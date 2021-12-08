@@ -1,0 +1,101 @@
+Распиновка:
+D0 - UART RX
+D1 - UART TX
+D2 - Button DOWN (Active HIGH)
+D3 - Button UP (Active HIGH)
+D5 - LCD RST
+D6 - LCD CS
+D7 - LCD MOSI
+D9 - USB Voltage //?
+D11 - LCD SCK    //?
+D12 - Buzzer (Passive)
+D13 - Debug LED
+A1 - LCD Backlight (Active HIGH)
+A4 - RTC SDA
+A5 - RTC SCL
+
+Требуемые либки:
+
+Дисплей
+LCD1202
+http://arduino.ru/forum/proekty/khronograf-izmeritel-skorosti-puli-ot-prostogo-k-slozhnomu?page=5#comment-136147
+
+
+
+
+
+
+
+
+
+
+Либки ложить класть в:
+C:\Users\Dr. Failov\Documents\Arduino\libraries
+
+
+Источники:
+https://www.youtube.com/watch?v=t6KwVkY8EA8
+https://github.com/igorok107/PCF8814
+https://digitalchip.ru/podklyuchenie-displeya-ot-nokia-1100-chast-1/
+https://forum.cxem.net/index.php?/topic/159500-lcd-nokia-1202-%D1%81%D1%85%D0%B5%D0%BC%D0%B0-%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D1%8F-%D0%BA-%D0%B0%D1%80%D0%B4%D1%83%D0%B8%D0%BD%D0%BE/
+https://github.com/kashapovd/PCF8814-Nokia-1100-LCD-library
+
+
+Распиновка дисплея:
+//CS_PIN         10
+//MOSI_PIN       11
+//SCK_PIN        13
+//LCD_RESET_PIN  12
+
+
+Контроллер дисплея какой-то из этих:
+pcf8814
+ste2007
+ST7565
+HX1230 
+
+
+Модели, с которым по идее этит дисплей совместим:
+Nokia 1101
+Nokia 1202
+Nokia 1280 (у меня такой)
+
+
+
+Использование:
+
+-Циферблат: 
+Кнопка вверх активирует подсветку на 10 секунд.
+
+
+
+
+Changelog
+2021-10-16 Проведены эксперименты с дисплеями, принято решение шото делать
+2021-12-03 7 Часов работы, исправления, написания программы
+2021-12-04 Заказаны новые RTC
+2021-12-04 Исправлена проблема отображения заряда
+2021-12-05 добавленю меню
+2021-12-05 Перенемены сновные блоки циферблата
+2021-12-06 Текстовая часть меню перенесена в PROGMEM
+2021-12-06 Место под вывод даты
+2021-12-06 Добавлены мелодии (Стас)
+2021-12-07 Вынес меню в отдельный файл
+2021-12-07 Добавил отдельное меню настроек
+2021-12-07 Добавил отдельное меню мелодий
+2021-12-07 Начата работа над меню заданий времени
+2021-12-08 Напаян RTC и добавлена его инициализация
+
+
+
+
+- в меню пиктограмы добавить на кнопки
+- меню задания времени
+- работа с RTC
+- свастон
+- Секундомер
+- добавить задержку к началу мелодии
+- Добаавить температуру
+
+
+
