@@ -1,7 +1,8 @@
-# DRM_Watch
-# For new line: \
-# Picture: <img src="Photos/" width="300"/>
-#
+<!-- For new line: \ -->
+<!-- Picture: <img src="Photos/" width="300"/>  -->
+
+# DRM_Watch v2
+
 Atduino-based watch with Nokia 1280 LCD.\
 
 Used components:
