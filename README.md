@@ -42,7 +42,7 @@ Link: https://aliexpress.ru/item/4000004876793.html  \
 <b>Passive buzzer, 5.2mm x 5.2mm </b> \
 Buzzer allows to play sound signals and melodies. \
 Link: https://aliexpress.ru/item/1005003227004618.html  \
-<img src="buzzer.jpg" width="300"/>
+<img src="Photos/buzzer.jpg" width="300"/>
 <img src="Photos/photo_2021-12-03_20-30-06.jpg" width="300"/>
 <img src="Photos/photo_2021-12-03_20-30-32.jpg" width="300"/>
  \
