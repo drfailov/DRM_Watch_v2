@@ -5,15 +5,9 @@ const uint8_t  SPRINTF_BUFFER_SIZE{32};  ///< Buffer size for sprintf()
 const uint8_t  LED_PIN{13};              ///< Built-in Arduino green LED pin
 
 DS3231M_Class DS3231M;  ///< Create an instance of the DS3231M class
+bool rtcReady = false;
 
 void rtcInit() {
-  /*!
-   @brief    Arduino method called once at startup to initialize the system
-   @details  This is an Arduino IDE method which is called first upon boot or restart. It is only
-             called one time and then control goes to the main "loop()" method, from which control
-             never returns
-   @return   void
-  */
   pinMode(LED_PIN, OUTPUT);  // Make the LED light an output pin
   Serial.print(F("Init DS3231M RTC..."));
   while (!DS3231M.begin())  // Initialize RTC communications
@@ -22,8 +16,9 @@ void rtcInit() {
     delay(3000);
   }                         // of loop until device is located
   DS3231M.pinSquareWave();  // Make INT/SQW pin toggle at 1Hz
+  rtcReady = true;
   Serial.print(F("OK"));
-  DS3231M.adjust();  // Set to library compile Date/Time
+  //DS3231M.adjust();  // Set to library compile Date/Time
   Serial.print(F("DS3231M chip temperature is "));
   Serial.print(DS3231M.temperature() / 100.0, 1);  // Value is in 100ths of a degree
   Serial.println(
@@ -88,10 +83,9 @@ void readCommand() {
           {
             Serial.print(F("Unable to parse date/time\n"));
           } else {
-            DS3231M.adjust(
-                DateTime(year, month, day, hour, minute, second));  // Adjust the RTC date/time
+            DS3231M.adjust(DateTime(year, month, day, hour, minute, second));  // Adjust the RTC date/time
             Serial.print(F("Date has been set."));
-          }  // of if-then-else the date could be parsed
+          }  
           break;
         /********************
         ** Unknown command **
@@ -107,22 +101,57 @@ void readCommand() {
 }  // of method readCommand
 
 void rtcloop() {
-  /*!
-   @brief    Arduino method for the main program loop
-   @details  This is the main program for the Arduino IDE, it is an infinite loop and keeps on
-             repeating
-   @return   void
-  */
   static uint8_t secs;
   DateTime       now = DS3231M.now();  // get the current time from device
   if (secs != now.second())            // Output if seconds have changed
   {
     // Use sprintf() to pretty print the date/time with leading zeros
     char output_buffer[SPRINTF_BUFFER_SIZE];  ///< Temporary buffer for sprintf()
-    sprintf(output_buffer, "%04d-%02d-%02d %02d:%02d:%02d", now.year(), now.month(), now.day(),
-            now.hour(), now.minute(), now.second());
+    sprintf(output_buffer, "%04d-%02d-%02d %02d:%02d:%02d", now.year(), now.month(), now.day(), now.hour(), now.minute(), now.second());
     Serial.println(output_buffer);
     secs = now.second();  // Set the counter variable
   }                       // of if the seconds have changed
   readCommand();          // See if serial port has incoming data
-}  // of method loop()
+}  
+
+byte rtcGetSeconds(){
+  if(!rtcReady)
+    return rand()%60;
+  DateTime now = DS3231M.now(); 
+  return now.second();
+}
+byte rtcGetMinutes(){
+  if(!rtcReady)
+    return rand()%60;
+  DateTime now = DS3231M.now(); 
+  return now.minute();
+}
+byte rtcGetHours(){
+  if(!rtcReady)
+    return rand()%60;
+  DateTime now = DS3231M.now(); 
+  return now.hour();
+}
+byte rtcGetDay(){
+  if(!rtcReady)
+    return rand()%30;
+  DateTime now = DS3231M.now(); 
+  return now.day();
+}
+byte rtcGetMonth(){
+  if(!rtcReady)
+    return rand()%12;
+  DateTime now = DS3231M.now(); 
+  return now.month();
+}
+int rtcGetYear(){
+  if(!rtcReady)
+    return rand()%3000;
+  DateTime now = DS3231M.now(); 
+  return now.year();
+}
+float rtcGetTemp(){
+  if(!rtcReady)
+    return (rand()%3000) / 100.0;
+  return DS3231M.temperature() / 100.0;
+}

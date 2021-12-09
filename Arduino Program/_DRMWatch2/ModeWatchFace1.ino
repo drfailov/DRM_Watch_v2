@@ -51,9 +51,9 @@ void modeWatchFace1Loop() {
   bool isChargeComplete = batteryIsChargeComplete();
 
   { //time
-    int hour = rand()%12;
-    int minute = rand()%60;
-    int second = rand()%60;
+    int hour = rtcGetHours();
+    int minute = rtcGetMinutes();
+    int second = rtcGetSeconds();
     int hour1 = hour / 10;
     int hour2 = hour - (hour1 * 10);
     int minute1 = minute / 10;
@@ -72,13 +72,22 @@ void modeWatchFace1Loop() {
   }
   
   {//date
-    int day = rand()%31;
-    int month = rand()%12;
-    int year = rand()%2099;
+    int day = rtcGetDay();
+    int month = rtcGetMonth();
+    int year = rtcGetYear();
 
     char chars[11];
     sprintf(chars, "%02d.%02d.%04d", day, month, year);
     displayDrawText(2, 2, 1, chars);
+  }
+  
+  {//Temperature
+    float temp = rtcGetTemp();
+    char chars[8];
+    /* 4 is mininum width, 2 is precision; float value is copied onto str_temp*/
+    dtostrf(temp, 4, 1, chars);
+    sprintf(chars, "%s C", chars);
+    displayDrawText(2, 59, 1, chars);
   }
 
   displayUpdate();

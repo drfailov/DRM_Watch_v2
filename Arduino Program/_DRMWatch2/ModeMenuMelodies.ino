@@ -25,6 +25,7 @@ void modeMenuMelodiesFinish() {
 }
 
 void modeMenuMelodiesSelected(byte index){
+  delay(200);
     if (index == 0) { //Nokia Tune
       tone(12, 1960);
       delay(150);
