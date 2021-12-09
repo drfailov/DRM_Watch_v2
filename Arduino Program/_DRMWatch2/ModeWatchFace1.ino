@@ -86,8 +86,17 @@ void modeWatchFace1Loop() {
     char chars[8];
     /* 4 is mininum width, 2 is precision; float value is copied onto str_temp*/
     dtostrf(temp, 4, 1, chars);
-    sprintf(chars, "%s C", chars);
+    sprintf(chars, "%sC", chars);
     displayDrawText(2, 59, 1, chars);
+  }
+  
+  {//voltage
+    byte x = 97;
+    byte y = 60;
+    char chars[10];
+    dtostrf(batteryVoltage(), 4, 2, chars);
+    sprintf(chars, "%sV", chars);
+    displayDrawText(x - (strlen(chars) * 6), y, 1, chars);
   }
 
   displayUpdate();

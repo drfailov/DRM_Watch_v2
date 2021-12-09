@@ -1,7 +1,7 @@
 #include <DS3231M.h>  // Include the DS3231M RTC library
 
 const uint32_t SERIAL_SPEED{115200};     ///< Set the baud rate for Serial I/O
-const uint8_t  SPRINTF_BUFFER_SIZE{32};  ///< Buffer size for sprintf()
+const uint8_t  SPRINTF_BUFFER_SIZE{2};  ///< Buffer size for sprintf()
 const uint8_t  LED_PIN{13};              ///< Built-in Arduino green LED pin
 
 DS3231M_Class DS3231M;  ///< Create an instance of the DS3231M class
@@ -99,6 +99,10 @@ void readCommand() {
     }                  // of if-then-else we've received full command
   }                    // of if-then there is something in our input buffer
 }  // of method readCommand
+
+void rtcSetTime(int year, byte month, byte day, byte hour, byte minute){
+  DS3231M.adjust(DateTime(year, month, day, hour, minute, 0));  // Adjust the RTC date/time
+}
 
 void rtcloop() {
   static uint8_t secs;

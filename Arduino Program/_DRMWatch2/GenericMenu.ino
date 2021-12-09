@@ -71,5 +71,5 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
 }
 
 void genericMenuFinish(){
-  digitalWrite(pinLcdBacklight, LOW);
+  //digitalWrite(pinLcdBacklight, LOW);
 }

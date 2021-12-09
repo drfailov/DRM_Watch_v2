@@ -79,12 +79,12 @@ void beepAlert() {
 }
 
 void beep() {
-  Serial.print(F("Beep..."));
+  //Serial.print(F("Beep..."));
   pinMode(pinBuzzer, OUTPUT);
 
   tone(pinBuzzer, 1500);  // пищать на пине 12, 1 кГц
-  delay(100);
+  delay(80);
   noTone(pinBuzzer);
   
-  Serial.println(F("OK"));
+  //Serial.println(F("OK"));
 }

@@ -1,17 +1,17 @@
 #include "lcd1202.h"
 #include <LowPower.h>
 
-const byte pinButtonDown = 2; //active high
-const byte pinButtonUp = 3; //active high
-const byte pinLcdRst = 5;
-const byte pinLcdCs = 6;
-const byte pinLcdMosi = 7;
-const byte pinUsbVoltage = 9;
-const byte pinChargeCompletePin = 10;
-const byte pinLcdSck = 11;
-const byte pinBuzzer = 12; //passive
-const byte pinLed = 13;  //active high
-const byte pinLcdBacklight = 15;  //A1, active high
+#define pinButtonDown (byte)2 //active high
+#define pinButtonUp (byte)3 //active high
+#define pinLcdRst (byte)5
+#define pinLcdCs (byte)6
+#define pinLcdMosi (byte)7
+#define pinUsbVoltage (byte)9
+#define pinChargeCompletePin (byte)10
+#define pinLcdSck (byte)11
+#define pinBuzzer (byte)12 //passive
+#define pinLed (byte)13  //active high
+#define pinLcdBacklight (byte)15  //A1, active high
 // A4 - RTC SDA
 // A5 - RTC SCL
 
@@ -61,6 +61,10 @@ void setMode(int _modeNew) {
   Serial.print(F(" -> "));
   Serial.print(_modeNew);
   Serial.println(F(" ..."));
+  
+  Serial.print(F("Free ram: "));
+  Serial.print(freeRam());
+  Serial.println(F(" bytes."));
 
   //finish old
   if (_mode == MODE_INIT) modeInitFinish();
@@ -87,4 +91,10 @@ void setMode(int _modeNew) {
 //переключить на режим выбранного в меню вотчфейса из любого места программы
 void goToWatchface(){
   setMode(MODE_WATCHFACE1);
+}
+
+int freeRam () {
+  extern int __heap_start, *__brkval;
+  int v;
+  return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval);
 }
