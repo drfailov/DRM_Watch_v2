@@ -1,3 +1,5 @@
+/*Mode is initial. Needed to init modules and welcome message.*/
+
 void modeInitSetup(){
   displayInit();
   displayBacklightOn();

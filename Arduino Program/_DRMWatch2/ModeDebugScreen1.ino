@@ -1,3 +1,5 @@
+/*Used to test new functionality*/
+
 int debugScreen1Counter = 10;
 int debugScreen1BacklightCounter = 0; //сколько секунд осталось подсветке светить. 0 = выключена
 

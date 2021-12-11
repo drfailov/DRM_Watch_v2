@@ -1,3 +1,5 @@
+/*Global functions related to power control and monitoring.
+*/
 
 float batteryVoltage(){
   return ((float)_batteryRawVoltage()) / 1000;

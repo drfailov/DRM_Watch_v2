@@ -1,3 +1,5 @@
+/*Show settings menu by triggerimg GenericMenu*/
+
 const byte modeMenuSettingsItemsCount = 4; //сколько пунктов меню в массиве
 
 //Максимальная длина строки:             |          |

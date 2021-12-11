@@ -1,3 +1,10 @@
+/*Global functions related to display. 
+ * Init, draw primitives, draw text...
+ * Every call to display has to be done by some call from this file.
+ * It needed to make migration to other display easier.
+*/
+
+
 LCD1202 lcd(pinLcdRst, pinLcdCs, pinLcdMosi, pinLcdSck);  // RST, CS, MOSI, SCK
 
 /*

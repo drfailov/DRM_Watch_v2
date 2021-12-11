@@ -1,3 +1,6 @@
+/*Global functions related to buzzer.
+*/
+
 void beepConfirm() {
   Serial.print(F("Beep confirm..."));
   pinMode(pinBuzzer, OUTPUT);

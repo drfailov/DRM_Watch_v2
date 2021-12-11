@@ -1,3 +1,6 @@
+/*Global functions related to control buttons.
+*/
+
 bool buttonLastValueUp = false;
 bool buttonLastValueDown = false;
 

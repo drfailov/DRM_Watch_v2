@@ -1,3 +1,5 @@
+/*Screen with main watchface*/
+
 #define BLOCK_WIDTH  4  // how many blocks contains one symbol
 #define BLOCK_HEIGHT 5  // how many blocks contains one symbol
 

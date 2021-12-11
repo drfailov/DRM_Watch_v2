@@ -17,7 +17,18 @@
 
 
 
-
+/* Program contains several screens (menus, watchfaces...).
+ * Every screen is a separate mode. Every mode contains of: modeSetup(), modeLoop(), modeFinish().
+ * Screens can work independently. Modes divided into different files to ease.
+ * Function loop() is routing loop() co correct dcreen according to active mode.
+ * Also setMode() function is triggering modeSetup() and modeFinish() for every mode.
+ * To change mode call: setMode(MODE_INIT);
+ * When adding new mode, it needs to be declared: 
+ *    - define constant for it,
+ *    - loop() call for modeLoop()
+ *    - call its setup() from setMode()
+ *    - call its finish() from setMode()
+*/
 #define MODE_INIT (byte)0
 #define MODE_WATCHFACE1 (byte)1
 #define MODE_MENU_MAIN (byte)2

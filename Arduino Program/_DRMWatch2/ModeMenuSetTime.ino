@@ -1,3 +1,6 @@
+/*Screen allows to set time
+*/
+
 #define MENU_SET_TIME_SELECTED_HOUR 0
 #define MENU_SET_TIME_SELECTED_MINUTE 1
 #define MENU_SET_TIME_SELECTED_DAY 2

@@ -1,5 +1,6 @@
 /*
- * код формирующий меню общий для всех меню в программе
+ * Code contains basic functionality for every list menu in device.
+ * Every menu is passes its items as arguments to loop() function.
 */
 const int genericMenuViewCount = 5; //сколько на экран помещается
 const int genericMenuMaxTextLength = 12; //размер буфера. Чем меньше тем экономнее

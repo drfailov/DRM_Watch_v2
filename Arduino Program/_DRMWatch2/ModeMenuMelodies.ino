@@ -1,3 +1,4 @@
+/*Show menu with melodies by triggerimg GenericMenu*/
 const byte modeMenuMelodiesItemsCount = 3; //сколько пунктов меню в массиве
 
 //Максимальная длина строки:                  |          |

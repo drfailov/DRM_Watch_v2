@@ -1,3 +1,4 @@
+/*Show main menu by triggerimg GenericMenu*/
 const int modeMenuMainItemsCount = 4; //сколько пунктов меню в массиве
 
 //Максимальная длина строки:    |          |
