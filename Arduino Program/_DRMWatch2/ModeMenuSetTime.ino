@@ -76,8 +76,12 @@ void modeMenuSetTimeLoop(){
   displayClear();
 
   displayDrawText(15, 2, 1, "Set time");
-  displayDrawText(/*X*/2, /*Y*/2, /*C*/1, "+");
-  displayDrawText(/*X*/2, /*Y*/59, /*C*/1, ">");
+  if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE || modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK)
+    displayDrawCheck(/*X*/1, /*Y*/2);
+  else
+    displayDrawText(/*X*/1, /*Y*/2, /*C*/1, "+");
+  //displayDrawText(/*X*/1, /*Y*/59, /*C*/1, ">");
+  displayDrawArrowRight(/*X*/1, /*Y*/59);
   
   displayDrawText(35, 19, 1, ":");
   { //hours

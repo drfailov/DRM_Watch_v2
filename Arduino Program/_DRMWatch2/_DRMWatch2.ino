@@ -18,13 +18,13 @@
 
 
 
-const byte MODE_INIT = 0;
-const byte MODE_WATCHFACE1 = 1;
-const byte MODE_MENU_MAIN = 2;
-const byte MODE_DEBUG_SCREEN1 = 3;
-const byte MODE_MENU_MELODIES = 4;
-const byte MODE_MENU_SETTINGS = 5;
-const byte MODE_MENU_SET_TIME = 6;
+#define MODE_INIT (byte)0
+#define MODE_WATCHFACE1 (byte)1
+#define MODE_MENU_MAIN (byte)2
+#define MODE_DEBUG_SCREEN1 (byte)3
+#define MODE_MENU_MELODIES (byte)4
+#define MODE_MENU_SETTINGS (byte)5
+#define MODE_MENU_SET_TIME (byte)6
 
 
 byte _mode = -1;

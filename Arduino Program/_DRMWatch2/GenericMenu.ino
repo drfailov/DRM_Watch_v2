@@ -65,8 +65,10 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
     displayFillRect(/*x*/93, /*y*/barPosition, /*w*/3, /*h*/barHeight, /*c*/1);
   }
   displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
-  displayDrawText(/*X*/2, /*Y*/2, /*C*/1, "+");
-  displayDrawText(/*X*/2, /*Y*/59, /*C*/1, "v");
+  //displayDrawText(/*X*/1, /*Y*/2, /*C*/1, "+");
+  displayDrawCheck(/*X*/2, /*Y*/2);
+  //displayDrawText(/*X*/2, /*Y*/59, /*C*/1, "v");
+  displayDrawArrowDown(/*X*/1, /*Y*/59);
   displayUpdate();
 }
 

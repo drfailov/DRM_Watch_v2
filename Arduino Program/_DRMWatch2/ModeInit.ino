@@ -1,6 +1,7 @@
 void modeInitSetup(){
   displayInit();
   displayBacklightOn();
+  delay(500);
   displayMessage("RTC Init...");
   rtcInit();
   displayMessage("RTC OK");

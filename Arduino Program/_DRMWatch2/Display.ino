@@ -93,12 +93,6 @@ void displayBacklightOff(){
   digitalWrite(pinLcdBacklight, LOW);
 }
 
-void displayMessage(const char* text){
-  displayClear();
-  lcd.print(10, 30, 1, text);
-  displayUpdate();
-}
-
 void displayClear(){
   lcd.Clear_LCD();
 }
@@ -122,4 +116,39 @@ void displayFillRect(byte x, byte y, byte w, byte h, boolean color){
 void displayDrawText(int X, int Y, int color, const char* text){
   //1 is black, 0 is white
   lcd.print(X, Y, color, text);
+}
+
+
+//-------- Display independent functions
+
+void displayMessage(const char* text){
+  displayClear();
+  displayDrawText(10, 30, 1, text);
+  displayUpdate();
+}
+
+void displayDrawCheck(byte x, byte y){
+  displayDrawLine(/*X1*/x+0, /*Y1*/y+3, /*X2*/x+1, /*Y2*/y+6, /*C*/1);
+  displayDrawLine(/*X1*/x+0, /*Y1*/y+3, /*X2*/x+2, /*Y2*/y+5, /*C*/1);
+  displayDrawLine(/*X1*/x+1, /*Y1*/y+6, /*X2*/x+5, /*Y2*/y+0, /*C*/1);
+  displayDrawLine(/*X1*/x+2, /*Y1*/y+6, /*X2*/x+5, /*Y2*/y+0, /*C*/1);
+}
+
+void displayDrawArrowDown(byte x, byte y){
+  displayDrawLine(/*X1*/x+0, /*Y1*/y+0, /*X2*/x+6, /*Y2*/y+0, /*C*/1);
+  displayDrawLine(/*X1*/x+1, /*Y1*/y+1, /*X2*/x+5, /*Y2*/y+1, /*C*/1);
+  displayDrawLine(/*X1*/x+1, /*Y1*/y+2, /*X2*/x+5, /*Y2*/y+2, /*C*/1);
+  displayDrawLine(/*X1*/x+2, /*Y1*/y+3, /*X2*/x+4, /*Y2*/y+3, /*C*/1);
+  displayDrawLine(/*X1*/x+2, /*Y1*/y+4, /*X2*/x+4, /*Y2*/y+4, /*C*/1);
+  displayDrawLine(/*X1*/x+3, /*Y1*/y+5, /*X2*/x+3, /*Y2*/y+5, /*C*/1);
+}
+
+void displayDrawArrowRight(byte x, byte y){
+  displayDrawLine(/*X1*/x+0, /*Y1*/y+0, /*X2*/x+0, /*Y2*/y+0, /*C*/1);
+  displayDrawLine(/*X1*/x+0, /*Y1*/y+1, /*X2*/x+2, /*Y2*/y+1, /*C*/1);
+  displayDrawLine(/*X1*/x+0, /*Y1*/y+2, /*X2*/x+4, /*Y2*/y+2, /*C*/1);
+  displayDrawLine(/*X1*/x+0, /*Y1*/y+3, /*X2*/x+6, /*Y2*/y+3, /*C*/1);
+  displayDrawLine(/*X1*/x+0, /*Y1*/y+4, /*X2*/x+4, /*Y2*/y+4, /*C*/1);
+  displayDrawLine(/*X1*/x+0, /*Y1*/y+5, /*X2*/x+2, /*Y2*/y+5, /*C*/1);
+  displayDrawLine(/*X1*/x+0, /*Y1*/y+6, /*X2*/x+0, /*Y2*/y+6, /*C*/1);
 }
