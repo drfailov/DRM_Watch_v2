@@ -10,6 +10,7 @@ bool rtcReady = false;
 void rtcInit() {
   pinMode(LED_PIN, OUTPUT);  // Make the LED light an output pin
   Serial.print(F("Init DS3231M RTC..."));
+  Wire.setWireTimeout(3000, true); //timeout value in uSec - SBWire uses 100 uSec, so 1000 should be OK
   while (!DS3231M.begin())  // Initialize RTC communications
   {
     Serial.println(F("Unable to find DS3231MM. Checking again in 3s."));
