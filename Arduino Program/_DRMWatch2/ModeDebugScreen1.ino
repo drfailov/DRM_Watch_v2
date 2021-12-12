@@ -18,7 +18,7 @@ void modeDebugScreen1Loop() {
     setMode(MODE_MENU_MAIN);
     return;
   }
-  displayClear();
+  
   float voltage = batteryVoltage();
   bool isCharging = batteryIsCharging();
   bool isChargeComplete = batteryIsChargeComplete();
@@ -53,6 +53,7 @@ void modeDebugScreen1Loop() {
       displayDrawText(60, 30, 1, "LOW");
   }
   displayUpdate();
+  
 
   debugScreen1BacklightCounter --;
   if(debugScreen1BacklightCounter < 0) debugScreen1BacklightCounter = 0;
@@ -62,9 +63,9 @@ void modeDebugScreen1Loop() {
     digitalWrite(pinLcdBacklight, LOW);
 
   
-  Serial.flush();
-  delay(50);
-  LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
+//  Serial.flush();
+//  delay(50);
+//  LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
 }
 
 void modeDebugScreen1Finish() {

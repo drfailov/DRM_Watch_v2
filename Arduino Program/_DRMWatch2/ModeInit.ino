@@ -3,17 +3,21 @@
 void modeInitSetup(){
   displayInit();
   displayBacklightOn();
-  delay(500);
   displayMessage("RTC Init...");
   rtcInit();
-  displayMessage("RTC OK");
+  displayClear();
+  displayDrawVector(pathZubat, 20, 10, false);
+  displayUpdate();
   beepConfirm();
-  //displayBacklightOff();
+  displayClear();
+  displayDrawVector(pathZubat, 0, 10, false);
+  displayDrawVector(pathDrmWatch, 48, 15, true);
 }
 
 void modeInitLoop(){
   delay(100);
   goToWatchface();
+  //setMode(MODE_DEBUG_SCREEN1);
   return;
 }
 
