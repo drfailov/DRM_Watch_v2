@@ -5,6 +5,11 @@ float batteryVoltage(){
   return ((float)_batteryRawVoltage()) / 1000;
 }
 
+
+bool batteryIsLowPower(){
+  return batteryVoltage() < 3.4;
+}
+
 bool batteryIsCharging(){
   pinMode(pinUsbVoltage, INPUT);
   int sum = 0;

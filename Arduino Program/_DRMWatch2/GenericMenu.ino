@@ -22,8 +22,8 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
   if (isButtonUpPressed()) {
     genericMenuLastActionTime = millis();
     beep();
-
     onSelected (genericMenuSelectPosition);
+    return;
   }
 
   if (isButtonDownPressed()) {

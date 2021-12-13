@@ -93,7 +93,7 @@ void modeWatchFace1Loop() {
 
     char chars[11];
     sprintf(chars, "%02d.%02d.%04d", day, month, year);
-    displayDrawText(2, 2, 1, chars);
+    displayDrawText(0, 0, 1, chars);
   }
   
   {//Temperature
@@ -102,16 +102,20 @@ void modeWatchFace1Loop() {
     /* 4 is mininum width, 2 is precision; float value is copied onto str_temp*/
     dtostrf(temp, 4, 1, chars);
     sprintf(chars, "%sC", chars);
-    displayDrawText(2, 59, 1, chars);
+    displayDrawText(0, 61, 1, chars);
   }
   
-  {//voltage
-    byte x = 97;
-    byte y = 60;
-    char chars[10];
-    dtostrf(batteryVoltage(), 4, 2, chars);
-    sprintf(chars, "%sV", chars);
-    displayDrawText(x - (strlen(chars) * 6), y, 1, chars);
+//  {//voltage
+//    byte x = 97;
+//    byte y = 60;
+//    char chars[10];
+//    dtostrf(batteryVoltage(), 4, 2, chars);
+//    sprintf(chars, "%sV", chars);
+//    displayDrawText(x - (strlen(chars) * 6), y, 1, chars);
+//  }
+  
+  {//battery
+    drawBattery(78, 0);
   }
 
   displayUpdate();
@@ -127,6 +131,8 @@ void modeWatchFace1Loop() {
   Serial.flush();
   delay(10);
   byte sleepTime = eepromReadSleepTime();
+  if(batteryIsLowPower()) //если разряжен, то макс интервал
+    sleepTime = 8;
   if(sleepTime == 0)
     LowPower.powerDown(SLEEP_500MS, ADC_OFF, BOD_OFF);
   else if (sleepTime == 1)

@@ -13,14 +13,14 @@ void rtcInit() {
   while (!DS3231M.begin())  // Initialize RTC communications
   {
     Serial.println(F("Unable to find DS3231MM. Checking again in 3s."));
-    displayMessage("RTC FAIL. Try again...");
+    displayMessage(F("RTC FAIL."));
     delay(300);
   }                         // of loop until device is located
   DS3231M.pinSquareWave();  // Make INT/SQW pin toggle at 1Hz
   rtcReady = true;
-  Serial.print(F("OK"));
+  Serial.println(F("OK"));
   //DS3231M.adjust();  // Set to library compile Date/Time
-  Serial.print(F("DS3231M chip temperature is "));
+  Serial.print(F("DS3231M temp: "));
   Serial.print(DS3231M.temperature() / 100.0, 1);  // Value is in 100ths of a degree
   Serial.println("\xC2\xB0""C");
 }  

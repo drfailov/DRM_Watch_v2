@@ -57,7 +57,7 @@ void modeMenuSetTimeLoop(){
     
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE) {//SAVE
       rtcSetTime(modeMenuSetTimeYears, modeMenuSetTimeMonths, modeMenuSetTimeDays, modeMenuSetTimeHours, modeMenuSetTimeMinutes);
-      displayMessage("Saved.");
+      displayMessage(F("Saved."));
       delay(500);
       goToWatchface();
       return;
@@ -78,7 +78,7 @@ void modeMenuSetTimeLoop(){
   
   displayClear();
 
-  displayDrawText(15, 2, 1, "Set time");
+  displayDrawText(15, 2, 1, F("Set time"));
   if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE || modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK)
     displayDrawCheck(/*X*/1, /*Y*/2);
   else
@@ -169,8 +169,7 @@ void modeMenuSetTimeLoop(){
   { //Save
     byte x = 15;
     byte y = 53;
-    char chars[5];
-    sprintf(chars, "Save");
+    const __FlashStringHelper* chars = F("Save");
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE){
       displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);
@@ -183,8 +182,7 @@ void modeMenuSetTimeLoop(){
   { //BACK
     byte x = 50;
     byte y = 53;
-    char chars[5];
-    sprintf(chars, "Back");
+    const __FlashStringHelper* chars = F("Back");
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK){
       displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);

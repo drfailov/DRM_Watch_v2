@@ -51,6 +51,11 @@ void modeMenuMainSelected(byte index) {
     return;
   }
 
+  if (index == 6) { //About
+    setMode(MODE_ABOUT);
+    return;
+  }
+
   if (index == 7) { //Exit
     goToWatchface();
     return;

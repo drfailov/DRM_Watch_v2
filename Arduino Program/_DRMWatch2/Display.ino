@@ -106,19 +106,24 @@ void displayDrawText(int X, int Y, int color, const char* text){
   lcd.print(X, Y, color, text);
 }
 
+void displayDrawText(int X, int Y, int color, char c){
+  //1 is black, 0 is white
+  lcd.drawChar(X, Y, color, c);
+}
+
 //-------- Display independent functions
   
 void displayDrawVectorLogo(){
-  displayDrawVector(pathZubat, 0, 20, false);
-  displayDrawVector(pathBubble, 0, 0, false);
-  displayDrawVector(pathDrmWatch, 48, 25, true);
+  displayDrawVector(/*path*/pathZubat, /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
+  displayDrawVector(/*path*/pathBubble, /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
+  displayDrawVector(/*path*/pathDrmWatch, /*x*/48, /*y*/25, /*animate*/true, /*color*/1);
 }
 
 //max number of points for one path is 255.
 //Array type: const PROGMEM byte path[] = {...);
 //Array format: {numberOfPoints, x0, y0, x1, y1, x2, y2, ...}
 //255,255 coordinates is skipped, so it can be used for separate paths
-void displayDrawVector(const byte* data_array, byte X, byte Y, bool animate){
+void displayDrawVector(const byte* data_array, byte X, byte Y, bool animate, bool color){
   byte numberOfPoints = pgm_read_byte(&data_array[0]);
   byte lx = pgm_read_byte(&data_array[1]);
   byte ly = pgm_read_byte(&data_array[2]);
@@ -127,7 +132,7 @@ void displayDrawVector(const byte* data_array, byte X, byte Y, bool animate){
     byte x = pgm_read_byte(&data_array[currentIndex]);
     byte y = pgm_read_byte(&data_array[currentIndex + 1]);
     if(x != 255 && y != 255 && lx != 255 && ly != 255)
-      displayDrawLine(/*X1*/lx + X, /*Y1*/ly + Y, /*X2*/x + X, /*Y2*/y + Y, /*C*/1);
+      displayDrawLine(/*X1*/lx + X, /*Y1*/ly + Y, /*X2*/x + X, /*Y2*/y + Y, /*C*/color);
     if(animate && i%2==0)
       displayUpdate();
     currentIndex += 2;
@@ -136,13 +141,42 @@ void displayDrawVector(const byte* data_array, byte X, byte Y, bool animate){
   }
 }
 
-void displayMessage(const char* text){
+
+void displayDrawText(int X, int Y, int color, const __FlashStringHelper* str){
+  byte len = strlen_P((PGM_P)str);
+  if(len > 18) len = 18;
+  char buffer[18];
+  strcpy_P(buffer, (PGM_P)str);
+  for(int i=0; i<len; i++)
+    displayDrawText(X + i*6, Y, color, buffer[i]);
+}
+
+void displayMessage(const __FlashStringHelper* str){
   displayClear();
-  displayDrawVector(pathZubat, 0, 20, false);
-  displayDrawVector(pathBubble, 0, 0, false);
+  displayDrawVector(/*path*/pathZubat, /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
+  displayDrawVector(/*path*/pathBubble, /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
+  //byte len = strlen_P((PGM_P)str);
+  //if(len > 12) len = 12;
+  char buffer[14];
+  strlcpy_P(buffer, (PGM_P)str, 14);
+  for(int i=0; i<14; i++){
+    if(buffer[i] == '\0') 
+      break;
+    displayDrawText(10 + i*6, 6, 1, buffer[i]);
+    displayUpdate();
+    delay(6);
+  }
+  delay(500);
+}
+
+void displayMessageFromRam(const char* text){
+  displayClear();
+  displayDrawVector(/*path*/pathZubat, /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
+  displayDrawVector(/*path*/pathBubble, /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
+  
   byte len = strlen(text);
   for(int i=0; i<len; i++){
-    lcd.drawChar(10 + i*6, 6, 1, text[i]);
+    displayDrawText(10 + i*6, 6, 1, text[i]);
     displayUpdate();
     delay(5);
   }
@@ -179,4 +213,50 @@ void displayDrawArrowRight(byte x, byte y){
   displayDrawLine(/*X1*/x+0, /*Y1*/y+4, /*X2*/x+4, /*Y2*/y+4, /*C*/1);
   displayDrawLine(/*X1*/x+0, /*Y1*/y+5, /*X2*/x+2, /*Y2*/y+5, /*C*/1);
   displayDrawLine(/*X1*/x+0, /*Y1*/y+6, /*X2*/x+0, /*Y2*/y+6, /*C*/1);
+}
+
+void drawBattery(byte x, byte y){
+  float voltage = batteryVoltage();
+  bool isCharging = batteryIsCharging();
+  byte level = 0;
+  if(voltage > 3.1) level = 1;
+  if(voltage > 3.4) level = 2;
+  if(voltage > 3.8) level = 3;
+  if(voltage > 4.0) level = 4;
+  byte xshift = 6;
+  displayDrawRect(/*x*/x+xshift+1, /*y*/y, /*w*/11, /*h*/7, /*color*/1);
+  displayDrawLine(/*X1*/x+xshift+0, /*Y1*/y+2, /*X2*/x+xshift+0, /*Y2*/y+4, /*C*/1);
+  displayDrawLine(/*X1*/x+xshift+1, /*Y1*/y+2, /*X2*/x+xshift+1, /*Y2*/y+4, /*C*/0);
+  if(level >= 1)
+    displayDrawLine(/*X1*/x+xshift+9, /*Y1*/y+2, /*X2*/x+xshift+9, /*Y2*/y+4, /*C*/1);
+  if(level >= 2)
+    displayDrawLine(/*X1*/x+xshift+7, /*Y1*/y+2, /*X2*/x+xshift+7, /*Y2*/y+4, /*C*/1);
+  if(level >= 3)
+    displayDrawLine(/*X1*/x+xshift+5, /*Y1*/y+2, /*X2*/x+xshift+5, /*Y2*/y+4, /*C*/1);
+  if(level >= 4)
+    displayDrawLine(/*X1*/x+xshift+3, /*Y1*/y+2, /*X2*/x+xshift+3, /*Y2*/y+4, /*C*/1);
+  
+  if(batteryIsLowPower())
+  {
+    static const char img[6] PROGMEM = { 
+      0b00100010,
+      0b00010100,
+      0b00001000,
+      0b00010100,
+      0b00100010,
+      0b00000000
+    };
+    lcd.drawBitmap(x, y, img, 6, 8, 1);
+  }
+  if(batteryIsCharging()){
+    static const char img[6] PROGMEM = { 
+      0b00000000,
+      0b01001100,
+      0b00111110,
+      0b00011001,
+      0b00000000,
+      0b00000000
+    };
+    lcd.drawBitmap(x, y, img, 6, 8, 1);
+  }
 }

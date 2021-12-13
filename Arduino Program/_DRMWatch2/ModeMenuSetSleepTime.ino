@@ -35,7 +35,7 @@ void modeMenuSetSleepTimeFinish() {
 void modeMenuSetSleepTimeSelected(byte index) {
   if (index == 0) { //0.5 sec
     eepromSaveSleepTime(0);
-    displayMessage("Saved: 0.5 sec");
+    displayMessage(F("Saved .5 sec"));
     delay(500);
     goToWatchface();
     return;
@@ -43,7 +43,7 @@ void modeMenuSetSleepTimeSelected(byte index) {
   
   if (index == 1) { //1 s
     eepromSaveSleepTime(1);
-    displayMessage("Saved: 1 sec");
+    displayMessage(F("Saved 1 sec"));
     delay(500);
     goToWatchface();
     return;
@@ -51,7 +51,7 @@ void modeMenuSetSleepTimeSelected(byte index) {
 
   if (index == 2) { //2s
     eepromSaveSleepTime(2);
-    displayMessage("Saved: 2 sec");
+    displayMessage(F("Saved 2 sec"));
     delay(500);
     goToWatchface();
     return;
@@ -59,7 +59,7 @@ void modeMenuSetSleepTimeSelected(byte index) {
   
   if (index == 3) { //4s
     eepromSaveSleepTime(4);
-    displayMessage("Saved: 4 sec");
+    displayMessage(F("Saved 4 sec"));
     delay(500);
     goToWatchface();
     return;
@@ -67,7 +67,7 @@ void modeMenuSetSleepTimeSelected(byte index) {
   
   if (index == 4) { //8s
     eepromSaveSleepTime(8);
-    displayMessage("Saved: 8 sec");
+    displayMessage(F("Saved 8 sec"));
     delay(500);
     goToWatchface();
     return;
