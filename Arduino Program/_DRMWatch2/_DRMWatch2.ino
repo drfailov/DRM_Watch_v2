@@ -36,6 +36,7 @@
 #define MODE_MENU_MELODIES (byte)4
 #define MODE_MENU_SETTINGS (byte)5
 #define MODE_MENU_SET_TIME (byte)6
+#define MODE_MENU_SET_SLEEP_TIME (byte)7
 
 
 byte _mode = -1;
@@ -62,6 +63,8 @@ void loop() {
   if (_mode == MODE_MENU_MELODIES ) modeMenuMelodiesLoop();
   if (_mode == MODE_MENU_SETTINGS ) modeMenuSettingsLoop();
   if (_mode == MODE_MENU_SET_TIME ) modeMenuSetTimeLoop();
+  if (_mode == MODE_MENU_SET_SLEEP_TIME ) modeMenuSetSleepTimeLoop();
+  
 }
 
 void setMode(int _modeNew) {
@@ -85,6 +88,7 @@ void setMode(int _modeNew) {
   if (_mode == MODE_MENU_MELODIES ) modeMenuMelodiesFinish();
   if (_mode == MODE_MENU_SETTINGS ) modeMenuSettingsFinish();
   if (_mode == MODE_MENU_SET_TIME ) modeMenuSetTimeFinish();
+  if (_mode == MODE_MENU_SET_SLEEP_TIME ) modeMenuSetSleepTimeFinish();
   
 
   //init new
@@ -95,6 +99,7 @@ void setMode(int _modeNew) {
   if (_modeNew == MODE_MENU_MELODIES ) modeMenuMelodiesSetup();
   if (_modeNew == MODE_MENU_SETTINGS ) modeMenuSettingsSetup();
   if (_modeNew == MODE_MENU_SET_TIME ) modeMenuSetTimeSetup();
+  if (_modeNew == MODE_MENU_SET_SLEEP_TIME ) modeMenuSetSleepTimeSetup();
 
   _mode = _modeNew;
 }

@@ -34,6 +34,8 @@ int modeWatchFace1BacklightCounter = 10; //сколько секунд оста�
 
 void modeWatchFace1Setup() {
   modeWatchFace1BacklightCounter = 10;
+  attachInterrupt(0, wakeUp, CHANGE);
+  attachInterrupt(1, wakeUp, CHANGE);
 }
 
 void modeWatchFace1Loop() {
@@ -112,14 +114,31 @@ void modeWatchFace1Loop() {
   }
 
   Serial.flush();
-  delay(50);
-  LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
+  delay(10);
+  switch(eepromReadSleepTime()){
+    case 0:    
+      LowPower.powerDown(SLEEP_500MS, ADC_OFF, BOD_OFF);
+    case 1:
+      LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
+    case 2:
+      LowPower.powerDown(SLEEP_2S, ADC_OFF, BOD_OFF);
+    case 4:
+      LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
+    case 8:
+      LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+    default:
+      LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
+  }
 }
 
 void modeWatchFace1Finish() {
-
+  detachInterrupt(0);
+  detachInterrupt(1);
 }
 
+void wakeUp(){ //to react for button
+  
+}
 
 void drawSymbol(int symbol, int offsetX, int offsetY, int blockSizeX, int blockSizeY){
   for(int bx=0;bx<BLOCK_WIDTH; bx++){

@@ -128,7 +128,7 @@ void displayDrawVector(const byte* data_array, byte X, byte Y, bool animate){
     byte y = pgm_read_byte(&data_array[currentIndex + 1]);
     if(x != 255 && y != 255 && lx != 255 && ly != 255)
       displayDrawLine(/*X1*/lx + X, /*Y1*/ly + Y, /*X2*/x + X, /*Y2*/y + Y, /*C*/1);
-    if(animate)
+    if(animate && i%2==0)
       displayUpdate();
     currentIndex += 2;
     lx = x;
@@ -137,6 +137,12 @@ void displayDrawVector(const byte* data_array, byte X, byte Y, bool animate){
 }
 
 void displayMessage(const char* text){
+  displayClear();
+  displayDrawText(10, 30, 1, text);
+  displayUpdate();
+}
+
+void displaySimpleMessage(const char* text){
   displayClear();
   displayDrawText(10, 30, 1, text);
   displayUpdate();
