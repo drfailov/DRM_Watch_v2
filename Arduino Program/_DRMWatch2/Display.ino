@@ -138,8 +138,15 @@ void displayDrawVector(const byte* data_array, byte X, byte Y, bool animate){
 
 void displayMessage(const char* text){
   displayClear();
-  displayDrawText(10, 30, 1, text);
-  displayUpdate();
+  displayDrawVector(pathZubat, 0, 20, false);
+  displayDrawVector(pathBubble, 0, 0, false);
+  byte len = strlen(text);
+  for(int i=0; i<len; i++){
+    lcd.drawChar(10 + i*6, 6, 1, text[i]);
+    displayUpdate();
+    delay(5);
+  }
+  delay(500);
 }
 
 void displaySimpleMessage(const char* text){

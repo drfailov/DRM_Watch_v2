@@ -3,7 +3,7 @@
 void modeInitSetup(){
   displayInit();
   displayBacklightOn();
-  displayMessage("RTC Init...");
+  displaySimpleMessage("RTC Init...");
   rtcInit();
   displayClear();
   displayDrawVector(pathZubat, 20, 10, false);

@@ -33,7 +33,13 @@ PROGMEM const int32_t font [] {
 int modeWatchFace1BacklightCounter = 10; //сколько секунд осталось подсветке светить. 0 = выключена
 
 void modeWatchFace1Setup() {
-  modeWatchFace1BacklightCounter = 10;
+  byte sleepTime = eepromReadSleepTime();
+  if(sleepTime == 0) modeWatchFace1BacklightCounter = 20;
+  if(sleepTime == 1) modeWatchFace1BacklightCounter = 10;
+  if(sleepTime == 2) modeWatchFace1BacklightCounter = 5;
+  if(sleepTime == 4) modeWatchFace1BacklightCounter = 3;
+  if(sleepTime == 8) modeWatchFace1BacklightCounter = 2;
+    
   attachInterrupt(0, wakeUp, CHANGE);
   attachInterrupt(1, wakeUp, CHANGE);
 }
@@ -41,7 +47,12 @@ void modeWatchFace1Setup() {
 void modeWatchFace1Loop() {
   if (isButtonUpPressed()) {
     beep();
-    modeWatchFace1BacklightCounter = 10;
+    byte sleepTime = eepromReadSleepTime();
+    if(sleepTime == 0) modeWatchFace1BacklightCounter = 20;
+    if(sleepTime == 1) modeWatchFace1BacklightCounter = 10;
+    if(sleepTime == 2) modeWatchFace1BacklightCounter = 5;
+    if(sleepTime == 4) modeWatchFace1BacklightCounter = 3;
+    if(sleepTime == 8) modeWatchFace1BacklightCounter = 2;
   }
 
   if (isButtonDownPressed()) {
@@ -115,20 +126,17 @@ void modeWatchFace1Loop() {
 
   Serial.flush();
   delay(10);
-  switch(eepromReadSleepTime()){
-    case 0:    
-      LowPower.powerDown(SLEEP_500MS, ADC_OFF, BOD_OFF);
-    case 1:
-      LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
-    case 2:
-      LowPower.powerDown(SLEEP_2S, ADC_OFF, BOD_OFF);
-    case 4:
-      LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
-    case 8:
-      LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
-    default:
-      LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
-  }
+  byte sleepTime = eepromReadSleepTime();
+  if(sleepTime == 0)
+    LowPower.powerDown(SLEEP_500MS, ADC_OFF, BOD_OFF);
+  else if (sleepTime == 1)
+    LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
+  else if (sleepTime == 2)
+    LowPower.powerDown(SLEEP_2S, ADC_OFF, BOD_OFF);
+  else if (sleepTime == 4)
+    LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
+  else if (sleepTime == 8)
+    LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
 }
 
 void modeWatchFace1Finish() {
