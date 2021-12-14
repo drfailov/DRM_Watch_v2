@@ -57,7 +57,7 @@ void modeMenuSettingsSelected(byte index) {
   }
   
   if (index == 4) { //Set sound
-    
+    setMode(MODE_MENU_SET_BEEP_SOUND); 
     return;
   }
   

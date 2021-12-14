@@ -1,7 +1,8 @@
 #include <EEPROM.h>
-#define eepromAddressSleepTime 10 
-#define eepromAddressSilentMode 11
-#define eepromAddressButtonSound 12 
+#define eepromAddressSleepTime (byte)10 
+#define eepromAddressSilentMode (byte)11
+#define eepromAddressBeepSound (byte)12 
+
 
 byte eepromReadSleepTime(){
   byte result = 1;
@@ -10,4 +11,15 @@ byte eepromReadSleepTime(){
 }
 void eepromSaveSleepTime(byte data){
   EEPROM.put(eepromAddressSleepTime, data);
+}
+
+
+
+byte eepromReadBeepSound(){
+  byte result = 1;
+  EEPROM.get(eepromAddressBeepSound, result);
+  return result;
+}
+void eepromSaveBeepSound(byte data){
+  EEPROM.put(eepromAddressBeepSound, data);
 }

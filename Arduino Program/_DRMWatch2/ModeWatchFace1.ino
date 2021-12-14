@@ -40,8 +40,8 @@ void modeWatchFace1Setup() {
   if(sleepTime == 4) modeWatchFace1BacklightCounter = 3;
   if(sleepTime == 8) modeWatchFace1BacklightCounter = 2;
     
-  attachInterrupt(0, wakeUp, CHANGE);
-  attachInterrupt(1, wakeUp, CHANGE);
+  attachInterrupt(0, wakeUp, HIGH);
+  attachInterrupt(1, wakeUp, HIGH);
 }
 
 void modeWatchFace1Loop() {
@@ -133,16 +133,18 @@ void modeWatchFace1Loop() {
   byte sleepTime = eepromReadSleepTime();
   if(batteryIsLowPower()) //если разряжен, то макс интервал
     sleepTime = 8;
-  if(sleepTime == 0)
+  if(sleepTime == eepromSleepTime05sec)
     LowPower.powerDown(SLEEP_500MS, ADC_OFF, BOD_OFF);
-  else if (sleepTime == 1)
+  else if (sleepTime == eepromSleepTime1sec)
     LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
-  else if (sleepTime == 2)
+  else if (sleepTime == eepromSleepTime2sec)
     LowPower.powerDown(SLEEP_2S, ADC_OFF, BOD_OFF);
-  else if (sleepTime == 4)
+  else if (sleepTime == eepromSleepTime4sec)
     LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
-  else if (sleepTime == 8)
+  else if (sleepTime == eepromSleepTime8sec)
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+  else //if some garbage in memory
+    LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
 }
 
 void modeWatchFace1Finish() {

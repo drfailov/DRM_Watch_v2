@@ -219,10 +219,10 @@ void drawBattery(byte x, byte y){
   float voltage = batteryVoltage();
   bool isCharging = batteryIsCharging();
   byte level = 0;
-  if(voltage > 3.1) level = 1;
-  if(voltage > 3.4) level = 2;
-  if(voltage > 3.8) level = 3;
-  if(voltage > 4.0) level = 4;
+  if(voltage > 3.25) level = 1;
+  if(voltage > 3.50) level = 2;
+  if(voltage > 3.85) level = 3;
+  if(voltage > 4.00) level = 4;
   byte xshift = 6;
   displayDrawRect(/*x*/x+xshift+1, /*y*/y, /*w*/11, /*h*/7, /*color*/1);
   displayDrawLine(/*X1*/x+xshift+0, /*Y1*/y+2, /*X2*/x+xshift+0, /*Y2*/y+4, /*C*/1);

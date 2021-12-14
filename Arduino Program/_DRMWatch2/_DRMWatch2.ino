@@ -1,6 +1,7 @@
 #include "lcd1202.h"
 #include <LowPower.h>
 
+//Pins
 #define pinButtonDown (byte)2 //active high
 #define pinButtonUp (byte)3 //active high
 #define pinLcdRst (byte)5
@@ -16,6 +17,21 @@
 // A5 - RTC SCL
 
 
+//sleep times
+#define eepromSleepTime05sec (byte)0 
+#define eepromSleepTime1sec (byte)1 
+#define eepromSleepTime2sec (byte)2 
+#define eepromSleepTime4sec (byte)4 
+#define eepromSleepTime8sec (byte)8 
+
+//beep sounds
+#define eepromBeepSoundBeep (byte)0
+#define eepromBeepSoundClick (byte)1
+#define eepromBeepSoundTone (byte)2
+#define eepromBeepSoundWhistle (byte)3
+#define eepromBeepSoundNone (byte)4
+
+
 
 /* Program contains several screens (menus, watchfaces...).
  * Every screen is a separate mode. Every mode contains of: modeSetup(), modeLoop(), modeFinish().
@@ -29,6 +45,7 @@
  *    - call its setup() from setMode()
  *    - call its finish() from setMode()
 */
+//Modes
 #define MODE_INIT (byte)0
 #define MODE_WATCHFACE1 (byte)1
 #define MODE_MENU_MAIN (byte)2
@@ -38,6 +55,7 @@
 #define MODE_MENU_SET_TIME (byte)6
 #define MODE_MENU_SET_SLEEP_TIME (byte)7
 #define MODE_ABOUT (byte)8
+#define MODE_MENU_SET_BEEP_SOUND (byte)9
 
 
 byte _mode = -1;
@@ -66,6 +84,7 @@ void loop() {
   if (_mode == MODE_MENU_SET_TIME ) modeMenuSetTimeLoop();
   if (_mode == MODE_MENU_SET_SLEEP_TIME ) modeMenuSetSleepTimeLoop();
   if (_mode == MODE_ABOUT ) modeAboutLoop();
+  if (_mode == MODE_MENU_SET_BEEP_SOUND ) modeMenuSetBeepSoundLoop();
   
 }
 
@@ -92,6 +111,7 @@ void setMode(int _modeNew) {
   if (_mode == MODE_MENU_SET_TIME ) modeMenuSetTimeFinish();
   if (_mode == MODE_MENU_SET_SLEEP_TIME ) modeMenuSetSleepTimeFinish();
   if (_mode == MODE_ABOUT ) modeAboutFinish();
+  if (_mode == MODE_MENU_SET_BEEP_SOUND ) modeMenuSetBeepSoundFinish();
   
 
   //init new
@@ -102,7 +122,9 @@ void setMode(int _modeNew) {
   if (_modeNew == MODE_MENU_MELODIES ) modeMenuMelodiesSetup();
   if (_modeNew == MODE_MENU_SETTINGS ) modeMenuSettingsSetup();
   if (_modeNew == MODE_MENU_SET_TIME ) modeMenuSetTimeSetup();
+  if (_modeNew == MODE_MENU_SET_SLEEP_TIME ) modeMenuSetSleepTimeSetup();
   if (_modeNew == MODE_ABOUT ) modeAboutSetup();
+  if (_modeNew == MODE_MENU_SET_BEEP_SOUND ) modeMenuSetBeepSoundSetup();
 
   _mode = _modeNew;
 }

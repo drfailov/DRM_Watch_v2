@@ -82,12 +82,27 @@ void beepAlert() {
 }
 
 void beep() {
-  //Serial.print(F("Beep..."));
   pinMode(pinBuzzer, OUTPUT);
-
-  tone(pinBuzzer, 1500);  // пищать на пине 12, 1 кГц
-  delay(80);
+  if(eepromReadBeepSound() == eepromBeepSoundNone){
+    //play nothing
+  }
+  else if(eepromReadBeepSound() == eepromBeepSoundClick){
+    tone(pinBuzzer, 1500);  
+    delay(1);
+  }
+  else if(eepromReadBeepSound() == eepromBeepSoundTone){
+    tone(pinBuzzer, 1000);  
+    delay(150);
+  }
+  else if(eepromReadBeepSound() == eepromBeepSoundWhistle){
+    tone(pinBuzzer, 2000);  
+    delay(40);
+    tone(pinBuzzer, 3000);  
+    delay(40);
+  }
+  else{//standartBeep
+    tone(pinBuzzer, 1500);  
+    delay(80);
+  }
   noTone(pinBuzzer);
-  
-  //Serial.println(F("OK"));
 }
