@@ -115,6 +115,10 @@ Changelog
 2021-12-14 Обновил лимиты напряжения
 2021-12-14 Исправлена реакция кнопок если держать их дольше 0.0001сек
 2021-12-14 Выбор звука кнопок
+2021-12-14 Начата разработка конвертера мелодий в код для Arduino
+2021-12-15 Конвертер уже парсит меложии и умеет считать частоты
+2021-12-15 Начато формирование файла с прикольными мелодиями
+2021-12-15 Добавлены мелодии в несжатом виде
 
 
 
@@ -124,3 +128,92 @@ Changelog
 - Секундомер
 - Зрада \ Перемога
 - Зажатие кнопок
+
+
+
+http://nokia.nigelcoldwell.co.uk/tunes.html
+
+Entertainer
+Tempo=140
+ 8d2 8#d2 8e2 4c3 8e2 4c3 8e2 2c3 8c3 8d3 8#d3 8e3 8c3 8d3 4e3 8b2 4d3 2c3 4- 8d2 8#d2 8e2 4c3 8e2 4c3 8e2 2c3 8- 8a2 8g2 8#f2 8a2 8c3 4e3 8d3 8c3 8a2 2d3
+ 2       ---  
+ 4       ---
+ 8       00
+ 16      01
+ 32      10
+ 64      11
+
+
+2 4 8 16 32 64 
+
+n 
+0  c1   	   
+1  #c1	   
+2  d1	   
+3  #d1
+4  e1
+5  f1
+6  #f1
+7  g1
+8  #g1
+9  a1
+10 #a1
+11 b1
+
+12 c2   	   
+13 #c2	   
+14 d2	   
+15 #d2
+16 e2
+17 f2
+18 #f2
+19 g2
+20 #g2
+21 a2
+22 #a2
+23 b2
+
+24 c3   	   
+25 #c3	   
+26 d3	   
+27 #d3
+28 e3
+29 f3
+30 #f3
+31 g3
+32 #g3
+33 a3
+34 #a3
+35 b3
+
+36 -
+
+
+  	   
+ 
+    // m[1] is optional note duration
+    // m[2] is optional dot in note duration
+    // m[3] is optional sharp sign, yes, it goes before the note
+    // m[4] is note itself
+    // m[5] is optional octave number
+	
+	 use k&7 as the note index (a=1, c=2, …, g=7)
+	 
+	 
+	 // n is a note index 0..35 where 0 is C of the lowest octave,
+	// 12 is C of the middle octave and 35 is B of the highest octave.
+	let n =
+	  (((k&7) * 1.6) + 8)%12 + // note index 0..11
+	  !!m[3] +                 // semitote 0/1
+	  m[5] * 12;               // octave number
+	  
+	  // Note frequency is calculated as (F*2^(n/12)),
+  // Where n is note index, and F is the frequency of n=0
+  // We can use C2=65.41, or C3=130.81. C2 is a bit shorter.
+  
+  
+  // since BPM is "beats per minute", or usually "quarter note beats per minute",
+// BPM/4 would be "whole notes per minute" and BPM/60/4 would be "whole
+// notes per second":
+whole_notes_per_second = bpm / 240;
+duration = 1 / (whole_notes_per_second * note_duration);

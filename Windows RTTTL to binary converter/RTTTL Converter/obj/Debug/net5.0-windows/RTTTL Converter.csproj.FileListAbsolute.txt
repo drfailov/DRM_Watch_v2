@@ -1,0 +1,18 @@
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\bin\Debug\net5.0-windows\RTTTL Converter.exe
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\bin\Debug\net5.0-windows\RTTTL Converter.deps.json
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\bin\Debug\net5.0-windows\RTTTL Converter.runtimeconfig.json
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\bin\Debug\net5.0-windows\RTTTL Converter.runtimeconfig.dev.json
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\bin\Debug\net5.0-windows\RTTTL Converter.dll
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\bin\Debug\net5.0-windows\ref\RTTTL Converter.dll
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\bin\Debug\net5.0-windows\RTTTL Converter.pdb
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\obj\Debug\net5.0-windows\RTTTL Converter.csproj.AssemblyReference.cache
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\obj\Debug\net5.0-windows\RTTTL_Converter.Form1.resources
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\obj\Debug\net5.0-windows\RTTTL Converter.csproj.GenerateResource.cache
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\obj\Debug\net5.0-windows\RTTTL Converter.GeneratedMSBuildEditorConfig.editorconfig
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\obj\Debug\net5.0-windows\RTTTL Converter.AssemblyInfoInputs.cache
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\obj\Debug\net5.0-windows\RTTTL Converter.AssemblyInfo.cs
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\obj\Debug\net5.0-windows\RTTTL Converter.csproj.CoreCompileInputs.cache
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\obj\Debug\net5.0-windows\RTTTL Converter.dll
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\obj\Debug\net5.0-windows\ref\RTTTL Converter.dll
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\obj\Debug\net5.0-windows\RTTTL Converter.pdb
+C:\Data\Projects\Arduino\2021-10-16 DRM Watch V2\Git DRM Watch\DRM_Watch_v2\Windows RTTTL to binary converter\RTTTL Converter\obj\Debug\net5.0-windows\RTTTL Converter.genruntimeconfig.cache
