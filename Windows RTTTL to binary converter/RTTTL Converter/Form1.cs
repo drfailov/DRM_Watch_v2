@@ -48,6 +48,7 @@ namespace RTTTL_Converter
             text = text.Trim();
             String[] notes = text.Split(' ');
             String result = "//tempo: " + tempo + "\n\n";
+            String result2 = "static const byte melody PROGMEM = {\n";
             foreach (String note in notes)
             {
 
@@ -145,38 +146,103 @@ namespace RTTTL_Converter
                 // Note frequency is calculated as (F*2^(n/12)),
                 // Where n is note index, and F is the frequency of n=0
                 // We can use C2=65.41, or C3=130.81. C2 is a bit shorter.
-                double frequency = 130.81d * Math.Pow(2d, (noteNumber / 12d));
+                double frequency = 260d * Math.Pow(2d, (noteNumber / 12d));
 
-
-
-                result += "//Note: " + note;
-                result += ", tonS: " + toneString;
-                result += ", durS: " + durationString;
-                result += ", octS: " + octaveString;
-                result += ", nAoS: " + noteAndOctaveString;
-                result += "\n";
-                result += "//NoteNumber: " + noteNumber;
-                result += ", timeMs: " + timeMs;
-                result += ", frq: " + frequency;
-                result += "\n";
-
-                if (noteNumber < 36) { 
-                    result += "tone(pinBuzzer, " + (int)frequency + ");\n";
-                    result += "delay(" + (int)timeMs + ");\n";
-                    result += "noTone(pinBuzzer);\n";
-                    result += "delay(10);\n\n";
+                //duration is float 2, 4, 8, 16, 32, 64
+                String durationBinary = "";
+                int duplicateNote = 1;
+                if (duration == 2)
+                {
+                    durationBinary = "00"; //maybe duplicate note?
+                    duplicateNote = 2;
                 }
+                else if (duration == 4) durationBinary = "00";
+                else if (duration == 8) durationBinary = "01";
+                else if (duration == 16) durationBinary = "10";
+                else if (duration == 32) durationBinary = "11";
                 else
                 {
-                    result += "delay(" + (int)timeMs + ");\n\n";
+                    MessageBox.Show("Unsupported duration at: \"" + note + "\".");
+                    return;
+                }
+
+                //noteNumber is what we need to store
+                String noteBinary = Convert.ToString(noteNumber, 2);
+                while (noteBinary.Length < 6) noteBinary = "0" + noteBinary;
+
+
+                for (int dn = 0; dn < duplicateNote; dn++)
+                {
+                    result += "//Note: " + note;
+                    result += ", tonS: " + toneString;
+                    result += ", durS: " + durationString;
+                    result += ", octS: " + octaveString;
+                    result += ", nAoS: " + noteAndOctaveString;
+                    result += "\n";
+                    result += "//NoteNumber: " + noteNumber;
+                    result += ", timeMs: " + timeMs;
+                    result += ", frq: " + frequency;
+                    result += "\n";
+                    result += "//noteData: [" + durationBinary + noteBinary + "]";
+                    result += "\n";
+                    
+                    result2 += "    0b" + durationBinary + noteBinary + ",\n";
+
+                    if (noteNumber < 36)
+                    {
+                        result += "tone(pinBuzzer, " + (int)frequency + ");\n";
+                        result += "delay(" + (int)timeMs + ");\n";
+                        result += "noTone(pinBuzzer);\n";
+                        result += "delay(10);\n\n";
+                    }
+                    else
+                    {
+                        result += "delay(" + (int)timeMs + ");\n\n";
+                    }
                 }
             }
+            result2 += "};";
             richTextBox1.Text = result;
+            richTextBox2.Text = result2;
         }
 
         private string GetNotNumbers(string input)
         {
             return new string(input.Where(c => !char.IsDigit(c)).ToArray());
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Text = "";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(richTextBox1.Text);
+            richTextBox1.SelectAll();
+            richTextBox1.Focus();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(richTextBox2.Text);
+            richTextBox2.SelectAll();
+            richTextBox2.Focus();
         }
     }
 }
