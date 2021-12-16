@@ -5,6 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>RTTTL_Converter</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>FP NEW.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,7 +4,7 @@
 */
 const int genericMenuViewCount = 5; //сколько на экран помещается
 const int genericMenuMaxTextLength = 12; //размер буфера. Чем меньше тем экономнее
-const long genericMenuAutoExitTimeout = 60000; //MS Время до автоматического выхода с меню
+const long genericMenuAutoExitTimeout = 120000; //MS Время до автоматического выхода с меню
 
 byte genericMenuSelectPosition = 0; //текущий выделенный элемени
 byte genericMenuViewPosition = 0; //первый элемент который сейчас на экране отображается

@@ -29,6 +29,7 @@ namespace RTTTL_Converter
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -52,6 +53,9 @@ namespace RTTTL_Converter
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -62,6 +66,8 @@ namespace RTTTL_Converter
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel11.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -97,7 +103,7 @@ namespace RTTTL_Converter
             this.richTextBox1.Location = new System.Drawing.Point(5, 39);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(459, 413);
+            this.richTextBox1.Size = new System.Drawing.Size(397, 386);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -118,7 +124,7 @@ namespace RTTTL_Converter
             this.panel1.Location = new System.Drawing.Point(0, 125);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(831, 467);
+            this.panel1.Size = new System.Drawing.Size(831, 440);
             this.panel1.TabIndex = 5;
             // 
             // panel5
@@ -129,7 +135,7 @@ namespace RTTTL_Converter
             this.panel5.Location = new System.Drawing.Point(5, 5);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(5);
-            this.panel5.Size = new System.Drawing.Size(469, 457);
+            this.panel5.Size = new System.Drawing.Size(407, 430);
             this.panel5.TabIndex = 5;
             // 
             // panel7
@@ -139,7 +145,7 @@ namespace RTTTL_Converter
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(5, 5);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(459, 34);
+            this.panel7.Size = new System.Drawing.Size(397, 34);
             this.panel7.TabIndex = 5;
             // 
             // panel9
@@ -147,7 +153,7 @@ namespace RTTTL_Converter
             this.panel9.Controls.Add(this.button3);
             this.panel9.Controls.Add(this.button2);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(319, 0);
+            this.panel9.Location = new System.Drawing.Point(257, 0);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(140, 34);
             this.panel9.TabIndex = 0;
@@ -187,10 +193,10 @@ namespace RTTTL_Converter
             this.panel6.Controls.Add(this.richTextBox2);
             this.panel6.Controls.Add(this.panel8);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(474, 5);
+            this.panel6.Location = new System.Drawing.Point(412, 5);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(5);
-            this.panel6.Size = new System.Drawing.Size(352, 457);
+            this.panel6.Size = new System.Drawing.Size(414, 430);
             this.panel6.TabIndex = 0;
             // 
             // richTextBox2
@@ -200,7 +206,7 @@ namespace RTTTL_Converter
             this.richTextBox2.Location = new System.Drawing.Point(5, 39);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(342, 413);
+            this.richTextBox2.Size = new System.Drawing.Size(404, 386);
             this.richTextBox2.TabIndex = 4;
             this.richTextBox2.Text = "";
             this.richTextBox2.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);
@@ -212,7 +218,7 @@ namespace RTTTL_Converter
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(5, 5);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(342, 34);
+            this.panel8.Size = new System.Drawing.Size(404, 34);
             this.panel8.TabIndex = 6;
             // 
             // panel10
@@ -220,7 +226,7 @@ namespace RTTTL_Converter
             this.panel10.Controls.Add(this.button4);
             this.panel10.Controls.Add(this.button5);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel10.Location = new System.Drawing.Point(200, 0);
+            this.panel10.Location = new System.Drawing.Point(262, 0);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(142, 34);
             this.panel10.TabIndex = 0;
@@ -307,16 +313,45 @@ namespace RTTTL_Converter
             this.label4.TabIndex = 5;
             this.label4.Text = "Tempo (BPM) :";
             // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.panel12);
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel11.Location = new System.Drawing.Point(0, 565);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(831, 27);
+            this.panel11.TabIndex = 7;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.label5);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel12.Location = new System.Drawing.Point(631, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(200, 27);
+            this.panel12.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(114, 6);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(83, 15);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Dr. Failov 2021";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(831, 592);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel11);
             this.Controls.Add(this.panel2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(672, 386);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Arduino RTTTL Converter";
             this.panel1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
@@ -331,6 +366,9 @@ namespace RTTTL_Converter
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -360,6 +398,9 @@ namespace RTTTL_Converter
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Label label5;
     }
 }
 

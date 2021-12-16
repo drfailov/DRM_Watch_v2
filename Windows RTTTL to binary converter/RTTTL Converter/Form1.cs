@@ -30,7 +30,7 @@ namespace RTTTL_Converter
                 MessageBox.Show("Tempo incottect number: \"" + tempoString + "\".");
                 return;
             }
-            if (tempo < 40 || tempo > 500)
+            if (tempo < 20 || tempo > 254)
             {
                 MessageBox.Show("Tempo \"" + tempo + "\" is not in correct range.");
                 return;
@@ -48,10 +48,12 @@ namespace RTTTL_Converter
             text = text.Trim();
             String[] notes = text.Split(' ');
             String result = "//tempo: " + tempo + "\n\n";
-            String result2 = "static const byte melody PROGMEM = {\n";
-            foreach (String note in notes)
+            String result2 = "const byte melody[] PROGMEM = {\n";
+            result2 += "    " + tempo + ",\n    ";
+            int inThisLine = 0; //для разделенния на строкки по несколько нот
+            for(int index = 0; index < notes.Length; index++)
             {
-
+                String note = notes[index];
                 bool x2 = note.Contains('.');
                 String noteString = note.Replace(".", "").Trim();
                 String toneString = GetNotNumbers(noteString);
@@ -151,10 +153,23 @@ namespace RTTTL_Converter
                 //duration is float 2, 4, 8, 16, 32, 64
                 String durationBinary = "";
                 int duplicateNote = 1;
-                if (duration == 2)
+                //if (duration == 2 || duration == 1)
+                //{
+                //    durationBinary = "00"; //maybe duplicate note?
+                //    duplicateNote = 2;
+                //}
+                //else 
+                if (duration == 1)
                 {
-                    durationBinary = "00"; //maybe duplicate note?
-                    duplicateNote = 2;
+                    durationBinary = "00";
+                    if (noteNumber == 36)
+                        duplicateNote = 4;
+                }
+                else if (duration == 2)
+                {
+                    durationBinary = "00";
+                    if (noteNumber == 36)
+                        duplicateNote = 2;
                 }
                 else if (duration == 4) durationBinary = "00";
                 else if (duration == 8) durationBinary = "01";
@@ -162,7 +177,7 @@ namespace RTTTL_Converter
                 else if (duration == 32) durationBinary = "11";
                 else
                 {
-                    MessageBox.Show("Unsupported duration at: \"" + note + "\".");
+                    MessageBox.Show("Unsupported duration " + duration + " at: \"" + note + "\".");
                     return;
                 }
 
@@ -173,7 +188,8 @@ namespace RTTTL_Converter
 
                 for (int dn = 0; dn < duplicateNote; dn++)
                 {
-                    result += "//Note: " + note;
+                    result += "//Note: " + note; 
+                    result += ", index: " + index;
                     result += ", tonS: " + toneString;
                     result += ", durS: " + durationString;
                     result += ", octS: " + octaveString;
@@ -185,8 +201,14 @@ namespace RTTTL_Converter
                     result += "\n";
                     result += "//noteData: [" + durationBinary + noteBinary + "]";
                     result += "\n";
-                    
-                    result2 += "    0b" + durationBinary + noteBinary + ",\n";
+
+                    result2 += "0b" + durationBinary + noteBinary + ", ";
+
+                    if (++inThisLine == 5)
+                    {
+                        result2 += "\n    ";
+                        inThisLine = 0;
+                    }
 
                     if (noteNumber < 36)
                     {
@@ -201,6 +223,7 @@ namespace RTTTL_Converter
                     }
                 }
             }
+            result2 += "0b11111111, \n";
             result2 += "};";
             richTextBox1.Text = result;
             richTextBox2.Text = result2;
