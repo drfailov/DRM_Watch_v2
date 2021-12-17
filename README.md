@@ -6,14 +6,14 @@
 Arduino-based watch with Nokia 1280 LCD. 
 
 ##Used components:
+
 - Arduino Nano (MEGA328P chip)
 - Nokia 1280 LCD (PCF8814 chip)
 - RTC module (DS3231M chip)
 - Li-Po charger module (TC4056A chip)
 
 
-\
-\
+
 ##To get components I've desoldered modules. 
 
 <b>Arduino Nano, CH340C and MEGA328P</b> \
@@ -45,8 +45,12 @@ Link: https://aliexpress.ru/item/1005003227004618.html  \
 <img src="Photos/buzzer.jpg" width="300"/>
 <img src="Photos/photo_2021-12-03_20-30-06.jpg" width="300"/>
 <img src="Photos/photo_2021-12-03_20-30-32.jpg" width="300"/>
- \
- \
+
+
+
+
+
+
  ## Code description
  
  ### How to add my own screen?
@@ -63,7 +67,7 @@ Link: https://aliexpress.ru/item/1005003227004618.html  \
  - Call your `modeSetup()` from `setMode()` when entering your mode.
  - Call your `modeFinish()` from `setMode()` when leaving your mode.
  - Call `setMode(YOUR_MODE);` when you want to enter your new screen.
- - Don`t forget to call `goToWatchface()` or `setMode()` to exit your mode if needed.
+ - Don't forget to call `goToWatchface()` or `setMode()` to exit your mode if needed.
 \
 
 ### Mode description
