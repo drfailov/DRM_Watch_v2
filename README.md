@@ -5,7 +5,7 @@
 
 Arduino-based watch with Nokia 1280 LCD. 
 
-Used components:
+##Used components:
 - Arduino Nano (MEGA328P chip)
 - Nokia 1280 LCD (PCF8814 chip)
 - RTC module (DS3231M chip)
@@ -14,7 +14,7 @@ Used components:
 
 \
 \
-To get components I've desoldered modules. 
+##To get components I've desoldered modules. 
 
 <b>Arduino Nano, CH340C and MEGA328P</b> \
 MEGA328P used as main controller.\
@@ -47,9 +47,39 @@ Link: https://aliexpress.ru/item/1005003227004618.html  \
 <img src="Photos/photo_2021-12-03_20-30-32.jpg" width="300"/>
  \
  \
+ ## Code description
+ 
+ ### How to add my own screen?
+ Program contains several screens (menus, watchfaces...).
+ Every screen is a separate mode. Every mode contains of: modeSetup(), modeLoop(), modeFinish().
+ Modes can work independently. Modes divided into different files to ease.
+ Function of main program `loop()` is routing `modeLoop()` to correct mode according to `_mode` value.
+ Also `setMode()` function is triggering `modeSetup()` and `modeFinish()` for every mode.
+ To change mode call: `setMode(MODE_INIT);`.
+ When adding new mode: 
+ - Create new file with `modeLoop()`, `modeSetup()`, and `modeFinish()` for your mode.
+ - Define constant for it in main file, like `#define MODE_MENU_SET_BEEP_SOUND (byte)9`.
+ - Add to main `loop()` call for your `modeLoop()`.
+ - Call your `modeSetup()` from `setMode()` when entering your mode.
+ - Call your `modeFinish()` from `setMode()` when leaving your mode.
+ - Call `setMode(YOUR_MODE);` when you want to enter your new screen.
+ - Don`t forget to call `goToWatchface()` or `setMode()` to exit your mode if needed.
+\
+
+### Mode description
+
+#### ModeInit
+Initial mode. Its goal to init Serial, init display, init RTC, show startup animation, and go to watchface.
+
+#### ModeWatchFace1
+Whow time, date. Watchfaces is only screen with deep sleep, so device can run for a long time if in watchface mode.
+
+#### ModeMenuMain
+Main menu, opens when you click bottom button. If inactive for 120 sec, will automatically go to watchface.
+ 
  \
  \
-<b> Prototype photos: <b/> \
+## Prototype photos:
  <img src="Photos/photo_2021-12-05_17-01-19.jpg" width="300"/>
  <img src="Photos/photo_2021-12-04_13-20-55.jpg" width="300"/>
  <img src="Photos/photo_2021-12-08_22-34-49.jpg" width="300"/>
