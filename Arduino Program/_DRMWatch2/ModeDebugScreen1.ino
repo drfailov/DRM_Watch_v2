@@ -1,6 +1,7 @@
 /*Used to test new functionality*/
 
 void modeDebugScreen1Setup() {
+  displayInit();
 }
 
 void modeDebugScreen1Loop() {

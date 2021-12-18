@@ -1,5 +1,6 @@
 #include "lcd1202.h"
 #include <LowPower.h>
+#define version F("v0.15")
 
 //Pins
 #define pinButtonDown (byte)2 //active high

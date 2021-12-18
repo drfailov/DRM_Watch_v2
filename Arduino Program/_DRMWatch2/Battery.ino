@@ -7,7 +7,7 @@ float batteryVoltage(){
 
 
 bool batteryIsLowPower(){
-  return batteryVoltage() < 3.50;
+  return batteryVoltage() < 3.65;
 }
 
 bool batteryIsCharging(){

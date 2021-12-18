@@ -41,6 +41,7 @@ void beepConfirm() {
   delay(30);
   noTone(pinBuzzer);      // не пищать
   delay(30);
+  pinMode(pinBuzzer, INPUT);
   Serial.println(F("OK"));
 }
 
@@ -77,7 +78,7 @@ void beepAlert() {
   tone(pinBuzzer, 1000);  // пищать на пине 12, 1 кГц
   delay(100);
   noTone(pinBuzzer);      // не пищать
-
+  pinMode(pinBuzzer, INPUT);
   Serial.println(F("OK"));
 }
 
@@ -105,4 +106,5 @@ void beep() {
     delay(80);
   }
   noTone(pinBuzzer);
+  pinMode(pinBuzzer, INPUT);
 }

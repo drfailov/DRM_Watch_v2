@@ -63,10 +63,9 @@ static const PROGMEM byte pathBubble[] = { 12,
 void displayInit(){
   Serial.print(F("LCD Init..."));
   lcd.Inicialize();  //Инициализация дисплея
-  lcd.Clear_LCD();  //Очистка дисплея  
-  displayUpdate();
+  //lcd.Clear_LCD();  //Очистка дисплея  
+  //displayUpdate();
   Serial.println("OK");
-  displayBacklightOff();
 }
 
 void displayBacklightOn(){
@@ -77,8 +76,9 @@ void displayBacklightOn(){
 
 void displayBacklightOff(){
   Serial.println(F("LCD Backlight OFF"));
-  pinMode(pinLcdBacklight, OUTPUT);
-  digitalWrite(pinLcdBacklight, LOW);
+//  pinMode(pinLcdBacklight, OUTPUT);
+//  digitalWrite(pinLcdBacklight, LOW);
+  pinMode(pinLcdBacklight, INPUT);
 }
 
 void displayClear(){
@@ -219,8 +219,8 @@ void drawBattery(byte x, byte y){
   float voltage = batteryVoltage();
   bool isCharging = batteryIsCharging();
   byte level = 0;
-  if(voltage > 3.25) level = 1;
-  if(voltage > 3.50) level = 2;
+  if(voltage > 3.40) level = 1;
+  if(voltage > 3.65) level = 2;
   if(voltage > 3.85) level = 3;
   if(voltage > 4.00) level = 4;
   byte xshift = 6;

@@ -148,45 +148,27 @@ const byte* const getMelodyNokiaTune(){ return nokiaTune;}
 
 void melodyPlayerPlayMelody(const byte* const melody) {
   Serial.println(F("Play melody..."));
+  pinMode(pinBuzzer, OUTPUT);
   byte length = melodyPlayerGetLength(melody);
-//  Serial.print(F("Length:"));
-//  Serial.println(length);
   float tempo = pgm_read_byte(&melody[0]);
-//  Serial.print(F("Tempo:"));
-//  Serial.println(tempo);
   float whole_notes_per_second = tempo / 240.0;
-//  Serial.print(F("whole_notes_per_second:"));
-//  Serial.println(whole_notes_per_second);
   for (byte i = 1; i < length-1; i++) {
     byte b = pgm_read_byte(&melody[i]);
-    //printBits(b);
-//    Serial.print(F(", Note:"));
-//    Serial.print(i);
     byte duration = 0;
     if (bitRead(b, 7) == 0 && bitRead(b, 6) == 0) duration = 4;
     if (bitRead(b, 7) == 0 && bitRead(b, 6) == 1) duration = 8;
     if (bitRead(b, 7) == 1 && bitRead(b, 6) == 0) duration = 16;
     if (bitRead(b, 7) == 1 && bitRead(b, 6) == 1) duration = 32;
-//    Serial.print(F(", Dur:"));
-//    Serial.print(duration);
     float timeMs = 1000.0 / (whole_notes_per_second * duration);
-//    Serial.print(F(", timeMs:"));
-//    Serial.print(timeMs);
     byte noteNumberByte = 0;
     for(byte i=0; i < 6; i++)
       bitWrite(noteNumberByte, i, bitRead(b, i));
     float noteNumber = noteNumberByte;
-//    Serial.print(F(", noteNumber:"));
-//    Serial.print(noteNumber);
     // Note frequency is calculated as (F*2^(n/12)),
-    // Where n is note index, and F is the frequency of n=0
     // We can use C2=65.41, or C3=130.81. C2 is a bit shorter.
     float frequency = 0;
     if(noteNumber < 36)
       frequency = 260.0 * pow(2.0, (noteNumber / 12.0));
-//    Serial.print(F(", frequency:"));
-//    Serial.print(frequency);
-
 
     if(frequency != 0)
       tone(pinBuzzer, frequency);
@@ -195,11 +177,9 @@ void melodyPlayerPlayMelody(const byte* const melody) {
     delay(timeMs);
     noTone(pinBuzzer);
     delay(10);
-    
-//    Serial.print(F(", RAM:"));
-//    Serial.print(freeRam());
-//    Serial.println(F(";"));
   }
+  noTone(pinBuzzer);
+  pinMode(pinBuzzer, INPUT);
 }
 
 void printBits(byte myByte) {

@@ -74,7 +74,7 @@ void modeMenuSetSleepTimeSelected(byte index) {
   }
 
   if (index == 5) { //Back
-    setMode(MODE_MENU_MAIN);
+    setMode(MODE_MENU_SETTINGS);
     return;
   }
 }

@@ -33,40 +33,48 @@ byte rtcGetSeconds(){
   if(!rtcReady)
     return rand()%60;
   DateTime now = DS3231M.now(); 
+  delayMicroseconds(100);
   return now.second();
 }
 byte rtcGetMinutes(){
   if(!rtcReady)
     return rand()%60;
   DateTime now = DS3231M.now(); 
+  delayMicroseconds(100);
   return now.minute();
 }
 byte rtcGetHours(){
   if(!rtcReady)
     return rand()%60;
   DateTime now = DS3231M.now(); 
+  delayMicroseconds(100);
   return now.hour();
 }
 byte rtcGetDay(){
   if(!rtcReady)
     return rand()%30;
   DateTime now = DS3231M.now(); 
+  delayMicroseconds(100);
   return now.day();
 }
 byte rtcGetMonth(){
   if(!rtcReady)
     return rand()%12;
   DateTime now = DS3231M.now(); 
+  delayMicroseconds(100);
   return now.month();
 }
 int rtcGetYear(){
   if(!rtcReady)
     return rand()%3000;
   DateTime now = DS3231M.now(); 
+  delayMicroseconds(100);
   return now.year();
 }
 float rtcGetTemp(){
   if(!rtcReady)
     return (rand()%3000) / 100.0;
-  return DS3231M.temperature() / 100.0;
+  float temp =  DS3231M.temperature() / 100.0;
+  delayMicroseconds(100);
+  return temp;
 }

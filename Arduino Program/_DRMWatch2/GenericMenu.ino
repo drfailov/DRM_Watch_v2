@@ -12,7 +12,8 @@ long genericMenuLastActionTime = 0; //последнее действие кно
 
 
 void genericMenuSetup(){
-  digitalWrite(pinLcdBacklight, HIGH);
+  displayInit();
+  displayBacklightOn();
   genericMenuSelectPosition = 0;
   genericMenuViewPosition = 0;
   genericMenuLastActionTime = millis();
