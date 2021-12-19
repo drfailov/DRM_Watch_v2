@@ -20,15 +20,15 @@ bool batteryIsCharging(){
   return sum > 5;
 }
 
-bool batteryIsChargeComplete(){
-  pinMode(pinChargeCompletePin, INPUT);
-  int sum = 0;
-  for(int i=0; i<10; i++)
-    if(digitalRead(pinChargeCompletePin) == HIGH)
-      sum += 1;
-
-  return sum > 5;
-}
+//bool batteryIsChargeComplete(){
+//  pinMode(pinChargeCompletePin, INPUT);
+//  int sum = 0;
+//  for(int i=0; i<10; i++)
+//    if(digitalRead(pinChargeCompletePin) == HIGH)
+//      sum += 1;
+//
+//  return sum > 5;
+//}
 
 long _batteryRawVoltage(){
   Serial.print(F("Read voltage ..."));

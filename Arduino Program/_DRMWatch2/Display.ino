@@ -61,8 +61,13 @@ static const PROGMEM byte pathBubble[] = { 12,
 }; 
 
 void displayInit(){
+  //displayPowerOff();
   Serial.print(F("LCD Init..."));
+  pinMode(pinLcdPower, OUTPUT);
+  digitalWrite(pinLcdPower, HIGH);
+  delay(100);
   lcd.Inicialize();  //Инициализация дисплея
+  delay(10);
   //lcd.Clear_LCD();  //Очистка дисплея  
   //displayUpdate();
   Serial.println("OK");
@@ -79,6 +84,23 @@ void displayBacklightOff(){
 //  pinMode(pinLcdBacklight, OUTPUT);
 //  digitalWrite(pinLcdBacklight, LOW);
   pinMode(pinLcdBacklight, INPUT);
+}
+
+void displayPowerOff(){
+  Serial.println(F("LCD POWER OFF"));
+
+
+  
+  pinMode(pinLcdBacklight, INPUT);
+  digitalWrite(pinLcdBacklight, LOW);
+  
+  pinMode(pinLcdRst, INPUT);
+  pinMode(pinLcdCs, INPUT);
+  pinMode(pinLcdMosi, INPUT);
+  pinMode(pinLcdSck, INPUT);
+  pinMode(pinLcdPower, INPUT);
+  
+  delay(50);
 }
 
 void displayClear(){

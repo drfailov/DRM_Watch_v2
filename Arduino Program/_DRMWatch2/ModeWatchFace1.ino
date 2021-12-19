@@ -68,7 +68,7 @@ void modeWatchFace1Loop() {
   displayClear();
   float voltage = batteryVoltage();
   bool isCharging = batteryIsCharging();
-  bool isChargeComplete = batteryIsChargeComplete();
+  //bool isChargeComplete = batteryIsChargeComplete();
 
   { //time
     int hour = rtcGetHours();
@@ -86,7 +86,7 @@ void modeWatchFace1Loop() {
     drawSymbol(10      , 34, 20, 3, 4); // :
     drawSymbol(minute1 , 40, 20, 3, 4);
     drawSymbol(minute2 , 54, 20, 3, 4);
-    drawSymbol(10      , 69, 20, 3, 4); // :
+    drawSymbol(10      , 70, 25, 2, 3); // :
     drawSymbol(second1 , 75, 25, 2, 3);
     drawSymbol(second2 , 85, 25, 2, 3);
   }

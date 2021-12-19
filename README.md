@@ -5,6 +5,17 @@
 
 Arduino-based watch with Nokia 1280 LCD. 
 
+## Functions
+- Watchface scren
+- Menu screens
+- Play monophonic melodies
+- Set time screen
+- Set sleep time screen
+- Set button sound screen
+- Force reboot
+- About screen
+
+
 ## Used components:
 
 - Arduino Nano (MEGA328P chip)
@@ -13,8 +24,7 @@ Arduino-based watch with Nokia 1280 LCD.
 - Li-Po charger module (TC4056A chip)
 
 
-
-## To get components I've desoldered modules. 
+### To get components I've desoldered modules. 
 
 <b>Arduino Nano, CH340C and MEGA328P</b> \
 MEGA328P used as main controller.\
@@ -25,6 +35,8 @@ Link: https://aliexpress.ru/item/4000903444456.html  \
  \
  \
 <b>Nokia 1280, PCF8814 LCD </b> \
+Also, this display is used in: Nokia 1202, Nokia 1280, Nokia 1203.
+And also compatible with Nokia 1100 LCD, but it will not fit with board.
 Display is main output device. \
 Link: https://aliexpress.ru/item/32864378445.html  \
 <img src="Photos/photo_2021-10-24_09-22-21.jpg" width="300"/>
@@ -47,11 +59,28 @@ Link: https://aliexpress.ru/item/1005003227004618.html  \
 <img src="Photos/photo_2021-12-03_20-30-32.jpg" width="300"/>
 
 
+## Pinout
+<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="500"/>
+- D0 - UART RX
+- D1 - UART TX
+- D2 - Button DOWN (Active HIGH)
+- D3 - Button UP (Active HIGH)
+- D5 - LCD RST
+- D6 - LCD CS
+- D7 - LCD MOSI
+- D9 - USB Voltage 
+- D10 - LCD Power
+- D11 - LCD SCK   
+- D12 - Buzzer (Passive)
+- D13 - Debug LED
+- A1 - LCD Backlight (Active HIGH)
+- A4 - RTC SDA
+- A5 - RTC SCL
 
 
 
 
- ## Code description
+## Code description
 
 ### How to add my own screen?
 Program contains several screens (menus, watchfaces...).
@@ -70,24 +99,71 @@ When adding new mode:
 - Don't forget to call `goToWatchface()` or `setMode()` to exit your mode if needed.
 
 
-## Mode description
+
+
+
+### Used Libraries
+
+#### LCD1202
+Used to run nokia display. Also may be compatible with this LCD controllers: pcf8814, ste2007, ST7565, HX1230.
+Library included in this repo. Just copy it to your libraries folder (C:\Users\USER\Documents\Arduino\libraries).
+Source: http://arduino.ru/forum/proekty/khronograf-izmeritel-skorosti-puli-ot-prostogo-k-slozhnomu?page=5#comment-136147
+
+#### Low-Power-master
+Used to allow deep sleep between screen refreshing. 
+Library included in this repo. Just copy it to your libraries folder (C:\Users\USER\Documents\Arduino\libraries).
+
+#### DS3231M-1.0.6
+Used to communicate with RTC module.
+Library included in this repo. Just copy it to your libraries folder (C:\Users\USER\Documents\Arduino\libraries).
+
+
+
+
+
+### Mode description
 
 #### ModeInit
 Initial mode. Its goal to init Serial, init display, init RTC, show startup animation, and go to watchface.
+If RTC can not be initialized, watchface will not open.
+<img src="Photos/photo_2021-12-19_19-43-52.jpg" width="300"/>
+
 
 #### ModeWatchFace1
 Whow time, date. Watchfaces is only screen with deep sleep, so device can run for a long time if in watchface mode.
+Press button Up to turn on backlight. Press button down to open main menu.
+<img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="300"/>
 
 #### ModeMenuMain
 Main menu, opens when you click bottom button. If inactive for 120 sec, will automatically go to watchface.
+Press button Up to select. Press button Down to move cursor down.
+<img src="Photos/photo_2021-12-19_19-43-52 (3).jpg" width="300"/>
 
- 
- 
- 
- 
+#### ModeMenuMelodies
+<img src="Photos/photo_2021-12-19_19-43-52 (4).jpg" width="300"/>
+
+#### ModeMenuSetTime
+<img src="Photos/photo_2021-12-19_19-43-52 (5).jpg" width="300"/>
+
+#### ModeMenuSetSleepTime
+<img src="Photos/photo_2021-12-19_19-43-52 (6).jpg" width="300"/>
+
+#### ModeMenuSetBeepSound
+<img src="Photos/photo_2021-12-19_19-43-52 (7).jpg" width="300"/>
+
+#### ModeAbout
+<img src="Photos/photo_2021-12-19_19-43-52 (8).jpg" width="300"/>
+
+#### Mode
+<img src="Photos/" width="300"/>
+
+#### Mode
+<img src="Photos/" width="300"/>
+
+#### Mode
+<img src="Photos/" width="300"/>
  
  
 ## Prototype photos:
- <img src="Photos/photo_2021-12-05_17-01-19.jpg" width="300"/>
- <img src="Photos/photo_2021-12-04_13-20-55.jpg" width="300"/>
- <img src="Photos/photo_2021-12-08_22-34-49.jpg" width="300"/>
+ <img src="Photos/photo_2021-12-05_17-01-19.jpg" width="300"/>    <img src="Photos/photo_2021-12-04_13-20-55.jpg" width="300"/>
+ <img src="Photos/photo_2021-12-08_22-34-49.jpg" width="300"/>    <img src="Photos/photo_2021-12-19_16-08-34.jpg" width="300"/>

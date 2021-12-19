@@ -63,6 +63,9 @@ void modeMenuSettingsSelected(byte index) {
   
   if (index == 5) { //Reboot
     displayMessage(F("Rebooting..."));
+    delay(100);
+    displayPowerOff();
+    delay(1000);
     resetFunc(); //вызываем reset
     return;
   }

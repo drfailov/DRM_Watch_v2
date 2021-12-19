@@ -1,6 +1,6 @@
 #include "lcd1202.h"
 #include <LowPower.h>
-#define version F("v0.15")
+#define version F("v0.16")
 
 //Pins
 #define pinButtonDown (byte)2 //active high
@@ -9,7 +9,7 @@
 #define pinLcdCs (byte)6
 #define pinLcdMosi (byte)7
 #define pinUsbVoltage (byte)9
-#define pinChargeCompletePin (byte)10
+#define pinLcdPower (byte)10
 #define pinLcdSck (byte)11
 #define pinBuzzer (byte)12 //passive
 #define pinLed (byte)13  //active high
