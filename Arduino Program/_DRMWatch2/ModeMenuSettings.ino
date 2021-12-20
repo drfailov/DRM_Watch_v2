@@ -3,12 +3,12 @@
 const byte modeMenuSettingsItemsCount = 7; //сколько пунктов меню в массиве
 
 //Максимальная длина строки:                  |          |
-const char modeMenuSettingsItem1[] PROGMEM = "Set time";
+const char modeMenuSettingsItem1[] PROGMEM = "Reboot";
 const char modeMenuSettingsItem2[] PROGMEM = "Select WTF";
-const char modeMenuSettingsItem3[] PROGMEM = "Set sleep";
-const char modeMenuSettingsItem4[] PROGMEM = "Set silent";
+const char modeMenuSettingsItem3[] PROGMEM = "Set silent";
+const char modeMenuSettingsItem4[] PROGMEM = "Set sleep";
 const char modeMenuSettingsItem5[] PROGMEM = "Set sound";
-const char modeMenuSettingsItem6[] PROGMEM = "Reboot";
+const char modeMenuSettingsItem6[] PROGMEM = "Set time";
 const char modeMenuSettingsItem7[] PROGMEM = "< Back";
 
 const char* const modeMenuSettingsItems[] PROGMEM = {
@@ -36,8 +36,12 @@ void modeMenuSettingsFinish() {
 }
 
 void modeMenuSettingsSelected(byte index) {
-  if (index == 0) { //Set time
-    setMode(MODE_MENU_SET_TIME); 
+  if (index == 0) { //Reboot
+    displayMessage(F("Rebooting..."));
+    delay(100);
+    displayPowerOff();
+    delay(1000);
+    resetFunc(); //вызываем reset
     return;
   }
   
@@ -45,14 +49,14 @@ void modeMenuSettingsSelected(byte index) {
     
     return;
   }
-
-  if (index == 2) { //Set sleep
-    setMode(MODE_MENU_SET_SLEEP_TIME); 
+  
+  if (index == 2) { //Set silent
+    setMode(MODE_MENU_SET_SILENT_MODE); 
     return;
   }
-  
-  if (index == 3) { //Set silent
-    
+
+  if (index == 3) { //Set sleep
+    setMode(MODE_MENU_SET_SLEEP_TIME); 
     return;
   }
   
@@ -60,13 +64,9 @@ void modeMenuSettingsSelected(byte index) {
     setMode(MODE_MENU_SET_BEEP_SOUND); 
     return;
   }
-  
-  if (index == 5) { //Reboot
-    displayMessage(F("Rebooting..."));
-    delay(100);
-    displayPowerOff();
-    delay(1000);
-    resetFunc(); //вызываем reset
+
+  if (index == 5) { //Set time
+    setMode(MODE_MENU_SET_TIME); 
     return;
   }
 

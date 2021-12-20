@@ -2,7 +2,9 @@
 */
 
 bool buttonLastValueUp = false;
+long lastTimePushDownTimeForButtonUp = 0;
 bool buttonLastValueDown = false;
+long lastTimePushDownTimeForButtonDown = 0;
 
 
 bool isButtonUpPressed(){
@@ -13,9 +15,17 @@ bool isButtonUpPressed(){
     if(digitalRead(pinButtonUp) == HIGH)
       sum += 1;
   bool value = sum > 5;
-  bool result = value && !buttonLastValueUp;
+  bool lastValue = buttonLastValueUp;
   buttonLastValueUp = value;
-  return result;
+  bool isButtonPressDown = value && !lastValue;
+
+  if(isButtonPressDown)
+    lastTimePushDownTimeForButtonUp = millis();
+  if(isButtonPressDown)
+    return true;
+  if(value && lastValue && millis()-lastTimePushDownTimeForButtonUp > 500)
+    return true;
+  return false;
 }
 
 bool isButtonDownPressed(){
@@ -26,7 +36,14 @@ bool isButtonDownPressed(){
     if(digitalRead(pinButtonDown) == HIGH)
       sum += 1;
   bool value = sum > 5;
-  bool result = value && !buttonLastValueDown;
+  bool lastValue = buttonLastValueDown;
   buttonLastValueDown = value;
-  return result;
+  bool isButtonPressDown = value && !lastValue;
+  if(isButtonPressDown)
+    lastTimePushDownTimeForButtonDown = millis();
+  if(isButtonPressDown)
+    return true;
+  if(value && lastValue && millis()-lastTimePushDownTimeForButtonDown > 500)
+    return true;
+  return false;
 }

@@ -177,16 +177,20 @@ void displayMessage(const __FlashStringHelper* str){
   displayClear();
   displayDrawVector(/*path*/pathZubat, /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
   displayDrawVector(/*path*/pathBubble, /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
-  //byte len = strlen_P((PGM_P)str);
-  //if(len > 12) len = 12;
-  char buffer[14];
-  strlcpy_P(buffer, (PGM_P)str, 14);
-  for(int i=0; i<14; i++){
+  const byte BUFFER_SIZE = 25;
+  char buffer[BUFFER_SIZE];
+  strlcpy_P(buffer, (PGM_P)str, BUFFER_SIZE);
+  byte pos = 0;
+  for(byte i=0; i<BUFFER_SIZE; i++){
     if(buffer[i] == '\0') 
       break;
-    displayDrawText(10 + i*6, 6, 1, buffer[i]);
-    displayUpdate();
-    delay(6);
+    Serial.println((byte)buffer[i]);
+    if((byte)buffer[i] != 208 && (byte)buffer[i] != 209){
+      displayDrawText(10 + pos*6, 6, 1, buffer[i]);
+      displayUpdate();
+      pos ++;
+      delay(6);
+    }
   }
   delay(500);
 }
@@ -212,39 +216,63 @@ void displaySimpleMessage(const char* text){
 }
 
 void displayDrawCheck(byte x, byte y){
-  displayDrawLine(/*X1*/x+0, /*Y1*/y+3, /*X2*/x+1, /*Y2*/y+6, /*C*/1);
-  displayDrawLine(/*X1*/x+0, /*Y1*/y+3, /*X2*/x+2, /*Y2*/y+5, /*C*/1);
-  displayDrawLine(/*X1*/x+1, /*Y1*/y+6, /*X2*/x+5, /*Y2*/y+0, /*C*/1);
-  displayDrawLine(/*X1*/x+2, /*Y1*/y+6, /*X2*/x+5, /*Y2*/y+0, /*C*/1);
+  static const char img[6] PROGMEM = { 
+      0b00011000,
+      0b01110000,
+      0b01110000,
+      0b00111000,
+      0b00001110,
+      0b00000011,
+    };
+  lcd.drawBitmap(x, y, img, 6, 8, 1);
 }
 
 void displayDrawArrowDown(byte x, byte y){
-  displayDrawLine(/*X1*/x+0, /*Y1*/y+0, /*X2*/x+6, /*Y2*/y+0, /*C*/1);
-  displayDrawLine(/*X1*/x+1, /*Y1*/y+1, /*X2*/x+5, /*Y2*/y+1, /*C*/1);
-  displayDrawLine(/*X1*/x+1, /*Y1*/y+2, /*X2*/x+5, /*Y2*/y+2, /*C*/1);
-  displayDrawLine(/*X1*/x+2, /*Y1*/y+3, /*X2*/x+4, /*Y2*/y+3, /*C*/1);
-  displayDrawLine(/*X1*/x+2, /*Y1*/y+4, /*X2*/x+4, /*Y2*/y+4, /*C*/1);
-  displayDrawLine(/*X1*/x+3, /*Y1*/y+5, /*X2*/x+3, /*Y2*/y+5, /*C*/1);
+  static const char img[7] PROGMEM = { 
+      0b00000001,
+      0b00000111,
+      0b00011111,
+      0b01111111,
+      0b00011111,
+      0b00000111,
+      0b00000001,
+    };
+  lcd.drawBitmap(x, y, img, 7, 8, 1);
 }
 
 void displayDrawArrowRight(byte x, byte y){
-  displayDrawLine(/*X1*/x+0, /*Y1*/y+0, /*X2*/x+0, /*Y2*/y+0, /*C*/1);
-  displayDrawLine(/*X1*/x+0, /*Y1*/y+1, /*X2*/x+2, /*Y2*/y+1, /*C*/1);
-  displayDrawLine(/*X1*/x+0, /*Y1*/y+2, /*X2*/x+4, /*Y2*/y+2, /*C*/1);
-  displayDrawLine(/*X1*/x+0, /*Y1*/y+3, /*X2*/x+6, /*Y2*/y+3, /*C*/1);
-  displayDrawLine(/*X1*/x+0, /*Y1*/y+4, /*X2*/x+4, /*Y2*/y+4, /*C*/1);
-  displayDrawLine(/*X1*/x+0, /*Y1*/y+5, /*X2*/x+2, /*Y2*/y+5, /*C*/1);
-  displayDrawLine(/*X1*/x+0, /*Y1*/y+6, /*X2*/x+0, /*Y2*/y+6, /*C*/1);
+  static const char img[7] PROGMEM = { 
+      0b01111111,
+      0b00111110,
+      0b00111110,
+      0b00011100,
+      0b00011100,
+      0b00001000,
+      0b00001000
+    };
+  lcd.drawBitmap(x, y, img, 7, 8, 1);
 }
 
-void drawBattery(byte x, byte y){
-  float voltage = batteryVoltage();
-  bool isCharging = batteryIsCharging();
-  byte level = 0;
-  if(voltage > 3.40) level = 1;
-  if(voltage > 3.65) level = 2;
-  if(voltage > 3.85) level = 3;
-  if(voltage > 4.00) level = 4;
+void displayDrawSilentModeIcon(byte x, byte y){
+      static const char img[11] PROGMEM = { 
+      0b00011000,
+      0b00011000,
+      0b00100100,
+      0b01000010,
+      0b11111111,
+      0b00000000,
+      0b00100010,
+      0b00010100,
+      0b00001000,
+      0b00010100,
+      0b00100010
+    };
+    lcd.drawBitmap(x, y, img, 11, 8, 1);
+}
+
+void displayDrawBattery(byte x, byte y, byte level, bool isCharging, bool isLowPower){
+
+  //draw battery
   byte xshift = 6;
   displayDrawRect(/*x*/x+xshift+1, /*y*/y, /*w*/11, /*h*/7, /*color*/1);
   displayDrawLine(/*X1*/x+xshift+0, /*Y1*/y+2, /*X2*/x+xshift+0, /*Y2*/y+4, /*C*/1);
@@ -257,8 +285,9 @@ void drawBattery(byte x, byte y){
     displayDrawLine(/*X1*/x+xshift+5, /*Y1*/y+2, /*X2*/x+xshift+5, /*Y2*/y+4, /*C*/1);
   if(level >= 4)
     displayDrawLine(/*X1*/x+xshift+3, /*Y1*/y+2, /*X2*/x+xshift+3, /*Y2*/y+4, /*C*/1);
-  
-  if(batteryIsLowPower())
+
+  //draw low power symbol
+  if(isLowPower)
   {
     static const char img[6] PROGMEM = { 
       0b00100010,
@@ -270,7 +299,9 @@ void drawBattery(byte x, byte y){
     };
     lcd.drawBitmap(x, y, img, 6, 8, 1);
   }
-  if(batteryIsCharging()){
+
+  //draw charging symbol
+  if(isCharging){
     static const char img[6] PROGMEM = { 
       0b00000000,
       0b01001100,
@@ -280,5 +311,47 @@ void drawBattery(byte x, byte y){
       0b00000000
     };
     lcd.drawBitmap(x, y, img, 6, 8, 1);
+  }
+}
+
+#define BLOCK_WIDTH  4  // how many blocks contains one symbol
+#define BLOCK_HEIGHT 5  // how many blocks contains one symbol
+PROGMEM const int32_t watchFaceFont [] {
+  
+  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
+  0b00000000000011111001100110011111, //0
+  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
+  0b00000000000011100100010001000110, //1
+  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
+  0b00000000000011110001111110001111, //2
+  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
+  0b00000000000011111000111110001111, //3
+  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
+  0b00000000000010001000111110011001, //4
+  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
+  0b00000000000011111000111100011111, //5
+  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
+  0b00000000000011111001111100011111, //6
+  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
+  0b00000000000010001000100010001111, //7
+  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
+  0b00000000000011111001111110011111, //8
+  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
+  0b00000000000011111000111110011111, //9
+  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
+  0b00000000000000000001000000010000, // [10] = :
+};
+void displayDrawNumber(int symbol, int offsetX, int offsetY, int blockSizeX, int blockSizeY){
+  for(int bx=0;bx<BLOCK_WIDTH; bx++){
+    for(int by=0;by<BLOCK_HEIGHT;by++){
+      int bitIndex = bx + by * BLOCK_WIDTH;
+      int32_t data = pgm_read_dword(&watchFaceFont[symbol]);
+      bool fill = bitRead(data, bitIndex);
+      if(fill){
+        int x = blockSizeX*bx + offsetX;
+        int y = blockSizeY*by + offsetY;
+        displayFillRect(/*x*/x, /*y*/y, /*w*/blockSizeX-1, /*h*/blockSizeY-1, /*c*/1);    
+      }
+    }
   }
 }

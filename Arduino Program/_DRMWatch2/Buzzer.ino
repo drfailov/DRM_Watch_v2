@@ -2,6 +2,8 @@
 */
 
 void beepConfirm() {
+  if(eepromReadSilentMode())
+    return;
   Serial.print(F("Beep confirm..."));
   pinMode(pinBuzzer, OUTPUT);
 
@@ -48,6 +50,8 @@ void beepConfirm() {
 
 
 void beepAlert() {
+  if(eepromReadSilentMode())
+    return;
   Serial.print(F("Beep alert..."));
   pinMode(pinBuzzer, OUTPUT);
 
@@ -83,6 +87,8 @@ void beepAlert() {
 }
 
 void beep() {
+  if(eepromReadSilentMode())
+    return;
   pinMode(pinBuzzer, OUTPUT);
   if(eepromReadBeepSound() == eepromBeepSoundNone){
     //play nothing

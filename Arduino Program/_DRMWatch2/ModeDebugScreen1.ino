@@ -11,7 +11,7 @@ void modeDebugScreen1Loop() {
   }
   if(isButtonDownPressed()){
     beep();
-    setMode(MODE_MENU_MAIN);
+    goToWatchface();
     return;
   } 
   

@@ -60,7 +60,7 @@ void modeMenuMelodiesSelected(byte index) {
     melodyPlayerPlayMelody(getMelodyToreador());
   }
   if (index == 7) { //Back
-    setMode(MODE_MENU_MAIN);
+    setMode(MODE_MENU_APPS);
     return;
   }
 }

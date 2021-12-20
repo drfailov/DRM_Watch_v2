@@ -1,6 +1,6 @@
 #include "lcd1202.h"
 #include <LowPower.h>
-#define version F("v0.16")
+#define version F("v0.17")
 
 //Pins
 #define pinButtonDown (byte)2 //active high
@@ -57,6 +57,8 @@
 #define MODE_MENU_SET_SLEEP_TIME (byte)7
 #define MODE_ABOUT (byte)8
 #define MODE_MENU_SET_BEEP_SOUND (byte)9
+#define MODE_MENU_SET_SILENT_MODE (byte)10
+#define MODE_MENU_APPS (byte)11
 
 
 byte _mode = -1;
@@ -86,6 +88,8 @@ void loop() {
   if (_mode == MODE_MENU_SET_SLEEP_TIME ) modeMenuSetSleepTimeLoop();
   if (_mode == MODE_ABOUT ) modeAboutLoop();
   if (_mode == MODE_MENU_SET_BEEP_SOUND ) modeMenuSetBeepSoundLoop();
+  if (_mode == MODE_MENU_SET_SILENT_MODE ) modeMenuSetSilentModeLoop();
+  if (_mode == MODE_MENU_APPS ) modeMenuAppsLoop();
   
 }
 
@@ -113,6 +117,8 @@ void setMode(int _modeNew) {
   if (_mode == MODE_MENU_SET_SLEEP_TIME ) modeMenuSetSleepTimeFinish();
   if (_mode == MODE_ABOUT ) modeAboutFinish();
   if (_mode == MODE_MENU_SET_BEEP_SOUND ) modeMenuSetBeepSoundFinish();
+  if (_mode == MODE_MENU_SET_SILENT_MODE ) modeMenuSetSilentModeFinish();
+  if (_mode == MODE_MENU_APPS ) modeMenuAppsFinish();
   
 
   //init new
@@ -126,6 +132,9 @@ void setMode(int _modeNew) {
   if (_modeNew == MODE_MENU_SET_SLEEP_TIME ) modeMenuSetSleepTimeSetup();
   if (_modeNew == MODE_ABOUT ) modeAboutSetup();
   if (_modeNew == MODE_MENU_SET_BEEP_SOUND ) modeMenuSetBeepSoundSetup();
+  if (_modeNew == MODE_MENU_SET_SILENT_MODE ) modeMenuSetSilentModeSetup();
+  if (_modeNew == MODE_MENU_APPS ) modeMenuAppsSetup();
+  
 
   _mode = _modeNew;
 }

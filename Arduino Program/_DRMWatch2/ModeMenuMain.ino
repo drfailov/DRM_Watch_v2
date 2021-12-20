@@ -1,25 +1,17 @@
 /*Show main menu by triggerimg GenericMenu*/
-const int modeMenuMainItemsCount = 8; //сколько пунктов меню в массиве
+const int modeMenuMainItemsCount = 4; //сколько пунктов меню в массиве
 
 //Максимальная длина строки:             |          |
-const char modeMenuMainItem1[] PROGMEM = "Debug view";
-const char modeMenuMainItem2[] PROGMEM = "Melodies";
-const char modeMenuMainItem3[] PROGMEM = "Settings";
-const char modeMenuMainItem4[] PROGMEM = "Stopwatch";
-const char modeMenuMainItem5[] PROGMEM = "Zrada";
-const char modeMenuMainItem6[] PROGMEM = "Svaston";
-const char modeMenuMainItem7[] PROGMEM = "About";
-const char modeMenuMainItem8[] PROGMEM = "Exit";
+const char modeMenuMainItem1[] PROGMEM = "Apps";
+const char modeMenuMainItem2[] PROGMEM = "Settings";
+const char modeMenuMainItem3[] PROGMEM = "About";
+const char modeMenuMainItem4[] PROGMEM = "< Exit";
 
 const char* const modeMenuMainItems[] PROGMEM = {
   modeMenuMainItem1,
   modeMenuMainItem2,
   modeMenuMainItem3,
-  modeMenuMainItem4,
-  modeMenuMainItem5,
-  modeMenuMainItem6,
-  modeMenuMainItem7,
-  modeMenuMainItem8
+  modeMenuMainItem4
 };
 
 
@@ -36,27 +28,22 @@ void modeMenuMainFinish() {
 }
 
 void modeMenuMainSelected(byte index) {
-  if (index == 0) { //Debug screen
-    setMode(MODE_DEBUG_SCREEN1);
-    return;
-  }
-  
-  if (index == 1) { //Melodies
-    setMode(MODE_MENU_MELODIES);
+  if (index == 0) { //Apps
+    setMode(MODE_MENU_APPS);
     return;
   }
 
-  if (index == 2) { //Settings
+  if (index == 1) { //Settings
     setMode(MODE_MENU_SETTINGS);
     return;
   }
 
-  if (index == 6) { //About
+  if (index == 2) { //About
     setMode(MODE_ABOUT);
     return;
   }
 
-  if (index == 7) { //Exit
+  if (index == 3) { //Exit
     goToWatchface();
     return;
   }

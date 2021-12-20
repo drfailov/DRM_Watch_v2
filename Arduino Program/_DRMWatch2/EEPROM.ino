@@ -23,3 +23,14 @@ byte eepromReadBeepSound(){
 void eepromSaveBeepSound(byte data){
   EEPROM.put(eepromAddressBeepSound, data);
 }
+
+
+
+bool eepromReadSilentMode(){
+  byte result = 1;
+  EEPROM.get(eepromAddressSilentMode, result);
+  return result == 1;
+}
+void eepromSaveSilentMode(bool data){
+  EEPROM.put(eepromAddressSilentMode, (byte)data);
+}
