@@ -1,5 +1,4 @@
-/*Screen allows to set time
-*/
+/*Screen allows to set time*/
 
 #define MENU_SET_TIME_SELECTED_HOUR 0
 #define MENU_SET_TIME_SELECTED_MINUTE 1
@@ -80,11 +79,10 @@ void modeMenuSetTimeLoop(){
 
   displayDrawText(15, 2, 1, F("Set time"));
   if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE || modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK)
-    displayDrawCheck(/*X*/1, /*Y*/2);
+    displayDrawCheck(/*X*/1, /*Y*/2, 1);
   else
     displayDrawText(/*X*/1, /*Y*/2, /*C*/1, "+");
-  //displayDrawText(/*X*/1, /*Y*/59, /*C*/1, ">");
-  displayDrawArrowRight(/*X*/1, /*Y*/59);
+  displayDrawArrowRight(/*X*/1, /*Y*/59, 1);
   
   displayDrawText(35, 19, 1, ":");
   { //hours
@@ -169,7 +167,12 @@ void modeMenuSetTimeLoop(){
   { //Save
     byte x = 15;
     byte y = 53;
-    const __FlashStringHelper* chars = F("Save");
+#ifdef LANG_EN
+    const __FlashStringHelper* chars = F("Save");    
+#endif
+#ifdef LANG_RU
+    const __FlashStringHelper* chars = F("Сохр");    
+#endif
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE){
       displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);
@@ -182,7 +185,12 @@ void modeMenuSetTimeLoop(){
   { //BACK
     byte x = 50;
     byte y = 53;
+#ifdef LANG_EN
     const __FlashStringHelper* chars = F("Back");
+#endif
+#ifdef LANG_RU
+    const __FlashStringHelper* chars = F("Назд");
+#endif
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK){
       displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);

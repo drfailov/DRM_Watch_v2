@@ -37,8 +37,6 @@ void modeWatchFace1Loop() {
     return;
   }
   displayClear();
-  float voltage = batteryVoltage();
-  bool isCharging = batteryIsCharging();
 
   { //time
     int hour = rtcGetHours();
@@ -93,7 +91,7 @@ void modeWatchFace1Loop() {
     displayDrawBattery(78, 0, level, isCharging, isLowPower);
   }
   if(eepromReadSilentMode()){ 
-    displayDrawSilentModeIcon(85, 60);
+    displayDrawSilentModeIcon(85, 60, 1);
   }
 
   displayUpdate();

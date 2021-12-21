@@ -2,12 +2,22 @@
 const byte modeMenuAppsItemsCount = 6; //сколько пунктов меню в массиве
 
 //Максимальная длина строки:              |          |
+#ifdef LANG_EN
 const char modeMenuAppsItem1[] PROGMEM = "Debug view";
 const char modeMenuAppsItem2[] PROGMEM = "Melodies";
 const char modeMenuAppsItem3[] PROGMEM = "Stopwatch";
 const char modeMenuAppsItem4[] PROGMEM = "Zrada";
 const char modeMenuAppsItem5[] PROGMEM = "Svaston";
 const char modeMenuAppsItem6[] PROGMEM = "< Back";
+#endif
+#ifdef LANG_RU
+const char modeMenuAppsItem1[] PROGMEM = "Отладка";
+const char modeMenuAppsItem2[] PROGMEM = "Мелодии";
+const char modeMenuAppsItem3[] PROGMEM = "Секундомер";
+const char modeMenuAppsItem4[] PROGMEM = "Зрада";
+const char modeMenuAppsItem5[] PROGMEM = "Свастон";
+const char modeMenuAppsItem6[] PROGMEM = "< Назад";
+#endif
 
 const char* const modeMenuAppsItems[] PROGMEM = {
   modeMenuAppsItem1,
@@ -44,7 +54,8 @@ void modeMenuAppsSelected(byte index) {
   }
   
   if (index == 2) { //Stopwatch
-    
+    setMode(MODE_STOPWATCH);
+    return;
   }
   
   if (index == 3) { //Zrada

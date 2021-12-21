@@ -19,8 +19,14 @@ void modeAboutLoop() {
   } 
   
   displayClear();
-  displayDrawText(0, 0, 1,  F("Softw: Dr.Failov"));
+  #ifdef LANG_EN
+  displayDrawText(0, 0, 1, F("Softw: Dr.Failov"));
   displayDrawText(0, 9, 1, F("Hardw: MeltemiOS"));
+  #endif
+  #ifdef LANG_RU
+  displayDrawText(0, 0, 1, F("Софт:  Dr.Failov"));
+  displayDrawText(0, 9, 1, F("Хард:  MeltemiOS"));
+  #endif
   displayDrawText(74, 61, 1, F("2021"));
   displayDrawText(00, 61, 1, version);
   //displayDrawCheck(0, 61);

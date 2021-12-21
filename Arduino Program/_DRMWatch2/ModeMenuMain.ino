@@ -2,10 +2,18 @@
 const int modeMenuMainItemsCount = 4; //сколько пунктов меню в массиве
 
 //Максимальная длина строки:             |          |
+#ifdef LANG_EN
 const char modeMenuMainItem1[] PROGMEM = "Apps";
 const char modeMenuMainItem2[] PROGMEM = "Settings";
 const char modeMenuMainItem3[] PROGMEM = "About";
 const char modeMenuMainItem4[] PROGMEM = "< Exit";
+#endif
+#ifdef LANG_RU
+const char modeMenuMainItem1[] PROGMEM = "Приложения";
+const char modeMenuMainItem2[] PROGMEM = "Настройки";
+const char modeMenuMainItem3[] PROGMEM = "О программе";
+const char modeMenuMainItem4[] PROGMEM = "< Выход";
+#endif
 
 const char* const modeMenuMainItems[] PROGMEM = {
   modeMenuMainItem1,

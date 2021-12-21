@@ -4,7 +4,7 @@
  * It needed to make migration to other display easier.
 */
 
-
+#define LCD_TEXT_BUFFER_SIZE 24
 LCD1202 lcd(pinLcdRst, pinLcdCs, pinLcdMosi, pinLcdSck);  // RST, CS, MOSI, SCK
 
 /*
@@ -133,6 +133,10 @@ void displayDrawText(int X, int Y, int color, char c){
   lcd.drawChar(X, Y, color, c);
 }
 
+void displayDrawBitmap(byte x, byte y, const unsigned char *img, byte w, byte h, byte color){
+  lcd.drawBitmap(x, y, img, w, h, color);
+}
+
 //-------- Display independent functions
   
 void displayDrawVectorLogo(){
@@ -166,22 +170,26 @@ void displayDrawVector(const byte* data_array, byte X, byte Y, bool animate, boo
 
 void displayDrawText(int X, int Y, int color, const __FlashStringHelper* str){
   byte len = strlen_P((PGM_P)str);
-  if(len > 18) len = 18;
-  char buffer[18];
+  if(len > LCD_TEXT_BUFFER_SIZE) len = LCD_TEXT_BUFFER_SIZE;
+  char buffer[LCD_TEXT_BUFFER_SIZE];
   strcpy_P(buffer, (PGM_P)str);
-  for(int i=0; i<len; i++)
-    displayDrawText(X + i*6, Y, color, buffer[i]);
+  byte pos = 0;
+  for(int i=0; i<len; i++){
+    if((byte)buffer[i] != 208 && (byte)buffer[i] != 209){
+      displayDrawText(X + pos*6, Y, color, buffer[i]);
+      pos++;
+    }
+  }
 }
 
 void displayMessage(const __FlashStringHelper* str){
   displayClear();
   displayDrawVector(/*path*/pathZubat, /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
   displayDrawVector(/*path*/pathBubble, /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
-  const byte BUFFER_SIZE = 25;
-  char buffer[BUFFER_SIZE];
-  strlcpy_P(buffer, (PGM_P)str, BUFFER_SIZE);
+  char buffer[LCD_TEXT_BUFFER_SIZE];
+  strlcpy_P(buffer, (PGM_P)str, LCD_TEXT_BUFFER_SIZE);
   byte pos = 0;
-  for(byte i=0; i<BUFFER_SIZE; i++){
+  for(byte i=0; i<LCD_TEXT_BUFFER_SIZE; i++){
     if(buffer[i] == '\0') 
       break;
     Serial.println((byte)buffer[i]);
@@ -195,19 +203,19 @@ void displayMessage(const __FlashStringHelper* str){
   delay(500);
 }
 
-void displayMessageFromRam(const char* text){
-  displayClear();
-  displayDrawVector(/*path*/pathZubat, /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
-  displayDrawVector(/*path*/pathBubble, /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
-  
-  byte len = strlen(text);
-  for(int i=0; i<len; i++){
-    displayDrawText(10 + i*6, 6, 1, text[i]);
-    displayUpdate();
-    delay(5);
-  }
-  delay(500);
-}
+//void displayMessageFromRam(const char* text){
+//  displayClear();
+//  displayDrawVector(/*path*/pathZubat, /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
+//  displayDrawVector(/*path*/pathBubble, /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
+//  
+//  byte len = strlen(text);
+//  for(int i=0; i<len; i++){
+//    displayDrawText(10 + i*6, 6, 1, text[i]);
+//    displayUpdate();
+//    delay(5);
+//  }
+//  delay(500);
+//}
 
 void displaySimpleMessage(const char* text){
   displayClear();
@@ -215,7 +223,7 @@ void displaySimpleMessage(const char* text){
   displayUpdate();
 }
 
-void displayDrawCheck(byte x, byte y){
+void displayDrawCheck(byte x, byte y, bool color){
   static const char img[6] PROGMEM = { 
       0b00011000,
       0b01110000,
@@ -224,10 +232,22 @@ void displayDrawCheck(byte x, byte y){
       0b00001110,
       0b00000011,
     };
-  lcd.drawBitmap(x, y, img, 6, 8, 1);
+  displayDrawBitmap(x, y, img, 6, 8, color);
 }
 
-void displayDrawArrowDown(byte x, byte y){
+void displayDrawResetIcon(byte x, byte y, bool color){
+  static const char img[6] PROGMEM = { 
+      0b01001111,
+      0b10000011,
+      0b10000101,
+      0b01001001,
+      0b00110000,
+      0b00000000,
+    };
+  displayDrawBitmap(x, y, img, 6, 8, color);
+}
+
+void displayDrawArrowDown(byte x, byte y, bool color){
   static const char img[7] PROGMEM = { 
       0b00000001,
       0b00000111,
@@ -237,10 +257,10 @@ void displayDrawArrowDown(byte x, byte y){
       0b00000111,
       0b00000001,
     };
-  lcd.drawBitmap(x, y, img, 7, 8, 1);
+  displayDrawBitmap(x, y, img, 7, 8, color);
 }
 
-void displayDrawArrowRight(byte x, byte y){
+void displayDrawArrowRight(byte x, byte y, bool color){
   static const char img[7] PROGMEM = { 
       0b01111111,
       0b00111110,
@@ -250,10 +270,10 @@ void displayDrawArrowRight(byte x, byte y){
       0b00001000,
       0b00001000
     };
-  lcd.drawBitmap(x, y, img, 7, 8, 1);
+  displayDrawBitmap(x, y, img, 7, 8, color);
 }
 
-void displayDrawSilentModeIcon(byte x, byte y){
+void displayDrawSilentModeIcon(byte x, byte y, bool color){
       static const char img[11] PROGMEM = { 
       0b00011000,
       0b00011000,
@@ -267,7 +287,7 @@ void displayDrawSilentModeIcon(byte x, byte y){
       0b00010100,
       0b00100010
     };
-    lcd.drawBitmap(x, y, img, 11, 8, 1);
+    displayDrawBitmap(x, y, img, 11, 8, color);
 }
 
 void displayDrawBattery(byte x, byte y, byte level, bool isCharging, bool isLowPower){
@@ -297,7 +317,7 @@ void displayDrawBattery(byte x, byte y, byte level, bool isCharging, bool isLowP
       0b00100010,
       0b00000000
     };
-    lcd.drawBitmap(x, y, img, 6, 8, 1);
+    displayDrawBitmap(x, y, img, 6, 8, 1);
   }
 
   //draw charging symbol
@@ -310,7 +330,7 @@ void displayDrawBattery(byte x, byte y, byte level, bool isCharging, bool isLowP
       0b00000000,
       0b00000000
     };
-    lcd.drawBitmap(x, y, img, 6, 8, 1);
+    displayDrawBitmap(x, y, img, 6, 8, 1);
   }
 }
 

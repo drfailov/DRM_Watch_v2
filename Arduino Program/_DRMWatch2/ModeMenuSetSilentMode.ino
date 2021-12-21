@@ -3,9 +3,17 @@
 const byte modeMenuSetSilentModeItemsCount = 3; //сколько пунктов меню в массиве
 
 //Максимальная длина строки:                       |          |
+
+#ifdef LANG_EN
 const char modeMenuSetSilentModeItem1[] PROGMEM = "Sound ON";
 const char modeMenuSetSilentModeItem2[] PROGMEM = "Sound OFF";
 const char modeMenuSetSilentModeItem3[] PROGMEM = "< Back";
+#endif
+#ifdef LANG_RU
+const char modeMenuSetSilentModeItem1[] PROGMEM = "Звук ВКЛ";
+const char modeMenuSetSilentModeItem2[] PROGMEM = "Звук ВЫКЛ";
+const char modeMenuSetSilentModeItem3[] PROGMEM = "< Назад";
+#endif
 
 const char* const modeMenuSetSilentModeItems[] PROGMEM = {
   modeMenuSetSilentModeItem1,

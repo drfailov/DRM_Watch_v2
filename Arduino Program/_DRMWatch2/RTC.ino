@@ -13,7 +13,12 @@ void rtcInit() {
   while (!DS3231M.begin())  // Initialize RTC communications
   {
     Serial.println(F("Unable to find DS3231MM. Checking again in 3s."));
+#ifdef LANG_EN
     displayMessage(F("RTC FAIL."));
+#endif
+#ifdef LANG_RU
+    displayMessage(F("Ошибка RTC."));
+#endif
     delay(300);
   }                         // of loop until device is located
   DS3231M.pinSquareWave();  // Make INT/SQW pin toggle at 1Hz

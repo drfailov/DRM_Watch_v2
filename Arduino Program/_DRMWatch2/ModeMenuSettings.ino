@@ -3,6 +3,8 @@
 const byte modeMenuSettingsItemsCount = 7; //сколько пунктов меню в массиве
 
 //Максимальная длина строки:                  |          |
+
+#ifdef LANG_EN
 const char modeMenuSettingsItem1[] PROGMEM = "Reboot";
 const char modeMenuSettingsItem2[] PROGMEM = "Select WTF";
 const char modeMenuSettingsItem3[] PROGMEM = "Set silent";
@@ -10,6 +12,16 @@ const char modeMenuSettingsItem4[] PROGMEM = "Set sleep";
 const char modeMenuSettingsItem5[] PROGMEM = "Set sound";
 const char modeMenuSettingsItem6[] PROGMEM = "Set time";
 const char modeMenuSettingsItem7[] PROGMEM = "< Back";
+#endif
+#ifdef LANG_RU
+const char modeMenuSettingsItem1[] PROGMEM = "Перезагрузка";
+const char modeMenuSettingsItem2[] PROGMEM = "Циферблат";
+const char modeMenuSettingsItem3[] PROGMEM = "Беззвучный";
+const char modeMenuSettingsItem4[] PROGMEM = "Время сна";
+const char modeMenuSettingsItem5[] PROGMEM = "Звук кнопок";
+const char modeMenuSettingsItem6[] PROGMEM = "Задать время";
+const char modeMenuSettingsItem7[] PROGMEM = "< Назад";
+#endif
 
 const char* const modeMenuSettingsItems[] PROGMEM = {
   modeMenuSettingsItem1,
@@ -37,7 +49,12 @@ void modeMenuSettingsFinish() {
 
 void modeMenuSettingsSelected(byte index) {
   if (index == 0) { //Reboot
+#ifdef LANG_EN
     displayMessage(F("Rebooting..."));
+#endif
+#ifdef LANG_RU
+    displayMessage(F("Перезагрузка"));
+#endif    
     delay(100);
     displayPowerOff();
     delay(1000);

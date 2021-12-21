@@ -50,7 +50,7 @@ void modeDebugScreen1Loop() {
 //    else
 //      displayDrawText(60, 30, 1, F("LOW"));
 //  }
-  displayDrawCheck(0, 61);
+  displayDrawCheck(0, 61, 1);
   displayUpdate();
   
 }

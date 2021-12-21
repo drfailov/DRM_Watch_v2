@@ -3,7 +3,7 @@
  * Every menu is passes its items as arguments to loop() function.
 */
 const int genericMenuViewCount = 5; //сколько на экран помещается
-const int genericMenuMaxTextLength = 12; //размер буфера. Чем меньше тем экономнее
+const int genericMenuMaxTextLength = 24; //размер буфера. Чем меньше тем экономнее
 const long genericMenuAutoExitTimeout = 120000; //MS Время до автоматического выхода с меню
 
 byte genericMenuSelectPosition = 0; //текущий выделенный элемени
@@ -67,10 +67,8 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
     displayFillRect(/*x*/93, /*y*/barPosition, /*w*/3, /*h*/barHeight, /*c*/1);
   }
   displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
-  //displayDrawText(/*X*/1, /*Y*/2, /*C*/1, "+");
-  displayDrawCheck(/*X*/2, /*Y*/2);
-  //displayDrawText(/*X*/2, /*Y*/59, /*C*/1, "v");
-  displayDrawArrowDown(/*X*/1, /*Y*/59);
+  displayDrawCheck(/*X*/2, /*Y*/2, 1);
+  displayDrawArrowDown(/*X*/1, /*Y*/59, 1);
   displayUpdate();
 }
 
