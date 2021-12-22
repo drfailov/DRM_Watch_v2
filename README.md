@@ -2,8 +2,12 @@
 <!-- Picture: <img src="Photos/" width="300"/>  -->
 
 # DRM_Watch v2
+<img src="Photos/DRMWatch.png" width="200"/>
 
-Arduino-based watch with Nokia 1280 LCD. 
+Arduino-based watch with Nokia 1280 LCD. \
+Main challenge of this project is packing as much
+as possible stuff inside Arduino Nano with its 15KB of memory.
+Programming contributions made by Dr. Failov, hardware part is made by MeltemiOS.
 
 ## Functions
 - Watchface scren
@@ -85,9 +89,9 @@ Pins list:
 ## Code description
 
 ### Menu language
-There is 2 options to select language: `Russian` and `English`.
-If you want use `Russian` language, uncomment `#define LANG_RU` string in main file.
-If you want use `English` language, uncomment `#define LANG_EN` string in main file.
+There is 2 options to select language: `Russian` and `English`.\
+If you want use `Russian` language, uncomment `#define LANG_RU` string in main file.\
+If you want use `English` language, uncomment `#define LANG_EN` string in main file.\
 Only one string can be active at the time. If you select any language, you have to comment other one.
 
 ### How to add my own screen?
