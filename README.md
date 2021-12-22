@@ -60,7 +60,7 @@ Link: https://aliexpress.ru/item/1005003227004618.html  \
 
 
 ## Pinout
-<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="500"/>
+
 - D0 = UART RX
 - D1 = UART TX
 - D2 = Button DOWN (Active HIGH)
@@ -76,7 +76,7 @@ Link: https://aliexpress.ru/item/1005003227004618.html  \
 - A1 = LCD Backlight (Active HIGH)
 - A4 = RTC SDA
 - A5 = RTC SCL
-
+<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="500"/>
 
 
 
