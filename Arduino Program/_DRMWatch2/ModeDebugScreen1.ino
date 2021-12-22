@@ -16,7 +16,6 @@ void modeDebugScreen1Loop() {
   } 
   
   
-  
   displayClear();
   { 
     float voltage = batteryVoltage();
@@ -42,14 +41,6 @@ void modeDebugScreen1Loop() {
     displayDrawText(35 + (strlen(chars) * 6), 20, 1, F(" bytes"));
     displayDrawText(35, 20, 1, chars);
   }
-//  {
-//    bool isChargeComplete = batteryIsChargeComplete();
-//    displayDrawText(0, 30, 1, F("Complete: "));
-//    if (isChargeComplete)
-//      displayDrawText(60, 30, 1, F("HIGH"));
-//    else
-//      displayDrawText(60, 30, 1, F("LOW"));
-//  }
   displayDrawCheck(0, 61, 1);
   displayUpdate();
   

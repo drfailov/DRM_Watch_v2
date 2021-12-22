@@ -1,6 +1,6 @@
 #include "lcd1202.h"
 #include <LowPower.h>
-#define version F("v0.18")
+#define version F("v0.19")
 //#define LANG_EN
 #define LANG_RU
 
@@ -65,6 +65,10 @@
 
 
 byte _mode = -1;
+//размер буфера. Чем меньше тем экономнее
+#define BUFFER_SIZE 26
+//общий на всю программу текстовый буфер чтобы не объявлять каждый раз локальную
+char buffer[BUFFER_SIZE]; 
 
 void setup() {
   Serial.begin(115200);

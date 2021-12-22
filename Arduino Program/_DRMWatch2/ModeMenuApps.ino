@@ -59,11 +59,11 @@ void modeMenuAppsSelected(byte index) {
   }
   
   if (index == 3) { //Zrada
-    
+    displayMessage(F("В разработке!"));
   }
   
   if (index == 4) { //Svaston
-    
+    displayMessage(F("В разработке!"));
   } 
   
   if (index == 5) { //Back

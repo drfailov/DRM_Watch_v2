@@ -37,7 +37,12 @@ void modeMenuSetSilentModeFinish() {
 void modeMenuSetSilentModeSelected(byte index) {
   if (index == 0) { //Sound ON
     eepromSaveSilentMode(false);
+#ifdef LANG_EN
     displayMessage(F("Sound ON"));
+#endif
+#ifdef LANG_RU
+    displayMessage(F("Звук ВКЛ"));
+#endif
     delay(500);
     goToWatchface();
     return;
@@ -45,7 +50,12 @@ void modeMenuSetSilentModeSelected(byte index) {
   
   if (index == 1) { //Sound OFF
     eepromSaveSilentMode(true);
+#ifdef LANG_EN
     displayMessage(F("Sound OFF"));
+#endif
+#ifdef LANG_RU
+    displayMessage(F("Звук ВЫКЛ"));
+#endif
     delay(500);
     goToWatchface();
     return;

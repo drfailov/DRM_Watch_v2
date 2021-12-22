@@ -63,7 +63,7 @@ void modeMenuSettingsSelected(byte index) {
   }
   
   if (index == 1) { //Select WTF
-    
+    displayMessage(F("В разработке!"));
     return;
   }
   

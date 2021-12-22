@@ -56,7 +56,12 @@ void modeMenuSetTimeLoop(){
     
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE) {//SAVE
       rtcSetTime(modeMenuSetTimeYears, modeMenuSetTimeMonths, modeMenuSetTimeDays, modeMenuSetTimeHours, modeMenuSetTimeMinutes);
-      displayMessage(F("Saved."));
+#ifdef LANG_EN
+      displayMessage(F("Time saved"));
+#endif
+#ifdef LANG_RU
+      displayMessage(F("Время сохр."));
+#endif
       delay(500);
       goToWatchface();
       return;

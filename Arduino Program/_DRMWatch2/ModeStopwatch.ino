@@ -10,13 +10,25 @@ bool modeStopwatchIsRunning = false;
 
 void modeStopwatchSetup() {
   displayInit();
+  modeStopwatchSelectedItem = 0;
 }
 
 void modeStopwatchLoop() {
   if(isButtonUpPressed()){
     beep();
     if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_START){
-      modeStopwatchStartedTime = millis();
+      if(modeStopwatchIsRunning == false){
+        modeStopwatchStartedTime = millis();
+        modeStopwatchIsRunning = true;
+      }
+      else if(modeStopwatchIsRunning == true){
+        modeStopwatchFinishedTime = millis();
+        modeStopwatchIsRunning = false;
+      }
+    }
+    if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_RESET){
+      modeStopwatchStartedTime = 0;
+      modeStopwatchFinishedTime = 0;
       modeStopwatchIsRunning = true;
     }
     if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_BACK){
@@ -33,28 +45,36 @@ void modeStopwatchLoop() {
   } 
   
   
-  
   displayClear();
   
   { //time
-    int hour = 0;
     int minute = 0;
     int second = 0;
-    int hour1 = hour / 10;
-    int hour2 = hour - (hour1 * 10);
+    int millisecond = 0;
+
+    if(modeStopwatchIsRunning == true){
+      long difference = millis() - modeStopwatchStartedTime;
+      minute = (difference) / 1000 / 60;
+      second = (difference - (minute * 1000 * 60)) / 1000;
+      millisecond = (difference - (minute * 1000 * 60) - (second * 1000)) / 10;
+    }
+
+    
     int minute1 = minute / 10;
     int minute2 = minute - (minute1 * 10);
     int second1 = second / 10;
     int second2 = second - (second1 * 10);
+    int millisecond1 = millisecond / 10;
+    int millisecond2 = millisecond - (millisecond1 * 10);
     
-    displayDrawNumber(hour1   ,  5, 10, 3, 4);
-    displayDrawNumber(hour2   , 19, 10, 3, 4);
+    displayDrawNumber(minute1   ,  5, 10, 3, 4);
+    displayDrawNumber(minute2   , 19, 10, 3, 4);
     displayDrawNumber(10      , 34, 10, 3, 4); // :
-    displayDrawNumber(minute1 , 40, 10, 3, 4);
-    displayDrawNumber(minute2 , 54, 10, 3, 4);
+    displayDrawNumber(second1 , 40, 10, 3, 4);
+    displayDrawNumber(second2 , 54, 10, 3, 4);
     displayDrawNumber(10      , 70, 15, 2, 3); // :
-    displayDrawNumber(second1 , 75, 15, 2, 3);
-    displayDrawNumber(second2 , 85, 15, 2, 3);
+    displayDrawNumber(millisecond1 , 75, 15, 2, 3);
+    displayDrawNumber(millisecond2 , 85, 15, 2, 3);
   }
 
   

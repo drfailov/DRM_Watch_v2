@@ -45,7 +45,12 @@ void modeMenuSetSleepTimeFinish() {
 void modeMenuSetSleepTimeSelected(byte index) {
   if (index == 0) { //0.5 sec
     eepromSaveSleepTime(eepromSleepTime05sec);
+#ifdef LANG_EN
     displayMessage(F("Saved .5 sec"));
+#endif
+#ifdef LANG_RU
+    displayMessage(F("Сохр: .5 сек"));
+#endif
     delay(500);
     goToWatchface();
     return;
@@ -53,7 +58,12 @@ void modeMenuSetSleepTimeSelected(byte index) {
   
   if (index == 1) { //1 s
     eepromSaveSleepTime(eepromSleepTime1sec);
+#ifdef LANG_EN
     displayMessage(F("Saved 1 sec"));
+#endif
+#ifdef LANG_RU
+    displayMessage(F("Сохр: 1 сек"));
+#endif
     delay(500);
     goToWatchface();
     return;
@@ -61,7 +71,12 @@ void modeMenuSetSleepTimeSelected(byte index) {
 
   if (index == 2) { //2s
     eepromSaveSleepTime(eepromSleepTime2sec);
+#ifdef LANG_EN
     displayMessage(F("Saved 2 sec"));
+#endif
+#ifdef LANG_RU
+    displayMessage(F("Сохр: 2 сек"));
+#endif
     delay(500);
     goToWatchface();
     return;
@@ -69,7 +84,12 @@ void modeMenuSetSleepTimeSelected(byte index) {
   
   if (index == 3) { //4s
     eepromSaveSleepTime(eepromSleepTime4sec);
+#ifdef LANG_EN
     displayMessage(F("Saved 4 sec"));
+#endif
+#ifdef LANG_RU
+    displayMessage(F("Сохр: 4 сек"));
+#endif
     delay(500);
     goToWatchface();
     return;
@@ -77,7 +97,12 @@ void modeMenuSetSleepTimeSelected(byte index) {
   
   if (index == 4) { //8s
     eepromSaveSleepTime(eepromSleepTime8sec);
+#ifdef LANG_EN
     displayMessage(F("Saved 8 sec"));
+#endif
+#ifdef LANG_RU
+    displayMessage(F("Сохр: 8 сек"));
+#endif
     delay(500);
     goToWatchface();
     return;
