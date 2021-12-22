@@ -141,73 +141,72 @@ Library included in this repo. Just copy it to your libraries folder (`C:\Users\
 
 
 
-### Mode description
+## Mode description
 
-#### ModeInit
+### ModeInit
 Initial mode. Its goal to init Serial, init display, init RTC, show startup animation, and go to watchface.
 If RTC can not be initialized, watchface will not open.
 <img src="Photos/photo_2021-12-19_19-43-52.jpg" width="300"/>
 
 
-#### ModeWatchFace1
+### ModeWatchFace1
 Whow time, date. Watchfaces is only screen with deep sleep, so device can run for a long time if in watchface mode.
 Press button Up to turn on backlight. Press button down to open main menu.\
 <img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="300"/>
 
 
-#### ModeMenuMain
+### ModeMenuMain
 Main menu, opens when you click bottom button. If inactive for 120 sec, will automatically go to watchface.
 Press button Up to select. Press button Down to move cursor down.\
 <img src="Photos/photo_2021-12-19_19-43-52 (3).jpg" width="300"/>
 
 
-#### ModeMenuMelodies
+### ModeMenuMelodies
 Menu with list of melodies, which can be played. If inactive for 120 sec, will automatically go to watchface.
 Press button Up to select. Press button Down to move cursor down.\
 <img src="Photos/photo_2021-12-19_19-43-52 (4).jpg" width="300"/>
 
 
-#### ModeMenuSetTime
+### ModeMenuSetTime
 Menu to set correct time manually. There is no auto-exit from this menu, 
 so if you leave watch untouched in this mode, it will discharge and power off.
 Button down is moving field selection, button up is incrementing value.\
 <img src="Photos/photo_2021-12-19_19-43-52 (5).jpg" width="300"/>
 
-#### ModeMenuSetSleepTime
+### ModeMenuSetSleepTime
 Menu allows you to select interval of sleep in watchface. 
 With less interval watchface will update more frequently, so battery will drain faster.
 If inactive for 120 sec, will automatically go to watchface.
 Press button Up to select. Press button Down to move cursor down.\
 <img src="Photos/photo_2021-12-19_19-43-52 (6).jpg" width="300"/>
 
-#### ModeMenuSetBeepSound
+### ModeMenuSetBeepSound
 <img src="Photos/photo_2021-12-19_19-43-52 (7).jpg" width="300"/>
 
-#### ModeAbout
+### ModeAbout
 <img src="Photos/photo_2021-12-19_19-43-52 (8).jpg" width="300"/>
 
-#### Mode
+### Mode
 <img src="Photos/" width="300"/>
 
-#### Mode
+### Mode
 <img src="Photos/" width="300"/>
 
-#### Mode
+### Mode
 <img src="Photos/" width="300"/>
  
  
  
 ## Melodies converter
-Because of Arduino have VERY limited space, byt I want to store long melodies, 
-I made algorythm to compress music as much as possible./
-As source I using Nokia-style composer music, named RTTTL./
-I made software to convert RTTTL to binary codes, which can be 
-played by synthesizer of DRM Watch firmware./
-Melodies stored in form of one byte-one note. 
-Array is contains tempo and notes./
-First 2 bits of note is representing note duration (values 4, 8, 16, 32)./
-Last 6 bits represents note number counted from low note of first octave./
-<img src="Photos/photo_2021-12-16_22-37-15.jpg" width="300"/>
+Because of Arduino have <b>VERY</b> limited space, byt I want to store long melodies, I made algorythm to 
+compress music as much as possible.\
+As source I using Nokia-style composer music, named `RTTTL`.\
+I made software to convert `RTTTL` to binary codes, which can be played by synthesizer of 
+DRM Watch firmware.\
+Melodies stored in form of one byte-one note. Array is contains tempo and notes.\
+First 2 bits of note is representing note duration (values 4, 8, 16, 32).\
+Last 6 bits represents note number counted from low note of first octave.\
+<img src="Photos/photo_2021-12-16_22-37-15.jpg" width="500"/>
 
  
 ## Prototype photos:
