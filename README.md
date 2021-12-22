@@ -60,9 +60,9 @@ Link: https://aliexpress.ru/item/1005003227004618.html  \
 
 
 ## Pinout
-<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="500"/>
+<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="700"/>
 
-Pind s list:
+Pins list:
 - D0 - UART RX
 - D1 - UART TX
 - D2 - Button DOWN (Active HIGH)
@@ -100,7 +100,15 @@ When adding new mode:
 - Call `setMode(YOUR_MODE);` when you want to enter your new screen.
 - Don't forget to call `goToWatchface()` or `setMode()` to exit your mode if needed.
 
-
+### How to add my own watchface?
+Watchfaces is the same that Mode, but called from `goToWatchface()`.
+- Create file like `modeWatchFace2`.
+- Create functions `Setup()`, `Loop()`, `Finish()` for `modeWatchFace2`.
+- Create constant for this new mode.
+- Call its functions from `setMode()` and `loop()`.
+- Create item for your watchface in `ModeSetWatchface`.
+- Call from goToWatchface(), if its number selected.
+- Don't forget to copy or reuse backlight, sleep and exit to menu routines to make your watchface fully functional.
 
 
 
