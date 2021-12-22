@@ -84,6 +84,12 @@ Pins list:
 
 ## Code description
 
+### Menu language
+There is 2 options to select language: `Russian` and `English`.
+If you want use `Russian` language, uncomment `#define LANG_RU` string in main file.
+If you want use `English` language, uncomment `#define LANG_EN` string in main file.
+Only one string can be active at the time. If you select any language, you have to comment other one.
+
 ### How to add my own screen?
 Program contains several screens (menus, watchfaces...).
 Every screen is a separate mode. Every mode contains of: modeSetup(), modeLoop(), modeFinish().
@@ -115,17 +121,17 @@ Watchfaces is the same that Mode, but called from `goToWatchface()`.
 ### Used Libraries
 
 #### LCD1202
-Used to run nokia display. Also may be compatible with this LCD controllers: pcf8814, ste2007, ST7565, HX1230.
-Library included in this repo. Just copy it to your libraries folder (C:\Users\USER\Documents\Arduino\libraries).
+Used to run nokia display. Also may be compatible with this LCD controllers: `pcf8814`, `ste2007`, `ST7565`, `HX1230`.
+Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`).
 Source: http://arduino.ru/forum/proekty/khronograf-izmeritel-skorosti-puli-ot-prostogo-k-slozhnomu?page=5#comment-136147
 
 #### Low-Power-master
 Used to allow deep sleep between screen refreshing. 
-Library included in this repo. Just copy it to your libraries folder (C:\Users\USER\Documents\Arduino\libraries).
+Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`).
 
 #### DS3231M-1.0.6
 Used to communicate with RTC module.
-Library included in this repo. Just copy it to your libraries folder (C:\Users\USER\Documents\Arduino\libraries).
+Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`).
 
 
 
@@ -141,21 +147,33 @@ If RTC can not be initialized, watchface will not open.
 
 #### ModeWatchFace1
 Whow time, date. Watchfaces is only screen with deep sleep, so device can run for a long time if in watchface mode.
-Press button Up to turn on backlight. Press button down to open main menu.
+Press button Up to turn on backlight. Press button down to open main menu.\
 <img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="300"/>
+
 
 #### ModeMenuMain
 Main menu, opens when you click bottom button. If inactive for 120 sec, will automatically go to watchface.
-Press button Up to select. Press button Down to move cursor down.
+Press button Up to select. Press button Down to move cursor down.\
 <img src="Photos/photo_2021-12-19_19-43-52 (3).jpg" width="300"/>
 
+
 #### ModeMenuMelodies
+Menu with list of melodies, which can be played. If inactive for 120 sec, will automatically go to watchface.
+Press button Up to select. Press button Down to move cursor down.\
 <img src="Photos/photo_2021-12-19_19-43-52 (4).jpg" width="300"/>
 
+
 #### ModeMenuSetTime
+Menu to set correct time manually. There is no auto-exit from this menu, 
+so if you leave watch untouched in this mode, it will discharge and power off.
+Button down is moving field selection, button up is incrementing value.\
 <img src="Photos/photo_2021-12-19_19-43-52 (5).jpg" width="300"/>
 
 #### ModeMenuSetSleepTime
+Menu allows you to select interval of sleep in watchface. 
+With less interval watchface will update more frequently, so battery will drain faster.
+If inactive for 120 sec, will automatically go to watchface.
+Press button Up to select. Press button Down to move cursor down.\
 <img src="Photos/photo_2021-12-19_19-43-52 (6).jpg" width="300"/>
 
 #### ModeMenuSetBeepSound
