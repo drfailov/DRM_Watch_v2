@@ -60,23 +60,25 @@ Link: https://aliexpress.ru/item/1005003227004618.html  \
 
 
 ## Pinout
-
-- D0 = UART RX
-- D1 = UART TX
-- D2 = Button DOWN (Active HIGH)
-- D3 = Button UP (Active HIGH)
-- D5 = LCD RST
-- D6 = LCD CS
-- D7 = LCD MOSI
-- D9 = USB Voltage 
-- D10 = LCD Power
-- D11 = LCD SCK   
-- D12 = Buzzer (Passive)
-- D13 = Debug LED
-- A1 = LCD Backlight (Active HIGH)
-- A4 = RTC SDA
-- A5 = RTC SCL
 <img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="500"/>
+
+Pind s list:
+- D0 - UART RX
+- D1 - UART TX
+- D2 - Button DOWN (Active HIGH)
+- D3 - Button UP (Active HIGH)
+- D5 - LCD RST
+- D6 - LCD CS
+- D7 - LCD MOSI
+- D9 - USB Voltage 
+- D10 - LCD Power
+- D11 - LCD SCK   
+- D12 - Buzzer (Passive)
+- D13 - Debug LED
+- A1 - LCD Backlight (Active HIGH)
+- A4 - RTC SDA
+- A5 - RTC SCL
+
 
 
 
