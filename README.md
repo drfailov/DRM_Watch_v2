@@ -50,8 +50,7 @@ Link: https://aliexpress.ru/item/32864378445.html  \
 ### RTC module, DS3231M chip
 DS3231M is needed to precisely calculate time. \
 Link: https://aliexpress.ru/item/4000004876793.html  \
-<img src="Photos/1PCS-DS3231-AT24C32-IIC-Precision-RTC-Real-Time-Clock-Memory-Module-For-Arduino-new-original.jpg_220x220xzq55.jpg" width="300"/>
-<img src="Photos/photo_2021-12-08_22-56-06.jpg" width="150"/> <img src="Photos/Screenshot 2021-12-09 004224.png" width="150"/>
+<img src="Photos/1PCS-DS3231-AT24C32-IIC-Precision-RTC-Real-Time-Clock-Memory-Module-For-Arduino-new-original.jpg_220x220xzq55.jpg" width="150"/> <img src="Photos/photo_2021-12-08_22-56-06.jpg" width="150"/> <img src="Photos/Screenshot 2021-12-09 004224.png" width="150"/>
 
 
 ### Passive buzzer, 5.2mm x 5.2mm 
@@ -196,6 +195,20 @@ Press button Up to select. Press button Down to move cursor down.\
 #### Mode
 <img src="Photos/" width="300"/>
  
+ 
+ 
+## Melodies converter
+Because of Arduino have VERY limited space, byt I want to store long melodies, 
+I made algorythm to compress music as much as possible./
+As source I using Nokia-style composer music, named RTTTL./
+I made software to convert RTTTL to binary codes, which can be 
+played by synthesizer of DRM Watch firmware./
+Melodies stored in form of one byte-one note. 
+Array is contains tempo and notes./
+First 2 bits of note is representing note duration (values 4, 8, 16, 32)./
+Last 6 bits represents note number counted from low note of first octave./
+<img src="Photos/photo_2021-12-16_22-37-15.jpg" width="300"/>
+
  
 ## Prototype photos:
  <img src="Photos/photo_2021-12-05_17-01-19.jpg" width="300"/>    <img src="Photos/photo_2021-12-04_13-20-55.jpg" width="300"/>
