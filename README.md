@@ -145,7 +145,7 @@ Library included in this repo. Just copy it to your libraries folder (`C:\Users\
 
 ### ModeInit
 Initial mode. Its goal to init Serial, init display, init RTC, show startup animation, and go to watchface.
-If RTC can not be initialized, watchface will not open.
+If RTC can not be initialized, watchface will not open.\
 <img src="Photos/photo_2021-12-19_19-43-52.jpg" width="300"/>
 
 

@@ -111,7 +111,7 @@ void setMode(int _modeNew) {
   Serial.print(_modeNew);
   Serial.println(F(" ..."));
   
-  Serial.print(F("Free ram: "));
+  Serial.print(F("freeRam(): "));
   Serial.print(freeRam());
   Serial.println(F(" bytes."));
 
