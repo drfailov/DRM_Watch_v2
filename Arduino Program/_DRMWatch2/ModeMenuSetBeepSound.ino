@@ -32,6 +32,9 @@ const char* const modeMenuSetBeepSoundItems[] PROGMEM = {
 
 void modeMenuSetBeepSoundSetup() {
   genericMenuSetup();
+  byte selected = eepromReadBeepSound();
+  if(selected < 0 || selected > 4) selected = 0;
+  genericMenuSelectPosition = selected;
 }
 
 void modeMenuSetBeepSoundLoop() {
@@ -51,7 +54,6 @@ void modeMenuSetBeepSoundSelected(byte index) {
 #ifdef LANG_RU
     displayMessage(F("Сохр: писк"));
 #endif
-    delay(500);
     goToWatchface();
     return;
   }
@@ -64,7 +66,6 @@ void modeMenuSetBeepSoundSelected(byte index) {
 #ifdef LANG_RU
     displayMessage(F("Сохр: клик"));
 #endif
-    delay(500);
     goToWatchface();
     return;
   }
@@ -74,10 +75,9 @@ void modeMenuSetBeepSoundSelected(byte index) {
 #ifdef LANG_EN
     displayMessage(F("Saved tone"));
 #endif
-#ifdef LANG_EN
+#ifdef LANG_RU
     displayMessage(F("Сохр: тон"));
 #endif
-    delay(500);
     goToWatchface();
     return;
   }
@@ -90,7 +90,6 @@ void modeMenuSetBeepSoundSelected(byte index) {
 #ifdef LANG_RU
     displayMessage(F("Сохр: свист"));
 #endif
-    delay(500);
     goToWatchface();
     return;
   }
@@ -103,7 +102,6 @@ void modeMenuSetBeepSoundSelected(byte index) {
 #ifdef LANG_RU
     displayMessage(F("Сохр: беззв."));
 #endif
-    delay(500);
     goToWatchface();
     return;
   }

@@ -20,6 +20,7 @@ void modeInitSetup(){
   displayDrawText(66, 61, 1, version);
   displayDrawVector(/*path*/pathZubat, /*x*/0, /*y*/10, /*animate*/false, /*color*/1);
   displayDrawVector(/*path*/pathDrmWatch, /*x*/48, /*y*/15, /*animate*/true, /*color*/1);
+  displayUpdate();
   delay(200);
 }
 

@@ -160,8 +160,11 @@ void displayDrawVector(const byte* data_array, byte X, byte Y, bool animate, boo
     byte y = pgm_read_byte(&data_array[currentIndex + 1]);
     if(x != 255 && y != 255 && lx != 255 && ly != 255)
       displayDrawLine(/*X1*/lx + X, /*Y1*/ly + Y, /*X2*/x + X, /*Y2*/y + Y, /*C*/color);
-    if(animate && i%2==0)
+    if(animate && i%2==0){
       displayUpdate();
+      if (isButtonUpPressed()) 
+        animate = false;
+    }
     currentIndex += 2;
     lx = x;
     ly = y;
@@ -194,17 +197,26 @@ void displayMessage(const __FlashStringHelper* str){
   //if(len > LCD_TEXT_BUFFER_SIZE) len = LCD_TEXT_BUFFER_SIZE;
   //strlcpy_P(lcdBuffer, (PGM_P)str, len);
   byte pos = 0;
+  bool animate = true;
   for(byte i=0; i<LCD_TEXT_BUFFER_SIZE; i++){
     if(buffer[i] == '\0') 
       break;
     if((byte)buffer[i] != 208 && (byte)buffer[i] != 209){
       displayDrawText(10 + pos*6, 6, 1, buffer[i]);
-      displayUpdate();
       pos ++;
-      delay(6);
+      if(animate){
+        displayUpdate();
+        delay(6);
+      }
     }
+    if (isButtonUpPressed()) 
+      animate = false;
   }
-  delay(500);
+  displayUpdate();
+  if(animate)
+    delay(500);
+  else
+    delay(200);
 }
 
 //void displayMessageFromRam(const char* text){
@@ -286,6 +298,19 @@ void displayDrawPauseSign(byte x, byte y, bool color){
       0b00000000,
       0b01111111,
       0b01111111
+    };
+  displayDrawBitmap(x, y, img, 7, 8, color);
+}
+
+void displayDrawStopSign(byte x, byte y, bool color){
+  static const char img[7] PROGMEM = { 
+      0b00111111,
+      0b00111111,
+      0b00111111,
+      0b00111111,
+      0b00111111,
+      0b00111111,
+      0b00000000
     };
   displayDrawBitmap(x, y, img, 7, 8, color);
 }

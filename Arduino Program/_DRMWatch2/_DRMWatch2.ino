@@ -1,4 +1,5 @@
 #include "lcd1202.h"
+#include <util/atomic.h>
 #include <LowPower.h>
 #define version F("v0.20")
 //#define LANG_EN
@@ -158,4 +159,13 @@ int freeRam () {
   extern int __heap_start, *__brkval;
   int v;
   return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval);
+}
+
+
+void setMillis(unsigned long ms)
+{
+    extern unsigned long timer0_millis;
+    ATOMIC_BLOCK (ATOMIC_RESTORESTATE) {
+        timer0_millis = ms;
+    }
 }

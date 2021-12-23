@@ -32,6 +32,12 @@ const char* const modeMenuSetSleepTimeItems[] PROGMEM = {
 
 void modeMenuSetSleepTimeSetup() {
   genericMenuSetup();
+  byte selected = eepromReadSleepTime();
+  if(selected == eepromSleepTime05sec) genericMenuSelectPosition = 0;
+  if(selected == eepromSleepTime1sec) genericMenuSelectPosition = 1;
+  if(selected == eepromSleepTime2sec) genericMenuSelectPosition = 2;
+  if(selected == eepromSleepTime4sec) genericMenuSelectPosition = 3;
+  if(selected == eepromSleepTime8sec) genericMenuSelectPosition = 4;  
 }
 
 void modeMenuSetSleepTimeLoop() {
@@ -51,7 +57,6 @@ void modeMenuSetSleepTimeSelected(byte index) {
 #ifdef LANG_RU
     displayMessage(F("Сохр: .5 сек"));
 #endif
-    delay(500);
     goToWatchface();
     return;
   }
@@ -64,7 +69,6 @@ void modeMenuSetSleepTimeSelected(byte index) {
 #ifdef LANG_RU
     displayMessage(F("Сохр: 1 сек"));
 #endif
-    delay(500);
     goToWatchface();
     return;
   }
@@ -77,7 +81,6 @@ void modeMenuSetSleepTimeSelected(byte index) {
 #ifdef LANG_RU
     displayMessage(F("Сохр: 2 сек"));
 #endif
-    delay(500);
     goToWatchface();
     return;
   } 
@@ -90,7 +93,6 @@ void modeMenuSetSleepTimeSelected(byte index) {
 #ifdef LANG_RU
     displayMessage(F("Сохр: 4 сек"));
 #endif
-    delay(500);
     goToWatchface();
     return;
   }
@@ -103,7 +105,6 @@ void modeMenuSetSleepTimeSelected(byte index) {
 #ifdef LANG_RU
     displayMessage(F("Сохр: 8 сек"));
 #endif
-    delay(500);
     goToWatchface();
     return;
   }

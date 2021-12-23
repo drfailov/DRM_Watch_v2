@@ -34,7 +34,7 @@ void modeAboutLoop() {
 
   
   displayDrawVector(/*path*/pathDrmWatch, /*x*/26, /*y*/22, /*animate*/true, /*color*/1);
-  
+  displayUpdate();
   for(long st = millis(); millis() - st < 900; ){
     if(isButtonUpPressed()){
       beep();

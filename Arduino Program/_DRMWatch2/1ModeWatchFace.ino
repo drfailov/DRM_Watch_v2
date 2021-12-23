@@ -1,36 +1,15 @@
 /*Screen with main watchface*/
-
-int modeWatchFace1BacklightCounter = 10; //сколько секунд осталось подсветке светить. 0 = выключена
+long modeWatchFace1BacklightTimeout = 10000;
+long modeWatchFace1BacklightEnabledTime = millis();
 
 void modeWatchFace1Setup() {
   displayInit();
-  byte sleepTime = eepromReadSleepTime();
-  if(batteryIsLowPower()) //если разряжен, то макс интервал
-    sleepTime = eepromSleepTime8sec;
-  if(sleepTime == eepromSleepTime05sec) modeWatchFace1BacklightCounter = 20;
-  if(sleepTime == eepromSleepTime1sec) modeWatchFace1BacklightCounter = 10;
-  if(sleepTime == eepromSleepTime2sec) modeWatchFace1BacklightCounter = 5;
-  if(sleepTime == eepromSleepTime4sec) modeWatchFace1BacklightCounter = 3;
-  if(sleepTime == eepromSleepTime8sec) modeWatchFace1BacklightCounter = 2;
-    
-  attachInterrupt(0, wakeUp, HIGH);
-  attachInterrupt(1, wakeUp, HIGH);
+  modeWatchFace1BacklightEnabledTime = millis();    
+  attachInterrupt(1, modeWatchFace1ButtonUp, HIGH); //up
+  attachInterrupt(0, wakeUp, HIGH);  //down
 }
 
 void modeWatchFace1Loop() {
-  if (isButtonUpPressed()) {
-    beep();
-    byte sleepTime = eepromReadSleepTime();
-    if(batteryIsLowPower()) //если разряжен, то макс интервал
-      sleepTime = eepromSleepTime8sec;
-    if(sleepTime == eepromSleepTime05sec) modeWatchFace1BacklightCounter = 20;
-    if(sleepTime == eepromSleepTime1sec) modeWatchFace1BacklightCounter = 10;
-    if(sleepTime == eepromSleepTime2sec) modeWatchFace1BacklightCounter = 5;
-    if(sleepTime == eepromSleepTime4sec) modeWatchFace1BacklightCounter = 3;
-    if(sleepTime == eepromSleepTime8sec) modeWatchFace1BacklightCounter = 2;
-    delay(500);
-  }
-
   if (isButtonDownPressed()) {
     beep();
     setMode(MODE_MENU_MAIN);
@@ -96,9 +75,7 @@ void modeWatchFace1Loop() {
 
   displayUpdate();
   { //Baclight
-    modeWatchFace1BacklightCounter --;
-    if (modeWatchFace1BacklightCounter < 0) modeWatchFace1BacklightCounter = 0;
-    if (modeWatchFace1BacklightCounter > 0)
+    if(millis() - modeWatchFace1BacklightEnabledTime < modeWatchFace1BacklightTimeout)
       displayBacklightOn();
     else
       displayBacklightOff();
@@ -112,24 +89,41 @@ void modeWatchFace1Loop() {
   Serial.flush();
   Serial.end();
   delay(5);
-  if(sleepTime == eepromSleepTime05sec)
+  if(sleepTime == eepromSleepTime05sec){
+    setMillis(millis() + 500);
     LowPower.powerDown(SLEEP_500MS, ADC_OFF, BOD_OFF);
-  else if (sleepTime == eepromSleepTime1sec)
+  }
+  else if (sleepTime == eepromSleepTime1sec){
+    setMillis(millis() + 1000);
     LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
-  else if (sleepTime == eepromSleepTime2sec)
+  }
+  else if (sleepTime == eepromSleepTime2sec){
+    setMillis(millis() + 2000);
     LowPower.powerDown(SLEEP_2S, ADC_OFF, BOD_OFF);
-  else if (sleepTime == eepromSleepTime4sec)
+  }
+  else if (sleepTime == eepromSleepTime4sec){
+    setMillis(millis() + 4000);
     LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
-  else if (sleepTime == eepromSleepTime8sec)
+  }
+  else if (sleepTime == eepromSleepTime8sec){
+    setMillis(millis() + 8000);
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
-  else //if some garbage in memory
+  }
+  else{ //if some garbage in memory
+    setMillis(millis() + 1000);
     LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
+  }
   Serial.begin(115200);
 }
 
 void modeWatchFace1Finish() {
   detachInterrupt(0);
   detachInterrupt(1);
+}
+
+void modeWatchFace1ButtonUp(){
+  modeWatchFace1BacklightEnabledTime = millis();
+  beep();
 }
 
 void wakeUp(){ //to react for button

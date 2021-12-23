@@ -24,6 +24,11 @@ const char* const modeMenuSetSilentModeItems[] PROGMEM = {
 
 void modeMenuSetSilentModeSetup() {
   genericMenuSetup();
+  bool silent = eepromReadSilentMode();
+  if(silent == true)
+    genericMenuSelectPosition = 1;
+  if(silent == false)
+    genericMenuSelectPosition = 0;
 }
 
 void modeMenuSetSilentModeLoop() {
@@ -43,7 +48,6 @@ void modeMenuSetSilentModeSelected(byte index) {
 #ifdef LANG_RU
     displayMessage(F("Звук ВКЛ"));
 #endif
-    delay(500);
     goToWatchface();
     return;
   }
@@ -56,7 +60,6 @@ void modeMenuSetSilentModeSelected(byte index) {
 #ifdef LANG_RU
     displayMessage(F("Звук ВЫКЛ"));
 #endif
-    delay(500);
     goToWatchface();
     return;
   }
