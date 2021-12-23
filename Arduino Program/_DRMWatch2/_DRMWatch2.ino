@@ -1,6 +1,6 @@
 #include "lcd1202.h"
 #include <LowPower.h>
-#define version F("v0.19")
+#define version F("v0.20")
 //#define LANG_EN
 #define LANG_RU
 

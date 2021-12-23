@@ -277,6 +277,19 @@ void displayDrawArrowRight(byte x, byte y, bool color){
   displayDrawBitmap(x, y, img, 7, 8, color);
 }
 
+void displayDrawPauseSign(byte x, byte y, bool color){
+  static const char img[7] PROGMEM = { 
+      0b01111111,
+      0b01111111,
+      0b00000000,
+      0b00000000,
+      0b00000000,
+      0b01111111,
+      0b01111111
+    };
+  displayDrawBitmap(x, y, img, 7, 8, color);
+}
+
 void displayDrawSilentModeIcon(byte x, byte y, bool color){
       static const char img[11] PROGMEM = { 
       0b00011000,
