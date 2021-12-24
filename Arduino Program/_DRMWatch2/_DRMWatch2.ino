@@ -1,7 +1,7 @@
 #include "lcd1202.h"
 #include <util/atomic.h>
 #include <LowPower.h>
-#define version F("v0.20")
+#define version F("v0.21")
 //#define LANG_EN
 #define LANG_RU
 
@@ -63,11 +63,12 @@
 #define MODE_MENU_SET_SILENT_MODE (byte)10
 #define MODE_MENU_APPS (byte)11
 #define MODE_STOPWATCH (byte)12
+#define MODE_SET_ALARM (byte)13
 
 
 byte _mode = -1;
 //размер буфера. Чем меньше тем экономнее
-#define BUFFER_SIZE 26
+#define BUFFER_SIZE 25
 //общий на всю программу текстовый буфер чтобы не объявлять каждый раз локальную
 char buffer[BUFFER_SIZE]; 
 
@@ -99,6 +100,8 @@ void loop() {
   if (_mode == MODE_MENU_SET_SILENT_MODE ) modeMenuSetSilentModeLoop();
   if (_mode == MODE_MENU_APPS ) modeMenuAppsLoop();
   if (_mode == MODE_STOPWATCH ) modeStopwatchLoop();
+  if (_mode == MODE_SET_ALARM ) modeSetAlarmLoop();
+  
   
 }
 
@@ -129,6 +132,8 @@ void setMode(int _modeNew) {
   if (_mode == MODE_MENU_SET_SILENT_MODE ) modeMenuSetSilentModeFinish();
   if (_mode == MODE_MENU_APPS ) modeMenuAppsFinish();
   if (_mode == MODE_STOPWATCH ) modeStopwatchFinish();
+  if (_mode == MODE_SET_ALARM ) modeSetAlarmFinish();
+  
   
 
   //init new
@@ -145,6 +150,8 @@ void setMode(int _modeNew) {
   if (_modeNew == MODE_MENU_SET_SILENT_MODE ) modeMenuSetSilentModeSetup();
   if (_modeNew == MODE_MENU_APPS ) modeMenuAppsSetup();
   if (_modeNew == MODE_STOPWATCH ) modeStopwatchSetup();
+  if (_modeNew == MODE_SET_ALARM ) modeSetAlarmSetup();
+  
   
 
   _mode = _modeNew;

@@ -42,30 +42,28 @@ void modeMenuMelodiesFinish() {
 
 void modeMenuMelodiesSelected(byte index) {
   delay(200);
-  
-  if (index == 0) { 
-    melodyPlayerPlayMelody(getMelodyEntertainer());
-  }
-  if (index == 1) { 
-    melodyPlayerPlayMelody(getMelodyBadinerie());
-  }
-  if (index == 2) { 
-    melodyPlayerPlayMelody(getMelodyNokiaTune());
-  }
-  if (index == 3) {
-    melodyPlayerPlayMelody(getMelodyMozart());
-  }
-  if (index == 4) {
-    melodyPlayerPlayMelody(getMelodyMario());
-  }  
-  if (index == 5) {
-    melodyPlayerPlayMelody(getMelodyGroovyBlue());
-  }  
-  if (index == 6) {
-    melodyPlayerPlayMelody(getMelodyToreador());
-  }
   if (index == 7) { //Back
     setMode(MODE_MENU_APPS);
     return;
   }
+  else{
+    melodyPlayerPlayMelody(getMelodyByIndex(index));
+  }
+}
+
+const byte* const getMelodyByIndex(byte index){
+  if (index == 0) 
+    return getMelodyEntertainer();
+  if (index == 1)  
+    return getMelodyBadinerie();
+  if (index == 2)  
+    return getMelodyNokiaTune();
+  if (index == 3) 
+    return getMelodyMozart();
+  if (index == 4) 
+    return getMelodyMario();
+  if (index == 5) 
+    return getMelodyGroovyBlue();
+  if (index == 6) 
+    return getMelodyToreador();
 }

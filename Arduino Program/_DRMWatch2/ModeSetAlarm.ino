@@ -1,61 +1,61 @@
 /*Screen allows to set time*/
 
-#define MENU_SET_TIME_SELECTED_HOUR 0
-#define MENU_SET_TIME_SELECTED_MINUTE 1
-#define MENU_SET_TIME_SELECTED_DAY 2
-#define MENU_SET_TIME_SELECTED_MONTH  3
-#define MENU_SET_TIME_SELECTED_YEAR 4
-#define MENU_SET_TIME_SELECTED_SAVE 5
-#define MENU_SET_TIME_SELECTED_BACK 6
-int modeMenuSetTimeSelected = MENU_SET_TIME_SELECTED_HOUR;
+#define MODE_SET_ALARM_SELECTED_HOUR 0
+#define MODE_SET_ALARM_SELECTED_MINUTE 1
+#define MODE_SET_ALARM_SELECTED_DAY 2
+#define MODE_SET_ALARM_SELECTED_MONTH  3
+#define MODE_SET_ALARM_SELECTED_YEAR 4
+#define MODE_SET_ALARM_SELECTED_SAVE 5
+#define MODE_SET_ALARM_SELECTED_BACK 6
+int modeSetAlarmSelected = MODE_SET_ALARM_SELECTED_HOUR;
 
 
-byte modeMenuSetTimeHours = 00;
-byte modeMenuSetTimeMinutes = 00;
-byte modeMenuSetTimeSeconds = 00;
+byte modeSetAlarmHours = 00;
+byte modeSetAlarmMinutes = 00;
+byte modeSetAlarmSeconds = 00;
 
-byte modeMenuSetTimeDays = 01;
-byte modeMenuSetTimeMonths = 01;
-int modeMenuSetTimeYears = 2021;
+byte modeSetAlarmDays = 01;
+byte modeSetAlarmMonths = 01;
+int modeSetAlarmYears = 2021;
 
 
-void modeMenuSetTimeSetup(){
-  modeMenuSetTimeHours = rtcGetHours();
-  modeMenuSetTimeMinutes = rtcGetMinutes();
-  modeMenuSetTimeDays = rtcGetDay();
-  modeMenuSetTimeMonths = rtcGetMonth();
-  modeMenuSetTimeYears = rtcGetYear();
+void modeSetAlarmSetup(){
+  modeSetAlarmHours = rtcGetHours();
+  modeSetAlarmMinutes = rtcGetMinutes();
+  modeSetAlarmDays = rtcGetDay();
+  modeSetAlarmMonths = rtcGetMonth();
+  modeSetAlarmYears = rtcGetYear();
   digitalWrite(pinLcdBacklight, HIGH);
-  modeMenuSetTimeSelected = 0;
+  modeSetAlarmSelected = 0;
 }
 
-void modeMenuSetTimeLoop(){
+void modeSetAlarmLoop(){
   if (isButtonUpPressed()) {
     beep();
     //change value
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_HOUR) {//hours
-      modeMenuSetTimeHours ++;
-      if(modeMenuSetTimeHours > 23) modeMenuSetTimeHours = 0;
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_HOUR) {//hours
+      modeSetAlarmHours ++;
+      if(modeSetAlarmHours > 23) modeSetAlarmHours = 0;
     }
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MINUTE) {//Minutes
-      modeMenuSetTimeMinutes ++;
-      if(modeMenuSetTimeMinutes > 59) modeMenuSetTimeMinutes = 0;
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MINUTE) {//Minutes
+      modeSetAlarmMinutes ++;
+      if(modeSetAlarmMinutes > 59) modeSetAlarmMinutes = 0;
     }
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_DAY) {//Day
-      modeMenuSetTimeDays ++;
-      if(modeMenuSetTimeDays > 31) modeMenuSetTimeDays = 0;
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_DAY) {//Day
+      modeSetAlarmDays ++;
+      if(modeSetAlarmDays > 31) modeSetAlarmDays = 0;
     }
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MONTH) {//Month
-      modeMenuSetTimeMonths ++;
-      if(modeMenuSetTimeMonths > 12) modeMenuSetTimeMonths = 0;
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MONTH) {//Month
+      modeSetAlarmMonths ++;
+      if(modeSetAlarmMonths > 12) modeSetAlarmMonths = 0;
     }
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_YEAR) {//Month
-      modeMenuSetTimeYears ++;
-      if(modeMenuSetTimeYears > 2050) modeMenuSetTimeYears = 2020;
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_YEAR) {//Month
+      modeSetAlarmYears ++;
+      if(modeSetAlarmYears > 2050) modeSetAlarmYears = 2020;
     }
     
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE) {//SAVE
-      rtcSetTime(modeMenuSetTimeYears, modeMenuSetTimeMonths, modeMenuSetTimeDays, modeMenuSetTimeHours, modeMenuSetTimeMinutes);
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_SAVE) {//SAVE
+      rtcSetTime(modeSetAlarmYears, modeSetAlarmMonths, modeSetAlarmDays, modeSetAlarmHours, modeSetAlarmMinutes);
 #ifdef LANG_EN
       displayMessage(F("Time saved"));
 #endif
@@ -66,7 +66,7 @@ void modeMenuSetTimeLoop(){
       goToWatchface();
       return;
     }
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK) {//BACK
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_BACK) {//BACK
       setMode(MODE_MENU_SETTINGS);
       return;
     }
@@ -75,8 +75,8 @@ void modeMenuSetTimeLoop(){
   if (isButtonDownPressed()) {
     beep();
     //move next
-    modeMenuSetTimeSelected ++;
-    if(modeMenuSetTimeSelected > 6) modeMenuSetTimeSelected = 0;
+    modeSetAlarmSelected ++;
+    if(modeSetAlarmSelected > 6) modeSetAlarmSelected = 0;
   }
 
   
@@ -87,7 +87,7 @@ void modeMenuSetTimeLoop(){
 #ifdef LANG_RU
   displayDrawText(15, 2, 1, F("Задать время"));
 #endif
-  if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE || modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK)
+  if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_SAVE || modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_BACK)
     displayDrawCheck(/*X*/1, /*Y*/2, 1);
   else
     displayDrawText(/*X*/1, /*Y*/2, /*C*/1, "+");
@@ -98,8 +98,8 @@ void modeMenuSetTimeLoop(){
     byte x = 15;
     byte y = 15;
     char chars[4];
-    sprintf(chars, "%02d", modeMenuSetTimeHours);
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_HOUR){
+    sprintf(chars, "%02d", modeSetAlarmHours);
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_HOUR){
       displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);
     }
@@ -113,8 +113,8 @@ void modeMenuSetTimeLoop(){
     byte x = 40;
     byte y = 15;
     char chars[4];
-    sprintf(chars, "%02d", modeMenuSetTimeMinutes);
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MINUTE){
+    sprintf(chars, "%02d", modeSetAlarmMinutes);
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MINUTE){
       displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);
     }
@@ -131,8 +131,8 @@ void modeMenuSetTimeLoop(){
     byte x = 15;
     byte y = 33;
     char chars[4];
-    sprintf(chars, "%02d", modeMenuSetTimeDays);
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_DAY){
+    sprintf(chars, "%02d", modeSetAlarmDays);
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_DAY){
       displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);
     }
@@ -146,8 +146,8 @@ void modeMenuSetTimeLoop(){
     byte x = 40;
     byte y = 33;
     char chars[4];
-    sprintf(chars, "%02d", modeMenuSetTimeMonths);
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MONTH){
+    sprintf(chars, "%02d", modeSetAlarmMonths);
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MONTH){
       displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);
     }
@@ -161,8 +161,8 @@ void modeMenuSetTimeLoop(){
     byte x = 65;
     byte y = 33;
     char chars[5];
-    sprintf(chars, "%04d", modeMenuSetTimeYears);
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_YEAR){
+    sprintf(chars, "%04d", modeSetAlarmYears);
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_YEAR){
       displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);
     }
@@ -182,7 +182,7 @@ void modeMenuSetTimeLoop(){
 #ifdef LANG_RU
     const __FlashStringHelper* chars = F("Сохр");    
 #endif
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE){
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_SAVE){
       displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);
     }
@@ -200,7 +200,7 @@ void modeMenuSetTimeLoop(){
 #ifdef LANG_RU
     const __FlashStringHelper* chars = F("Назд");
 #endif
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK){
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_BACK){
       displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);
     }
@@ -213,6 +213,6 @@ void modeMenuSetTimeLoop(){
   displayUpdate();
 }
 
-void modeMenuSetTimeFinish(){
+void modeSetAlarmFinish(){
   //digitalWrite(pinLcdBacklight, LOW);
 }

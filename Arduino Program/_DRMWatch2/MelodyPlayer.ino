@@ -162,13 +162,12 @@ const byte* const getMelodyNokiaTune() {
 
 void melodyPlayerPlayMelody(const byte* const melody) {
   Serial.println(F("Play melody..."));
+  melodyPlayerDrawScreen();
   pinMode(pinBuzzer, OUTPUT);
   byte length = melodyPlayerGetLength(melody);
   float tempo = pgm_read_byte(&melody[0]);
   float whole_notes_per_second = tempo / 240.0;
   for (byte i = 1; i < length - 1; i++) {
-
-
     byte b = pgm_read_byte(&melody[i]);
     byte duration = 0;
     if (bitRead(b, 7) == 0 && bitRead(b, 6) == 0) duration = 4;
@@ -184,15 +183,13 @@ void melodyPlayerPlayMelody(const byte* const melody) {
     // We can use C2=65.41, or C3=130.81. C2 is a bit shorter.
     float frequency = 0;
     if (noteNumber < 36)
-      frequency = 260.0 * pow(2.0, (noteNumber / 12.0));
+      frequency = 290.0 * pow(2.0, (noteNumber / 12.0));
 
     if (frequency != 0)
       tone(pinBuzzer, frequency);
     else
       noTone(pinBuzzer);
     long noteStarted = millis();
-    if(timeMs > 100)
-      drawScreen(i, length);
     while(millis() - noteStarted < timeMs);
     noTone(pinBuzzer);
     delay(10);
@@ -203,24 +200,16 @@ void melodyPlayerPlayMelody(const byte* const melody) {
   pinMode(pinBuzzer, INPUT);
 }
 
-void drawScreen(int note, int totalNotes) {
+void melodyPlayerDrawScreen() {
   displayClear();
   displayDrawStopSign(/*X*/2, /*Y*/2, 1);
-  displayDrawVector(/*path*/pathZubat, /*x*/24, /*y*/1, /*animate*/false, /*color*/1);
-  { //text current note
-    ltoa(note, buffer, DEC);
-    displayDrawText(2, 50, 1, buffer);
-  }
-  { //text total
-    ltoa(totalNotes, buffer, DEC);
-    displayDrawText(95 - (strlen(buffer) * 6), 50, 1, buffer);
-  }
-  int lineLen = 90;
-  int lineX = 2;
-  int x = lineX + (lineLen * note / totalNotes);
-  displayDrawLine(/*X1*/lineX, /*Y1*/62, /*X2*/x, /*Y2*/62, /*C*/1);
-  displayDrawLine(/*X1*/lineX, /*Y1*/63, /*X2*/lineX + lineLen, /*Y2*/63, /*C*/1);
-  displayDrawLine(/*X1*/lineX, /*Y1*/64, /*X2*/x, /*Y2*/64, /*C*/1);
+  displayDrawVector(/*path*/pathZubat, /*x*/24, /*y*/5, /*animate*/false, /*color*/1);
+#ifdef LANG_EN
+  displayDrawText(20, 55, 1, F("Playing..."));
+#endif
+#ifdef LANG_RU
+  displayDrawText(17, 55, 1, F("Попиликаем!"));
+#endif
   displayUpdate();
 }
 

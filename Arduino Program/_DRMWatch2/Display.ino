@@ -4,8 +4,6 @@
  * It needed to make migration to other display easier.
 */
 
-#define LCD_TEXT_BUFFER_SIZE 26
-char lcdBuffer[LCD_TEXT_BUFFER_SIZE];
 LCD1202 lcd(pinLcdRst, pinLcdCs, pinLcdMosi, pinLcdSck);  // RST, CS, MOSI, SCK
 
 /*
@@ -173,12 +171,9 @@ void displayDrawVector(const byte* data_array, byte X, byte Y, bool animate, boo
 
 
 void displayDrawText(int X, int Y, int color, const __FlashStringHelper* str){
-  //byte len = strlen_P((PGM_P)str);
-  //if(len > LCD_TEXT_BUFFER_SIZE) len = LCD_TEXT_BUFFER_SIZE;
   strcpy_P(buffer, (PGM_P)str);
-  //strlcpy_P(lcdBuffer, (PGM_P)str, len);
   byte pos = 0;
-  for(int i=0; i<LCD_TEXT_BUFFER_SIZE; i++){
+  for(int i=0; i<BUFFER_SIZE; i++){
     if(buffer[i] == '\0') 
       break;
     if((byte)buffer[i] != 208 && (byte)buffer[i] != 209){
@@ -193,12 +188,9 @@ void displayMessage(const __FlashStringHelper* str){
   displayDrawVector(/*path*/pathZubat, /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
   displayDrawVector(/*path*/pathBubble, /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
   strcpy_P(buffer, (PGM_P)str);
-  //byte len = strlen_P((PGM_P)str) + 1;
-  //if(len > LCD_TEXT_BUFFER_SIZE) len = LCD_TEXT_BUFFER_SIZE;
-  //strlcpy_P(lcdBuffer, (PGM_P)str, len);
   byte pos = 0;
   bool animate = true;
-  for(byte i=0; i<LCD_TEXT_BUFFER_SIZE; i++){
+  for(byte i=0; i<BUFFER_SIZE; i++){
     if(buffer[i] == '\0') 
       break;
     if((byte)buffer[i] != 208 && (byte)buffer[i] != 209){
