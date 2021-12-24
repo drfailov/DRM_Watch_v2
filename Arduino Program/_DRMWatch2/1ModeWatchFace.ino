@@ -15,18 +15,48 @@ void modeWatchFace1Loop() {
     setMode(MODE_MENU_MAIN);
     return;
   }
-  displayClear();
+  
+  byte hour = rtcGetHours();
+  byte minute = rtcGetMinutes();
+  byte second = rtcGetSeconds();
+  byte day = rtcGetDay();
+  byte month = rtcGetMonth();
+  int year = rtcGetYear();
 
+  {//alert
+    //play melody and mark this day as playen if:
+    //-alert enabled
+    //-in this day was not playen
+    //-this is right time to play
+
+    bool alertIsEnabled = true;
+    static byte alertLastRunDay = -1;
+    byte alertTimeHour = 8;
+    byte alertTimeMinute = 0;
+    byte alertMelodyIndex = 1;
+    
+    if(alertIsEnabled){
+      if(alertLastRunDay != day){
+        if((hour == alertTimeHour && minute >= alertTimeMinute) || (hour > alertTimeHour)){
+          alertLastRunDay = day;
+          long timeStarted = millis();
+          long playTime = 120000;
+          displayBacklightOn();
+          while(melodyPlayerPlayMelody(getMelodyByIndex(alertMelodyIndex)) && millis() - timeStarted < playTime);
+        }
+      }
+    }
+  }
+  
+  displayClear();
+  
   { //time
-    int hour = rtcGetHours();
-    int minute = rtcGetMinutes();
-    int second = rtcGetSeconds();
-    int hour1 = hour / 10;
-    int hour2 = hour - (hour1 * 10);
-    int minute1 = minute / 10;
-    int minute2 = minute - (minute1 * 10);
-    int second1 = second / 10;
-    int second2 = second - (second1 * 10);
+    byte hour1 = hour / 10;
+    byte hour2 = hour - (hour1 * 10);
+    byte minute1 = minute / 10;
+    byte minute2 = minute - (minute1 * 10);
+    byte second1 = second / 10;
+    byte second2 = second - (second1 * 10);
     
     displayDrawNumber(hour1   ,  5, 20, 3, 4);
     displayDrawNumber(hour2   , 19, 20, 3, 4);
@@ -39,22 +69,16 @@ void modeWatchFace1Loop() {
   }
   
   {//date
-    int day = rtcGetDay();
-    int month = rtcGetMonth();
-    int year = rtcGetYear();
-
-    char chars[11];
-    sprintf(chars, "%02d.%02d.%04d", day, month, year);
-    displayDrawText(0, 0, 1, chars);
+    sprintf(buffer, "%02d.%02d.%04d", day, month, year);
+    displayDrawText(0, 0, 1, buffer);
   }
   
   {//Temperature
     float temp = rtcGetTemp();
-    char chars[8];
     /* 4 is mininum width, 2 is precision; float value is copied onto str_temp*/
-    dtostrf(temp, 4, 1, chars);
-    sprintf(chars, "%sC", chars);
-    displayDrawText(0, 61, 1, chars);
+    dtostrf(temp, 4, 1, buffer);
+    sprintf(buffer, "%sC", buffer);
+    displayDrawText(0, 61, 1, buffer);
   }
   
   {//battery

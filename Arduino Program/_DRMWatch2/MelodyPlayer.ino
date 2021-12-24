@@ -159,8 +159,8 @@ const byte* const getMelodyNokiaTune() {
 }
 
 
-
-void melodyPlayerPlayMelody(const byte* const melody) {
+//return true if was played completely or false if interrupted
+bool melodyPlayerPlayMelody(const byte* const melody) {
   Serial.println(F("Play melody..."));
   melodyPlayerDrawScreen();
   pinMode(pinBuzzer, OUTPUT);
@@ -194,10 +194,11 @@ void melodyPlayerPlayMelody(const byte* const melody) {
     noTone(pinBuzzer);
     delay(10);
     if (isButtonUpPressed()) 
-      return;
+      return false;
   }
   noTone(pinBuzzer);
   pinMode(pinBuzzer, INPUT);
+  return true;
 }
 
 void melodyPlayerDrawScreen() {
