@@ -198,6 +198,7 @@ bool melodyPlayerPlayMelody(const byte* const melody) {
   }
   noTone(pinBuzzer);
   pinMode(pinBuzzer, INPUT);
+  delay(500);
   return true;
 }
 

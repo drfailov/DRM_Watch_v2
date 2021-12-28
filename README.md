@@ -12,6 +12,7 @@ Programming contributions made by <b>Dr. Failov</b>, hardware part is made by <b
 ## Functions
 - Watchface scren
 - Menu screens
+- Alert
 - Play monophonic melodies
 - Stopwatch
 - Set time screen
@@ -186,7 +187,7 @@ Press button Up to select. Press button Down to move cursor down.\
 ### ModeAbout
 <img src="Photos/photo_2021-12-19_19-43-52 (8).jpg" width="300"/>
 
-### Mode
+### ModeSetAlarm
 <img src="Photos/" width="300"/>
 
 ### Mode

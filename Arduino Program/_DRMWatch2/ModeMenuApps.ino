@@ -1,5 +1,5 @@
 /*Show menu with melodies by triggerimg GenericMenu*/
-const byte modeMenuAppsItemsCount = 6; //сколько пунктов меню в массиве
+const byte modeMenuAppsItemsCount = 7; //сколько пунктов меню в массиве
 
 //Максимальная длина строки:              |          |
 #ifdef LANG_EN

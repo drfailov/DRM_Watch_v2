@@ -1,6 +1,6 @@
 /*Show settings menu by triggerimg GenericMenu*/
 
-const byte modeMenuSettingsItemsCount = 7; //сколько пунктов меню в массиве
+const byte modeMenuSettingsItemsCount = 8; //сколько пунктов меню в массиве
 
 //Максимальная длина строки:                  |          |
 
@@ -11,7 +11,8 @@ const char modeMenuSettingsItem3[] PROGMEM = "Set silent";
 const char modeMenuSettingsItem4[] PROGMEM = "Set sleep";
 const char modeMenuSettingsItem5[] PROGMEM = "Set sound";
 const char modeMenuSettingsItem6[] PROGMEM = "Set time";
-const char modeMenuSettingsItem7[] PROGMEM = "< Back";
+const char modeMenuSettingsItem7[] PROGMEM = "Hard reset";
+const char modeMenuSettingsItem8[] PROGMEM = "< Back";
 #endif
 #ifdef LANG_RU
 const char modeMenuSettingsItem1[] PROGMEM = "Перезагрузка";
@@ -20,7 +21,8 @@ const char modeMenuSettingsItem3[] PROGMEM = "Беззвучный";
 const char modeMenuSettingsItem4[] PROGMEM = "Время сна";
 const char modeMenuSettingsItem5[] PROGMEM = "Звук кнопок";
 const char modeMenuSettingsItem6[] PROGMEM = "Задать время";
-const char modeMenuSettingsItem7[] PROGMEM = "< Назад";
+const char modeMenuSettingsItem7[] PROGMEM = "Полный сброс";
+const char modeMenuSettingsItem8[] PROGMEM = "< Назад";
 #endif
 
 const char* const modeMenuSettingsItems[] PROGMEM = {
@@ -30,7 +32,8 @@ const char* const modeMenuSettingsItems[] PROGMEM = {
   modeMenuSettingsItem4,
   modeMenuSettingsItem5,
   modeMenuSettingsItem6,
-  modeMenuSettingsItem7
+  modeMenuSettingsItem7,
+  modeMenuSettingsItem8
 };
 void(* resetFunc) (void) = 0;//объявляем функцию reset с адресом 0
 
@@ -87,7 +90,12 @@ void modeMenuSettingsSelected(byte index) {
     return;
   }
 
-  if (index == 6) { //Back
+  if (index == 6) { //Hard Reset
+    
+    return;
+  }
+  
+  if (index == 7) { //Back
     setMode(MODE_MENU_MAIN);
     return;
   }

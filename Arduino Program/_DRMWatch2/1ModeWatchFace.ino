@@ -29,16 +29,16 @@ void modeWatchFace1Loop() {
     //-in this day was not playen
     //-this is right time to play
 
-    bool alertIsEnabled = true;
-    static byte alertLastRunDay = -1;
-    byte alertTimeHour = 8;
-    byte alertTimeMinute = 0;
-    byte alertMelodyIndex = 1;
+    bool alertIsEnabled = eepromReadAlertEnabled();
+    byte alertLastRunDay = eepromReadAlertLastDayRun();
+    byte alertTimeHour = eepromReadAlertHour();
+    byte alertTimeMinute = eepromReadAlertMinute();
+    byte alertMelodyIndex = eepromReadAlertMelodyIndex();
     
     if(alertIsEnabled){
       if(alertLastRunDay != day){
         if((hour == alertTimeHour && minute >= alertTimeMinute) || (hour > alertTimeHour)){
-          alertLastRunDay = day;
+          eepromSaveAlertLastDayRun(day);
           long timeStarted = millis();
           long playTime = 120000;
           displayBacklightOn();
@@ -93,8 +93,15 @@ void modeWatchFace1Loop() {
   
     displayDrawBattery(78, 0, level, isCharging, isLowPower);
   }
+
+  //Silent mode sign
   if(eepromReadSilentMode()){ 
     displayDrawSilentModeIcon(85, 60, 1);
+  }
+  
+  //Alert sign
+  if(eepromReadAlertEnabled()){ 
+    displayDrawAlertSign(72, 60, 1);
   }
 
   displayUpdate();

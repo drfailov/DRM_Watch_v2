@@ -2,29 +2,22 @@
 
 #define MODE_SET_ALARM_SELECTED_HOUR 0
 #define MODE_SET_ALARM_SELECTED_MINUTE 1
-#define MODE_SET_ALARM_SELECTED_DAY 2
-#define MODE_SET_ALARM_SELECTED_MONTH  3
-#define MODE_SET_ALARM_SELECTED_YEAR 4
-#define MODE_SET_ALARM_SELECTED_SAVE 5
-#define MODE_SET_ALARM_SELECTED_BACK 6
+#define MODE_SET_ALARM_SELECTED_MELODY 2
+#define MODE_SET_ALARM_SELECTED_SAVE  3
+#define MODE_SET_ALARM_SELECTED_DISABLE 4
+#define MODE_SET_ALARM_SELECTED_BACK 5
 int modeSetAlarmSelected = MODE_SET_ALARM_SELECTED_HOUR;
 
 
-byte modeSetAlarmHours = 00;
-byte modeSetAlarmMinutes = 00;
-byte modeSetAlarmSeconds = 00;
-
-byte modeSetAlarmDays = 01;
-byte modeSetAlarmMonths = 01;
-int modeSetAlarmYears = 2021;
+byte modeSetAlarmHour = 00;
+byte modeSetAlarmMinute = 00;
+byte modeSetAlarmMelody = 00;
 
 
 void modeSetAlarmSetup(){
-  modeSetAlarmHours = rtcGetHours();
-  modeSetAlarmMinutes = rtcGetMinutes();
-  modeSetAlarmDays = rtcGetDay();
-  modeSetAlarmMonths = rtcGetMonth();
-  modeSetAlarmYears = rtcGetYear();
+  modeSetAlarmHour = eepromReadAlertHour();
+  modeSetAlarmMinute = eepromReadAlertMinute();
+  modeSetAlarmMelody = eepromReadAlertMelodyIndex();
   digitalWrite(pinLcdBacklight, HIGH);
   modeSetAlarmSelected = 0;
 }
@@ -34,40 +27,46 @@ void modeSetAlarmLoop(){
     beep();
     //change value
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_HOUR) {//hours
-      modeSetAlarmHours ++;
-      if(modeSetAlarmHours > 23) modeSetAlarmHours = 0;
+      modeSetAlarmHour ++;
+      if(modeSetAlarmHour > 23) modeSetAlarmHour = 0;
     }
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MINUTE) {//Minutes
-      modeSetAlarmMinutes ++;
-      if(modeSetAlarmMinutes > 59) modeSetAlarmMinutes = 0;
+      modeSetAlarmMinute ++;
+      if(modeSetAlarmMinute > 59) modeSetAlarmMinute = 0;
     }
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_DAY) {//Day
-      modeSetAlarmDays ++;
-      if(modeSetAlarmDays > 31) modeSetAlarmDays = 0;
-    }
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MONTH) {//Month
-      modeSetAlarmMonths ++;
-      if(modeSetAlarmMonths > 12) modeSetAlarmMonths = 0;
-    }
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_YEAR) {//Month
-      modeSetAlarmYears ++;
-      if(modeSetAlarmYears > 2050) modeSetAlarmYears = 2020;
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MELODY) {//melody
+      modeSetAlarmMelody ++;
+      if(modeSetAlarmMelody >= getMelodiesCount()) modeSetAlarmMelody = 0;
     }
     
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_SAVE) {//SAVE
-      rtcSetTime(modeSetAlarmYears, modeSetAlarmMonths, modeSetAlarmDays, modeSetAlarmHours, modeSetAlarmMinutes);
+      eepromSaveAlertEnabled(true);
+      eepromSaveAlertMelodyIndex(modeSetAlarmMelody);
+      eepromSaveAlertHour(modeSetAlarmHour);
+      eepromSaveAlertMinute(modeSetAlarmMinute);
+      eepromSaveAlertLastDayRun(0);
 #ifdef LANG_EN
-      displayMessage(F("Time saved"));
+      displayMessage(F("Alert set"));
 #endif
 #ifdef LANG_RU
-      displayMessage(F("Время сохр."));
+      displayMessage(F("Установлено."));
 #endif
-      delay(500);
+      goToWatchface();
+      return;
+    }
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_DISABLE) {//OFF
+      eepromSaveAlertEnabled(false);
+#ifdef LANG_EN
+      displayMessage(F("Alert OFF"));
+#endif
+#ifdef LANG_RU
+      displayMessage(F("Выключено."));
+#endif
       goToWatchface();
       return;
     }
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_BACK) {//BACK
-      setMode(MODE_MENU_SETTINGS);
+      setMode(MODE_MENU_APPS);
       return;
     }
   }
@@ -76,18 +75,18 @@ void modeSetAlarmLoop(){
     beep();
     //move next
     modeSetAlarmSelected ++;
-    if(modeSetAlarmSelected > 6) modeSetAlarmSelected = 0;
+    if(modeSetAlarmSelected > 5) modeSetAlarmSelected = 0;
   }
 
   
   displayClear();
 #ifdef LANG_EN
-  displayDrawText(15, 2, 1, F("Set time"));
+  displayDrawText(15, 2, 1, F("Alarm set"));
 #endif
 #ifdef LANG_RU
-  displayDrawText(15, 2, 1, F("Задать время"));
+  displayDrawText(15, 2, 1, F("Будильник"));
 #endif
-  if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_SAVE || modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_BACK)
+  if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_SAVE || modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_DISABLE || modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_BACK)
     displayDrawCheck(/*X*/1, /*Y*/2, 1);
   else
     displayDrawText(/*X*/1, /*Y*/2, /*C*/1, "+");
@@ -98,7 +97,7 @@ void modeSetAlarmLoop(){
     byte x = 15;
     byte y = 15;
     char chars[4];
-    sprintf(chars, "%02d", modeSetAlarmHours);
+    sprintf(chars, "%02d", modeSetAlarmHour);
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_HOUR){
       displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);
@@ -113,7 +112,7 @@ void modeSetAlarmLoop(){
     byte x = 40;
     byte y = 15;
     char chars[4];
-    sprintf(chars, "%02d", modeSetAlarmMinutes);
+    sprintf(chars, "%02d", modeSetAlarmMinute);
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MINUTE){
       displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);
@@ -125,50 +124,19 @@ void modeSetAlarmLoop(){
   }
 
 
-  displayDrawText(35, 39, 1, ".");
-  displayDrawText(60, 39, 1, ".");
-  { //days
+  
+  { //melody
     byte x = 15;
     byte y = 33;
-    char chars[4];
-    sprintf(chars, "%02d", modeSetAlarmDays);
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_DAY){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, chars);
+    //strlcpy_P(buffer, pgm_read_word(getMelodyName(modeSetAlarmMelody)), BUFFER_SIZE);
+    strlcpy_P(buffer, getMelodyName(modeSetAlarmMelody), BUFFER_SIZE);
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MELODY){
+      displayFillRect(/*x*/x, /*y*/y, /*w*/80, /*h*/15, /*c*/1);
+      displayDrawText(x+4, y+4, 0, buffer);
     }
     else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, chars);
-    }
-  }
-  
-  { //months
-    byte x = 40;
-    byte y = 33;
-    char chars[4];
-    sprintf(chars, "%02d", modeSetAlarmMonths);
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MONTH){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, chars);
-    }
-    else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, chars);
-    }
-  }
-  
-  { //Year
-    byte x = 65;
-    byte y = 33;
-    char chars[5];
-    sprintf(chars, "%04d", modeSetAlarmYears);
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_YEAR){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, chars);
-    }
-    else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, chars);
+      displayDrawRect(/*x*/x, /*y*/y, /*w*/80, /*h*/15, /*c*/1);
+      displayDrawText(x+4, y+4, 1, buffer);
     }
   }
 
@@ -191,16 +159,17 @@ void modeSetAlarmLoop(){
       displayDrawText(x+4, y+4, 1, chars);
     }
   }
-  { //BACK
-    byte x = 50;
+  
+  { //OFF
+    byte x = 49;
     byte y = 53;
 #ifdef LANG_EN
-    const __FlashStringHelper* chars = F("Back");
+    const __FlashStringHelper* chars = F("OFF");
 #endif
 #ifdef LANG_RU
-    const __FlashStringHelper* chars = F("Назд");
+    const __FlashStringHelper* chars = F("Выкл");
 #endif
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_BACK){
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_DISABLE){
       displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
       displayDrawText(x + 4, y+4, 0, chars);
     }
@@ -210,9 +179,22 @@ void modeSetAlarmLoop(){
     }
   }
   
+  { //BACK
+    byte x = 83;
+    byte y = 53;
+    const __FlashStringHelper* chars = F("<");
+    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_BACK){
+      displayFillRect(/*x*/x, /*y*/y, /*w*/13, /*h*/15, /*c*/1);
+      displayDrawText(x + 4, y+4, 0, chars);
+    }
+    else{
+      displayDrawRect(/*x*/x, /*y*/y, /*w*/13, /*h*/15, /*c*/1);
+      displayDrawText(x+4, y+4, 1, chars);
+    }
+  }
+  
   displayUpdate();
 }
 
 void modeSetAlarmFinish(){
-  //digitalWrite(pinLcdBacklight, LOW);
 }

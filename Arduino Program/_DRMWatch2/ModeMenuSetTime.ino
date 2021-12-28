@@ -62,7 +62,6 @@ void modeMenuSetTimeLoop(){
 #ifdef LANG_RU
       displayMessage(F("Время сохр."));
 #endif
-      delay(500);
       goToWatchface();
       return;
     }

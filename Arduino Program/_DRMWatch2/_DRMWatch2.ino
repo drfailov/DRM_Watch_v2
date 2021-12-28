@@ -1,7 +1,7 @@
 #include "lcd1202.h"
 #include <util/atomic.h>
 #include <LowPower.h>
-#define version F("v0.21")
+#define version F("v0.22")
 //#define LANG_EN
 #define LANG_RU
 
@@ -162,13 +162,14 @@ void goToWatchface(){
   setMode(MODE_WATCHFACE1);
 }
 
+//объём свободной оперативки нужен для отладки
 int freeRam () {
   extern int __heap_start, *__brkval;
   int v;
   return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval);
 }
 
-
+//обновляем счётчик миллисекунд во время сна чтобы не ломались счётчики
 void setMillis(unsigned long ms)
 {
     extern unsigned long timer0_millis;

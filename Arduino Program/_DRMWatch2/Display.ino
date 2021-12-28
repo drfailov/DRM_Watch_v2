@@ -259,9 +259,9 @@ void displayDrawArrowDown(byte x, byte y, bool color){
   static const char img[7] PROGMEM = { 
       0b00000001,
       0b00000111,
-      0b00011111,
-      0b01111111,
-      0b00011111,
+      0b00011110,
+      0b01111000,
+      0b00011110,
       0b00000111,
       0b00000001,
     };
@@ -270,9 +270,9 @@ void displayDrawArrowDown(byte x, byte y, bool color){
 
 void displayDrawArrowRight(byte x, byte y, bool color){
   static const char img[7] PROGMEM = { 
-      0b01111111,
-      0b00111110,
-      0b00111110,
+      0b01100011,
+      0b00110110,
+      0b00110110,
       0b00011100,
       0b00011100,
       0b00001000,
@@ -303,6 +303,20 @@ void displayDrawStopSign(byte x, byte y, bool color){
       0b00111111,
       0b00111111,
       0b00000000
+    };
+  displayDrawBitmap(x, y, img, 7, 8, color);
+}
+
+
+void displayDrawAlertSign(byte x, byte y, bool color){
+  static const char img[7] PROGMEM = { 
+      0b00111000,
+      0b01000101,
+      0b10000011,
+      0b10011010,
+      0b10010011,
+      0b01000101,
+      0b00111000
     };
   displayDrawBitmap(x, y, img, 7, 8, color);
 }
