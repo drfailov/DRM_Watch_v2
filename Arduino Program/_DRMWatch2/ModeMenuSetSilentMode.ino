@@ -10,9 +10,9 @@ const char modeMenuSetSilentModeItem2[] PROGMEM = "Sound OFF";
 const char modeMenuSetSilentModeItem3[] PROGMEM = "< Back";
 #endif
 #ifdef LANG_RU
-const char modeMenuSetSilentModeItem1[] PROGMEM = "Звук ВКЛ";
-const char modeMenuSetSilentModeItem2[] PROGMEM = "Звук ВЫКЛ";
-const char modeMenuSetSilentModeItem3[] PROGMEM = "< Назад";
+const char modeMenuSetSilentModeItem1[] PROGMEM = "Звyк BKЛ";
+const char modeMenuSetSilentModeItem2[] PROGMEM = "Звyк BЫKЛ";
+const char modeMenuSetSilentModeItem3[] PROGMEM = "< Haзaд";
 #endif
 
 const char* const modeMenuSetSilentModeItems[] PROGMEM = {
@@ -46,7 +46,7 @@ void modeMenuSetSilentModeSelected(byte index) {
     displayMessage(F("Sound ON"));
 #endif
 #ifdef LANG_RU
-    displayMessage(F("Звук ВКЛ"));
+    displayMessage(F("Звyк BKЛ"));
 #endif
     goToWatchface();
     return;
@@ -58,7 +58,7 @@ void modeMenuSetSilentModeSelected(byte index) {
     displayMessage(F("Sound OFF"));
 #endif
 #ifdef LANG_RU
-    displayMessage(F("Звук ВЫКЛ"));
+    displayMessage(F("Звyк BЫKЛ"));
 #endif
     goToWatchface();
     return;

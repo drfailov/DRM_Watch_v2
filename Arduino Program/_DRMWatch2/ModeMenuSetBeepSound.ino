@@ -12,12 +12,12 @@ const char modeMenuSetBeepSoundItem5[] PROGMEM = "None";
 const char modeMenuSetBeepSoundItem6[] PROGMEM = "< Back";
 #endif
 #ifdef LANG_RU
-const char modeMenuSetBeepSoundItem1[] PROGMEM = "Писк";
-const char modeMenuSetBeepSoundItem2[] PROGMEM = "Клик";
-const char modeMenuSetBeepSoundItem3[] PROGMEM = "Тон";
-const char modeMenuSetBeepSoundItem4[] PROGMEM = "Свист";
-const char modeMenuSetBeepSoundItem5[] PROGMEM = "Без звука";
-const char modeMenuSetBeepSoundItem6[] PROGMEM = "< Назад";
+const char modeMenuSetBeepSoundItem1[] PROGMEM = "Пиcк";
+const char modeMenuSetBeepSoundItem2[] PROGMEM = "Kлик";
+const char modeMenuSetBeepSoundItem3[] PROGMEM = "Toн";
+const char modeMenuSetBeepSoundItem4[] PROGMEM = "Cвиcт";
+const char modeMenuSetBeepSoundItem5[] PROGMEM = "Бeз звyкa";
+const char modeMenuSetBeepSoundItem6[] PROGMEM = "< Haзaд";
 #endif
 
 const char* const modeMenuSetBeepSoundItems[] PROGMEM = {
@@ -52,7 +52,7 @@ void modeMenuSetBeepSoundSelected(byte index) {
     displayMessage(F("Saved beep"));
 #endif
 #ifdef LANG_RU
-    displayMessage(F("Сохр: писк"));
+    displayMessage(F("Coxp: пиcк"));
 #endif
     goToWatchface();
     return;
@@ -64,7 +64,7 @@ void modeMenuSetBeepSoundSelected(byte index) {
     displayMessage(F("Saved click"));
 #endif
 #ifdef LANG_RU
-    displayMessage(F("Сохр: клик"));
+    displayMessage(F("Coxp: клик"));
 #endif
     goToWatchface();
     return;
@@ -76,7 +76,7 @@ void modeMenuSetBeepSoundSelected(byte index) {
     displayMessage(F("Saved tone"));
 #endif
 #ifdef LANG_RU
-    displayMessage(F("Сохр: тон"));
+    displayMessage(F("Coxp: тoн"));
 #endif
     goToWatchface();
     return;
@@ -88,7 +88,7 @@ void modeMenuSetBeepSoundSelected(byte index) {
     displayMessage(F("Saved whistle"));
 #endif
 #ifdef LANG_RU
-    displayMessage(F("Сохр: свист"));
+    displayMessage(F("Coxp: cвиcт"));
 #endif
     goToWatchface();
     return;
@@ -100,7 +100,7 @@ void modeMenuSetBeepSoundSelected(byte index) {
     displayMessage(F("Saved none"));
 #endif
 #ifdef LANG_RU
-    displayMessage(F("Сохр: беззв."));
+    displayMessage(F("Coxp: бeззв."));
 #endif
     goToWatchface();
     return;

@@ -90,11 +90,11 @@ void modeStopwatchLoop() {
     if(modeStopwatchIsRunning == false){
       if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_START){
         displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-        displayDrawArrowRight(x + 7, y+4, 0);
+        displayDrawPlaySign(x + 7, y+4, 0);
       }
       else{
         displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-        displayDrawArrowRight(x + 7, y+4, 1);
+        displayDrawPlaySign(x + 7, y+4, 1);
       }
     }
     if(modeStopwatchIsRunning == true){

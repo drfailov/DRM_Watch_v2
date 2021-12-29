@@ -60,36 +60,32 @@ static const PROGMEM byte pathBubble[] = { 12,
 }; 
 
 void displayInit(){
-  //displayPowerOff();
+#ifdef LOG
   Serial.print(F("LCD Init..."));
+#endif
   pinMode(pinLcdPower, OUTPUT);
   digitalWrite(pinLcdPower, HIGH);
   delay(100);
   lcd.Inicialize();  //Инициализация дисплея
   delay(10);
-  //lcd.Clear_LCD();  //Очистка дисплея  
-  //displayUpdate();
+#ifdef LOG
   Serial.println("OK");
+#endif
 }
 
 void displayBacklightOn(){
-  Serial.println(F("LCD Backlight ON"));
   pinMode(pinLcdBacklight, OUTPUT);
   digitalWrite(pinLcdBacklight, HIGH);
 }
 
 void displayBacklightOff(){
-  Serial.println(F("LCD Backlight OFF"));
-//  pinMode(pinLcdBacklight, OUTPUT);
-//  digitalWrite(pinLcdBacklight, LOW);
   pinMode(pinLcdBacklight, INPUT);
 }
 
 void displayPowerOff(){
+#ifdef LOG
   Serial.println(F("LCD POWER OFF"));
-
-
-  
+#endif
   pinMode(pinLcdBacklight, INPUT);
   digitalWrite(pinLcdBacklight, LOW);
   
@@ -211,20 +207,6 @@ void displayMessage(const __FlashStringHelper* str){
     delay(200);
 }
 
-//void displayMessageFromRam(const char* text){
-//  displayClear();
-//  displayDrawVector(/*path*/pathZubat, /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
-//  displayDrawVector(/*path*/pathBubble, /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
-//  
-//  byte len = strlen(text);
-//  for(int i=0; i<len; i++){
-//    displayDrawText(10 + i*6, 6, 1, text[i]);
-//    displayUpdate();
-//    delay(5);
-//  }
-//  delay(500);
-//}
-
 void displaySimpleMessage(const char* text){
   displayClear();
   displayDrawText(10, 30, 1, text);
@@ -273,6 +255,19 @@ void displayDrawArrowRight(byte x, byte y, bool color){
       0b01100011,
       0b00110110,
       0b00110110,
+      0b00011100,
+      0b00011100,
+      0b00001000,
+      0b00001000
+    };
+  displayDrawBitmap(x, y, img, 7, 8, color);
+}
+
+void displayDrawPlaySign(byte x, byte y, bool color){
+  static const char img[7] PROGMEM = { 
+      0b01111111,
+      0b00111110,
+      0b00111110,
       0b00011100,
       0b00011100,
       0b00001000,

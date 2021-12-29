@@ -12,12 +12,12 @@ const char modeMenuSetSleepTimeItem5[] PROGMEM = "8 sec";
 const char modeMenuSetSleepTimeItem6[] PROGMEM = "< Back";
 #endif
 #ifdef LANG_RU
-const char modeMenuSetSleepTimeItem1[] PROGMEM = "0.5 сек";
-const char modeMenuSetSleepTimeItem2[] PROGMEM = "1 сек";
-const char modeMenuSetSleepTimeItem3[] PROGMEM = "2 сек";
-const char modeMenuSetSleepTimeItem4[] PROGMEM = "4 сек";
-const char modeMenuSetSleepTimeItem5[] PROGMEM = "8 сек";
-const char modeMenuSetSleepTimeItem6[] PROGMEM = "< Назад";
+const char modeMenuSetSleepTimeItem1[] PROGMEM = "0.5 ceк";
+const char modeMenuSetSleepTimeItem2[] PROGMEM = "1 ceк";
+const char modeMenuSetSleepTimeItem3[] PROGMEM = "2 ceк";
+const char modeMenuSetSleepTimeItem4[] PROGMEM = "4 ceк";
+const char modeMenuSetSleepTimeItem5[] PROGMEM = "8 ceк";
+const char modeMenuSetSleepTimeItem6[] PROGMEM = "< Haзaд";
 #endif
 
 const char* const modeMenuSetSleepTimeItems[] PROGMEM = {
@@ -55,7 +55,7 @@ void modeMenuSetSleepTimeSelected(byte index) {
     displayMessage(F("Saved .5 sec"));
 #endif
 #ifdef LANG_RU
-    displayMessage(F("Сохр: .5 сек"));
+    displayMessage(F("Coxp: .5 ceк"));
 #endif
     goToWatchface();
     return;
@@ -67,7 +67,7 @@ void modeMenuSetSleepTimeSelected(byte index) {
     displayMessage(F("Saved 1 sec"));
 #endif
 #ifdef LANG_RU
-    displayMessage(F("Сохр: 1 сек"));
+    displayMessage(F("Coxp: 1 ceк"));
 #endif
     goToWatchface();
     return;
@@ -79,7 +79,7 @@ void modeMenuSetSleepTimeSelected(byte index) {
     displayMessage(F("Saved 2 sec"));
 #endif
 #ifdef LANG_RU
-    displayMessage(F("Сохр: 2 сек"));
+    displayMessage(F("Coxp: 2 ceк"));
 #endif
     goToWatchface();
     return;
@@ -91,7 +91,7 @@ void modeMenuSetSleepTimeSelected(byte index) {
     displayMessage(F("Saved 4 sec"));
 #endif
 #ifdef LANG_RU
-    displayMessage(F("Сохр: 4 сек"));
+    displayMessage(F("Coxp: 4 ceк"));
 #endif
     goToWatchface();
     return;
@@ -103,7 +103,7 @@ void modeMenuSetSleepTimeSelected(byte index) {
     displayMessage(F("Saved 8 sec"));
 #endif
 #ifdef LANG_RU
-    displayMessage(F("Сохр: 8 сек"));
+    displayMessage(F("Coxp: 8 ceк"));
 #endif
     goToWatchface();
     return;

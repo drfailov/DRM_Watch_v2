@@ -13,7 +13,7 @@ const char modeMenuMelodiesItem7[] PROGMEM = "Toreador";
 const char modeMenuMelodiesItem8[] PROGMEM = "< Back";
 #endif
 #ifdef LANG_RU
-const char modeMenuMelodiesItem8[] PROGMEM = "< Назад";
+const char modeMenuMelodiesItem8[] PROGMEM = "< Haзaд";
 #endif
 
 const char* const modeMenuMelodiesItems[] PROGMEM = {

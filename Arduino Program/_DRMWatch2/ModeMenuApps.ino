@@ -3,7 +3,7 @@ const byte modeMenuAppsItemsCount = 7; //сколько пунктов меню 
 
 //Максимальная длина строки:              |          |
 #ifdef LANG_EN
-const char modeMenuAppsItem1[] PROGMEM = "Debug view";
+const char modeMenuAppsItem1[] PROGMEM = "Status";
 const char modeMenuAppsItem2[] PROGMEM = "Melodies";
 const char modeMenuAppsItem3[] PROGMEM = "Stopwatch";
 const char modeMenuAppsItem4[] PROGMEM = "Alarm";
@@ -12,13 +12,13 @@ const char modeMenuAppsItem6[] PROGMEM = "Svaston";
 const char modeMenuAppsItem7[] PROGMEM = "< Back";
 #endif
 #ifdef LANG_RU
-const char modeMenuAppsItem1[] PROGMEM = "Отладка";
-const char modeMenuAppsItem2[] PROGMEM = "Мелодии";
-const char modeMenuAppsItem3[] PROGMEM = "Секундомер";
-const char modeMenuAppsItem4[] PROGMEM = "Будильник";
-const char modeMenuAppsItem5[] PROGMEM = "Зрада";
-const char modeMenuAppsItem6[] PROGMEM = "Свастон";
-const char modeMenuAppsItem7[] PROGMEM = "< Назад";
+const char modeMenuAppsItem1[] PROGMEM = "Cтaтyc";
+const char modeMenuAppsItem2[] PROGMEM = "Meлoдии";
+const char modeMenuAppsItem3[] PROGMEM = "Ceкyндoмep";
+const char modeMenuAppsItem4[] PROGMEM = "Бyдильник";
+const char modeMenuAppsItem5[] PROGMEM = "Зpaдa";
+const char modeMenuAppsItem6[] PROGMEM = "Cвacтoн";
+const char modeMenuAppsItem7[] PROGMEM = "< Haзaд";
 #endif
 
 const char* const modeMenuAppsItems[] PROGMEM = {
@@ -47,34 +47,24 @@ void modeMenuAppsFinish() {
 void modeMenuAppsSelected(byte index) {
   
   if (index == 0) { //Debug screen
-    setMode(MODE_DEBUG_SCREEN1);
-    return;
+    setMode(MODE_STATUS);
   }
-  
-  if (index == 1) { //Melodies
+  else if (index == 1) { //Melodies
     setMode(MODE_MENU_MELODIES);
-    return;
   }
-  
-  if (index == 2) { //Stopwatch
+  else if (index == 2) { //Stopwatch
     setMode(MODE_STOPWATCH);
-    return;
   }
-  
-  if (index == 3) { //alarm
+  else if (index == 3) { //alarm
     setMode(MODE_SET_ALARM);
   }
-  
-  if (index == 4) { //Zrada
-    displayMessage(F("В разработке!"));
+  else if (index == 4) { //Zrada
+    displayMessage(F("B paзpaбoткe!"));
   }
-  
-  if (index == 5) { //Svaston
-    displayMessage(F("В разработке!"));
+  else if (index == 5) { //Svaston
+    displayMessage(F("B paзpaбoткe!"));
   } 
-  
-  if (index == 6) { //Back
+  else if (index == 6) { //Back
     setMode(MODE_MENU_MAIN);
-    return;
   }
 }

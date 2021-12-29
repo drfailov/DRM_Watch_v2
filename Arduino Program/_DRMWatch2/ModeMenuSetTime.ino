@@ -56,11 +56,23 @@ void modeMenuSetTimeLoop(){
     
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE) {//SAVE
       rtcSetTime(modeMenuSetTimeYears, modeMenuSetTimeMonths, modeMenuSetTimeDays, modeMenuSetTimeHours, modeMenuSetTimeMinutes);
+      { //fix alarm
+        byte hour = rtcGetHours();
+        byte minute = rtcGetMinutes();
+        byte day = rtcGetDay();
+        
+        byte modeSetAlarmHour = eepromReadAlertHour();
+        byte modeSetAlarmMinute = eepromReadAlertMinute();
+        if((hour == modeSetAlarmHour && minute >= modeSetAlarmMinute) || (hour > modeSetAlarmHour))
+            eepromSaveAlertLastDayRun(day);
+        else
+          eepromSaveAlertLastDayRun(0);
+      } 
 #ifdef LANG_EN
       displayMessage(F("Time saved"));
 #endif
 #ifdef LANG_RU
-      displayMessage(F("Время сохр."));
+      displayMessage(F("Bpeмя coxp."));
 #endif
       goToWatchface();
       return;
@@ -84,7 +96,7 @@ void modeMenuSetTimeLoop(){
   displayDrawText(15, 2, 1, F("Set time"));
 #endif
 #ifdef LANG_RU
-  displayDrawText(15, 2, 1, F("Задать время"));
+  displayDrawText(15, 2, 1, F("Зaдaть вpeмя"));
 #endif
   if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE || modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK)
     displayDrawCheck(/*X*/1, /*Y*/2, 1);
@@ -179,7 +191,7 @@ void modeMenuSetTimeLoop(){
     const __FlashStringHelper* chars = F("Save");    
 #endif
 #ifdef LANG_RU
-    const __FlashStringHelper* chars = F("Сохр");    
+    const __FlashStringHelper* chars = F("Coxp");    
 #endif
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE){
       displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
@@ -197,7 +209,7 @@ void modeMenuSetTimeLoop(){
     const __FlashStringHelper* chars = F("Back");
 #endif
 #ifdef LANG_RU
-    const __FlashStringHelper* chars = F("Назд");
+    const __FlashStringHelper* chars = F("Haзд");
 #endif
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK){
       displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);

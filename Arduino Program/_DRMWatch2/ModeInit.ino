@@ -12,7 +12,7 @@ void modeInitSetup(){
   beepConfirm();
   for(byte x=24; x > 0; x -= 4){
     displayClear();
-  displayDrawText(66, 61, 1, version);
+    displayDrawText(66, 61, 1, version);
     displayDrawVector(/*path*/pathZubat, /*x*/x, /*y*/10, /*animate*/false, /*color*/1);
     displayUpdate();
   }
@@ -27,8 +27,6 @@ void modeInitSetup(){
 void modeInitLoop(){
   delay(100);
   goToWatchface();
-  //setMode(MODE_DEBUG_SCREEN1);
-  return;
 }
 
 void modeInitFinish(){

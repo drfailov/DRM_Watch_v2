@@ -15,14 +15,14 @@ const char modeMenuSettingsItem7[] PROGMEM = "Hard reset";
 const char modeMenuSettingsItem8[] PROGMEM = "< Back";
 #endif
 #ifdef LANG_RU
-const char modeMenuSettingsItem1[] PROGMEM = "Перезагрузка";
-const char modeMenuSettingsItem2[] PROGMEM = "Циферблат";
-const char modeMenuSettingsItem3[] PROGMEM = "Беззвучный";
-const char modeMenuSettingsItem4[] PROGMEM = "Время сна";
-const char modeMenuSettingsItem5[] PROGMEM = "Звук кнопок";
-const char modeMenuSettingsItem6[] PROGMEM = "Задать время";
-const char modeMenuSettingsItem7[] PROGMEM = "Полный сброс";
-const char modeMenuSettingsItem8[] PROGMEM = "< Назад";
+const char modeMenuSettingsItem1[] PROGMEM = "Пepeзaгpyзкa";
+const char modeMenuSettingsItem2[] PROGMEM = "Цифepблaт";
+const char modeMenuSettingsItem3[] PROGMEM = "Бeззвyчный";
+const char modeMenuSettingsItem4[] PROGMEM = "Bpeмя cнa";
+const char modeMenuSettingsItem5[] PROGMEM = "Звyк кнoпoк";
+const char modeMenuSettingsItem6[] PROGMEM = "Зaдaть вpeмя";
+const char modeMenuSettingsItem7[] PROGMEM = "Пoлный cбpoc";
+const char modeMenuSettingsItem8[] PROGMEM = "< Haзaд";
 #endif
 
 const char* const modeMenuSettingsItems[] PROGMEM = {
@@ -58,7 +58,6 @@ void modeMenuSettingsSelected(byte index) {
 #ifdef LANG_RU
     displayMessage(F("Перезагрузка"));
 #endif    
-    delay(100);
     displayPowerOff();
     delay(1000);
     resetFunc(); //вызываем reset
@@ -66,7 +65,7 @@ void modeMenuSettingsSelected(byte index) {
   }
   
   if (index == 1) { //Select WTF
-    displayMessage(F("В разработке!"));
+    setMode(MODE_MENU_SET_WATCHFACE); 
     return;
   }
   
@@ -91,7 +90,16 @@ void modeMenuSettingsSelected(byte index) {
   }
 
   if (index == 6) { //Hard Reset
-    
+#ifdef LANG_EN
+    displayMessage(F("RESET!!!"));
+#endif
+#ifdef LANG_RU
+    displayMessage(F("CБPOC!!!"));
+#endif    
+    displayPowerOff();
+    eepromFIllByZeros();
+    delay(5000);
+    resetFunc(); //вызываем reset
     return;
   }
   

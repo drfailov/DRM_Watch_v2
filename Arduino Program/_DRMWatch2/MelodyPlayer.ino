@@ -161,7 +161,9 @@ const byte* const getMelodyNokiaTune() {
 
 //return true if was played completely or false if interrupted
 bool melodyPlayerPlayMelody(const byte* const melody) {
-  Serial.println(F("Play melody..."));
+#ifdef LOG
+  Serial.println(F("Play..."));
+#endif
   melodyPlayerDrawScreen();
   pinMode(pinBuzzer, OUTPUT);
   byte length = melodyPlayerGetLength(melody);
@@ -210,7 +212,7 @@ void melodyPlayerDrawScreen() {
   displayDrawText(20, 55, 1, F("Playing..."));
 #endif
 #ifdef LANG_RU
-  displayDrawText(17, 55, 1, F("Попиликаем!"));
+  displayDrawText(17, 55, 1, F("Пoпиликaeм!"));
 #endif
   displayUpdate();
 }

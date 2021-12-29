@@ -83,10 +83,36 @@ void eepromSaveAlertLastDayRun(byte data){
 #define eepromAddressAlertMelodyIndex (byte)17
 byte eepromReadAlertMelodyIndex(){
   byte result = 0;
-  if(result > getMelodiesCount()) result = 0;
   EEPROM.get(eepromAddressAlertMelodyIndex, result);
+  if(result > getMelodiesCount()) result = 0;
   return result;
 }
 void eepromSaveAlertMelodyIndex(byte data){
   EEPROM.put(eepromAddressAlertMelodyIndex, data);
+}
+
+
+
+#define eepromAddressWatchface (byte)18
+byte eepromReadWatchface(){
+  byte result = 0;
+  EEPROM.get(eepromAddressWatchface, result);
+  return result;
+}
+void eepromSaveWatchface(byte data){
+  EEPROM.put(eepromAddressWatchface, data);
+}
+
+
+
+
+void eepromReadToBuffer(){
+  for(int i=0; i<BUFFER_SIZE; i++){
+    EEPROM.get(i, buffer[i]);
+  }
+}
+void eepromFIllByZeros(){
+  for(int i=0; i<1000; i++){
+    EEPROM.put(i, 0b00000000);
+  }
 }

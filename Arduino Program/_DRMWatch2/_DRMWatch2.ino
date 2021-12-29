@@ -1,9 +1,10 @@
 #include "lcd1202.h"
 #include <util/atomic.h>
 #include <LowPower.h>
-#define version F("v0.22")
-//#define LANG_EN
-#define LANG_RU
+#define version F("v0.23")   //Версию менять здесь
+//#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
+#define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
+#define LOG   //Закомментировать чтобы отключило логи
 
 //Pins
 #define pinButtonDown (byte)2 //active high
@@ -36,7 +37,6 @@
 #define eepromBeepSoundNone (byte)4
 
 
-
 /* Program contains several screens (menus, watchfaces...).
  * Every screen is a separate mode. Every mode contains of: modeSetup(), modeLoop(), modeFinish().
  * Screens can work independently. Modes divided into different files to ease.
@@ -51,9 +51,9 @@
 */
 //Modes
 #define MODE_INIT (byte)0
-#define MODE_WATCHFACE1 (byte)1
+#define MODE_WATCHFACE (byte)1
 #define MODE_MENU_MAIN (byte)2
-#define MODE_DEBUG_SCREEN1 (byte)3
+#define MODE_STATUS (byte)3
 #define MODE_MENU_MELODIES (byte)4
 #define MODE_MENU_SETTINGS (byte)5
 #define MODE_MENU_SET_TIME (byte)6
@@ -64,6 +64,7 @@
 #define MODE_MENU_APPS (byte)11
 #define MODE_STOPWATCH (byte)12
 #define MODE_SET_ALARM (byte)13
+#define MODE_MENU_SET_WATCHFACE (byte)14
 
 
 byte _mode = -1;
@@ -73,24 +74,22 @@ byte _mode = -1;
 char buffer[BUFFER_SIZE]; 
 
 void setup() {
+#ifdef LOG
   Serial.begin(115200);
-  Serial.print(F("\nStarting DRM Watch program\n"));
-  Serial.print(F("- Compiled with c++ version "));
-  Serial.print(F(__VERSION__));
-  Serial.print(F("\n- On "));
+  Serial.println(F("\nDRM Watch program"));
+  Serial.print(F("- Date "));
   Serial.print(F(__DATE__));
   Serial.print(F(" at "));
-  Serial.print(F(__TIME__));
-  Serial.print(F("\n"));
-  
+  Serial.println(F(__TIME__));
+#endif  
   setMode(MODE_INIT);
 }
 
 void loop() {
   if (_mode == MODE_INIT) modeInitLoop();
-  if (_mode == MODE_WATCHFACE1) modeWatchFace1Loop();
+  if (_mode == MODE_WATCHFACE) modeWatchFaceLoop();
   if (_mode == MODE_MENU_MAIN ) modeMenuMainLoop();
-  if (_mode == MODE_DEBUG_SCREEN1 ) modeDebugScreen1Loop();
+  if (_mode == MODE_STATUS ) modeStatusLoop();
   if (_mode == MODE_MENU_MELODIES ) modeMenuMelodiesLoop();
   if (_mode == MODE_MENU_SETTINGS ) modeMenuSettingsLoop();
   if (_mode == MODE_MENU_SET_TIME ) modeMenuSetTimeLoop();
@@ -101,6 +100,7 @@ void loop() {
   if (_mode == MODE_MENU_APPS ) modeMenuAppsLoop();
   if (_mode == MODE_STOPWATCH ) modeStopwatchLoop();
   if (_mode == MODE_SET_ALARM ) modeSetAlarmLoop();
+  if (_mode == MODE_MENU_SET_WATCHFACE ) modeMenuSetWatchfaceLoop();
   
   
 }
@@ -108,21 +108,22 @@ void loop() {
 void setMode(int _modeNew) {
   if (_mode == _modeNew)
     return;
-  Serial.print(F("Update mode "));
+#ifdef LOG
+  Serial.print(F("Mode "));
   Serial.print(_mode);
   Serial.print(F(" -> "));
   Serial.print(_modeNew);
-  Serial.println(F(" ..."));
+  Serial.println(F("."));
   
-  Serial.print(F("freeRam(): "));
+  Serial.print(F("RAM: "));
   Serial.print(freeRam());
-  Serial.println(F(" bytes."));
-
+  Serial.println(F(" b"));
+#endif
   //finish old
   if (_mode == MODE_INIT) modeInitFinish();
-  if (_mode == MODE_WATCHFACE1) modeWatchFace1Finish();
+  if (_mode == MODE_WATCHFACE) modeWatchFaceFinish();
   if (_mode == MODE_MENU_MAIN ) modeMenuMainFinish();
-  if (_mode == MODE_DEBUG_SCREEN1 ) modeDebugScreen1Finish();
+  if (_mode == MODE_STATUS ) modeStatusFinish();
   if (_mode == MODE_MENU_MELODIES ) modeMenuMelodiesFinish();
   if (_mode == MODE_MENU_SETTINGS ) modeMenuSettingsFinish();
   if (_mode == MODE_MENU_SET_TIME ) modeMenuSetTimeFinish();
@@ -133,14 +134,14 @@ void setMode(int _modeNew) {
   if (_mode == MODE_MENU_APPS ) modeMenuAppsFinish();
   if (_mode == MODE_STOPWATCH ) modeStopwatchFinish();
   if (_mode == MODE_SET_ALARM ) modeSetAlarmFinish();
+  if (_mode == MODE_MENU_SET_WATCHFACE ) modeMenuSetWatchfaceFinish();
   
-  
-
+ 
   //init new
   if (_modeNew == MODE_INIT) modeInitSetup();
-  if (_modeNew == MODE_WATCHFACE1) modeWatchFace1Setup();
+  if (_modeNew == MODE_WATCHFACE) modeWatchFaceSetup();
   if (_modeNew == MODE_MENU_MAIN ) modeMenuMainSetup();
-  if (_modeNew == MODE_DEBUG_SCREEN1 ) modeDebugScreen1Setup();
+  if (_modeNew == MODE_STATUS ) modeStatusSetup();
   if (_modeNew == MODE_MENU_MELODIES ) modeMenuMelodiesSetup();
   if (_modeNew == MODE_MENU_SETTINGS ) modeMenuSettingsSetup();
   if (_modeNew == MODE_MENU_SET_TIME ) modeMenuSetTimeSetup();
@@ -151,15 +152,15 @@ void setMode(int _modeNew) {
   if (_modeNew == MODE_MENU_APPS ) modeMenuAppsSetup();
   if (_modeNew == MODE_STOPWATCH ) modeStopwatchSetup();
   if (_modeNew == MODE_SET_ALARM ) modeSetAlarmSetup();
+  if (_modeNew == MODE_MENU_SET_WATCHFACE ) modeMenuSetWatchfaceSetup();
   
-  
-
+ 
   _mode = _modeNew;
 }
 
 //переключить на режим выбранного в меню вотчфейса из любого места программы
 void goToWatchface(){
-  setMode(MODE_WATCHFACE1);
+  setMode(MODE_WATCHFACE);
 }
 
 //объём свободной оперативки нужен для отладки

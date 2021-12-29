@@ -4,7 +4,9 @@
 void beepConfirm() {
   if(eepromReadSilentMode())
     return;
+#ifdef LOG
   Serial.print(F("Beep confirm..."));
+#endif
   pinMode(pinBuzzer, OUTPUT);
 
   tone(pinBuzzer, 2000);  // пищать на пине 12, 1 кГц
@@ -52,7 +54,9 @@ void beepConfirm() {
 void beepAlert() {
   if(eepromReadSilentMode())
     return;
+#ifdef LOG
   Serial.print(F("Beep alert..."));
+#endif
   pinMode(pinBuzzer, OUTPUT);
 
   tone(pinBuzzer, 1000);  // пищать на пине 12, 1 кГц
@@ -83,7 +87,9 @@ void beepAlert() {
   delay(100);
   noTone(pinBuzzer);      // не пищать
   pinMode(pinBuzzer, INPUT);
+#ifdef LOG
   Serial.println(F("OK"));
+#endif
 }
 
 void beep() {

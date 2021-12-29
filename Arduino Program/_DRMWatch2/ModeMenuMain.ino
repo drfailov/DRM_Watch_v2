@@ -9,10 +9,10 @@ const char modeMenuMainItem3[] PROGMEM = "About";
 const char modeMenuMainItem4[] PROGMEM = "< Exit";
 #endif
 #ifdef LANG_RU
-const char modeMenuMainItem1[] PROGMEM = "Приложения";
-const char modeMenuMainItem2[] PROGMEM = "Настройки";
-const char modeMenuMainItem3[] PROGMEM = "О программе";
-const char modeMenuMainItem4[] PROGMEM = "< Выход";
+const char modeMenuMainItem1[] PROGMEM = "Пpилoжeния";
+const char modeMenuMainItem2[] PROGMEM = "Hacтpoйки";
+const char modeMenuMainItem3[] PROGMEM = "O пpoгpaммe";
+const char modeMenuMainItem4[] PROGMEM = "< Bыxoд";
 #endif
 
 const char* const modeMenuMainItems[] PROGMEM = {
@@ -38,21 +38,14 @@ void modeMenuMainFinish() {
 void modeMenuMainSelected(byte index) {
   if (index == 0) { //Apps
     setMode(MODE_MENU_APPS);
-    return;
   }
-
-  if (index == 1) { //Settings
+  else if (index == 1) { //Settings
     setMode(MODE_MENU_SETTINGS);
-    return;
   }
-
-  if (index == 2) { //About
+  else if (index == 2) { //About
     setMode(MODE_ABOUT);
-    return;
   }
-
-  if (index == 3) { //Exit
+  else if (index == 3) { //Exit
     goToWatchface();
-    return;
   }
 }

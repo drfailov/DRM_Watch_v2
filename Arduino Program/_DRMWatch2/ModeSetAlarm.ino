@@ -40,16 +40,22 @@ void modeSetAlarmLoop(){
     }
     
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_SAVE) {//SAVE
+      byte hour = rtcGetHours();
+      byte minute = rtcGetMinutes();
+      byte day = rtcGetDay();
       eepromSaveAlertEnabled(true);
       eepromSaveAlertMelodyIndex(modeSetAlarmMelody);
       eepromSaveAlertHour(modeSetAlarmHour);
       eepromSaveAlertMinute(modeSetAlarmMinute);
-      eepromSaveAlertLastDayRun(0);
+      if((hour == modeSetAlarmHour && minute >= modeSetAlarmMinute) || (hour > modeSetAlarmHour))
+          eepromSaveAlertLastDayRun(day);
+      else
+        eepromSaveAlertLastDayRun(0);
 #ifdef LANG_EN
       displayMessage(F("Alert set"));
 #endif
 #ifdef LANG_RU
-      displayMessage(F("Установлено."));
+      displayMessage(F("Уcтaнoвлeнo."));
 #endif
       goToWatchface();
       return;
@@ -60,7 +66,7 @@ void modeSetAlarmLoop(){
       displayMessage(F("Alert OFF"));
 #endif
 #ifdef LANG_RU
-      displayMessage(F("Выключено."));
+      displayMessage(F("Bыключeнo."));
 #endif
       goToWatchface();
       return;
@@ -84,7 +90,7 @@ void modeSetAlarmLoop(){
   displayDrawText(15, 2, 1, F("Alarm set"));
 #endif
 #ifdef LANG_RU
-  displayDrawText(15, 2, 1, F("Будильник"));
+  displayDrawText(15, 2, 1, F("Бyдильник"));
 #endif
   if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_SAVE || modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_DISABLE || modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_BACK)
     displayDrawCheck(/*X*/1, /*Y*/2, 1);
@@ -148,7 +154,7 @@ void modeSetAlarmLoop(){
     const __FlashStringHelper* chars = F("Save");    
 #endif
 #ifdef LANG_RU
-    const __FlashStringHelper* chars = F("Сохр");    
+    const __FlashStringHelper* chars = F("Coxp");    
 #endif
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_SAVE){
       displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
@@ -167,7 +173,7 @@ void modeSetAlarmLoop(){
     const __FlashStringHelper* chars = F("OFF");
 #endif
 #ifdef LANG_RU
-    const __FlashStringHelper* chars = F("Выкл");
+    const __FlashStringHelper* chars = F("Bыкл");
 #endif
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_DISABLE){
       displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
