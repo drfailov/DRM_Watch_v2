@@ -5,87 +5,21 @@ void beepConfirm() {
   if(eepromReadSilentMode())
     return;
 #ifdef LOG
-  Serial.print(F("Beep confirm..."));
+  Serial.print(F("Beep init..."));
 #endif
   pinMode(pinBuzzer, OUTPUT);
-
-  tone(pinBuzzer, 2000);  // пищать на пине 12, 1 кГц
-  delay(100);
-  noTone(pinBuzzer);      // не пищать
-  delay(100);
-  tone(pinBuzzer, 3000);  // пищать на пине 12, 1 кГц
-  delay(100);
-  noTone(pinBuzzer);      // не пищать
-  delay(100);
-  tone(pinBuzzer, 4000);  // пищать на пине 12, 1 кГц
-  delay(100);
-  noTone(pinBuzzer);      // не пищать
-  delay(100);
-  tone(pinBuzzer, 5000);  // пищать на пине 12, 1 кГц
-  delay(30);
-  noTone(pinBuzzer);      // не пищать
-  delay(30);
-  tone(pinBuzzer, 5000);  // пищать на пине 12, 1 кГц
-  delay(30);
-  noTone(pinBuzzer);      // не пищать
-  delay(30);
-  tone(pinBuzzer, 5000);  // пищать на пине 12, 1 кГц
-  delay(30);
-  noTone(pinBuzzer);      // не пищать
-  delay(30);
-  tone(pinBuzzer, 5000);  // пищать на пине 12, 1 кГц
-  delay(30);
-  noTone(pinBuzzer);      // не пищать
-  delay(30);
-  tone(pinBuzzer, 5000);  // пищать на пине 12, 1 кГц
-  delay(30);
-  noTone(pinBuzzer);      // не пищать
-  delay(30);
-  tone(pinBuzzer, 5000);  // пищать на пине 12, 1 кГц
-  delay(30);
-  noTone(pinBuzzer);      // не пищать
-  delay(30);
-  pinMode(pinBuzzer, INPUT);
-  Serial.println(F("OK"));
-}
-
-
-
-void beepAlert() {
-  if(eepromReadSilentMode())
-    return;
-#ifdef LOG
-  Serial.print(F("Beep alert..."));
-#endif
-  pinMode(pinBuzzer, OUTPUT);
-
-  tone(pinBuzzer, 1000);  // пищать на пине 12, 1 кГц
-  delay(100);
-  noTone(pinBuzzer);      // не пищать
-  delay(100);
-  tone(pinBuzzer, 2000);  // пищать на пине 12, 1 кГц
-  delay(100);
-  noTone(pinBuzzer);      // не пищать
-  delay(100);
-  tone(pinBuzzer, 3000);  // пищать на пине 12, 1 кГц
-  delay(100);
-  noTone(pinBuzzer);      // не пищать
-  delay(100);
-  tone(pinBuzzer, 4000);  // пищать на пине 12, 1 кГц
-  delay(100);
-  noTone(pinBuzzer);      // не пищать
-  delay(100);
-  tone(pinBuzzer, 3000);  // пищать на пине 12, 1 кГц
-  delay(100);
-  noTone(pinBuzzer);      // не пищать
-  delay(100);
-  tone(pinBuzzer, 2000);  // пищать на пине 12, 1 кГц
-  delay(100);
-  noTone(pinBuzzer);      // не пищать
-  delay(100);
-  tone(pinBuzzer, 1000);  // пищать на пине 12, 1 кГц
-  delay(100);
-  noTone(pinBuzzer);      // не пищать
+  for(byte i=2; i<5; i++){
+    tone(pinBuzzer, i*1000);  // пищать на пине 12, 1 кГц
+    delay(100);
+    noTone(pinBuzzer);      // не пищать
+    delay(100);
+  }
+  for(byte i=0; i<6; i++){
+    tone(pinBuzzer, 5000);  // пищать на пине 12, 1 кГц
+    delay(30);
+    noTone(pinBuzzer);      // не пищать
+    delay(30);
+  }
   pinMode(pinBuzzer, INPUT);
 #ifdef LOG
   Serial.println(F("OK"));

@@ -9,12 +9,6 @@ const char modeMenuMelodiesItem4[] PROGMEM = "Mozart";
 const char modeMenuMelodiesItem5[] PROGMEM = "Mario";
 const char modeMenuMelodiesItem6[] PROGMEM = "Groovy Blue";
 const char modeMenuMelodiesItem7[] PROGMEM = "Toreador";
-#ifdef LANG_EN
-const char modeMenuMelodiesItem8[] PROGMEM = "< Back";
-#endif
-#ifdef LANG_RU
-const char modeMenuMelodiesItem8[] PROGMEM = "< Haзaд";
-#endif
 
 const char* const modeMenuMelodiesItems[] PROGMEM = {
   modeMenuMelodiesItem1,
@@ -24,7 +18,7 @@ const char* const modeMenuMelodiesItems[] PROGMEM = {
   modeMenuMelodiesItem5,
   modeMenuMelodiesItem6,
   modeMenuMelodiesItem7,
-  modeMenuMelodiesItem8
+  menuItemBack
 };
 
 

@@ -12,7 +12,6 @@ const char modeMenuSettingsItem4[] PROGMEM = "Set sleep";
 const char modeMenuSettingsItem5[] PROGMEM = "Set sound";
 const char modeMenuSettingsItem6[] PROGMEM = "Set time";
 const char modeMenuSettingsItem7[] PROGMEM = "Hard reset";
-const char modeMenuSettingsItem8[] PROGMEM = "< Back";
 #endif
 #ifdef LANG_RU
 const char modeMenuSettingsItem1[] PROGMEM = "Пepeзaгpyзкa";
@@ -22,7 +21,6 @@ const char modeMenuSettingsItem4[] PROGMEM = "Bpeмя cнa";
 const char modeMenuSettingsItem5[] PROGMEM = "Звyк кнoпoк";
 const char modeMenuSettingsItem6[] PROGMEM = "Зaдaть вpeмя";
 const char modeMenuSettingsItem7[] PROGMEM = "Пoлный cбpoc";
-const char modeMenuSettingsItem8[] PROGMEM = "< Haзaд";
 #endif
 
 const char* const modeMenuSettingsItems[] PROGMEM = {
@@ -33,7 +31,7 @@ const char* const modeMenuSettingsItems[] PROGMEM = {
   modeMenuSettingsItem5,
   modeMenuSettingsItem6,
   modeMenuSettingsItem7,
-  modeMenuSettingsItem8
+  menuItemBack
 };
 void(* resetFunc) (void) = 0;//объявляем функцию reset с адресом 0
 

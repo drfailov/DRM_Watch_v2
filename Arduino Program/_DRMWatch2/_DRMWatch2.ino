@@ -1,7 +1,7 @@
 #include "lcd1202.h"
 #include <util/atomic.h>
 #include <LowPower.h>
-#define version F("v0.23")   //Версию менять здесь
+#define version F("v0.24")   //Версию менять здесь
 //#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
 #define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
 #define LOG   //Закомментировать чтобы отключило логи
@@ -66,6 +66,12 @@
 #define MODE_SET_ALARM (byte)13
 #define MODE_MENU_SET_WATCHFACE (byte)14
 
+#ifdef LANG_RU
+const char menuItemBack[] PROGMEM = "< Haзaд";
+#endif
+#ifdef LANG_EN
+const char menuItemBack[] PROGMEM = "< Back";
+#endif
 
 byte _mode = -1;
 //размер буфера. Чем меньше тем экономнее
@@ -76,7 +82,8 @@ char buffer[BUFFER_SIZE];
 void setup() {
 #ifdef LOG
   Serial.begin(115200);
-  Serial.println(F("\nDRM Watch program"));
+  Serial.println(F("\nDRM Watch V2"));
+  Serial.println(version);
   Serial.print(F("- Date "));
   Serial.print(F(__DATE__));
   Serial.print(F(" at "));
@@ -112,12 +119,10 @@ void setMode(int _modeNew) {
   Serial.print(F("Mode "));
   Serial.print(_mode);
   Serial.print(F(" -> "));
-  Serial.print(_modeNew);
-  Serial.println(F("."));
+  Serial.println(_modeNew);
   
   Serial.print(F("RAM: "));
-  Serial.print(freeRam());
-  Serial.println(F(" b"));
+  Serial.println(freeRam());
 #endif
   //finish old
   if (_mode == MODE_INIT) modeInitFinish();
@@ -136,7 +141,6 @@ void setMode(int _modeNew) {
   if (_mode == MODE_SET_ALARM ) modeSetAlarmFinish();
   if (_mode == MODE_MENU_SET_WATCHFACE ) modeMenuSetWatchfaceFinish();
   
- 
   //init new
   if (_modeNew == MODE_INIT) modeInitSetup();
   if (_modeNew == MODE_WATCHFACE) modeWatchFaceSetup();
@@ -154,7 +158,6 @@ void setMode(int _modeNew) {
   if (_modeNew == MODE_SET_ALARM ) modeSetAlarmSetup();
   if (_modeNew == MODE_MENU_SET_WATCHFACE ) modeMenuSetWatchfaceSetup();
   
- 
   _mode = _modeNew;
 }
 
@@ -171,8 +174,7 @@ int freeRam () {
 }
 
 //обновляем счётчик миллисекунд во время сна чтобы не ломались счётчики
-void setMillis(unsigned long ms)
-{
+void setMillis(unsigned long ms){
     extern unsigned long timer0_millis;
     ATOMIC_BLOCK (ATOMIC_RESTORESTATE) {
         timer0_millis = ms;

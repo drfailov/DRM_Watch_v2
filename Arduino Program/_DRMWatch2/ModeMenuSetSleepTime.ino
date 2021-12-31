@@ -9,7 +9,6 @@ const char modeMenuSetSleepTimeItem2[] PROGMEM = "1 sec";
 const char modeMenuSetSleepTimeItem3[] PROGMEM = "2 sec";
 const char modeMenuSetSleepTimeItem4[] PROGMEM = "4 sec";
 const char modeMenuSetSleepTimeItem5[] PROGMEM = "8 sec";
-const char modeMenuSetSleepTimeItem6[] PROGMEM = "< Back";
 #endif
 #ifdef LANG_RU
 const char modeMenuSetSleepTimeItem1[] PROGMEM = "0.5 ceк";
@@ -17,7 +16,6 @@ const char modeMenuSetSleepTimeItem2[] PROGMEM = "1 ceк";
 const char modeMenuSetSleepTimeItem3[] PROGMEM = "2 ceк";
 const char modeMenuSetSleepTimeItem4[] PROGMEM = "4 ceк";
 const char modeMenuSetSleepTimeItem5[] PROGMEM = "8 ceк";
-const char modeMenuSetSleepTimeItem6[] PROGMEM = "< Haзaд";
 #endif
 
 const char* const modeMenuSetSleepTimeItems[] PROGMEM = {
@@ -26,7 +24,7 @@ const char* const modeMenuSetSleepTimeItems[] PROGMEM = {
   modeMenuSetSleepTimeItem3,
   modeMenuSetSleepTimeItem4,
   modeMenuSetSleepTimeItem5,
-  modeMenuSetSleepTimeItem6
+  menuItemBack
 };
 
 

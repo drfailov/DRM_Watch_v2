@@ -49,14 +49,11 @@ void modeWatchFaceLoop() {
   }
 
   byte wtf = eepromReadWatchface();
-  if(wtf == 1){
-    drawWatchFace1(hour, minute, second, day, month, year);
+  if(wtf == 3){
+    drawWatchFace3(hour, minute, second, day, month, year);
   }
   else if(wtf == 2){
     drawWatchFace2(hour, minute, second, day, month, year);
-  }
-  else if(wtf == 3){
-    //drawWatchFace1(hour, minute, second, day, month, year);
   }
   else{
     drawWatchFace1(hour, minute, second, day, month, year);
@@ -69,9 +66,7 @@ void modeWatchFaceLoop() {
       displayBacklightOff();
   }
 
-  
   byte sleepTime = eepromReadSleepTime();
-
   if(batteryIsLowPower()) //если разряжен, то макс интервал
     sleepTime = 8;
 #ifdef LOG
@@ -115,7 +110,6 @@ void modeWatchFaceFinish() {
 
 void modeWatchFaceButtonUp(){
   modeWatchFaceBacklightEnabledTime = millis();
-  beep();
 }
 
 void wakeUp(){ //to react for button

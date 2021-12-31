@@ -7,18 +7,16 @@ const byte modeMenuSetSilentModeItemsCount = 3; //сколько пунктов 
 #ifdef LANG_EN
 const char modeMenuSetSilentModeItem1[] PROGMEM = "Sound ON";
 const char modeMenuSetSilentModeItem2[] PROGMEM = "Sound OFF";
-const char modeMenuSetSilentModeItem3[] PROGMEM = "< Back";
 #endif
 #ifdef LANG_RU
 const char modeMenuSetSilentModeItem1[] PROGMEM = "Звyк BKЛ";
 const char modeMenuSetSilentModeItem2[] PROGMEM = "Звyк BЫKЛ";
-const char modeMenuSetSilentModeItem3[] PROGMEM = "< Haзaд";
 #endif
 
 const char* const modeMenuSetSilentModeItems[] PROGMEM = {
   modeMenuSetSilentModeItem1,
   modeMenuSetSilentModeItem2,
-  modeMenuSetSilentModeItem3
+  menuItemBack
 };
 
 

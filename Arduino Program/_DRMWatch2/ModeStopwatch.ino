@@ -66,12 +66,12 @@ void modeStopwatchLoop() {
     second = (difference - (minute * 1000 * 60)) / 1000;       //(3710100 - (61*1000*60)) /1000 = (3710100-3660000) /1000 = 50100 /1000 = 5.01 = 5
     millisecond = (difference - (minute * 1000 * 60) - (second * 1000)) / 10;
       
-    int minute1 = minute / 10;
-    int minute2 = minute - (minute1 * 10);
-    int second1 = second / 10;
-    int second2 = second - (second1 * 10);
-    int millisecond1 = millisecond / 10;
-    int millisecond2 = millisecond - (millisecond1 * 10);
+    byte minute1 = minute / 10;
+    byte minute2 = minute - (minute1 * 10);
+    byte second1 = second / 10;
+    byte second2 = second - (second1 * 10);
+    byte millisecond1 = millisecond / 10;
+    byte millisecond2 = millisecond - (millisecond1 * 10);
     
     displayDrawNumber(minute1 , 13, 10, 3, 4);
     displayDrawNumber(minute2 , 27, 10, 3, 4);

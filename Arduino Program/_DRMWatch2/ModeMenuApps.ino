@@ -9,7 +9,6 @@ const char modeMenuAppsItem3[] PROGMEM = "Stopwatch";
 const char modeMenuAppsItem4[] PROGMEM = "Alarm";
 const char modeMenuAppsItem5[] PROGMEM = "Zrada";
 const char modeMenuAppsItem6[] PROGMEM = "Svaston";
-const char modeMenuAppsItem7[] PROGMEM = "< Back";
 #endif
 #ifdef LANG_RU
 const char modeMenuAppsItem1[] PROGMEM = "Cтaтyc";
@@ -18,7 +17,6 @@ const char modeMenuAppsItem3[] PROGMEM = "Ceкyндoмep";
 const char modeMenuAppsItem4[] PROGMEM = "Бyдильник";
 const char modeMenuAppsItem5[] PROGMEM = "Зpaдa";
 const char modeMenuAppsItem6[] PROGMEM = "Cвacтoн";
-const char modeMenuAppsItem7[] PROGMEM = "< Haзaд";
 #endif
 
 const char* const modeMenuAppsItems[] PROGMEM = {
@@ -28,7 +26,7 @@ const char* const modeMenuAppsItems[] PROGMEM = {
   modeMenuAppsItem4,
   modeMenuAppsItem5,
   modeMenuAppsItem6,
-  modeMenuAppsItem7
+  menuItemBack
 };
 
 

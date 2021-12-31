@@ -8,20 +8,18 @@ const byte modeMenuSetWatchfaceItemsCount = 4; //сколько пунктов �
 const char modeMenuSetWatchfaceItem1[] PROGMEM = "WTF 1";
 const char modeMenuSetWatchfaceItem2[] PROGMEM = "WTF 2";
 const char modeMenuSetWatchfaceItem3[] PROGMEM = "WTF 3";
-const char modeMenuSetWatchfaceItem4[] PROGMEM = "< Back";
 #endif
 #ifdef LANG_RU
 const char modeMenuSetWatchfaceItem1[] PROGMEM = "Циф 1";
 const char modeMenuSetWatchfaceItem2[] PROGMEM = "Циф 2";
 const char modeMenuSetWatchfaceItem3[] PROGMEM = "Циф 3";
-const char modeMenuSetWatchfaceItem4[] PROGMEM = "< Haзaд";
 #endif
 
 const char* const modeMenuSetWatchfaceItems[] PROGMEM = {
   modeMenuSetWatchfaceItem1,
   modeMenuSetWatchfaceItem2,
   modeMenuSetWatchfaceItem3,
-  modeMenuSetWatchfaceItem4
+  menuItemBack
 };
 
 

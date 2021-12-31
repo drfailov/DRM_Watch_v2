@@ -9,7 +9,6 @@ const char modeMenuSetBeepSoundItem2[] PROGMEM = "Click";
 const char modeMenuSetBeepSoundItem3[] PROGMEM = "Tone";
 const char modeMenuSetBeepSoundItem4[] PROGMEM = "Whistle";
 const char modeMenuSetBeepSoundItem5[] PROGMEM = "None";
-const char modeMenuSetBeepSoundItem6[] PROGMEM = "< Back";
 #endif
 #ifdef LANG_RU
 const char modeMenuSetBeepSoundItem1[] PROGMEM = "Пиcк";
@@ -17,7 +16,6 @@ const char modeMenuSetBeepSoundItem2[] PROGMEM = "Kлик";
 const char modeMenuSetBeepSoundItem3[] PROGMEM = "Toн";
 const char modeMenuSetBeepSoundItem4[] PROGMEM = "Cвиcт";
 const char modeMenuSetBeepSoundItem5[] PROGMEM = "Бeз звyкa";
-const char modeMenuSetBeepSoundItem6[] PROGMEM = "< Haзaд";
 #endif
 
 const char* const modeMenuSetBeepSoundItems[] PROGMEM = {
@@ -26,7 +24,7 @@ const char* const modeMenuSetBeepSoundItems[] PROGMEM = {
   modeMenuSetBeepSoundItem3,
   modeMenuSetBeepSoundItem4,
   modeMenuSetBeepSoundItem5,
-  modeMenuSetBeepSoundItem6
+  menuItemBack
 };
 
 
