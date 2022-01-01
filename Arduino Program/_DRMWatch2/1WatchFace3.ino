@@ -1,4 +1,4 @@
-void drawWatchFace3(byte hour, byte minute, byte second, byte day, byte month, int year){
+void drawWatchFace3(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek){
   displayClear();
 
   {//time
@@ -6,32 +6,35 @@ void drawWatchFace3(byte hour, byte minute, byte second, byte day, byte month, i
     byte hour2 = hour - (hour1 * 10);
     byte minute1 = minute / 10;
     byte minute2 = minute - (minute1 * 10);
-    displayFillRect(/*x*/46, /*y*/19, /*w*/4, /*h*/5, /*c*/1);
-    displayFillRect(/*x*/46, /*y*/31, /*w*/4, /*h*/5, /*c*/1);
-    drawNumber(/*x*/5, /*y*/12, /*num*/hour1);
-    drawNumber(/*x*/25, /*y*/12, /*num*/hour2);
-    drawNumber(/*x*/54, /*y*/12, /*num*/minute1);
-    drawNumber(/*x*/74, /*y*/12, /*num*/minute2);
+    displayFillRect(/*x*/46, /*y*/26, /*w*/4, /*h*/5, /*c*/1);
+    displayFillRect(/*x*/46, /*y*/38, /*w*/4, /*h*/5, /*c*/1);
+    drawNumber(/*x*/05, /*y*/16, /*num*/hour1);
+    drawNumber(/*x*/25, /*y*/16, /*num*/hour2);
+    drawNumber(/*x*/54, /*y*/16, /*num*/minute1);
+    drawNumber(/*x*/74, /*y*/16, /*num*/minute2);
   }
 
   
   {//date
     sprintf(buffer, "%02d.%02d.%04d", day, month, year);
-    displayDrawText(20, 55, 1, buffer);
+    displayDrawText(20, 61, 1, buffer);
   }
   
+
+  if(eepromReadAlertEnabled()){   //Alert sign
+    displayDrawAlertSign(0, 0, 1);
+  }
+  
+  if(eepromReadSilentMode()){  //Silent mode sign
+    displayDrawSilentModeIcon(12, 0, 1);
+  }
+  
+  {//DayOfWeek
+    modeWatchFaceDrawDayOfWeek(30, 0, dayOfWeek);
+  }
   
   {//battery
-    float voltage = batteryVoltage();
-    bool isCharging = batteryIsCharging();
-    bool isLowPower = batteryIsLowPower();
-    byte level = 0;
-    if(voltage > 3.40) level = 1;
-    if(voltage > 3.65) level = 2;
-    if(voltage > 3.85) level = 3;
-    if(voltage > 4.00) level = 4;
-  
-    displayDrawBattery(78, 0, level, isCharging, isLowPower);
+    modeWatchFaceDrawBattery(78, 0);
   }
   displayUpdate();
 }

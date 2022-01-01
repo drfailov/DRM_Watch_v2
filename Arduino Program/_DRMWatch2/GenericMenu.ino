@@ -45,13 +45,12 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
   for (int i = 0; i < genericMenuViewCount; i++) {
     int index = genericMenuViewPosition + i;
     if (index < genericMenuItemsCount) {
+      strcpy_P(buffer, pgm_read_word(&(genericMenuItems[index])));
       if (index == genericMenuSelectPosition) {
         displayFillRect(/*x*/11, /*y*/1 + 13 * i, /*w*/81, /*h*/13, /*c*/1);
-        strcpy_P(buffer, pgm_read_word(&(genericMenuItems[index])));
         displayDrawText(/*X*/15, /*Y*/4 + 13 * i, /*C*/0, buffer);
       }
       else {
-        strcpy_P(buffer, pgm_read_word(&(genericMenuItems[index])));
         displayDrawText(/*X*/15, /*Y*/4 + 13 * i, /*C*/1, buffer);
       }
     }
@@ -70,5 +69,4 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
 }
 
 void genericMenuFinish(){
-  //digitalWrite(pinLcdBacklight, LOW);
 }

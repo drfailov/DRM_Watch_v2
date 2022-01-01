@@ -67,6 +67,14 @@ byte rtcGetDay() {
   delayMicroseconds(100);
   return now.day();
 }
+
+byte rtcGetDayOfWeek() {
+  if (!rtcReady)
+    return rand() % 7;
+  DateTime now = DS3231M.now();
+  delayMicroseconds(100);
+  return now.dayOfTheWeek();
+}
 byte rtcGetMonth() {
   if (!rtcReady)
     return rand() % 12;

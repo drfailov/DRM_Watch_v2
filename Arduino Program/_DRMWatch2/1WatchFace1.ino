@@ -1,4 +1,4 @@
-void drawWatchFace1(byte hour, byte minute, byte second, byte day, byte month, int year){
+void drawWatchFace1(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek){ 
     displayClear();
   
   { //time
@@ -24,6 +24,10 @@ void drawWatchFace1(byte hour, byte minute, byte second, byte day, byte month, i
     displayDrawText(0, 0, 1, buffer);
   }
   
+  {//DayOfWeek
+    modeWatchFaceDrawDayOfWeek(78, 0, dayOfWeek);
+  }
+  
   {//Temperature
     float temp = rtcGetTemp();
     /* 4 is mininum width, 2 is precision; float value is copied onto str_temp*/
@@ -33,26 +37,15 @@ void drawWatchFace1(byte hour, byte minute, byte second, byte day, byte month, i
   }
   
   {//battery
-    float voltage = batteryVoltage();
-    bool isCharging = batteryIsCharging();
-    bool isLowPower = batteryIsLowPower();
-    byte level = 0;
-    if(voltage > 3.40) level = 1;
-    if(voltage > 3.65) level = 2;
-    if(voltage > 3.85) level = 3;
-    if(voltage > 4.00) level = 4;
-  
-    displayDrawBattery(78, 0, level, isCharging, isLowPower);
+    modeWatchFaceDrawBattery(78, 61);
   }
 
-  //Silent mode sign
-  if(eepromReadSilentMode()){ 
-    displayDrawSilentModeIcon(85, 60, 1);
+  if(eepromReadSilentMode()){ //Silent mode sign
+    displayDrawSilentModeIcon(65, 60, 1);
   }
   
-  //Alert sign
-  if(eepromReadAlertEnabled()){ 
-    displayDrawAlertSign(72, 60, 1);
+  if(eepromReadAlertEnabled()){   //Alert sign
+    displayDrawAlertSign(55, 60, 1);
   }
 
   displayUpdate();

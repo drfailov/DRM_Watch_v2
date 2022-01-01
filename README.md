@@ -10,7 +10,7 @@ as possible stuff inside Arduino Nano with its 15KB of memory.\
 Programming contributions made by <b>Dr. Failov</b>, hardware part is made by <b>MeltemiOS</b>.
 
 ## Functions
-- Watchface scren
+- 4 Watchfaces
 - Menu screens
 - Alert
 - Play monophonic melodies
@@ -20,6 +20,7 @@ Programming contributions made by <b>Dr. Failov</b>, hardware part is made by <b
 - Set silent mode screen
 - Set button sound screen
 - Force reboot
+- Zrada-Peremoga
 - About screen
 
 
@@ -156,6 +157,26 @@ Press button Up to turn on backlight. Press button down to open main menu.\
 <img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="300"/>
 
 
+### WatchFace1
+Watchface 1
+<img src="Photos/" width="300"/>
+
+
+### WatchFace2
+Watchface 2
+<img src="Photos/" width="300"/>
+
+
+### WatchFace3
+Watchface 3
+<img src="Photos/" width="300"/>
+
+
+### WatchFace4
+Watchface 4
+<img src="Photos/" width="300"/>
+
+
 ### ModeMenuMain
 Main menu, opens when you click bottom button. If inactive for 120 sec, will automatically go to watchface.
 Press button Up to select. Press button Down to move cursor down.\
@@ -182,15 +203,21 @@ Press button Up to select. Press button Down to move cursor down.\
 <img src="Photos/photo_2021-12-19_19-43-52 (6).jpg" width="300"/>
 
 ### ModeMenuSetBeepSound
+Select sound of buttons.
 <img src="Photos/photo_2021-12-19_19-43-52 (7).jpg" width="300"/>
 
 ### ModeAbout
+Information about developers and version.
 <img src="Photos/photo_2021-12-19_19-43-52 (8).jpg" width="300"/>
 
 ### ModeSetAlarm
+You can select time and melody and alarm will play at that time. Alarm will start only if watchface is opened.
 <img src="Photos/" width="300"/>
 
-### Mode
+### modeZrada
+Genegates random conscusion: "Peremoga" or "Zrada". This is local Ukrainian meme.
+"Peremoga" is "win", "Zrada" is "treason".
+Mechanics the same as heads and tails.
 <img src="Photos/" width="300"/>
 
 ### Mode

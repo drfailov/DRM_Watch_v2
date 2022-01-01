@@ -1,7 +1,6 @@
 /*Used to test new functionality*/
 
 void modeStatusSetup() {
-  displayInit();
 }
 
 void modeStatusLoop() {
@@ -27,7 +26,6 @@ void modeStatusLoop() {
 
   displayDrawCheck(0, 61, 1);
   displayUpdate();
-  
 }
 
 void drawParameter(byte x, byte y, const __FlashStringHelper* name, int value){

@@ -1,7 +1,7 @@
 #include "lcd1202.h"
 #include <util/atomic.h>
 #include <LowPower.h>
-#define version F("v0.24")   //Версию менять здесь
+#define version F("v1.00")   //Версию менять здесь
 //#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
 #define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
 #define LOG   //Закомментировать чтобы отключило логи
@@ -65,6 +65,7 @@
 #define MODE_STOPWATCH (byte)12
 #define MODE_SET_ALARM (byte)13
 #define MODE_MENU_SET_WATCHFACE (byte)14
+#define MODE_ZRADA (byte)15
 
 #ifdef LANG_RU
 const char menuItemBack[] PROGMEM = "< Haзaд";
@@ -108,6 +109,7 @@ void loop() {
   if (_mode == MODE_STOPWATCH ) modeStopwatchLoop();
   if (_mode == MODE_SET_ALARM ) modeSetAlarmLoop();
   if (_mode == MODE_MENU_SET_WATCHFACE ) modeMenuSetWatchfaceLoop();
+  if (_mode == MODE_ZRADA ) modeZradaLoop();
   
   
 }
@@ -140,6 +142,7 @@ void setMode(int _modeNew) {
   if (_mode == MODE_STOPWATCH ) modeStopwatchFinish();
   if (_mode == MODE_SET_ALARM ) modeSetAlarmFinish();
   if (_mode == MODE_MENU_SET_WATCHFACE ) modeMenuSetWatchfaceFinish();
+  if (_mode == MODE_ZRADA) modeZradaFinish();
   
   //init new
   if (_modeNew == MODE_INIT) modeInitSetup();
@@ -157,6 +160,8 @@ void setMode(int _modeNew) {
   if (_modeNew == MODE_STOPWATCH ) modeStopwatchSetup();
   if (_modeNew == MODE_SET_ALARM ) modeSetAlarmSetup();
   if (_modeNew == MODE_MENU_SET_WATCHFACE ) modeMenuSetWatchfaceSetup();
+  if (_modeNew == MODE_ZRADA) modeZradaSetup();
+  
   
   _mode = _modeNew;
 }

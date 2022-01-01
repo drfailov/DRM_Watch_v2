@@ -46,60 +46,35 @@ void modeMenuSetBeepSoundFinish() {
 void modeMenuSetBeepSoundSelected(byte index) {
   if (index == 0) { //beep
     eepromSaveBeepSound(eepromBeepSoundBeep);
-#ifdef LANG_EN
-    displayMessage(F("Saved beep"));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("Coxp: пиcк"));
-#endif
+    displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem1);
     goToWatchface();
     return;
   }
 
   if (index == 1) { //Click
     eepromSaveBeepSound(eepromBeepSoundClick);
-#ifdef LANG_EN
-    displayMessage(F("Saved click"));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("Coxp: клик"));
-#endif
+    displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem2);
     goToWatchface();
     return;
   }
 
   if (index == 2) { //Tone
     eepromSaveBeepSound(eepromBeepSoundTone);
-#ifdef LANG_EN
-    displayMessage(F("Saved tone"));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("Coxp: тoн"));
-#endif
+    displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem3);
     goToWatchface();
     return;
   }
 
   if (index == 3) { //Whiste
     eepromSaveBeepSound(eepromBeepSoundWhistle);
-#ifdef LANG_EN
-    displayMessage(F("Saved whistle"));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("Coxp: cвиcт"));
-#endif
+    displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem4);
     goToWatchface();
     return;
   }
 
   if (index == 4) { //None
     eepromSaveBeepSound(eepromBeepSoundNone);
-#ifdef LANG_EN
-    displayMessage(F("Saved none"));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("Coxp: бeззв."));
-#endif
+    displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem5);
     goToWatchface();
     return;
   }

@@ -37,6 +37,7 @@ static const PROGMEM byte pathZubat[] = { 42,
   34, 23,   255,255,    31,  2,    31,  4,    31,  3, //глаз
   32,  3,    30,  3
 }; 
+const byte* const getPathZubat(){return pathZubat;}
 
 static const PROGMEM byte pathDrmWatch[] = { 57,
    0,  0,     7,  0,    10,  3,    10, 13,     7, 16,  //D

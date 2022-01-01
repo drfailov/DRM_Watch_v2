@@ -4,18 +4,18 @@ const byte modeMenuSetSleepTimeItemsCount = 6; //сколько пунктов �
 
 //Максимальная длина строки:                     |          |
 #ifdef LANG_EN
-const char modeMenuSetSleepTimeItem1[] PROGMEM = "0.5 sec";
-const char modeMenuSetSleepTimeItem2[] PROGMEM = "1 sec";
-const char modeMenuSetSleepTimeItem3[] PROGMEM = "2 sec";
-const char modeMenuSetSleepTimeItem4[] PROGMEM = "4 sec";
-const char modeMenuSetSleepTimeItem5[] PROGMEM = "8 sec";
+const char modeMenuSetSleepTimeItem1[] PROGMEM = "Slp .5 sec";
+const char modeMenuSetSleepTimeItem2[] PROGMEM = "Slp 1 sec";
+const char modeMenuSetSleepTimeItem3[] PROGMEM = "Slp 2 sec";
+const char modeMenuSetSleepTimeItem4[] PROGMEM = "Slp 4 sec";
+const char modeMenuSetSleepTimeItem5[] PROGMEM = "Slp 8 sec";
 #endif
 #ifdef LANG_RU
-const char modeMenuSetSleepTimeItem1[] PROGMEM = "0.5 ceк";
-const char modeMenuSetSleepTimeItem2[] PROGMEM = "1 ceк";
-const char modeMenuSetSleepTimeItem3[] PROGMEM = "2 ceк";
-const char modeMenuSetSleepTimeItem4[] PROGMEM = "4 ceк";
-const char modeMenuSetSleepTimeItem5[] PROGMEM = "8 ceк";
+const char modeMenuSetSleepTimeItem1[] PROGMEM = "Coн .5 ceк";
+const char modeMenuSetSleepTimeItem2[] PROGMEM = "Coн 1 ceк";
+const char modeMenuSetSleepTimeItem3[] PROGMEM = "Coн 2 ceк";
+const char modeMenuSetSleepTimeItem4[] PROGMEM = "Coн 4 ceк";
+const char modeMenuSetSleepTimeItem5[] PROGMEM = "Coн 8 ceк";
 #endif
 
 const char* const modeMenuSetSleepTimeItems[] PROGMEM = {
@@ -49,60 +49,35 @@ void modeMenuSetSleepTimeFinish() {
 void modeMenuSetSleepTimeSelected(byte index) {
   if (index == 0) { //0.5 sec
     eepromSaveSleepTime(eepromSleepTime05sec);
-#ifdef LANG_EN
-    displayMessage(F("Saved .5 sec"));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("Coxp: .5 ceк"));
-#endif
+    displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem1);
     goToWatchface();
     return;
   }
   
   if (index == 1) { //1 s
     eepromSaveSleepTime(eepromSleepTime1sec);
-#ifdef LANG_EN
-    displayMessage(F("Saved 1 sec"));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("Coxp: 1 ceк"));
-#endif
+    displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem2);
     goToWatchface();
     return;
   }
 
   if (index == 2) { //2s
     eepromSaveSleepTime(eepromSleepTime2sec);
-#ifdef LANG_EN
-    displayMessage(F("Saved 2 sec"));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("Coxp: 2 ceк"));
-#endif
+    displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem3);
     goToWatchface();
     return;
   } 
   
   if (index == 3) { //4s
     eepromSaveSleepTime(eepromSleepTime4sec);
-#ifdef LANG_EN
-    displayMessage(F("Saved 4 sec"));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("Coxp: 4 ceк"));
-#endif
+    displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem4);
     goToWatchface();
     return;
   }
   
   if (index == 4) { //8s
     eepromSaveSleepTime(eepromSleepTime8sec);
-#ifdef LANG_EN
-    displayMessage(F("Saved 8 sec"));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("Coxp: 8 ceк"));
-#endif
+    displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem5);
     goToWatchface();
     return;
   }

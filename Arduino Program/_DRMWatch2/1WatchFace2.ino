@@ -1,4 +1,4 @@
-void drawWatchFace2(byte hour, byte minute, byte second, byte day, byte month, int year){
+void drawWatchFace2(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek){
     displayClear();
   
   { //time
@@ -27,17 +27,12 @@ void drawWatchFace2(byte hour, byte minute, byte second, byte day, byte month, i
     displayDrawText(0, 61, 1, buffer);
   }
   
-  {//battery
-    float voltage = batteryVoltage();
-    bool isCharging = batteryIsCharging();
-    bool isLowPower = batteryIsLowPower();
-    byte level = 0;
-    if(voltage > 3.40) level = 1;
-    if(voltage > 3.65) level = 2;
-    if(voltage > 3.85) level = 3;
-    if(voltage > 4.00) level = 4;
+  {//DayOfWeek
+    modeWatchFaceDrawDayOfWeek(55, 61, dayOfWeek);
+  }
   
-    displayDrawBattery(78, 0, level, isCharging, isLowPower);
+  {//battery
+    modeWatchFaceDrawBattery(78, 0);
   }
 
   //Silent mode sign
@@ -47,7 +42,7 @@ void drawWatchFace2(byte hour, byte minute, byte second, byte day, byte month, i
   
   //Alert sign
   if(eepromReadAlertEnabled()){ 
-    displayDrawAlertSign(72, 60, 1);
+    displayDrawAlertSign(75, 60, 1);
   }
 
   displayUpdate();

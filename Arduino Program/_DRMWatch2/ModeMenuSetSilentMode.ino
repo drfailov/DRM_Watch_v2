@@ -40,24 +40,14 @@ void modeMenuSetSilentModeFinish() {
 void modeMenuSetSilentModeSelected(byte index) {
   if (index == 0) { //Sound ON
     eepromSaveSilentMode(false);
-#ifdef LANG_EN
-    displayMessage(F("Sound ON"));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("Звyк BKЛ"));
-#endif
+    displayMessage((__FlashStringHelper*)modeMenuSetSilentModeItem1);
     goToWatchface();
     return;
   }
   
   if (index == 1) { //Sound OFF
     eepromSaveSilentMode(true);
-#ifdef LANG_EN
-    displayMessage(F("Sound OFF"));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("Звyк BЫKЛ"));
-#endif
+    displayMessage((__FlashStringHelper*)modeMenuSetSilentModeItem2);
     goToWatchface();
     return;
   }

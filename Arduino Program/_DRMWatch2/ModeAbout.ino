@@ -1,19 +1,16 @@
 /*Used to test new functionality*/
 
 void modeAboutSetup() {
-  displayInit();
 }
 
 void modeAboutLoop() {
   if(isButtonUpPressed()){
     beep();
-    //setMode(MODE_MENU_MAIN);
     goToWatchface();
     return;
   } 
   if(isButtonDownPressed()){
     beep();
-    //setMode(MODE_MENU_MAIN);
     goToWatchface();
     return;
   } 
@@ -36,13 +33,11 @@ void modeAboutLoop() {
   for(long st = millis(); millis() - st < 900; ){
     if(isButtonUpPressed()){
       beep();
-      //setMode(MODE_MENU_MAIN);
       goToWatchface();
       return;
     } 
     if(isButtonDownPressed()){
       beep();
-      //setMode(MODE_MENU_MAIN);
       goToWatchface();
       return;
     } 
