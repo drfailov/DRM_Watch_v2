@@ -145,7 +145,8 @@ void displayDrawVectorLogo(){
 //Array type: const PROGMEM byte path[] = {...);
 //Array format: {numberOfPoints, x0, y0, x1, y1, x2, y2, ...}
 //255,255 coordinates is skipped, so it can be used for separate paths
-void displayDrawVector(const byte* data_array, byte X, byte Y, bool animate, bool color){
+//animate: 0-noAnimation, 1...-speed,low is slow.
+void displayDrawVector(const byte* data_array, byte X, byte Y, byte animate, bool color){
   byte numberOfPoints = pgm_read_byte(&data_array[0]);
   byte lx = pgm_read_byte(&data_array[1]);
   byte ly = pgm_read_byte(&data_array[2]);
@@ -155,7 +156,7 @@ void displayDrawVector(const byte* data_array, byte X, byte Y, bool animate, boo
     byte y = pgm_read_byte(&data_array[currentIndex + 1]);
     if(x != 255 && y != 255 && lx != 255 && ly != 255)
       displayDrawLine(/*X1*/lx + X, /*Y1*/ly + Y, /*X2*/x + X, /*Y2*/y + Y, /*C*/color);
-    if(animate && i%2==0){
+    if(animate!=0 && i%animate==0){
       displayUpdate();
       if (isButtonUpPressed()) 
         animate = false;

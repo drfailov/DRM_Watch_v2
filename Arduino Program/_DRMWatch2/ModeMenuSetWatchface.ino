@@ -2,20 +2,11 @@
 
 const byte modeMenuSetWatchfaceItemsCount = 5; //сколько пунктов меню в массиве
 
-//Максимальная длина строки:                       |          |
-
-#ifdef LANG_EN
-const char modeMenuSetWatchfaceItem1[] PROGMEM = "WTF 1";
-const char modeMenuSetWatchfaceItem2[] PROGMEM = "WTF 2";
-const char modeMenuSetWatchfaceItem3[] PROGMEM = "WTF 3";
-const char modeMenuSetWatchfaceItem4[] PROGMEM = "WTF 4";
-#endif
-#ifdef LANG_RU
-const char modeMenuSetWatchfaceItem1[] PROGMEM = "Циф 1";
-const char modeMenuSetWatchfaceItem2[] PROGMEM = "Циф 2";
-const char modeMenuSetWatchfaceItem3[] PROGMEM = "Циф 3";
-const char modeMenuSetWatchfaceItem4[] PROGMEM = "Циф 4";
-#endif
+//Максимальная длина строки:                     "          "
+const char modeMenuSetWatchfaceItem1[] PROGMEM = "DRM Watch";
+const char modeMenuSetWatchfaceItem2[] PROGMEM = "DRM Lite";
+const char modeMenuSetWatchfaceItem3[] PROGMEM = "Siemens";
+const char modeMenuSetWatchfaceItem4[] PROGMEM = "Zubat";
 
 const char* const modeMenuSetWatchfaceItems[] PROGMEM = {
   modeMenuSetWatchfaceItem1,

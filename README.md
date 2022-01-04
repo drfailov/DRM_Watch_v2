@@ -7,7 +7,9 @@
 Arduino-based watch with Nokia 1280 LCD. \
 Main challenge of this project is packing as much
 as possible stuff inside Arduino Nano with its 15KB of memory.\
-Programming contributions made by <b>Dr. Failov</b>, hardware part is made by <b>MeltemiOS</b>.
+Programming contributions made by <b>Dr. Failov</b>.\
+Hardware part is made by <b>MeltemiOS</b>.\
+Watchfaces design drawn by <b>MeltemiOS</b>.\
 
 ## Functions
 - 4 Watchfaces

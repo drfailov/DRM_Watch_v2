@@ -1,5 +1,5 @@
 /*Screen with main watchface*/
-long modeWatchFaceBacklightTimeout = 10000;
+long modeWatchFaceBacklightTimeout = 15000;
 long modeWatchFaceBacklightEnabledTime = millis();
 
 void modeWatchFaceSetup() {
@@ -7,9 +7,10 @@ void modeWatchFaceSetup() {
   modeWatchFaceBacklightEnabledTime = millis();
   attachInterrupt(1, modeWatchFaceButtonUp, HIGH); //up
   attachInterrupt(0, wakeUp, HIGH);  //down
+  modeWatchFaceLoop(true);
 }
 
-void modeWatchFaceLoop() {
+void modeWatchFaceLoop(bool animate) {
   if (isButtonDownPressed()) {
     beep();
     setMode(MODE_MENU_MAIN);
@@ -51,7 +52,7 @@ void modeWatchFaceLoop() {
 
   byte wtf = eepromReadWatchface();
   if (wtf == 3) {
-    drawWatchFace3(hour, minute, second, day, month, year, dayOfWeek);
+    drawWatchFace3(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
   }
   else if (wtf == 2) {
     drawWatchFace2(hour, minute, second, day, month, year, dayOfWeek);
@@ -142,7 +143,7 @@ void modeWatchFaceDrawDayOfWeek(byte x, byte y, byte dayOfWeek) { //
   if (dayOfWeek == 4) txt = F("Чт");
   if (dayOfWeek == 5) txt = F("Пт");
   if (dayOfWeek == 6) txt = F("Сб");
-  if (dayOfWeek == 7) txt = F("Вс");
+  if (dayOfWeek == 0) txt = F("Вс");
 #endif
 #ifdef LANG_EN
   if (dayOfWeek == 1) txt = F("Mon");
@@ -151,7 +152,7 @@ void modeWatchFaceDrawDayOfWeek(byte x, byte y, byte dayOfWeek) { //
   if (dayOfWeek == 4) txt = F("Thu");
   if (dayOfWeek == 5) txt = F("Fri");
   if (dayOfWeek == 6) txt = F("Sat");
-  if (dayOfWeek == 7) txt = F("Sun");
+  if (dayOfWeek == 0) txt = F("Sun");
 #endif
   displayDrawText(x, y, 1, txt);
 }

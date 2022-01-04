@@ -28,7 +28,7 @@ void modeAboutLoop() {
   displayDrawText(00, 61, 1, version);
 
   
-  displayDrawVector(/*path*/pathDrmWatch, /*x*/26, /*y*/22, /*animate*/true, /*color*/1);
+  displayDrawVector(/*path*/pathDrmWatch, /*x*/26, /*y*/22, /*animate*/3, /*color*/1);
   displayUpdate();
   for(long st = millis(); millis() - st < 900; ){
     if(isButtonUpPressed()){
@@ -42,7 +42,7 @@ void modeAboutLoop() {
       return;
     } 
   }
-  displayDrawVector(/*path*/pathDrmWatch, /*x*/26, /*y*/22, /*animate*/true, /*color*/0);
+  displayDrawVector(/*path*/pathDrmWatch, /*x*/26, /*y*/22, /*animate*/5, /*color*/0);
   displayUpdate();
   
 }

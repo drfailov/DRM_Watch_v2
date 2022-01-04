@@ -1,18 +1,5 @@
-void drawWatchFace3(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek){
+void drawWatchFace3(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate){
   displayClear();
-
-  {//time
-    byte hour1 = hour / 10;
-    byte hour2 = hour - (hour1 * 10);
-    byte minute1 = minute / 10;
-    byte minute2 = minute - (minute1 * 10);
-    displayFillRect(/*x*/46, /*y*/26, /*w*/4, /*h*/5, /*c*/1);
-    displayFillRect(/*x*/46, /*y*/38, /*w*/4, /*h*/5, /*c*/1);
-    drawNumber(/*x*/05, /*y*/16, /*num*/hour1);
-    drawNumber(/*x*/25, /*y*/16, /*num*/hour2);
-    drawNumber(/*x*/54, /*y*/16, /*num*/minute1);
-    drawNumber(/*x*/74, /*y*/16, /*num*/minute2);
-  }
 
   
   {//date
@@ -36,6 +23,21 @@ void drawWatchFace3(byte hour, byte minute, byte second, byte day, byte month, i
   {//battery
     modeWatchFaceDrawBattery(78, 0);
   }
+  
+
+  {//time
+    byte hour1 = hour / 10;
+    byte hour2 = hour - (hour1 * 10);
+    byte minute1 = minute / 10;
+    byte minute2 = minute - (minute1 * 10);
+    displayFillRect(/*x*/46, /*y*/24, /*w*/3, /*h*/3, /*c*/1);
+    displayFillRect(/*x*/46, /*y*/35, /*w*/3, /*h*/3, /*c*/1);
+    drawNumber(/*x*/8, /*y*/16, /*num*/hour1, /*animate*/ animate);
+    drawNumber(/*x*/25, /*y*/16, /*num*/hour2, /*animate*/ animate);
+    drawNumber(/*x*/55, /*y*/16, /*num*/minute1, /*animate*/ animate);
+    drawNumber(/*x*/72, /*y*/16, /*num*/minute2, /*animate*/ animate);
+  }
+  
   displayUpdate();
 }
 
@@ -51,55 +53,55 @@ const byte fontWtf3[] PROGMEM = {
   0b11111110, //8
   0b11110110 //9
 };
-static const PROGMEM byte pathUp[] = { 8,
-   2,0,    14,0,   13,1,   3,1,    4,2,
-   12,2,   11,3,   5,3
+static const PROGMEM byte pathUp[] = { 6,
+   2,0,    12,0,   11,1,   3,1,   4,2,
+   10,2
 };
-static const PROGMEM byte pathUpLeft[] = { 8,
-   0,1,    0,14,   1,2,    1,13,   2,3,
-   2,12,   3,4,    3,11
+static const PROGMEM byte pathUpLeft[] = { 6,
+   0,1,    0,12,   1,11,   1,2,   2,3,
+   2,10
 };
-static const PROGMEM byte pathUpRight[] = { 8,
-   13,4,   13,11,  14,12,  14,3,   15,2,
-   15,13,  16,14,  16,1
+static const PROGMEM byte pathUpRight[] = { 6,
+   14,1,   14,12,  13,11,  13,2,  12,3,
+   12,10
 };
-static const PROGMEM byte pathCenter[] = { 10,
-   4,13,   12,13,  13,14,  3,14,   2,15,
-   14,15,  13,16,  3,16,   4,17,   12,17
+static const PROGMEM byte pathCenter[] = { 6,
+   3,12,   11,12,  12,13,  2,13,  3,14,
+   11,14
 };
-static const PROGMEM byte pathBottomLeft[] = { 8,
-   0,16,   0,32,   1,31,   1,17,   2,18,
-   2,30,   3,29,   3,19
+static const PROGMEM byte pathBottomLeft[] = { 6,
+   0,14,   0,27,   1,26,   1,15,  2,16,
+   2,25
 };
-static const PROGMEM byte pathBottomRight[] = { 8,
-   13,19,  13,29,  14,30,  14,18,  15,17,
-   15,31,  16,32,  16,16
+static const PROGMEM byte pathBottomRight[] = { 6,
+   14,14,  14,27,  13,26,  13,15, 12,16,
+   12,25
 };
-static const PROGMEM byte pathBottom[] = { 8,
-   5,30,   11,30,  12,31,  4,31,   3,32,
-   13,32,  14,33,  2,33
+static const PROGMEM byte pathBottom[] = { 6,
+   2,28,   12,28,  11,27,  3,27,  4,26,
+   10,26
 };
-void drawNumber(byte x, byte y, byte num){
+void drawNumber(byte x, byte y, byte num, byte animate){
   byte b = pgm_read_byte(&fontWtf3[num]);
   if(bitRead(b, 7)){ 
-    displayDrawVector(/*path*/pathUp, /*x*/x, /*y*/y, /*animate*/false, /*color*/1);
+    displayDrawVector(/*path*/pathUp, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
   }
   if(bitRead(b, 6)){ 
-    displayDrawVector(/*path*/pathUpLeft, /*x*/x, /*y*/y, /*animate*/false, /*color*/1);
+    displayDrawVector(/*path*/pathUpLeft, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
   }
   if(bitRead(b, 5)){ 
-    displayDrawVector(/*path*/pathUpRight, /*x*/x, /*y*/y, /*animate*/false, /*color*/1);
+    displayDrawVector(/*path*/pathUpRight, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
   }
   if(bitRead(b, 4)){ 
-    displayDrawVector(/*path*/pathCenter, /*x*/x, /*y*/y, /*animate*/false, /*color*/1);
+    displayDrawVector(/*path*/pathCenter, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
   }
   if(bitRead(b, 3)){ 
-    displayDrawVector(/*path*/pathBottomLeft, /*x*/x, /*y*/y, /*animate*/false, /*color*/1);
+    displayDrawVector(/*path*/pathBottomLeft, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
   }
   if(bitRead(b, 2)){ 
-    displayDrawVector(/*path*/pathBottomRight, /*x*/x, /*y*/y, /*animate*/false, /*color*/1);
+    displayDrawVector(/*path*/pathBottomRight, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
   }
   if(bitRead(b, 1)){ 
-    displayDrawVector(/*path*/pathBottom, /*x*/x, /*y*/y, /*animate*/false, /*color*/1);
+    displayDrawVector(/*path*/pathBottom, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
   }
 }

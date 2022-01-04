@@ -1,7 +1,7 @@
 #include "lcd1202.h"
 #include <util/atomic.h>
 #include <LowPower.h>
-#define version F("v1.00")   //Версию менять здесь
+#define version F("v1.01")   //Версию менять здесь
 //#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
 #define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
 #define LOG   //Закомментировать чтобы отключило логи
@@ -95,7 +95,7 @@ void setup() {
 
 void loop() {
   if (_mode == MODE_INIT) modeInitLoop();
-  if (_mode == MODE_WATCHFACE) modeWatchFaceLoop();
+  if (_mode == MODE_WATCHFACE) modeWatchFaceLoop(false);
   if (_mode == MODE_MENU_MAIN ) modeMenuMainLoop();
   if (_mode == MODE_STATUS ) modeStatusLoop();
   if (_mode == MODE_MENU_MELODIES ) modeMenuMelodiesLoop();
