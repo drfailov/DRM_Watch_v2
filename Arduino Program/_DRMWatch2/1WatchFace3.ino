@@ -1,29 +1,26 @@
 void drawWatchFace3(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate){
   displayClear();
-
   
   {//date
     sprintf(buffer, "%02d.%02d.%04d", day, month, year);
-    displayDrawText(20, 61, 1, buffer);
+    displayDrawText(16, 61, 1, buffer);
   }
   
-
   if(eepromReadAlertEnabled()){   //Alert sign
     displayDrawAlertSign(0, 0, 1);
   }
   
   if(eepromReadSilentMode()){  //Silent mode sign
-    displayDrawSilentModeIcon(12, 0, 1);
+    displayDrawSilentModeIcon(88, 0, 1);
   }
   
   {//DayOfWeek
-    modeWatchFaceDrawDayOfWeek(30, 0, dayOfWeek);
+    modeWatchFaceDrawDayOfWeek(0, 61, dayOfWeek);
   }
   
   {//battery
-    modeWatchFaceDrawBattery(78, 0);
+    modeWatchFaceDrawBattery(79, 61);
   }
-  
 
   {//time
     byte hour1 = hour / 10;

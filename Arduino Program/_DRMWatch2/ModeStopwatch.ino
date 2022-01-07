@@ -73,14 +73,14 @@ void modeStopwatchLoop() {
     byte millisecond1 = millisecond / 10;
     byte millisecond2 = millisecond - (millisecond1 * 10);
     
-    displayDrawNumber(minute1 , 13, 10, 3, 4);
-    displayDrawNumber(minute2 , 27, 10, 3, 4);
-    displayDrawNumber(10      , 41, 10, 3, 4); // :
-    displayDrawNumber(second1 , 46, 10, 3, 4);
-    displayDrawNumber(second2 , 60, 10, 3, 4);
-    displayDrawNumber(10      , 74, 15, 2, 3); // :
-    displayDrawNumber(millisecond1 , 78, 15, 2, 3);
-    displayDrawNumber(millisecond2 , 88, 15, 2, 3);
+    displayDrawNumber(minute1 , 13, 10, 3, 4, false);
+    displayDrawNumber(minute2 , 27, 10, 3, 4, false);
+    displayDrawNumber(10      , 41, 10, 3, 4, false); // :
+    displayDrawNumber(second1 , 46, 10, 3, 4, false);
+    displayDrawNumber(second2 , 60, 10, 3, 4, false);
+    displayDrawNumber(10      , 74, 15, 2, 3, false); // :
+    displayDrawNumber(millisecond1 , 78, 15, 2, 3, false);
+    displayDrawNumber(millisecond2 , 88, 15, 2, 3, false);
   }
 
   

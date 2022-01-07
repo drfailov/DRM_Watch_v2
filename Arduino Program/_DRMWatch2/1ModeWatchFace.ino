@@ -55,13 +55,13 @@ void modeWatchFaceLoop(bool animate) {
     drawWatchFace3(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
   }
   else if (wtf == 2) {
-    drawWatchFace2(hour, minute, second, day, month, year, dayOfWeek);
+    drawWatchFace2(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
   }
   else if (wtf == 4) {
-    drawWatchFace4(hour, minute, second, day, month, year, dayOfWeek);
+    drawWatchFace4(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
   }
   else {
-    drawWatchFace1(hour, minute, second, day, month, year, dayOfWeek);
+    drawWatchFace1(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
   }
 
   { //Baclight

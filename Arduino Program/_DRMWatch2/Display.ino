@@ -309,9 +309,9 @@ void displayDrawAlertSign(byte x, byte y, bool color){
   static const char img[7] PROGMEM = { 
       0b00111000,
       0b01000101,
-      0b10000011,
-      0b10011010,
-      0b10010011,
+      0b01000011,
+      0b01011010,
+      0b01010011,
       0b01000101,
       0b00111000
     };
@@ -319,26 +319,24 @@ void displayDrawAlertSign(byte x, byte y, bool color){
 }
 
 void displayDrawSilentModeIcon(byte x, byte y, bool color){
-      static const char img[11] PROGMEM = { 
-      0b00011000,
-      0b00011000,
-      0b00100100,
-      0b01000010,
-      0b11111111,
-      0b00000000,
-      0b00100010,
-      0b00010100,
-      0b00001000,
-      0b00010100,
-      0b00100010
+      static const char img[8] PROGMEM = { 
+      0b00100000,
+      0b01011110,
+      0b00100001,
+      0b01010001,
+      0b01101001,
+      0b00100101,
+      0b00111010,
+      0b00100001
     };
-    displayDrawBitmap(x, y, img, 11, 8, color);
+    displayDrawBitmap(x, y, img, 8, 8, color);
 }
 
+/*draws battery*/
 void displayDrawBattery(byte x, byte y, byte level, bool isCharging, bool isLowPower){
 
   //draw battery
-  byte xshift = 6;
+  byte xshift = 5;
   displayDrawRect(/*x*/x+xshift+1, /*y*/y, /*w*/11, /*h*/7, /*color*/1);
   displayDrawLine(/*X1*/x+xshift+0, /*Y1*/y+2, /*X2*/x+xshift+0, /*Y2*/y+4, /*C*/1);
   displayDrawLine(/*X1*/x+xshift+1, /*Y1*/y+2, /*X2*/x+xshift+1, /*Y2*/y+4, /*C*/0);
@@ -351,19 +349,6 @@ void displayDrawBattery(byte x, byte y, byte level, bool isCharging, bool isLowP
   if(level >= 4)
     displayDrawLine(/*X1*/x+xshift+3, /*Y1*/y+2, /*X2*/x+xshift+3, /*Y2*/y+4, /*C*/1);
 
-  //draw low power symbol
-  if(isLowPower)
-  {
-    static const char img[6] PROGMEM = { 
-      0b00100010,
-      0b00010100,
-      0b00001000,
-      0b00010100,
-      0b00100010,
-      0b00000000
-    };
-    displayDrawBitmap(x, y, img, 6, 8, 1);
-  }
 
   //draw charging symbol
   if(isCharging){
@@ -373,6 +358,20 @@ void displayDrawBattery(byte x, byte y, byte level, bool isCharging, bool isLowP
       0b00111110,
       0b00011001,
       0b00000000,
+      0b00000000
+    };
+    displayDrawBitmap(x, y, img, 6, 8, 1);
+  }
+  
+  //draw low power symbol
+  if(isLowPower)
+  {
+    static const char img[6] PROGMEM = { 
+      0b00100010,
+      0b00010100,
+      0b00001000,
+      0b00010100,
+      0b00100010,
       0b00000000
     };
     displayDrawBitmap(x, y, img, 6, 8, 1);
@@ -406,16 +405,19 @@ PROGMEM const int32_t watchFaceFont [] {
   //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
   0b00000000000000000001000000010000, // [10] = :
 };
-void displayDrawNumber(int symbol, int offsetX, int offsetY, int blockSizeX, int blockSizeY){
-  for(int bx=0;bx<BLOCK_WIDTH; bx++){
-    for(int by=0;by<BLOCK_HEIGHT;by++){
-      int bitIndex = bx + by * BLOCK_WIDTH;
+void displayDrawNumber(byte symbol, byte offsetX, byte offsetY, byte blockSizeX, byte blockSizeY, byte animate){
+  for(byte bx=0;bx<BLOCK_WIDTH; bx++){
+    for(byte by=0;by<BLOCK_HEIGHT;by++){
+      byte bitIndex = bx + by * BLOCK_WIDTH;
       int32_t data = pgm_read_dword(&watchFaceFont[symbol]);
       bool fill = bitRead(data, bitIndex);
       if(fill){
-        int x = blockSizeX*bx + offsetX;
-        int y = blockSizeY*by + offsetY;
-        displayFillRect(/*x*/x, /*y*/y, /*w*/blockSizeX-1, /*h*/blockSizeY-1, /*c*/1);    
+        byte x = blockSizeX*bx + offsetX;
+        byte y = blockSizeY*by + offsetY;
+        displayFillRect(/*x*/x, /*y*/y, /*w*/blockSizeX-1, /*h*/blockSizeY-1, /*c*/1);
+        if(animate && bitIndex%animate == 0){
+          displayUpdate();
+        }
       }
     }
   }
