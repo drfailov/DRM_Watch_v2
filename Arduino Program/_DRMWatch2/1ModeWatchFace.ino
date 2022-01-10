@@ -134,7 +134,7 @@ void modeWatchFaceDrawBattery(byte x, byte y) {
   displayDrawBattery(x, y, level, isCharging, isLowPower);
 }
 
-void modeWatchFaceDrawDayOfWeek(byte x, byte y, byte dayOfWeek) { //
+void modeWatchFaceDrawDayOfWeek(byte x, byte y, byte dayOfWeek, bool color) { //
   __FlashStringHelper* txt;
 #ifdef LANG_RU
   if (dayOfWeek == 1) txt = F("Пн");
@@ -154,5 +154,5 @@ void modeWatchFaceDrawDayOfWeek(byte x, byte y, byte dayOfWeek) { //
   if (dayOfWeek == 6) txt = F("Sat");
   if (dayOfWeek == 0) txt = F("Sun");
 #endif
-  displayDrawText(x, y, 1, txt);
+  displayDrawText(x, y, color, txt);
 }

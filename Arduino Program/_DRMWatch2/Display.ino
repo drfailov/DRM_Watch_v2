@@ -60,6 +60,7 @@ static const PROGMEM byte pathBubble[] = { 12,
   40, 18,   37,  29
 }; 
 
+//Инициализация дисплея. Подаём питание, ждём немного и инициализируем программно
 void displayInit(){
 #ifdef LOG
   Serial.print(F("LCD Init..."));
@@ -74,15 +75,18 @@ void displayInit(){
 #endif
 }
 
+//Врубаем подсветку
 void displayBacklightOn(){
   pinMode(pinLcdBacklight, OUTPUT);
   digitalWrite(pinLcdBacklight, HIGH);
 }
 
+//Отсоединяем пин подсветки полностью
 void displayBacklightOff(){
   pinMode(pinLcdBacklight, INPUT);
 }
 
+//Отсоединяем все пины дисплея от ардуины, в том числе и питание
 void displayPowerOff(){
 #ifdef LOG
   Serial.println(F("LCD POWER OFF"));
@@ -99,48 +103,60 @@ void displayPowerOff(){
   delay(50);
 }
 
+//Функция очистки дисплея. Она здесь указана для простоты перехода на другой дисплей - всё взаимодействие с дисплее происходит через эти "обёртки".
 void displayClear(){
   lcd.Clear_LCD();
 }
 
+//Функция оновления дисплея из буфера. Она здесь указана для простоты перехода на другой дисплей - всё взаимодействие с дисплее происходит через эти "обёртки".
 void displayUpdate(){
   lcd.Update();
 }
 
+//Функция рисования линии. Она здесь указана для простоты перехода на другой дисплей - всё взаимодействие с дисплее происходит через эти "обёртки".
 void displayDrawLine(byte x0, byte y0, byte x1, byte y1, boolean color){
   lcd.drawLine(/*X1*/x0, /*Y1*/y0, /*X2*/x1, /*Y2*/y1, /*C*/color);
 }
 
+//Функция рисования периметра прямоугольника. Она здесь указана для простоты перехода на другой дисплей - всё взаимодействие с дисплее происходит через эти "обёртки".
 void displayDrawRect(byte x, byte y, byte w, byte h, boolean color){
   lcd.drawRect(/*x*/x, /*y*/y, /*w*/w, /*h*/h, /*c*/color);
 }
 
+//Функция рисования залитого прямоугольника. Она здесь указана для простоты перехода на другой дисплей - всё взаимодействие с дисплее происходит через эти "обёртки".
 void displayFillRect(byte x, byte y, byte w, byte h, boolean color){
   lcd.fillRect(/*x*/x, /*y*/y, /*w*/w, /*h*/h, /*c*/color);
 }
 
+//Функция рисования текста. Эта конкретная функция рисует из оперативки, т.е. из буфера. 
+//Она здесь указана для простоты перехода на другой дисплей - всё взаимодействие с дисплее происходит через эти "обёртки".
+//Для рисования PROGMEM строк или строк с макросом F() есть другие функции пониже.
 void displayDrawText(int X, int Y, int color, const char* text){
   //1 is black, 0 is white
   lcd.print(X, Y, color, text);
 }
 
+//Рисование одного символа из оперативки. Она здесь указана для простоты перехода на другой дисплей - всё взаимодействие с дисплее происходит через эти "обёртки".
 void displayDrawText(int X, int Y, int color, char c){
   //1 is black, 0 is white
   lcd.drawChar(X, Y, color, c);
 }
 
+//Рисование растровой картинки. Она здесь указана для простоты перехода на другой дисплей - всё взаимодействие с дисплее происходит через эти "обёртки".
 void displayDrawBitmap(byte x, byte y, const unsigned char *img, byte w, byte h, byte color){
   lcd.drawBitmap(x, y, img, w, h, color);
 }
 
 //-------- Display independent functions
-  
+
+//Реконструкция изначального растра из тестовой программы. Эта функция нигде не вызывается, поэтому памяти не занимает. Пусть валяется.
 void displayDrawVectorLogo(){
   displayDrawVector(/*path*/pathZubat, /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
   displayDrawVector(/*path*/pathBubble, /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
   displayDrawVector(/*path*/pathDrmWatch, /*x*/48, /*y*/25, /*animate*/true, /*color*/1);
 }
 
+//Рисование векторной картинки. Формат вектора описан в комментарии ниже.
 //max number of points for one path is 255.
 //Array type: const PROGMEM byte path[] = {...);
 //Array format: {numberOfPoints, x0, y0, x1, y1, x2, y2, ...}
@@ -167,7 +183,7 @@ void displayDrawVector(const byte* data_array, byte X, byte Y, byte animate, boo
   }
 }
 
-
+//Рисование на экране текста из макроса F().
 void displayDrawText(int X, int Y, int color, const __FlashStringHelper* str){
   strcpy_P(buffer, (PGM_P)str);
   byte pos = 0;
@@ -181,6 +197,8 @@ void displayDrawText(int X, int Y, int color, const __FlashStringHelper* str){
   }
 }
 
+//Отображение красивого уведомления с Зубатом и анимацией.
+//Анимацию можно перемотать кнопкой вверх
 void displayMessage(const __FlashStringHelper* str){
   displayClear();
   displayDrawVector(/*path*/pathZubat, /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
@@ -209,12 +227,17 @@ void displayMessage(const __FlashStringHelper* str){
     delay(200);
 }
 
+//Вывод простого сообщения из оперативки.
 void displaySimpleMessage(const char* text){
   displayClear();
   displayDrawText(10, 30, 1, text);
   displayUpdate();
 }
 
+//Рисование галочки. Используется по всей программе, в частности в менюшках.
+//Рисунок находится в битовом массиве.
+//Начало массива - левая часть рисунка. Один бит - один пиксель.
+//Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
 void displayDrawCheck(byte x, byte y, bool color){
   static const char img[6] PROGMEM = { 
       0b00011000,
@@ -227,6 +250,10 @@ void displayDrawCheck(byte x, byte y, bool color){
   displayDrawBitmap(x, y, img, 6, 8, color);
 }
 
+//Рисование иконки сброса. Используется в секундомере
+//Рисунок находится в битовом массиве.
+//Начало массива - левая часть рисунка. Один бит - один пиксель.
+//Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
 void displayDrawResetIcon(byte x, byte y, bool color){
   static const char img[6] PROGMEM = { 
       0b01001111,
@@ -239,6 +266,10 @@ void displayDrawResetIcon(byte x, byte y, bool color){
   displayDrawBitmap(x, y, img, 6, 8, color);
 }
 
+//Рисование иконки стрелки вниз. Используется менющках.
+//Рисунок находится в битовом массиве.
+//Начало массива - левая часть рисунка. Один бит - один пиксель.
+//Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
 void displayDrawArrowDown(byte x, byte y, bool color){
   static const char img[7] PROGMEM = { 
       0b00000001,
@@ -252,6 +283,10 @@ void displayDrawArrowDown(byte x, byte y, bool color){
   displayDrawBitmap(x, y, img, 7, 8, color);
 }
 
+//Рисование иконки стрелки вправо. Используется на экране установки времени и будильника.
+//Рисунок находится в битовом массиве.
+//Начало массива - левая часть рисунка. Один бит - один пиксель.
+//Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
 void displayDrawArrowRight(byte x, byte y, bool color){
   static const char img[7] PROGMEM = { 
       0b01100011,
@@ -265,6 +300,10 @@ void displayDrawArrowRight(byte x, byte y, bool color){
   displayDrawBitmap(x, y, img, 7, 8, color);
 }
 
+//Рисование иконки плэй. Используется на экране секундомера.
+//Рисунок находится в битовом массиве.
+//Начало массива - левая часть рисунка. Один бит - один пиксель.
+//Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
 void displayDrawPlaySign(byte x, byte y, bool color){
   static const char img[7] PROGMEM = { 
       0b01111111,
@@ -278,6 +317,10 @@ void displayDrawPlaySign(byte x, byte y, bool color){
   displayDrawBitmap(x, y, img, 7, 8, color);
 }
 
+//Рисование иконки паузы. Используется на экране секундомера.
+//Рисунок находится в битовом массиве.
+//Начало массива - левая часть рисунка. Один бит - один пиксель.
+//Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
 void displayDrawPauseSign(byte x, byte y, bool color){
   static const char img[7] PROGMEM = { 
       0b01111111,
@@ -291,6 +334,10 @@ void displayDrawPauseSign(byte x, byte y, bool color){
   displayDrawBitmap(x, y, img, 7, 8, color);
 }
 
+//Рисование иконки стоп. Используется на экране секундомера.
+//Рисунок находится в битовом массиве.
+//Начало массива - левая часть рисунка. Один бит - один пиксель.
+//Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
 void displayDrawStopSign(byte x, byte y, bool color){
   static const char img[7] PROGMEM = { 
       0b00111111,
@@ -304,18 +351,23 @@ void displayDrawStopSign(byte x, byte y, bool color){
   displayDrawBitmap(x, y, img, 7, 8, color);
 }
 
-
+//Рисование иконки будильника. Используется на циферблатах.
+//Рисунок находится в битовом массиве.
+//Начало массива - левая часть рисунка. Один бит - один пиксель.
+//Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
 void displayDrawAlertSign(byte x, byte y, bool color){
-  static const char img[7] PROGMEM = { 
-      0b00111000,
-      0b01000101,
-      0b01000011,
-      0b01011010,
-      0b01010011,
-      0b01000101,
-      0b00111000
+  static const char img[9] PROGMEM = { 
+      0b00000010,
+      0b00011101,
+      0b00100010,
+      0b01000001,
+      0b01001101,
+      0b01001001,
+      0b00100010,
+      0b00011101,
+      0b00000010
     };
-  displayDrawBitmap(x, y, img, 7, 8, color);
+  displayDrawBitmap(x, y, img, 9, 8, color);
 }
 
 void displayDrawSilentModeIcon(byte x, byte y, bool color){

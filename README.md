@@ -45,7 +45,7 @@ Link: https://aliexpress.ru/item/4000903444456.html  \
 
 ### Nokia 1280, PCF8814 LCD
 Also, this display is used in: Nokia 1202, Nokia 1280, Nokia 1203.
-And also compatible with Nokia 1100 LCD, but it will not fit with board.
+And also compatible with Nokia 1100 LCD, Nokia 1101 LCD, Nokia 1110 LCD, but it will not fit with board.
 Display is main output device. \
 Link: https://aliexpress.ru/item/32864378445.html  \
 <img src="Photos/photo_2021-10-24_09-22-21.jpg" width="150"/> <img src="Photos/photo_2021-10-16_11-31-45.jpg" width="150"/>
@@ -153,29 +153,29 @@ If RTC can not be initialized, watchface will not open.\
 <img src="Photos/photo_2021-12-19_19-43-52.jpg" width="300"/>
 
 
-### ModeWatchFace1
+### ModeWatchFace
 Whow time, date. Watchfaces is only screen with deep sleep, so device can run for a long time if in watchface mode.
 Press button Up to turn on backlight. Press button down to open main menu.\
 <img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="300"/>
 
 
 ### WatchFace1
-Watchface 1
+Watchface 1\
 <img src="Photos/" width="300"/>
 
 
 ### WatchFace2
-Watchface 2
+Watchface 2\
 <img src="Photos/" width="300"/>
 
 
 ### WatchFace3
-Watchface 3
+Watchface 3\
 <img src="Photos/" width="300"/>
 
 
 ### WatchFace4
-Watchface 4
+Watchface 4\
 <img src="Photos/" width="300"/>
 
 
@@ -205,21 +205,21 @@ Press button Up to select. Press button Down to move cursor down.\
 <img src="Photos/photo_2021-12-19_19-43-52 (6).jpg" width="300"/>
 
 ### ModeMenuSetBeepSound
-Select sound of buttons.
+Select sound of buttons.\
 <img src="Photos/photo_2021-12-19_19-43-52 (7).jpg" width="300"/>
 
 ### ModeAbout
-Information about developers and version.
+Information about developers and version.\
 <img src="Photos/photo_2021-12-19_19-43-52 (8).jpg" width="300"/>
 
 ### ModeSetAlarm
-You can select time and melody and alarm will play at that time. Alarm will start only if watchface is opened.
+You can select time and melody and alarm will play at that time. Alarm will start only if watchface is opened.\
 <img src="Photos/" width="300"/>
 
 ### modeZrada
 Genegates random conscusion: "Peremoga" or "Zrada". This is local Ukrainian meme.
 "Peremoga" is "win", "Zrada" is "treason".
-Mechanics the same as heads and tails.
+Mechanics the same as heads and tails.\
 <img src="Photos/" width="300"/>
 
 ### Mode

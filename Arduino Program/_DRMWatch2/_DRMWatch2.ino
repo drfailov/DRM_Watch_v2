@@ -1,7 +1,7 @@
 #include "lcd1202.h"
 #include <util/atomic.h>
 #include <LowPower.h>
-#define version F("v1.02")   //Версию менять здесь
+#define version F("v1.03")   //Версию менять здесь
 //#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
 #define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
 #define LOG   //Закомментировать чтобы отключило логи
@@ -23,6 +23,7 @@
 
 
 //sleep times
+//Значения констант сна, котоые пишутся в память
 #define eepromSleepTime05sec (byte)0 
 #define eepromSleepTime1sec (byte)1 
 #define eepromSleepTime2sec (byte)2 
@@ -30,6 +31,7 @@
 #define eepromSleepTime8sec (byte)8 
 
 //beep sounds
+//Значения констант звука кнопок, котоые пишутся в память
 #define eepromBeepSoundBeep (byte)0
 #define eepromBeepSoundClick (byte)1
 #define eepromBeepSoundTone (byte)2
@@ -50,6 +52,7 @@
  *    - call its finish() from setMode()
 */
 //Modes
+//Значения констант режимов
 #define MODE_INIT (byte)0
 #define MODE_WATCHFACE (byte)1
 #define MODE_MENU_MAIN (byte)2
@@ -67,6 +70,7 @@
 #define MODE_MENU_SET_WATCHFACE (byte)14
 #define MODE_ZRADA (byte)15
 
+//Здесь определенл "назад", которое используется во всех меню, для экономии памяти
 #ifdef LANG_RU
 const char menuItemBack[] PROGMEM = "< Haзaд";
 #endif
@@ -74,10 +78,13 @@ const char menuItemBack[] PROGMEM = "< Haзaд";
 const char menuItemBack[] PROGMEM = "< Back";
 #endif
 
+//Переменная в которой хранится текущий режим
 byte _mode = -1;
-//размер буфера. Чем меньше тем экономнее
+
+//размер текстового буфера. Чем меньше тем экономнее.
 #define BUFFER_SIZE 25
-//общий на всю программу текстовый буфер чтобы не объявлять каждый раз локальную
+
+//общий на всю программу текстовый буфер чтобы не объявлять каждый раз локальную.
 char buffer[BUFFER_SIZE]; 
 
 void setup() {
@@ -110,8 +117,6 @@ void loop() {
   if (_mode == MODE_SET_ALARM ) modeSetAlarmLoop();
   if (_mode == MODE_MENU_SET_WATCHFACE ) modeMenuSetWatchfaceLoop();
   if (_mode == MODE_ZRADA ) modeZradaLoop();
-  
-  
 }
 
 void setMode(int _modeNew) {

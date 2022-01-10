@@ -5,7 +5,7 @@ const byte modeMenuSetWatchfaceItemsCount = 5; //сколько пунктов �
 //Максимальная длина строки:                     "          "
 const char modeMenuSetWatchfaceItem1[] PROGMEM = "DRM Watch";
 const char modeMenuSetWatchfaceItem2[] PROGMEM = "DRM Lite";
-const char modeMenuSetWatchfaceItem3[] PROGMEM = "Siemens";
+const char modeMenuSetWatchfaceItem3[] PROGMEM = "Nomens";
 const char modeMenuSetWatchfaceItem4[] PROGMEM = "Zubat";
 
 const char* const modeMenuSetWatchfaceItems[] PROGMEM = {
@@ -68,7 +68,7 @@ void modeMenuSetWatchfaceSelected(byte index) {
     return;
   }
 
-  if (index == 3) { //Back
+  if (index == 4) { //Back
     setMode(MODE_MENU_SETTINGS);
     return;
   }

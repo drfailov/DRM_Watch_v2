@@ -1,3 +1,13 @@
+/* 
+ * EN: 
+ * Drawing watchface 4 (Zubat). Arguments:
+ * hour, minute, second, day, month, year, dayOfWeek - current values to draw
+ * animate - 0=draw without animation, 1 - animate slowly, 2 - animate more quickly, ...
+ * RU: 
+ * Рисование циферблата 4 (Zubat). Принимает аргументы:
+ * hour, minute, second, day, month, year, dayOfWeek - текущие значения которые нужно вывести на циферблат
+ * animate - Анимировать ли вывод. 0 = не анимировать. 1 = анимировать медленно, 2 = анимировать быстрее ...
+*/
 void drawWatchFace4(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate){
   displayClear();
   
@@ -15,7 +25,7 @@ void drawWatchFace4(byte hour, byte minute, byte second, byte day, byte month, i
   }
   
   {//DayOfWeek
-    modeWatchFaceDrawDayOfWeek(0, 61, dayOfWeek);
+    modeWatchFaceDrawDayOfWeek(0, 61, dayOfWeek, /*color*/1);
   }  
   
   {//battery

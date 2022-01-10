@@ -1,26 +1,63 @@
+/* 
+ * EN: 
+ * Drawing watchfacw 3 (Nomens). Arguments:
+ * hour, minute, second, day, month, year, dayOfWeek - current values to draw
+ * animate - 0=draw without animation, 1 - animate slowly, 2 - animate more quickly, ...
+ * RU: 
+ * Рисование циферблата 3 (Nomens). Принимает аргументы:
+ * hour, minute, second, day, month, year, dayOfWeek - текущие значения которые нужно вывести на циферблат
+ * animate - Анимировать ли вывод. 0 = не анимировать. 1 = анимировать медленно, 2 = анимировать быстрее ...
+*/
 void drawWatchFace3(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate){
   displayClear();
-  
+
+
+  {//треугольничек с полосочкой рисуем
+    byte X = 63;
+    byte Y = 54;
+    for(byte i=1; i<14; i++){
+       displayDrawLine(/*X1*/X+i, /*Y1*/Y+i, /*X2*/96, /*Y2*/Y+i, /*C*/1);
+    }
+    displayDrawLine(/*X1*/0, /*Y1*/Y, /*X2*/96, /*Y2*/Y, /*C*/1);
+  }
+   
   {//date
     sprintf(buffer, "%02d.%02d.%04d", day, month, year);
-    displayDrawText(16, 61, 1, buffer);
-  }
-  
-  if(eepromReadAlertEnabled()){   //Alert sign
-    displayDrawAlertSign(0, 0, 1);
-  }
-  
-  if(eepromReadSilentMode()){  //Silent mode sign
-    displayDrawSilentModeIcon(88, 0, 1);
+    displayDrawText(3, 58, 1, buffer);
   }
   
   {//DayOfWeek
-    modeWatchFaceDrawDayOfWeek(0, 61, dayOfWeek);
+#ifdef LANG_EN
+    modeWatchFaceDrawDayOfWeek(76, 58, dayOfWeek, 0);
+#endif
+#ifdef LANG_RU
+    modeWatchFaceDrawDayOfWeek(80, 58, dayOfWeek, 0);
+#endif
   }
+
+  byte X = 96;
   
   {//battery
-    modeWatchFaceDrawBattery(79, 61);
+    X -= 17;
+    modeWatchFaceDrawBattery(X, 0);
+    if(!batteryIsCharging() && !batteryIsLowPower()) X += 5;
   }
+
+  
+  //Alert sign
+  if(eepromReadAlertEnabled()){ 
+    X-= 13;
+    displayDrawAlertSign(X, 0, 1);
+  }
+
+  
+  //Silent mode sign
+  if(eepromReadSilentMode()){ 
+    X -= 12;
+    displayDrawSilentModeIcon(X, 0, 1);
+  }
+  
+
 
   {//time
     byte hour1 = hour / 10;
@@ -29,10 +66,10 @@ void drawWatchFace3(byte hour, byte minute, byte second, byte day, byte month, i
     byte minute2 = minute - (minute1 * 10);
     displayFillRect(/*x*/46, /*y*/24, /*w*/3, /*h*/3, /*c*/1);
     displayFillRect(/*x*/46, /*y*/35, /*w*/3, /*h*/3, /*c*/1);
-    drawNumber(/*x*/8, /*y*/16, /*num*/hour1, /*animate*/ animate);
-    drawNumber(/*x*/25, /*y*/16, /*num*/hour2, /*animate*/ animate);
-    drawNumber(/*x*/55, /*y*/16, /*num*/minute1, /*animate*/ animate);
-    drawNumber(/*x*/72, /*y*/16, /*num*/minute2, /*animate*/ animate);
+    drawNumber(/*x*/8, /*y*/14, /*num*/hour1, /*animate*/ animate);
+    drawNumber(/*x*/25, /*y*/14, /*num*/hour2, /*animate*/ animate);
+    drawNumber(/*x*/55, /*y*/14, /*num*/minute1, /*animate*/ animate);
+    drawNumber(/*x*/72, /*y*/14, /*num*/minute2, /*animate*/ animate);
   }
   
   displayUpdate();

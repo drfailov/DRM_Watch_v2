@@ -1,3 +1,13 @@
+/* 
+ * EN: 
+ * Drawing watchfacw 2 (DRM Lite). Arguments:
+ * hour, minute, second, day, month, year, dayOfWeek - current values to draw
+ * animate - 0=draw without animation, 1 - animate slowly, 2 - animate more quickly, ...
+ * RU: 
+ * Рисование циферблата 2 (DRM Lite). Принимает аргументы:
+ * hour, minute, second, day, month, year, dayOfWeek - текущие значения которые нужно вывести на циферблат
+ * animate - Анимировать ли вывод. 0 = не анимировать. 1 = анимировать медленно, 2 = анимировать быстрее ...
+*/
 void drawWatchFace2(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate){
     displayClear();
   
@@ -8,10 +18,10 @@ void drawWatchFace2(byte hour, byte minute, byte second, byte day, byte month, i
   
   {//DayOfWeek
 #ifdef LANG_EN
-    modeWatchFaceDrawDayOfWeek(79, 0, dayOfWeek);
+    modeWatchFaceDrawDayOfWeek(79, 0, dayOfWeek, /*color*/1);
 #endif
 #ifdef LANG_RU
-    modeWatchFaceDrawDayOfWeek(85, 0, dayOfWeek);
+    modeWatchFaceDrawDayOfWeek(85, 0, dayOfWeek, /*color*/1);
 #endif
   }
   
@@ -39,7 +49,7 @@ void drawWatchFace2(byte hour, byte minute, byte second, byte day, byte month, i
   
   //Alert sign
   if(eepromReadAlertEnabled()){ 
-    X-= 9;
+    X-= 11;
     displayDrawAlertSign(X, 61, 1);
   }
   
