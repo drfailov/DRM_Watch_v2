@@ -33,7 +33,6 @@ const char* const modeMenuSettingsItems[] PROGMEM = {
   modeMenuSettingsItem7,
   menuItemBack
 };
-void(* resetFunc) (void) = 0;//объявляем функцию reset с адресом 0
 
 
 void modeMenuSettingsSetup() {
@@ -50,16 +49,7 @@ void modeMenuSettingsFinish() {
 
 void modeMenuSettingsSelected(byte index) {
   if (index == 0) { //Reboot
-#ifdef LANG_EN
-    displayMessage(F("Rebooting..."));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("Перезагрузка"));
-#endif    
-    displayPowerOff();
-    delay(1000);
-    resetFunc(); //вызываем reset
-    return;
+    reboot();
   }
   
   if (index == 1) { //Select WTF
@@ -88,17 +78,9 @@ void modeMenuSettingsSelected(byte index) {
   }
 
   if (index == 6) { //Hard Reset
-#ifdef LANG_EN
-    displayMessage(F("RESET!!!"));
-#endif
-#ifdef LANG_RU
-    displayMessage(F("CБPOC!!!"));
-#endif    
-    displayPowerOff();
-    eepromFIllByZeros();
-    delay(5000);
-    resetFunc(); //вызываем reset
-    return;
+    //eepromFIllByZeros();
+    eepromFIllByOnes();
+    reboot();
   }
   
   if (index == 7) { //Back

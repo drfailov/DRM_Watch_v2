@@ -1,4 +1,11 @@
 #include <EEPROM.h>
+/* EN:
+ * This fila contains function to save and read EEPROM parameters
+ * Default values for new arduino board is 255, 255, 255 ....
+ * RU:
+ * Этот файл содержит функции для записи и чтения EEPROM параметров
+ * Стандартные состояния переменных на новой ардуинке такие: 255, 255, 255 ....
+*/
 
 
 #define eepromAddressSleepTime (byte)10 
@@ -114,5 +121,10 @@ void eepromReadToBuffer(){
 void eepromFIllByZeros(){
   for(int i=0; i<1000; i++){
     EEPROM.put(i, 0b00000000);
+  }
+}
+void eepromFIllByOnes(){
+  for(int i=0; i<1000; i++){
+    EEPROM.put(i, 0b11111111);
   }
 }

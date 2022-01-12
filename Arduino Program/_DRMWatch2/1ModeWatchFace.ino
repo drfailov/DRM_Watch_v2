@@ -50,8 +50,11 @@ void modeWatchFaceLoop(bool animate) {
     }
   }
 
+  //Номер выбранного циферблата из памяти
   byte wtf = eepromReadWatchface();
-  bool found = false;
+  //Эта переменная нужна чтобы понять, удалось ли найти циферблат правильный. 
+  //Чтобы если не удалось, потом вывести сообщение "Select WTF".
+  bool found = false; 
 
 #ifdef WATCHFACE_DRMWATCH
   if (wtf == WATCHFACE_DRMWATCH) {
@@ -77,6 +80,13 @@ void modeWatchFaceLoop(bool animate) {
 #ifdef WATCHFACE_ZUBAT
   if (wtf == WATCHFACE_ZUBAT) {
     drawWatchFaceZubat(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+    found = true;
+  }
+#endif
+
+#ifdef WATCHFACE_NOKIA
+  if (wtf == WATCHFACE_NOKIA) {
+    drawWatchFaceNokia(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
     found = true;
   }
 #endif

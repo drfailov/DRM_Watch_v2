@@ -87,7 +87,25 @@ Pins list:
 - A4 - RTC SDA
 - A5 - RTC SCL
 
+## First steps
+- Assemble device
+- Connect it to PC and flash firmware
+- Select watchface
 
+## Troubleshooting
+### Select WTF After flash firmware
+<img src="Photos/" width="300"/>
+To fix it, go to settings and select watchface from list.
+### No device connected or Unrecognized device when connected
+<img src="Photos/" width="300"/>
+TODO
+### No response from board when trying to flash firmware.
+<img src="Photos/" width="300"/>
+Check your Arduino. (if pin13 LED is blinking when power on, arduino is alive)
+TODO
+### RTC FAIL on startup
+<img src="Photos/" width="300"/>
+TODO
 
 
 ## Code description
@@ -114,16 +132,18 @@ When adding new mode:
 - Call `setMode(YOUR_MODE);` when you want to enter your new screen.
 - Don't forget to call `goToWatchface()` or `setMode()` to exit your mode if needed.
 
+
+
 ### How to add my own watchface?
 Watchfaces is the same that Mode, but called from `goToWatchface()`.
-- Create file like `WatchFaceMy`.
-- Create function like `void drawWatchFaceMy(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate){ `.
-- Write script to draw yout watchface
-//todo
-- Call its functions from `setMode()` and `loop()`.
-- Create item for your watchface in `ModeSetWatchface`.
-- Call from goToWatchface(), if its number selected.
-- Don't forget to copy or reuse backlight, sleep and exit to menu routines to make your watchface fully functional.
+- Create constant for your watchface in file `_DRMWatch2.ino`. Use not used previously number for your constant: `#define WATCHFACE_NOKIA 5`.
+- Create file like `1WatchFaceNokia`.
+- Create function like `void drawWatchFaceNokia(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)`.
+- Add call of your `drawWatchFaceNokia` from file `1ModeWatchFace.ino` function `modeWatchFaceLoop`. 
+Put this call under `#ifdef WATCHFACE_NOKIA` statement. Use other watchfaces as example.
+- In file `ModeMenuSetWatchface.ino` function `modeMenuSetWatchfaceItemsCount()` add `cnt++;` for your watchface. 
+This is needed to count active watchfaces and show correct number of menu items.
+- Write script to draw yout watchface. You can only use non-blocking functions. 
 
 
 

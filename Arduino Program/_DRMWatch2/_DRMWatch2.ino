@@ -1,17 +1,22 @@
 #include "lcd1202.h"
 #include <util/atomic.h>
 #include <LowPower.h>
+void(* resetFunc) (void) = 0;//объявляем функцию reset с адресом 0
+
+//Базовые константы
 #define version F("v1.05")   //Версию менять здесь
 //#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
 #define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
 #define LOG   //Закомментировать чтобы отключило логи
 
+//Включение и выключение цифкрблатов
 #define WATCHFACE_DRMWATCH 1   //Это циферблат по умолчанию. Закомментировать чтобы отключило циферблат
 #define WATCHFACE_DRMLITE 2   //Закомментировать чтобы отключило циферблат
 #define WATCHFACE_NOMENS 3   //Закомментировать чтобы отключило циферблат
 #define WATCHFACE_ZUBAT 4   //Закомментировать чтобы отключило циферблат
+#define WATCHFACE_NOKIA 5   //Закомментировать чтобы отключило циферблат
 
-//Pins
+//Распиновка
 #define pinButtonDown (byte)2 //active high
 #define pinButtonUp (byte)3 //active high
 #define pinLcdRst (byte)5
@@ -178,6 +183,19 @@ void setMode(int _modeNew) {
   
   
   _mode = _modeNew;
+}
+
+//Выплнить всю последовательность действий требуемых для выполнения перезагрузки.
+void reboot(){
+#ifdef LANG_EN
+  displayMessage(F("Rebooting..."));
+#endif
+#ifdef LANG_RU
+  displayMessage(F("Перезагрузка"));
+#endif    
+  displayPowerOff();
+  delay(1000);
+  resetFunc(); //вызываем reset
 }
 
 //переключить на режим выбранного в меню вотчфейса из любого места программы

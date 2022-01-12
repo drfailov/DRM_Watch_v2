@@ -1,4 +1,7 @@
 /*Show watchfacw menu by triggerimg GenericMenu*/
+
+
+//This is needed to count active watchfaces and show correct number of menu items.
 byte modeMenuSetWatchfaceItemsCount(){//сколько пунктов меню в массиве
   byte cnt = 1;//1 for back item
 #ifdef WATCHFACE_DRMWATCH
@@ -15,6 +18,7 @@ byte modeMenuSetWatchfaceItemsCount(){//сколько пунктов меню �
 #endif
   return cnt;
 }
+
 
 #ifdef WATCHFACE_DRMWATCH
 //Максимальная длина строки:                            "          "
