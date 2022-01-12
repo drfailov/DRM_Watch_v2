@@ -8,7 +8,7 @@
  * hour, minute, second, day, month, year, dayOfWeek - текущие значения которые нужно вывести на циферблат
  * animate - Анимировать ли вывод. 0 = не анимировать. 1 = анимировать медленно, 2 = анимировать быстрее ...
 */
-void drawWatchFace3(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate){
+void drawWatchFaceNomens(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate){
   displayClear();
 
 

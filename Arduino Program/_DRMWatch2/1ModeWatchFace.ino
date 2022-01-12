@@ -51,17 +51,39 @@ void modeWatchFaceLoop(bool animate) {
   }
 
   byte wtf = eepromReadWatchface();
-  if (wtf == 3) {
-    drawWatchFace3(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+  bool found = false;
+
+#ifdef WATCHFACE_DRMWATCH
+  if (wtf == WATCHFACE_DRMWATCH) {
+    drawWatchFaceDrmWatch(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+    found = true;
   }
-  else if (wtf == 2) {
-    drawWatchFace2(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+#endif
+
+#ifdef WATCHFACE_DRMLITE
+  if (wtf == WATCHFACE_DRMLITE) {
+    drawWatchFaceDrmLite(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+    found = true;
   }
-  else if (wtf == 4) {
-    drawWatchFace4(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+#endif
+
+#ifdef WATCHFACE_NOMENS
+  if (wtf == WATCHFACE_NOMENS) {
+    drawWatchFaceNomens(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+    found = true;
   }
-  else {
-    drawWatchFace1(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+#endif
+
+#ifdef WATCHFACE_ZUBAT
+  if (wtf == WATCHFACE_ZUBAT) {
+    drawWatchFaceZubat(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+    found = true;
+  }
+#endif
+
+  if(!found){
+    displayDrawText(20, 30, 1, F("Select WTF"));
+    displayUpdate();
   }
 
   { //Baclight

@@ -56,7 +56,7 @@ void modeMenuSetTimeLoop(){
     
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE) {//SAVE
       rtcSetTime(modeMenuSetTimeYears, modeMenuSetTimeMonths, modeMenuSetTimeDays, modeMenuSetTimeHours, modeMenuSetTimeMinutes);
-      { //fix alarm
+      { //fix alarm, предотвращение включения будильника сразу в момент установки
         byte hour = rtcGetHours();
         byte minute = rtcGetMinutes();
         byte day = rtcGetDay();
@@ -64,16 +64,11 @@ void modeMenuSetTimeLoop(){
         byte modeSetAlarmHour = eepromReadAlertHour();
         byte modeSetAlarmMinute = eepromReadAlertMinute();
         if((hour == modeSetAlarmHour && minute >= modeSetAlarmMinute) || (hour > modeSetAlarmHour))
-            eepromSaveAlertLastDayRun(day);
+          eepromSaveAlertLastDayRun(day);
         else
           eepromSaveAlertLastDayRun(0);
       } 
-#ifdef LANG_EN
-      displayMessage(F("Time saved"));
-#endif
-#ifdef LANG_RU
-      displayMessage(F("Bpeмя coxp."));
-#endif
+      displayMessage((const __FlashStringHelper*)textSaved);
       goToWatchface();
       return;
     }
@@ -105,83 +100,20 @@ void modeMenuSetTimeLoop(){
   displayDrawArrowRight(/*X*/1, /*Y*/59, 1);
   
   displayDrawText(35, 19, 1, ":");
-  { //hours
-    byte x = 15;
-    byte y = 15;
-    char chars[4];
-    sprintf(chars, "%02d", modeMenuSetTimeHours);
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_HOUR){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, chars);
-    }
-    else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, chars);
-    }
-  }
+  //hours
+  displayDraw2DigitNumberWithFrame(/*x*/15, /*y*/15, /*number*/modeMenuSetTimeHours, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_HOUR);
+  //minutes
+  displayDraw2DigitNumberWithFrame(/*x*/40, /*y*/15, /*number*/modeMenuSetTimeMinutes, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MINUTE);
   
-  { //minutes
-    byte x = 40;
-    byte y = 15;
-    char chars[4];
-    sprintf(chars, "%02d", modeMenuSetTimeMinutes);
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MINUTE){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, chars);
-    }
-    else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, chars);
-    }
-  }
-
 
   displayDrawText(35, 39, 1, ".");
   displayDrawText(60, 39, 1, ".");
-  { //days
-    byte x = 15;
-    byte y = 33;
-    char chars[4];
-    sprintf(chars, "%02d", modeMenuSetTimeDays);
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_DAY){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, chars);
-    }
-    else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, chars);
-    }
-  }
-  
-  { //months
-    byte x = 40;
-    byte y = 33;
-    char chars[4];
-    sprintf(chars, "%02d", modeMenuSetTimeMonths);
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MONTH){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, chars);
-    }
-    else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, chars);
-    }
-  }
-  
-  { //Year
-    byte x = 65;
-    byte y = 33;
-    char chars[5];
-    sprintf(chars, "%04d", modeMenuSetTimeYears);
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_YEAR){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, chars);
-    }
-    else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, chars);
-    }
-  }
+  //days
+  displayDraw2DigitNumberWithFrame(/*x*/15, /*y*/33, /*number*/modeMenuSetTimeDays, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_DAY);
+  //months
+  displayDraw2DigitNumberWithFrame(/*x*/40, /*y*/33, /*number*/modeMenuSetTimeMonths, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MONTH); 
+  //Year
+  displayDraw2DigitNumberWithFrame(/*x*/65, /*y*/33, /*number*/modeMenuSetTimeYears%2000, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_YEAR); 
 
   
   { //Save

@@ -384,6 +384,20 @@ void displayDrawSilentModeIcon(byte x, byte y, bool color){
     displayDrawBitmap(x, y, img, 8, 8, color);
 }
 
+//Рисование прямоугольника с цифрами. Используется на экранах настройки будильника и времени
+void displayDraw2DigitNumberWithFrame(byte x, byte y, byte number, bool selected){
+  char chars[4];
+  sprintf(chars, "%02d", number);
+  if(selected){
+    displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
+    displayDrawText(x + 4, y+4, 0, chars);
+  }
+  else{
+    displayDrawRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
+    displayDrawText(x+4, y+4, 1, chars);
+  }
+}
+
 /*draws battery*/
 void displayDrawBattery(byte x, byte y, byte level, bool isCharging, bool isLowPower){
 

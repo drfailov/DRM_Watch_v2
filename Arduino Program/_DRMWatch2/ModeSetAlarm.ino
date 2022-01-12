@@ -51,12 +51,7 @@ void modeSetAlarmLoop(){
           eepromSaveAlertLastDayRun(day);
       else
         eepromSaveAlertLastDayRun(0);
-#ifdef LANG_EN
-      displayMessage(F("Alert set"));
-#endif
-#ifdef LANG_RU
-      displayMessage(F("Уcтaнoвлeнo."));
-#endif
+      displayMessage((const __FlashStringHelper*)textSaved);
       goToWatchface();
       return;
     }
@@ -99,37 +94,10 @@ void modeSetAlarmLoop(){
   displayDrawArrowRight(/*X*/1, /*Y*/59, 1);
   
   displayDrawText(35, 19, 1, ":");
-  { //hours
-    byte x = 15;
-    byte y = 15;
-    char chars[4];
-    sprintf(chars, "%02d", modeSetAlarmHour);
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_HOUR){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, chars);
-    }
-    else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, chars);
-    }
-  }
-  
-  { //minutes
-    byte x = 40;
-    byte y = 15;
-    char chars[4];
-    sprintf(chars, "%02d", modeSetAlarmMinute);
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MINUTE){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, chars);
-    }
-    else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, chars);
-    }
-  }
-
-
+  //hours
+  displayDraw2DigitNumberWithFrame(/*x*/15, /*y*/15, /*number*/modeSetAlarmHour, /*selected*/modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_HOUR); 
+  //minutes
+  displayDraw2DigitNumberWithFrame(/*x*/40, /*y*/15, /*number*/modeSetAlarmMinute, /*selected*/modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MINUTE); 
   
   { //melody
     byte x = 15;

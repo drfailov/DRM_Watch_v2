@@ -1,38 +1,81 @@
 /*Show watchfacw menu by triggerimg GenericMenu*/
+byte modeMenuSetWatchfaceItemsCount(){//сколько пунктов меню в массиве
+  byte cnt = 1;//1 for back item
+#ifdef WATCHFACE_DRMWATCH
+  cnt++;
+#endif
+#ifdef WATCHFACE_DRMLITE
+  cnt++;
+#endif
+#ifdef WATCHFACE_NOMENS
+  cnt++;
+#endif
+#ifdef WATCHFACE_ZUBAT
+  cnt++;
+#endif
+  return cnt;
+}
 
-const byte modeMenuSetWatchfaceItemsCount = 5; //сколько пунктов меню в массиве
-
+#ifdef WATCHFACE_DRMWATCH
+//Максимальная длина строки:                            "          "
+const char modeMenuSetWatchfaceItemDrmWatch[] PROGMEM = "DRM Watch";
+#endif
+#ifdef WATCHFACE_DRMLITE
+//Максимальная длина строки:                           "          "
+const char modeMenuSetWatchfaceItemDrmLite[] PROGMEM = "DRM Lite";
+#endif
+#ifdef WATCHFACE_NOMENS
 //Максимальная длина строки:                     "          "
-const char modeMenuSetWatchfaceItem1[] PROGMEM = "DRM Watch";
-const char modeMenuSetWatchfaceItem2[] PROGMEM = "DRM Lite";
-const char modeMenuSetWatchfaceItem3[] PROGMEM = "Nomens";
-const char modeMenuSetWatchfaceItem4[] PROGMEM = "Zubat";
+const char modeMenuSetWatchfaceItemNomens[] PROGMEM = "Nomens";
+#endif
+#ifdef WATCHFACE_ZUBAT
+//Максимальная длина строки:                     "          "
+const char modeMenuSetWatchfaceItemZubat[] PROGMEM = "Zubat";
+#endif
 
 const char* const modeMenuSetWatchfaceItems[] PROGMEM = {
-  modeMenuSetWatchfaceItem1,
-  modeMenuSetWatchfaceItem2,
-  modeMenuSetWatchfaceItem3,
-  modeMenuSetWatchfaceItem4,
+#ifdef WATCHFACE_DRMWATCH
+  modeMenuSetWatchfaceItemDrmWatch,
+#endif
+#ifdef WATCHFACE_DRMLITE
+  modeMenuSetWatchfaceItemDrmLite,
+#endif
+#ifdef WATCHFACE_NOMENS
+  modeMenuSetWatchfaceItemNomens,
+#endif
+#ifdef WATCHFACE_ZUBAT
+  modeMenuSetWatchfaceItemZubat,
+#endif
   menuItemBack
 };
 
 
 void modeMenuSetWatchfaceSetup() {
   genericMenuSetup();
-  byte value = eepromReadWatchface();
+  //Выбор стандартного выбранного пункта меню исходя из текущей настройки в памяти
   genericMenuSelectPosition = 0;
-  if(value == 1)
-    genericMenuSelectPosition = 0;
-  else if(value == 2)
-    genericMenuSelectPosition = 1;
-  else if(value == 3)
-    genericMenuSelectPosition = 2;
-  else if(value == 4)
-    genericMenuSelectPosition = 3;
+  byte value = eepromReadWatchface();
+  byte position = 0;
+#ifdef WATCHFACE_DRMWATCH
+  if(value == WATCHFACE_DRMWATCH) genericMenuSelectPosition = position;
+  position++;
+#endif
+#ifdef WATCHFACE_DRMLITE
+  if(value == WATCHFACE_DRMLITE) genericMenuSelectPosition = position;
+  position++;
+#endif
+#ifdef WATCHFACE_NOMENS
+  if(value == WATCHFACE_NOMENS) genericMenuSelectPosition = position;
+  position++;
+#endif
+#ifdef WATCHFACE_ZUBAT
+  if(value == WATCHFACE_ZUBAT) genericMenuSelectPosition = position;
+  position++;
+#endif
 }
 
 void modeMenuSetWatchfaceLoop() {
-  genericMenuLoop(modeMenuSetWatchfaceItemsCount, modeMenuSetWatchfaceItems, modeMenuSetWatchfaceSelected);
+  genericMenuLoop(modeMenuSetWatchfaceItemsCount(), modeMenuSetWatchfaceItems, modeMenuSetWatchfaceSelected);
 }
 
 void modeMenuSetWatchfaceFinish() {
@@ -40,35 +83,46 @@ void modeMenuSetWatchfaceFinish() {
 }
 
 void modeMenuSetWatchfaceSelected(byte index) {
-  if (index == 0) { //WTF 1
-    eepromSaveWatchface(1);
-    displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItem1);
+  byte checkingIndex = 0;
+  //последовательность проверок здесь должна соответсвовать порядку пунктов в меню
+  
+#ifdef WATCHFACE_DRMWATCH
+  if (index == checkingIndex++) {
+    eepromSaveWatchface(WATCHFACE_DRMWATCH);
+    displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemDrmWatch);
     goToWatchface();
     return;
   }
+#endif
 
-  if (index == 1) { //WTF 2
-    eepromSaveWatchface(2);
-    displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItem2);
+#ifdef WATCHFACE_DRMLITE
+  if (index == checkingIndex++) { 
+    eepromSaveWatchface(WATCHFACE_DRMLITE);
+    displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemDrmLite);
     goToWatchface();
     return;
   }
+#endif
 
-  if (index == 2) { //WTF 3
-    eepromSaveWatchface(3);
-    displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItem3);
+#ifdef WATCHFACE_NOMENS
+  if (index == checkingIndex++) { 
+    eepromSaveWatchface(WATCHFACE_NOMENS);
+    displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemNomens);
     goToWatchface();
     return;
   }
+#endif
 
-  if (index == 3) { //WTF 4
-    eepromSaveWatchface(4);
-    displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItem4);
+#ifdef WATCHFACE_ZUBAT
+  if (index == checkingIndex++) { 
+    eepromSaveWatchface(WATCHFACE_ZUBAT);
+    displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemZubat);
     goToWatchface();
     return;
   }
+#endif
 
-  if (index == 4) { //Back
+  if (index == checkingIndex++) { //Back
     setMode(MODE_MENU_SETTINGS);
     return;
   }

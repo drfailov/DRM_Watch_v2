@@ -8,8 +8,8 @@
  * hour, minute, second, day, month, year, dayOfWeek - текущие значения которые нужно вывести на циферблат
  * animate - Анимировать ли вывод. 0 = не анимировать. 1 = анимировать медленно, 2 = анимировать быстрее ...
 */
-void drawWatchFace1(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate){ 
-    displayClear();
+void drawWatchFaceDrmWatch(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate){ 
+  displayClear();
 
   {//date
     sprintf(buffer, "%02d.%02d.%04d", day, month, year);

@@ -116,9 +116,10 @@ When adding new mode:
 
 ### How to add my own watchface?
 Watchfaces is the same that Mode, but called from `goToWatchface()`.
-- Create file like `modeWatchFace2`.
-- Create functions `Setup()`, `Loop()`, `Finish()` for `modeWatchFace2`.
-- Create constant for this new mode.
+- Create file like `WatchFaceMy`.
+- Create function like `void drawWatchFaceMy(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate){ `.
+- Write script to draw yout watchface
+//todo
 - Call its functions from `setMode()` and `loop()`.
 - Create item for your watchface in `ModeSetWatchface`.
 - Call from goToWatchface(), if its number selected.
