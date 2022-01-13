@@ -86,7 +86,7 @@ void modeMenuSetTimeLoop(){
   }
 
   
-  displayClear();
+  display.displayClear();
 #ifdef LANG_EN
   displayDrawText(15, 2, 1, F("Set time"));
 #endif

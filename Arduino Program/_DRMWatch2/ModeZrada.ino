@@ -30,32 +30,32 @@ void modeZradaLoop() {
 
 
 void modeZradaDraw(bool drawZubat) {
-  displayClear();
-  if (modeZradaState == MODE_ZRADA_STATE_NONE) {
-    displayDrawText(60, 20, 1, F("---"));
-  }
-  else if (modeZradaState == MODE_ZRADA_STATE_ZRADA) {
-#ifdef LANG_EN
-    displayDrawText(55, 20, 1, F("Zrada"));
-#endif
-#ifdef LANG_RU
-    displayDrawText(55, 20, 1, F("Зрада"));
-#endif
-  }
-  else if (modeZradaState == MODE_ZRADA_STATE_PEREMOGA) {
-#ifdef LANG_EN
-    displayDrawText(45, 20, 1, F("Peremoga"));
-#endif
-#ifdef LANG_RU
-    displayDrawText(45, 20, 1, F("Перемога"));
-#endif
-  }
-  if(drawZubat){
-    displayDrawVector(/*path*/getPathZubat(), /*x*/5, /*y*/10, /*animate*/false, /*color*/1);
-    displayDrawPlaySign(/*X*/2, /*Y*/2, 1);
-    displayDrawCheck(/*X*/1, /*Y*/59, 1);
-  }
-  displayUpdate();
+//  displayClear();
+//  if (modeZradaState == MODE_ZRADA_STATE_NONE) {
+//    displayDrawText(60, 20, 1, F("---"));
+//  }
+//  else if (modeZradaState == MODE_ZRADA_STATE_ZRADA) {
+//#ifdef LANG_EN
+//    displayDrawText(55, 20, 1, F("Zrada"));
+//#endif
+//#ifdef LANG_RU
+//    displayDrawText(55, 20, 1, F("Зрада"));
+//#endif
+//  }
+//  else if (modeZradaState == MODE_ZRADA_STATE_PEREMOGA) {
+//#ifdef LANG_EN
+//    displayDrawText(45, 20, 1, F("Peremoga"));
+//#endif
+//#ifdef LANG_RU
+//    displayDrawText(45, 20, 1, F("Перемога"));
+//#endif
+//  }
+//  if(drawZubat){
+//    displayDrawVector(/*path*/getPathZubat(), /*x*/5, /*y*/10, /*animate*/false, /*color*/1);
+//    displayDrawPlaySign(/*X*/2, /*Y*/2, 1);
+//    displayDrawCheck(/*X*/1, /*Y*/59, 1);
+//  }
+//  displayUpdate();
 }
 
 void modeZradaFinish() {

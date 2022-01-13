@@ -1,3 +1,5 @@
+#include "Display.cpp"
+
 /* 
  * EN: 
  * Drawing watchface 5 (DRM Lite). Arguments:
@@ -9,7 +11,7 @@
  * animate - Анимировать ли вывод. 0 = не анимировать. 1 = анимировать медленно, 2 = анимировать быстрее ...
 */
 void drawWatchFaceNokia(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate){
-    displayClear();
+    Display.Display.displayClear();
       
     { //time
       byte hour1 = hour / 10;
@@ -17,12 +19,12 @@ void drawWatchFaceNokia(byte hour, byte minute, byte second, byte day, byte mont
       byte minute1 = minute / 10;
       byte minute2 = minute - (minute1 * 10);
       
-      displayDrawNumber(hour1   ,  6, 18, 4, 5, animate);
-      displayDrawNumber(hour2   , 25, 18, 4, 5, animate);
-      displayDrawNumber(10      , 46, 18, 4, 5, animate); // :
-      displayDrawNumber(minute1 , 55, 18, 4, 5, animate);
-      displayDrawNumber(minute2 , 74, 18, 4, 5, animate);
+      Display.displayDrawNumber(hour1   ,  6, 18, 4, 5, animate);
+      Display.displayDrawNumber(hour2   , 25, 18, 4, 5, animate);
+      Display.displayDrawNumber(10      , 46, 18, 4, 5, animate); // :
+      Display.displayDrawNumber(minute1 , 55, 18, 4, 5, animate);
+      Display.displayDrawNumber(minute2 , 74, 18, 4, 5, animate);
     }
   
-    displayUpdate();
+    Display.displayUpdate();
 }

@@ -1,3 +1,5 @@
+#include "Display.cpp"
+
 /*Used to test new functionality*/
 
 void modeAboutSetup() {
@@ -15,21 +17,21 @@ void modeAboutLoop() {
     return;
   } 
   
-  displayClear();
+  Display.displayClear();
 #ifdef LANG_EN
-  displayDrawText(0, 0, 1, F("Softw: Dr.Failov"));
-  displayDrawText(0, 9, 1, F("Hardw: MeltemiOS"));
+  Display.displayDrawText(0, 0, 1, F("Softw: Dr.Failov"));
+  Display.displayDrawText(0, 9, 1, F("Hardw: MeltemiOS"));
 #endif
 #ifdef LANG_RU
-  displayDrawText(0, 0, 1, F("Coфт:  Dr.Failov"));
-  displayDrawText(0, 9, 1, F("Xapд:  MeltemiOS"));
+  Display.displayDrawText(0, 0, 1, F("Coфт:  Dr.Failov"));
+  Display.displayDrawText(0, 9, 1, F("Xapд:  MeltemiOS"));
 #endif
-  displayDrawText(74, 61, 1, F("2021"));
-  displayDrawText(00, 61, 1, version);
+  Display.displayDrawText(74, 61, 1, F("2021"));
+  Display.displayDrawText(00, 61, 1, version);
 
   
-  displayDrawVector(/*path*/pathDrmWatch, /*x*/26, /*y*/22, /*animate*/3, /*color*/1);
-  displayUpdate();
+  Display.displayDrawVector(/*path*/pathDrmWatch, /*x*/26, /*y*/22, /*animate*/3, /*color*/1);
+  Display.displayUpdate();
   for(long st = millis(); millis() - st < 900; ){
     if(isButtonUpPressed()){
       beep();
@@ -42,8 +44,8 @@ void modeAboutLoop() {
       return;
     } 
   }
-  displayDrawVector(/*path*/pathDrmWatch, /*x*/26, /*y*/22, /*animate*/5, /*color*/0);
-  displayUpdate();
+  Display.displayDrawVector(/*path*/pathDrmWatch, /*x*/26, /*y*/22, /*animate*/5, /*color*/0);
+  Display.displayUpdate();
   
 }
 

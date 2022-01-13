@@ -17,7 +17,7 @@ const char modeMenuAppsItem4[] PROGMEM = "Бyдильник";
 const char modeMenuAppsItem5[] PROGMEM = "Зpaдa";
 #endif
 
-const char* const modeMenuAppsItems[] PROGMEM = {
+const char* modeMenuAppsItems[] = {
   modeMenuAppsItem1,
   modeMenuAppsItem2,
   modeMenuAppsItem3,
@@ -32,7 +32,7 @@ void modeMenuAppsSetup() {
 }
 
 void modeMenuAppsLoop() {
-  genericMenuLoop(modeMenuAppsItemsCount, modeMenuAppsItems, modeMenuAppsSelected);
+  genericMenuLoop(modeMenuAppsItemsCount, modeMenuAppsItems, modeMenuAppsSelected, false);
 }
 
 void modeMenuAppsFinish() {

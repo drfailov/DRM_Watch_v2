@@ -1,3 +1,5 @@
+#include "Display.cpp"
+
 /*Stopwatch functionality*/
 #define MODE_STOPWATCH_SELECTED_START 0
 #define MODE_STOPWATCH_SELECTED_RESET 1
@@ -9,7 +11,7 @@ long modeStopwatchFinishedTime = 0;
 bool modeStopwatchIsRunning = false;
 
 void modeStopwatchSetup() {
-  displayInit();
+  Display.displayInit();
   modeStopwatchSelectedItem = 0;
   modeStopwatchStartedTime = 0;
   modeStopwatchFinishedTime = 0;
@@ -47,7 +49,7 @@ void modeStopwatchLoop() {
   } 
   
   
-  displayClear();
+  Display.displayClear();
   
   { //time
     long difference = 0;
@@ -73,14 +75,14 @@ void modeStopwatchLoop() {
     byte millisecond1 = millisecond / 10;
     byte millisecond2 = millisecond - (millisecond1 * 10);
     
-    displayDrawNumber(minute1 , 13, 10, 3, 4, false);
-    displayDrawNumber(minute2 , 27, 10, 3, 4, false);
-    displayDrawNumber(10      , 41, 10, 3, 4, false); // :
-    displayDrawNumber(second1 , 46, 10, 3, 4, false);
-    displayDrawNumber(second2 , 60, 10, 3, 4, false);
-    displayDrawNumber(10      , 74, 15, 2, 3, false); // :
-    displayDrawNumber(millisecond1 , 78, 15, 2, 3, false);
-    displayDrawNumber(millisecond2 , 88, 15, 2, 3, false);
+    Display.displayDrawNumber(minute1 , 13, 10, 3, 4, false);
+    Display.displayDrawNumber(minute2 , 27, 10, 3, 4, false);
+    Display.displayDrawNumber(10      , 41, 10, 3, 4, false); // :
+    Display.displayDrawNumber(second1 , 46, 10, 3, 4, false);
+    Display.displayDrawNumber(second2 , 60, 10, 3, 4, false);
+    Display.displayDrawNumber(10      , 74, 15, 2, 3, false); // :
+    Display.displayDrawNumber(millisecond1 , 78, 15, 2, 3, false);
+    Display.displayDrawNumber(millisecond2 , 88, 15, 2, 3, false);
   }
 
   
@@ -89,22 +91,22 @@ void modeStopwatchLoop() {
     byte y = 43;
     if(modeStopwatchIsRunning == false){
       if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_START){
-        displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-        displayDrawPlaySign(x + 7, y+4, 0);
+        Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+        Display.displayDrawPlaySign(x + 7, y+4, 0);
       }
       else{
-        displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-        displayDrawPlaySign(x + 7, y+4, 1);
+        Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+        Display.displayDrawPlaySign(x + 7, y+4, 1);
       }
     }
     if(modeStopwatchIsRunning == true){
       if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_START){
-        displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-        displayDrawPauseSign(x + 6, y+4, 0);
+        Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+        Display.displayDrawPauseSign(x + 6, y+4, 0);
       }
       else{
-        displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-        displayDrawPauseSign(x + 6, y+4, 1);
+        Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+        Display.displayDrawPauseSign(x + 6, y+4, 1);
       }
     }
   }
@@ -114,12 +116,12 @@ void modeStopwatchLoop() {
     byte x = 44;
     byte y = 43;
     if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_RESET){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-      displayDrawResetIcon(x + 8, y+4, 0);
+      Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+      Display.displayDrawResetIcon(x + 8, y+4, 0);
     }
     else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-      displayDrawResetIcon(x + 8, y+4, 1);
+      Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+      Display.displayDrawResetIcon(x + 8, y+4, 1);
     }
   }
     
@@ -128,18 +130,18 @@ void modeStopwatchLoop() {
     byte y = 43;
     const __FlashStringHelper* chars = F("<");
     if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_BACK){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-      displayDrawText(x + 8, y+4, 0, chars);
+      Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+      Display.displayDrawText(x + 8, y+4, 0, chars);
     }
     else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-      displayDrawText(x+8, y+4, 1, chars);
+      Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+      Display.displayDrawText(x+8, y+4, 1, chars);
     }
   }
   
-  displayDrawArrowRight(0, 61, 1);
-  displayDrawCheck(/*X*/2, /*Y*/2, 1);
-  displayUpdate();
+  Display.displayDrawArrowRight(0, 61, 1);
+  Display.displayDrawCheck(/*X*/2, /*Y*/2, 1);
+  Display.displayUpdate();
   
 }
 

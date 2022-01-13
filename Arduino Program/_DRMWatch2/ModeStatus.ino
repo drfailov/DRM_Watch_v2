@@ -10,7 +10,7 @@ void modeStatusLoop() {
     return;
   } 
     
-  displayClear();
+  display.displayClear();
   drawParameter(00, 00, F("VLT"), _batteryRawVoltage());
   drawParameter(65, 00, F("CHG"), batteryIsCharging());
   drawParameter(00, 10, F("RAM"), freeRam());
@@ -31,8 +31,8 @@ void modeStatusLoop() {
 void drawParameter(byte x, byte y, const __FlashStringHelper* name, int value){
   int ram = freeRam();
   displayDrawText(x, y, 1, name);
-  ltoa(value, buffer, DEC);
-  displayDrawText(x+6+strlen_P((PGM_P)name)*6, y, 1, buffer);
+  ltoa(value, Generic.buffer, DEC);
+  displayDrawText(x+6+strlen_P((PGM_P)name)*6, y, 1, Generic.buffer);
   displayDrawText(x+strlen_P((PGM_P)name)*6, y, 1, F(":"));
 }
 

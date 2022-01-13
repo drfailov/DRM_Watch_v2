@@ -26,7 +26,7 @@ void modeMenuMainSetup() {
 }
 
 void modeMenuMainLoop() {
-  genericMenuLoop(modeMenuMainItemsCount, modeMenuMainItems, modeMenuMainSelected);
+  genericMenuLoop(modeMenuMainItemsCount, modeMenuMainItems, modeMenuMainSelected, true);
 }
 
 void modeMenuMainFinish() {

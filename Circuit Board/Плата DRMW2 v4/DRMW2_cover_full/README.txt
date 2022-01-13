@@ -1,0 +1,1 @@
+DRMW2_cover_full_outline.gbr = Inner lines of the board is V scoring.

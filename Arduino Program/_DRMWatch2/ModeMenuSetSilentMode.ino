@@ -30,7 +30,7 @@ void modeMenuSetSilentModeSetup() {
 }
 
 void modeMenuSetSilentModeLoop() {
-  genericMenuLoop(modeMenuSetSilentModeItemsCount, modeMenuSetSilentModeItems, modeMenuSetSilentModeSelected);
+  genericMenuLoop(modeMenuSetSilentModeItemsCount, modeMenuSetSilentModeItems, modeMenuSetSilentModeSelected, true);
 }
 
 void modeMenuSetSilentModeFinish() {

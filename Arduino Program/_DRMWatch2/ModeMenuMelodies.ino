@@ -27,7 +27,7 @@ void modeMenuMelodiesSetup() {
 }
 
 void modeMenuMelodiesLoop() {
-  genericMenuLoop(modeMenuMelodiesItemsCount, modeMenuMelodiesItems, modeMenuMelodiesSelected);
+  genericMenuLoop(modeMenuMelodiesItemsCount, modeMenuMelodiesItems, modeMenuMelodiesSelected, true);
 }
 
 void modeMenuMelodiesFinish() {

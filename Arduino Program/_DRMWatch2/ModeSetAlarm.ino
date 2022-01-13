@@ -80,7 +80,7 @@ void modeSetAlarmLoop(){
   }
 
   
-  displayClear();
+  display.displayClear();
 #ifdef LANG_EN
   displayDrawText(15, 2, 1, F("Alarm set"));
 #endif
@@ -103,7 +103,7 @@ void modeSetAlarmLoop(){
     byte x = 15;
     byte y = 33;
     //strlcpy_P(buffer, pgm_read_word(getMelodyName(modeSetAlarmMelody)), BUFFER_SIZE);
-    strlcpy_P(buffer, getMelodyName(modeSetAlarmMelody), BUFFER_SIZE);
+    strlcpy_P(Generic.buffer, getMelodyName(modeSetAlarmMelody), BUFFER_SIZE);
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MELODY){
       displayFillRect(/*x*/x, /*y*/y, /*w*/80, /*h*/15, /*c*/1);
       displayDrawText(x+4, y+4, 0, buffer);

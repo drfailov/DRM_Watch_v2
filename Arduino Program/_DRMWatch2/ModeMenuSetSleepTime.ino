@@ -39,7 +39,7 @@ void modeMenuSetSleepTimeSetup() {
 }
 
 void modeMenuSetSleepTimeLoop() {
-  genericMenuLoop(modeMenuSetSleepTimeItemsCount, modeMenuSetSleepTimeItems, modeMenuSetSleepTimeSelected);
+  genericMenuLoop(modeMenuSetSleepTimeItemsCount, modeMenuSetSleepTimeItems, modeMenuSetSleepTimeSelected, true);
 }
 
 void modeMenuSetSleepTimeFinish() {

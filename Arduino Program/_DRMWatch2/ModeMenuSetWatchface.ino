@@ -79,7 +79,7 @@ void modeMenuSetWatchfaceSetup() {
 }
 
 void modeMenuSetWatchfaceLoop() {
-  genericMenuLoop(modeMenuSetWatchfaceItemsCount(), modeMenuSetWatchfaceItems, modeMenuSetWatchfaceSelected);
+  genericMenuLoop(modeMenuSetWatchfaceItemsCount(), modeMenuSetWatchfaceItems, modeMenuSetWatchfaceSelected, true);
 }
 
 void modeMenuSetWatchfaceFinish() {

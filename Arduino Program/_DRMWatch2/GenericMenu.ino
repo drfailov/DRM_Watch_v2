@@ -1,3 +1,5 @@
+#include "Display.cpp"
+
 /*
  * Code contains basic functionality for every list menu in device.
  * Every menu is passes its items as arguments to loop() function.
@@ -18,7 +20,13 @@ void genericMenuSetup(){
   genericMenuLastActionTime = millis();
 }
 
-void genericMenuLoop(const int genericMenuItemsCount, const char* const genericMenuItems[], void (*onSelected)(byte index)){
+
+/* genericMenuItemsCount - number of items in array.
+ * genericMenuItems[] - Array of addresses to strings stored in PROGMEM
+ * (*onSelected)(byte index) - Pointer to function which will be called when user selects item.
+ * progmemArray - Text has to be stored in progmem. But array can be stored in RAM or in PROGMEM. Pass true if your array stored in PROGMEM.
+*/
+void genericMenuLoop(const int genericMenuItemsCount, const char* const genericMenuItems[], void (*onSelected)(byte index), bool progmemArray){
   if (isButtonUpPressed()) {
     genericMenuLastActionTime = millis();
     beep();
@@ -41,31 +49,34 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
   }
 
   //draw
-  displayClear();
+  Display.displayClear();
   for (int i = 0; i < genericMenuViewCount; i++) {
     int index = genericMenuViewPosition + i;
     if (index < genericMenuItemsCount) {
-      strcpy_P(buffer, pgm_read_word(&(genericMenuItems[index])));
+      if(progmemArray)
+        strcpy_P(buffer, pgm_read_word(&(genericMenuItems[index])));  //for PROGMEM arrays
+      else
+        strcpy_P(buffer, (genericMenuItems[index]));      //for RAM arrays
       if (index == genericMenuSelectPosition) {
-        displayFillRect(/*x*/11, /*y*/1 + 13 * i, /*w*/81, /*h*/13, /*c*/1);
-        displayDrawText(/*X*/15, /*Y*/4 + 13 * i, /*C*/0, buffer);
+        Display.displayFillRect(/*x*/11, /*y*/1 + 13 * i, /*w*/81, /*h*/13, /*c*/1);
+        Display.displayDrawText(/*X*/15, /*Y*/4 + 13 * i, /*C*/0, buffer);
       }
       else {
-        displayDrawText(/*X*/15, /*Y*/4 + 13 * i, /*C*/1, buffer);
+        Display.displayDrawText(/*X*/15, /*Y*/4 + 13 * i, /*C*/1, buffer);
       }
     }
   }
   { //scrollbar
     float h = 66;
-    displayDrawLine(/*X1*/94, /*Y1*/0, /*X2*/94, /*Y2*/h, /*C*/1);
+    Display.displayDrawLine(/*X1*/94, /*Y1*/0, /*X2*/94, /*Y2*/h, /*C*/1);
     float barHeight = h / genericMenuItemsCount;
     float barPosition = barHeight * genericMenuSelectPosition;
-    displayFillRect(/*x*/93, /*y*/barPosition, /*w*/3, /*h*/barHeight, /*c*/1);
+    Display.displayFillRect(/*x*/93, /*y*/barPosition, /*w*/3, /*h*/barHeight, /*c*/1);
   }
-  displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
-  displayDrawCheck(/*X*/2, /*Y*/2, 1);
-  displayDrawArrowDown(/*X*/1, /*Y*/59, 1);
-  displayUpdate();
+  Display.displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
+  Display.displayDrawCheck(/*X*/2, /*Y*/2, 1);
+  Display.displayDrawArrowDown(/*X*/1, /*Y*/59, 1);
+  Display.displayUpdate();
 }
 
 void genericMenuFinish(){

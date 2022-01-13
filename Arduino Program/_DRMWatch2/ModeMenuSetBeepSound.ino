@@ -36,7 +36,7 @@ void modeMenuSetBeepSoundSetup() {
 }
 
 void modeMenuSetBeepSoundLoop() {
-  genericMenuLoop(modeMenuSetBeepSoundItemsCount, modeMenuSetBeepSoundItems, modeMenuSetBeepSoundSelected);
+  genericMenuLoop(modeMenuSetBeepSoundItemsCount, modeMenuSetBeepSoundItems, modeMenuSetBeepSoundSelected, true);
 }
 
 void modeMenuSetBeepSoundFinish() {

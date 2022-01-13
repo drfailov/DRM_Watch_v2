@@ -40,7 +40,7 @@ void modeMenuSettingsSetup() {
 }
 
 void modeMenuSettingsLoop() {
-  genericMenuLoop(modeMenuSettingsItemsCount, modeMenuSettingsItems, modeMenuSettingsSelected);
+  genericMenuLoop(modeMenuSettingsItemsCount, modeMenuSettingsItems, modeMenuSettingsSelected, true);
 }
 
 void modeMenuSettingsFinish() {

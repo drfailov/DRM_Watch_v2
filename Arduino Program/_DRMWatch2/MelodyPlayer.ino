@@ -1,3 +1,5 @@
+#include "Display.cpp"
+
 const byte groovyBlue[] PROGMEM = {
   125,
   0b10011101, 0b00100100, 0b00100100, 0b00100100, 0b00100100,
@@ -205,16 +207,16 @@ bool melodyPlayerPlayMelody(const byte* const melody) {
 }
 
 void melodyPlayerDrawScreen() {
-  displayClear();
-  displayDrawStopSign(/*X*/2, /*Y*/2, 1);
-  displayDrawVector(/*path*/pathZubat, /*x*/24, /*y*/5, /*animate*/false, /*color*/1);
+  Display.displayClear();
+  Display.displayDrawStopSign(/*X*/2, /*Y*/2, 1);
+  Display.displayDrawVector(/*path*/pathZubat, /*x*/24, /*y*/5, /*animate*/false, /*color*/1);
 #ifdef LANG_EN
-  displayDrawText(20, 55, 1, F("Playing..."));
+  Display.displayDrawText(20, 55, 1, F("Playing..."));
 #endif
 #ifdef LANG_RU
-  displayDrawText(17, 55, 1, F("Пoпиликaeм!"));
+  Display.displayDrawText(17, 55, 1, F("Пoпиликaeм!"));
 #endif
-  displayUpdate();
+  Display.displayUpdate();
 }
 
 void printBits(byte myByte) {

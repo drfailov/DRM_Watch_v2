@@ -1,9 +1,11 @@
+#include "Display.cpp"
+
 /*Screen with main watchface*/
 long modeWatchFaceBacklightTimeout = 15000;
 long modeWatchFaceBacklightEnabledTime = millis();
 
 void modeWatchFaceSetup() {
-  displayInit();
+  Display.displayInit();
   modeWatchFaceBacklightEnabledTime = millis();
   attachInterrupt(1, modeWatchFaceButtonUp, HIGH); //up
   attachInterrupt(0, wakeUp, HIGH);  //down
@@ -98,9 +100,9 @@ void modeWatchFaceLoop(bool animate) {
 
   { //Baclight
     if (millis() - modeWatchFaceBacklightEnabledTime < modeWatchFaceBacklightTimeout)
-      displayBacklightOn();
+      Display.displayBacklightOn();
     else
-      displayBacklightOff();
+      Display.displayBacklightOff();
   }
 
   byte sleepTime = eepromReadSleepTime();
@@ -163,7 +165,7 @@ void modeWatchFaceDrawBattery(byte x, byte y) {
   if (voltage > 3.85) level = 3;
   if (voltage > 4.00) level = 4;
 
-  displayDrawBattery(x, y, level, isCharging, isLowPower);
+  Display.displayDrawBattery(x, y, level, isCharging, isLowPower);
 }
 
 void modeWatchFaceDrawDayOfWeek(byte x, byte y, byte dayOfWeek, bool color) { //
@@ -186,5 +188,5 @@ void modeWatchFaceDrawDayOfWeek(byte x, byte y, byte dayOfWeek, bool color) { //
   if (dayOfWeek == 6) txt = F("Sat");
   if (dayOfWeek == 0) txt = F("Sun");
 #endif
-  displayDrawText(x, y, color, txt);
+  Display.displayDrawText(x, y, color, txt);
 }
