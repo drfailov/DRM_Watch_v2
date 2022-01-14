@@ -1,8 +1,10 @@
-#include "lcd1202.h"
-#include "Generic.h"
+
 
 #ifndef DISPLAYCPP
 #define DISPLAYCPP
+
+#include "lcd1202.h"
+#include "Generic.h"
 
 class Display_{
   /*Global functions related to display. 
@@ -225,7 +227,7 @@ class Display_{
     displayClear();
     displayDrawVector(/*path*/getPathZubat(), /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
     displayDrawVector(/*path*/getPathBubble(), /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
-    strcpy_P(Generic.buffer, (PGM_P)str);
+    strcpy_P(Generic.getBuffer(), (PGM_P)str);
     byte pos = 0;
     bool animate = true;
     for(byte i=0; i<BUFFER_SIZE; i++){
@@ -515,6 +517,6 @@ class Display_{
   }
 };
 
-Display_ Display;
+static Display_ Display;
 
 #endif

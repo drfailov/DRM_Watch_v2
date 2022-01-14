@@ -1,4 +1,5 @@
 #include "Display.cpp"
+#include "Generic.h"
 
 /*Screen with main watchface*/
 long modeWatchFaceBacklightTimeout = 15000;

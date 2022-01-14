@@ -25,11 +25,11 @@ class Generic_{
   
   public:
   //общий на всю программу текстовый буфер чтобы не объявлять каждый раз локальную.
-  static char buffer[BUFFER_SIZE]; 
-  static char* getBuffer(){return buffer;}
+  char buffer[BUFFER_SIZE]; 
+  char* getBuffer(){return buffer;}
 
 };
 
-Generic_ Generic;
+static Generic_ Generic;
 
 #endif
