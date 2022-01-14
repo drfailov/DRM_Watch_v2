@@ -209,7 +209,7 @@ bool melodyPlayerPlayMelody(const byte* const melody) {
 void melodyPlayerDrawScreen() {
   Display.displayClear();
   Display.displayDrawStopSign(/*X*/2, /*Y*/2, 1);
-  Display.displayDrawVector(/*path*/pathZubat, /*x*/24, /*y*/5, /*animate*/false, /*color*/1);
+  Display.displayDrawVector(/*path*/Display.getPathZubat(), /*x*/24, /*y*/5, /*animate*/false, /*color*/1);
 #ifdef LANG_EN
   Display.displayDrawText(20, 55, 1, F("Playing..."));
 #endif

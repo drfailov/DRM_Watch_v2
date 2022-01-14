@@ -14,8 +14,8 @@ void drawWatchFaceDrmLite(byte hour, byte minute, byte second, byte day, byte mo
     Display.displayClear();
   
   {//date
-    sprintf(buffer, "%02d.%02d.%04d", day, month, year);
-    Display.displayDrawText(0, 0, 1, buffer);
+    sprintf(Generic.buffer, "%02d.%02d.%04d", day, month, year);
+    Display.displayDrawText(0, 0, 1, Generic.buffer);
   }
   
   {//DayOfWeek
@@ -30,9 +30,9 @@ void drawWatchFaceDrmLite(byte hour, byte minute, byte second, byte day, byte mo
   {//Temperature
     float temp = rtcGetTemp();
     /* 4 is mininum width, 2 is precision; float value is copied onto str_temp*/
-    dtostrf(temp, 4, 1, buffer);
-    sprintf(buffer, "%sC", buffer);
-    Display.displayDrawText(0, 61, 1, buffer);
+    dtostrf(temp, 4, 1, Generic.buffer);
+    sprintf(Generic.buffer, "%sC", Generic.buffer);
+    Display.displayDrawText(0, 61, 1, Generic.buffer);
   }
 
   byte X = 96;

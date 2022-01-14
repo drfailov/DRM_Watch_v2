@@ -1,7 +1,10 @@
 #include "lcd1202.h"
 #include "Generic.h"
 
-class Display{
+#ifndef DISPLAYCPP
+#define DISPLAYCPP
+
+class Display_{
   /*Global functions related to display. 
    * Init, draw primitives, draw text...
    * Every call to display has to be done by some call from this file.
@@ -30,6 +33,7 @@ class Display{
    *
   */
   
+  public:
   
 
   static const byte* const getPathZubat(){
@@ -73,12 +77,7 @@ class Display{
       40, 18,   37,  29
     }; 
     return pathBubble;
-  }
-
- 
-  
-  public:
-  
+  } 
   
   
   //Инициализация дисплея. Подаём питание, ждём немного и инициализируем программно
@@ -208,13 +207,13 @@ class Display{
   
   //Рисование на экране текста из макроса F().
   static void displayDrawText(int X, int Y, int color, const __FlashStringHelper* str){
-    strcpy_P(buffer, (PGM_P)str);
+    strcpy_P(Generic.buffer, (PGM_P)str);
     byte pos = 0;
     for(int i=0; i<BUFFER_SIZE; i++){
-      if(buffer[i] == '\0') 
+      if(Generic.buffer[i] == '\0') 
         break;
-      if((byte)buffer[i] != 208 && (byte)buffer[i] != 209){
-        displayDrawText(X + pos*6, Y, color, buffer[i]);
+      if((byte)Generic.buffer[i] != 208 && (byte)Generic.buffer[i] != 209){
+        displayDrawText(X + pos*6, Y, color, Generic.buffer[i]);
         pos++;
       }
     }
@@ -226,14 +225,14 @@ class Display{
     displayClear();
     displayDrawVector(/*path*/getPathZubat(), /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
     displayDrawVector(/*path*/getPathBubble(), /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
-    strcpy_P(buffer, (PGM_P)str);
+    strcpy_P(Generic.buffer, (PGM_P)str);
     byte pos = 0;
     bool animate = true;
     for(byte i=0; i<BUFFER_SIZE; i++){
-      if(buffer[i] == '\0') 
+      if(Generic.buffer[i] == '\0') 
         break;
-      if((byte)buffer[i] != 208 && (byte)buffer[i] != 209){
-        displayDrawText(10 + pos*6, 6, 1, buffer[i]);
+      if((byte)Generic.buffer[i] != 208 && (byte)Generic.buffer[i] != 209){
+        displayDrawText(10 + pos*6, 6, 1, Generic.buffer[i]);
         pos ++;
         if(animate){
           displayUpdate();
@@ -515,3 +514,7 @@ class Display{
     }
   }
 };
+
+Display_ Display;
+
+#endif

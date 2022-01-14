@@ -93,7 +93,7 @@ void modeMenuSetWatchfaceSelected(byte index) {
 #ifdef WATCHFACE_DRMWATCH
   if (index == checkingIndex++) {
     eepromSaveWatchface(WATCHFACE_DRMWATCH);
-    displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemDrmWatch);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemDrmWatch);
     goToWatchface();
     return;
   }
@@ -102,7 +102,7 @@ void modeMenuSetWatchfaceSelected(byte index) {
 #ifdef WATCHFACE_DRMLITE
   if (index == checkingIndex++) { 
     eepromSaveWatchface(WATCHFACE_DRMLITE);
-    displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemDrmLite);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemDrmLite);
     goToWatchface();
     return;
   }
@@ -111,7 +111,7 @@ void modeMenuSetWatchfaceSelected(byte index) {
 #ifdef WATCHFACE_NOMENS
   if (index == checkingIndex++) { 
     eepromSaveWatchface(WATCHFACE_NOMENS);
-    displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemNomens);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemNomens);
     goToWatchface();
     return;
   }
@@ -120,7 +120,7 @@ void modeMenuSetWatchfaceSelected(byte index) {
 #ifdef WATCHFACE_ZUBAT
   if (index == checkingIndex++) { 
     eepromSaveWatchface(WATCHFACE_ZUBAT);
-    displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemZubat);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemZubat);
     goToWatchface();
     return;
   }

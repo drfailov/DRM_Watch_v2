@@ -46,35 +46,35 @@ void modeMenuSetBeepSoundFinish() {
 void modeMenuSetBeepSoundSelected(byte index) {
   if (index == 0) { //beep
     eepromSaveBeepSound(eepromBeepSoundBeep);
-    displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem1);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem1);
     goToWatchface();
     return;
   }
 
   if (index == 1) { //Click
     eepromSaveBeepSound(eepromBeepSoundClick);
-    displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem2);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem2);
     goToWatchface();
     return;
   }
 
   if (index == 2) { //Tone
     eepromSaveBeepSound(eepromBeepSoundTone);
-    displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem3);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem3);
     goToWatchface();
     return;
   }
 
   if (index == 3) { //Whiste
     eepromSaveBeepSound(eepromBeepSoundWhistle);
-    displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem4);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem4);
     goToWatchface();
     return;
   }
 
   if (index == 4) { //None
     eepromSaveBeepSound(eepromBeepSoundNone);
-    displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem5);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem5);
     goToWatchface();
     return;
   }

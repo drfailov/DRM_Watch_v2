@@ -38,8 +38,8 @@ class WatchfaceDrmWatch : public GenericWatchface {
       Display.displayClear();
 
       { //date
-        sprintf(buffer, "%02d.%02d.%04d", day, month, year);
-        Display.displayDrawText(0, 0, 1, buffer);
+        sprintf(Generic.buffer, "%02d.%02d.%04d", day, month, year);
+        Display.displayDrawText(0, 0, 1, Generic.buffer);
       }
 
       { //DayOfWeek
@@ -51,34 +51,34 @@ class WatchfaceDrmWatch : public GenericWatchface {
 #endif
       }
 
-      { //Temperature
-        float temp = rtcGetTemp();
-        /* 4 is mininum width, 2 is precision; float value is copied onto str_temp*/
-        dtostrf(temp, 4, 1, buffer);
-        sprintf(buffer, "%sC", buffer);
-        Display.displayDrawText(0, 61, 1, buffer);
-      }
+//      { //Temperature
+//        float temp = rtcGetTemp();
+//        /* 4 is mininum width, 2 is precision; float value is copied onto str_temp*/
+//        dtostrf(temp, 4, 1, Generic.buffer);
+//        sprintf(Generic.buffer, "%sC", Generic.buffer);
+//        Display.displayDrawText(0, 61, 1, Generic.buffer);
+//      }
 
 
       byte X = 96;
 
-      { //battery
-        X -= 17;
-        Display.modeWatchFaceDrawBattery(X, 61);
-        if (!batteryIsCharging() && !batteryIsLowPower()) X += 5;
-      }
-
-      //Silent mode sign
-      if (eepromReadSilentMode()) {
-        X -= 10;
-        Display.displayDrawSilentModeIcon(X, 61, 1);
-      }
-
-      //Alert sign
-      if (eepromReadAlertEnabled()) {
-        X -= 11;
-        Display.displayDrawAlertSign(X, 61, 1);
-      }
+//      { //battery
+//        X -= 17;
+//        //modeWatchFaceDrawBattery(X, 61);
+//        if (!batteryIsCharging() && !batteryIsLowPower()) X += 5;
+//      }
+//
+//      //Silent mode sign
+//      if (eepromReadSilentMode()) {
+//        X -= 10;
+//        Display.displayDrawSilentModeIcon(X, 61, 1);
+//      }
+//
+//      //Alert sign
+//      if (eepromReadAlertEnabled()) {
+//        X -= 11;
+//        Display.displayDrawAlertSign(X, 61, 1);
+//      }
 
 
       { //time

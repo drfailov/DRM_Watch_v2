@@ -1,26 +1,28 @@
+#include "Display.cpp"
+
 /*Mode is initial. Needed to init modules and welcome message.*/
 
 void modeInitSetup(){
-  displayInit();
-  displayBacklightOn();
-  displaySimpleMessage("RTC Init");
+  Display.displayInit();
+  Display.displayBacklightOn();
+  Display.displaySimpleMessage("RTC Init");
   rtcInit();
-  display.displayClear();
-  displayDrawText(67, 61, 1, version);
-  displayDrawVector(/*path*/getPathZubat(), /*x*/25, /*y*/10, /*animate*/6, /*color*/1);
-  displayUpdate();
+  Display.displayClear();
+  Display.displayDrawText(67, 61, 1, version);
+  Display.displayDrawVector(/*path*/Display.getPathZubat(), /*x*/25, /*y*/10, /*animate*/6, /*color*/1);
+  Display.displayUpdate();
   beepConfirm();
   for(byte x=25; x > 0; x -= 5){
-    display.displayClear();
-    displayDrawText(67, 61, 1, version);
-    displayDrawVector(/*path*/getPathZubat(), /*x*/x, /*y*/10, /*animate*/false, /*color*/1);
-    displayUpdate();
+    Display.displayClear();
+    Display.displayDrawText(67, 61, 1, version);
+    Display.displayDrawVector(/*path*/Display.getPathZubat(), /*x*/x, /*y*/10, /*animate*/false, /*color*/1);
+    Display.displayUpdate();
   }
-  display.displayClear();
-  displayDrawText(67, 61, 1, version);
-  displayDrawVector(/*path*/getPathZubat(), /*x*/0, /*y*/10, /*animate*/false, /*color*/1);
-  displayDrawVector(/*path*/getPathDrmWatch(), /*x*/48, /*y*/15, /*animate*/4, /*color*/1);
-  displayUpdate();
+  Display.displayClear();
+  Display.displayDrawText(67, 61, 1, version);
+  Display.displayDrawVector(/*path*/Display.getPathZubat(), /*x*/0, /*y*/10, /*animate*/false, /*color*/1);
+  Display.displayDrawVector(/*path*/Display.getPathDrmWatch(), /*x*/48, /*y*/15, /*animate*/4, /*color*/1);
+  Display.displayUpdate();
 }
 
 void modeInitLoop(){

@@ -18,10 +18,10 @@ void rtcInit() {
     Serial.println(F("DS3231M error..."));
 #endif
 #ifdef LANG_EN
-    displayMessage(F("RTC FAIL."));
+    Display.displayMessage(F("RTC FAIL."));
 #endif
 #ifdef LANG_RU
-    displayMessage(F("Ошибка RTC."));
+    Display.displayMessage(F("Ошибка RTC."));
 #endif
     delay(300);
   }                         // of loop until device is located

@@ -24,8 +24,8 @@ void drawWatchFaceNomens(byte hour, byte minute, byte second, byte day, byte mon
   }
    
   {//date
-    sprintf(buffer, "%02d.%02d.%04d", day, month, year);
-    Display.displayDrawText(3, 58, 1, buffer);
+    sprintf(Generic.buffer, "%02d.%02d.%04d", day, month, year);
+    Display.displayDrawText(3, 58, 1, Generic.buffer);
   }
   
   {//DayOfWeek
@@ -74,7 +74,7 @@ void drawWatchFaceNomens(byte hour, byte minute, byte second, byte day, byte mon
     drawNumber(/*x*/72, /*y*/14, /*num*/minute2, /*animate*/ animate);
   }
   
-  displayUpdate();
+  Display.displayUpdate();
 }
 
 const byte fontWtf3[] PROGMEM = {

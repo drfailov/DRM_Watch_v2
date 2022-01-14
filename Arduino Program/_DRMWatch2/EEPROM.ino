@@ -115,7 +115,7 @@ void eepromSaveWatchface(byte data){
 
 void eepromReadToBuffer(){
   for(int i=0; i<BUFFER_SIZE; i++){
-    EEPROM.get(i, buffer[i]);
+    EEPROM.get(i, Generic.buffer[i]);
   }
 }
 void eepromFIllByZeros(){

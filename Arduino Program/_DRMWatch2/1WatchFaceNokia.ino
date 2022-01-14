@@ -11,7 +11,7 @@
  * animate - Анимировать ли вывод. 0 = не анимировать. 1 = анимировать медленно, 2 = анимировать быстрее ...
 */
 void drawWatchFaceNokia(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate){
-    Display.Display.displayClear();
+    Display.displayClear();
       
     { //time
       byte hour1 = hour / 10;

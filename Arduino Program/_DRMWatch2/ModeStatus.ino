@@ -1,3 +1,6 @@
+#include <Arduino.h>
+#include "Generic.h"
+#include "Display.cpp"
 /*Used to test new functionality*/
 
 void modeStatusSetup() {
@@ -10,7 +13,7 @@ void modeStatusLoop() {
     return;
   } 
     
-  display.displayClear();
+  Display.displayClear();
   drawParameter(00, 00, F("VLT"), _batteryRawVoltage());
   drawParameter(65, 00, F("CHG"), batteryIsCharging());
   drawParameter(00, 10, F("RAM"), freeRam());
@@ -24,16 +27,16 @@ void modeStatusLoop() {
   //drawParameter(50, 50, F("aME"), eepromReadAlertMelodyIndex());
   drawParameter(50, 60, F("WTF"), eepromReadWatchface());
 
-  displayDrawCheck(0, 61, 1);
-  displayUpdate();
+  Display.displayDrawCheck(0, 61, 1);
+  Display.displayUpdate();
 }
 
 void drawParameter(byte x, byte y, const __FlashStringHelper* name, int value){
   int ram = freeRam();
-  displayDrawText(x, y, 1, name);
-  ltoa(value, Generic.buffer, DEC);
-  displayDrawText(x+6+strlen_P((PGM_P)name)*6, y, 1, Generic.buffer);
-  displayDrawText(x+strlen_P((PGM_P)name)*6, y, 1, F(":"));
+  Display.displayDrawText(x, y, 1, name);
+  //ltoa(value, Generic.buffer, DEC);
+  Display.displayDrawText(x+6+strlen_P((PGM_P)name)*6, y, 1, Generic.buffer);
+  Display.displayDrawText(x+strlen_P((PGM_P)name)*6, y, 1, F(":"));
 }
 
 void modeStatusFinish() {

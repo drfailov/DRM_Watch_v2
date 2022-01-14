@@ -1,3 +1,4 @@
+#include "Display.cpp"
 /*Screen allows to set time*/
 
 #define MENU_SET_TIME_SELECTED_HOUR 0
@@ -68,7 +69,7 @@ void modeMenuSetTimeLoop(){
         else
           eepromSaveAlertLastDayRun(0);
       } 
-      displayMessage((const __FlashStringHelper*)textSaved);
+      Display.displayMessage((const __FlashStringHelper*)textSaved);
       goToWatchface();
       return;
     }
@@ -86,34 +87,34 @@ void modeMenuSetTimeLoop(){
   }
 
   
-  display.displayClear();
+  Display.displayClear();
 #ifdef LANG_EN
-  displayDrawText(15, 2, 1, F("Set time"));
+  Display.displayDrawText(15, 2, 1, F("Set time"));
 #endif
 #ifdef LANG_RU
-  displayDrawText(15, 2, 1, F("Зaдaть вpeмя"));
+  Display.displayDrawText(15, 2, 1, F("Зaдaть вpeмя"));
 #endif
   if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE || modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK)
-    displayDrawCheck(/*X*/1, /*Y*/2, 1);
+    Display.displayDrawCheck(/*X*/1, /*Y*/2, 1);
   else
-    displayDrawText(/*X*/1, /*Y*/2, /*C*/1, "+");
-  displayDrawArrowRight(/*X*/1, /*Y*/59, 1);
+    Display.displayDrawText(/*X*/1, /*Y*/2, /*C*/1, "+");
+  Display.displayDrawArrowRight(/*X*/1, /*Y*/59, 1);
   
-  displayDrawText(35, 19, 1, ":");
+  Display.displayDrawText(35, 19, 1, ":");
   //hours
-  displayDraw2DigitNumberWithFrame(/*x*/15, /*y*/15, /*number*/modeMenuSetTimeHours, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_HOUR);
+  Display.displayDraw2DigitNumberWithFrame(/*x*/15, /*y*/15, /*number*/modeMenuSetTimeHours, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_HOUR);
   //minutes
-  displayDraw2DigitNumberWithFrame(/*x*/40, /*y*/15, /*number*/modeMenuSetTimeMinutes, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MINUTE);
+  Display.displayDraw2DigitNumberWithFrame(/*x*/40, /*y*/15, /*number*/modeMenuSetTimeMinutes, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MINUTE);
   
 
-  displayDrawText(35, 39, 1, ".");
-  displayDrawText(60, 39, 1, ".");
+  Display.displayDrawText(35, 39, 1, ".");
+  Display.displayDrawText(60, 39, 1, ".");
   //days
-  displayDraw2DigitNumberWithFrame(/*x*/15, /*y*/33, /*number*/modeMenuSetTimeDays, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_DAY);
+  Display.displayDraw2DigitNumberWithFrame(/*x*/15, /*y*/33, /*number*/modeMenuSetTimeDays, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_DAY);
   //months
-  displayDraw2DigitNumberWithFrame(/*x*/40, /*y*/33, /*number*/modeMenuSetTimeMonths, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MONTH); 
+  Display.displayDraw2DigitNumberWithFrame(/*x*/40, /*y*/33, /*number*/modeMenuSetTimeMonths, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MONTH); 
   //Year
-  displayDraw2DigitNumberWithFrame(/*x*/65, /*y*/33, /*number*/modeMenuSetTimeYears%2000, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_YEAR); 
+  Display.displayDraw2DigitNumberWithFrame(/*x*/65, /*y*/33, /*number*/modeMenuSetTimeYears%2000, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_YEAR); 
 
   
   { //Save
@@ -126,12 +127,12 @@ void modeMenuSetTimeLoop(){
     const __FlashStringHelper* chars = F("Coxp");    
 #endif
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, chars);
+      Display.displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
+      Display.displayDrawText(x + 4, y+4, 0, chars);
     }
     else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, chars);
+      Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
+      Display.displayDrawText(x+4, y+4, 1, chars);
     }
   }
   { //BACK
@@ -144,16 +145,16 @@ void modeMenuSetTimeLoop(){
     const __FlashStringHelper* chars = F("Haзд");
 #endif
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, chars);
+      Display.displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
+      Display.displayDrawText(x + 4, y+4, 0, chars);
     }
     else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, chars);
+      Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
+      Display.displayDrawText(x+4, y+4, 1, chars);
     }
   }
   
-  displayUpdate();
+  Display.displayUpdate();
 }
 
 void modeMenuSetTimeFinish(){

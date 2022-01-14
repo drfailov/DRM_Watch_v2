@@ -45,7 +45,7 @@ void modeWatchFaceLoop(bool animate) {
           eepromSaveAlertLastDayRun(day);
           long timeStarted = millis();
           long playTime = 120000;
-          displayBacklightOn();
+          Display.displayBacklightOn();
           while (melodyPlayerPlayMelody(getMelodyByIndex(alertMelodyIndex)) && millis() - timeStarted < playTime);
         }
       }
@@ -94,8 +94,8 @@ void modeWatchFaceLoop(bool animate) {
 #endif
 
   if(!found){
-    displayDrawText(20, 30, 1, F("Select WTF"));
-    displayUpdate();
+    Display.displayDrawText(20, 30, 1, F("Select WTF"));
+    Display.displayUpdate();
   }
 
   { //Baclight

@@ -49,35 +49,35 @@ void modeMenuSetSleepTimeFinish() {
 void modeMenuSetSleepTimeSelected(byte index) {
   if (index == 0) { //0.5 sec
     eepromSaveSleepTime(eepromSleepTime05sec);
-    displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem1);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem1);
     goToWatchface();
     return;
   }
   
   if (index == 1) { //1 s
     eepromSaveSleepTime(eepromSleepTime1sec);
-    displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem2);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem2);
     goToWatchface();
     return;
   }
 
   if (index == 2) { //2s
     eepromSaveSleepTime(eepromSleepTime2sec);
-    displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem3);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem3);
     goToWatchface();
     return;
   } 
   
   if (index == 3) { //4s
     eepromSaveSleepTime(eepromSleepTime4sec);
-    displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem4);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem4);
     goToWatchface();
     return;
   }
   
   if (index == 4) { //8s
     eepromSaveSleepTime(eepromSleepTime8sec);
-    displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem5);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem5);
     goToWatchface();
     return;
   }

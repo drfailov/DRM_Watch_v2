@@ -14,8 +14,8 @@ void drawWatchFaceZubat(byte hour, byte minute, byte second, byte day, byte mont
   Display.displayClear();
   
   {//date
-    sprintf(buffer, "%02d.%02d.%04d", day, month, year);
-    Display.displayDrawText(37, 61, 1, buffer);
+    sprintf(Generic.buffer, "%02d.%02d.%04d", day, month, year);
+    Display.displayDrawText(37, 61, 1, Generic.buffer);
   }
   
   if(eepromReadAlertEnabled()){   //Alert sign
@@ -35,7 +35,7 @@ void drawWatchFaceZubat(byte hour, byte minute, byte second, byte day, byte mont
   }
 
   {//zubat
-    Display.displayDrawVector(/*path*/getPathZubat(), /*x*/0, /*y*/10, /*animate*/false, /*color*/1);
+    Display.displayDrawVector(/*path*/Display.getPathZubat(), /*x*/0, /*y*/10, /*animate*/false, /*color*/1);
   }
   
   {//time
@@ -51,5 +51,5 @@ void drawWatchFaceZubat(byte hour, byte minute, byte second, byte day, byte mont
     Display.displayDrawNumber(minute2 , 85, 19, 3, 4, animate);
   }
 
-  displayUpdate();
+  Display.displayUpdate();
 }

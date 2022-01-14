@@ -1,4 +1,5 @@
 #include "Display.cpp"
+#include "Generic.h"
 
 /*
  * Code contains basic functionality for every list menu in device.
@@ -13,8 +14,8 @@ long genericMenuLastActionTime = 0; //последнее действие кно
 
 
 void genericMenuSetup(){
-  displayInit();
-  displayBacklightOn();
+  Display.displayInit();
+  Display.displayBacklightOn();
   genericMenuSelectPosition = 0;
   genericMenuViewPosition = 0;
   genericMenuLastActionTime = millis();
@@ -54,15 +55,15 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
     int index = genericMenuViewPosition + i;
     if (index < genericMenuItemsCount) {
       if(progmemArray)
-        strcpy_P(buffer, pgm_read_word(&(genericMenuItems[index])));  //for PROGMEM arrays
+        strcpy_P(Generic.buffer, pgm_read_word(&(genericMenuItems[index])));  //for PROGMEM arrays
       else
-        strcpy_P(buffer, (genericMenuItems[index]));      //for RAM arrays
+        strcpy_P(Generic.buffer, (genericMenuItems[index]));      //for RAM arrays
       if (index == genericMenuSelectPosition) {
         Display.displayFillRect(/*x*/11, /*y*/1 + 13 * i, /*w*/81, /*h*/13, /*c*/1);
-        Display.displayDrawText(/*X*/15, /*Y*/4 + 13 * i, /*C*/0, buffer);
+        Display.displayDrawText(/*X*/15, /*Y*/4 + 13 * i, /*C*/0, Generic.buffer);
       }
       else {
-        Display.displayDrawText(/*X*/15, /*Y*/4 + 13 * i, /*C*/1, buffer);
+        Display.displayDrawText(/*X*/15, /*Y*/4 + 13 * i, /*C*/1, Generic.buffer);
       }
     }
   }

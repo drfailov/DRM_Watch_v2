@@ -21,11 +21,15 @@
 //размер текстового буфера. Чем меньше тем экономнее.
 #define BUFFER_SIZE 25
 
-class Generic{
-
+class Generic_{
+  
+  public:
   //общий на всю программу текстовый буфер чтобы не объявлять каждый раз локальную.
   static char buffer[BUFFER_SIZE]; 
+  static char* getBuffer(){return buffer;}
 
 };
+
+Generic_ Generic;
 
 #endif

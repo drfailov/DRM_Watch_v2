@@ -40,14 +40,14 @@ void modeMenuSetSilentModeFinish() {
 void modeMenuSetSilentModeSelected(byte index) {
   if (index == 0) { //Sound ON
     eepromSaveSilentMode(false);
-    displayMessage((__FlashStringHelper*)modeMenuSetSilentModeItem1);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetSilentModeItem1);
     goToWatchface();
     return;
   }
   
   if (index == 1) { //Sound OFF
     eepromSaveSilentMode(true);
-    displayMessage((__FlashStringHelper*)modeMenuSetSilentModeItem2);
+    Display.displayMessage((__FlashStringHelper*)modeMenuSetSilentModeItem2);
     goToWatchface();
     return;
   }

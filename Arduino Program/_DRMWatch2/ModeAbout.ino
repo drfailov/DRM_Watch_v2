@@ -30,7 +30,7 @@ void modeAboutLoop() {
   Display.displayDrawText(00, 61, 1, version);
 
   
-  Display.displayDrawVector(/*path*/pathDrmWatch, /*x*/26, /*y*/22, /*animate*/3, /*color*/1);
+  Display.displayDrawVector(/*path*/Display.getPathDrmWatch(), /*x*/26, /*y*/22, /*animate*/3, /*color*/1);
   Display.displayUpdate();
   for(long st = millis(); millis() - st < 900; ){
     if(isButtonUpPressed()){
@@ -44,7 +44,7 @@ void modeAboutLoop() {
       return;
     } 
   }
-  Display.displayDrawVector(/*path*/pathDrmWatch, /*x*/26, /*y*/22, /*animate*/5, /*color*/0);
+  Display.displayDrawVector(/*path*/Display.getPathDrmWatch(), /*x*/26, /*y*/22, /*animate*/5, /*color*/0);
   Display.displayUpdate();
   
 }
