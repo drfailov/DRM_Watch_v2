@@ -34,8 +34,8 @@ Watchfaces design drawn by <b>MeltemiOS</b>.\
 - Li-Po charger module (TC4056A chip)
 
 
-To get components I've desoldered modules. 
-<img src="Photos/photo_2022-01-11_15-28-52.jpg" width="150"/>
+To get components I've desoldered modules. \
+<img src="Photos/photo_2022-01-11_15-28-52.jpg" width="250"/>
 
 ### Arduino Nano, CH340C and MEGA328P
 MEGA328P used as main controller.\
@@ -66,7 +66,7 @@ Link: https://aliexpress.ru/item/1005003227004618.html  \
 ### Board
 I've ordered boards on JLC PCB. Here's what I got:\
 <img src="Photos/photo_2021-11-30_08-55-54.jpg" width="150"/> <img src="Photos/photo_2021-11-30_16-37-08.jpg" width="150"/> <img src="Photos/photo_2021-11-30_08-59-16.jpg" width="150"/> 
-Board soldering plan:
+Board soldering plan:\
 <img src="Circuit Board\Плата DRMW2 v4\2022-01-16 DRMW2_DOC.png" width="250"/>
 
 
