@@ -82,11 +82,13 @@ Pins list:
 - D5 - LCD RST
 - D6 - LCD CS
 - D7 - LCD MOSI
-- D9 - USB Voltage 
+- D8 - LCD SCK
+- D9 - 
 - D10 - LCD Power
-- D11 - LCD SCK   
+- D11 - USB Voltage    
 - D12 - Buzzer (Passive)
 - D13 - Debug LED
+- A0 - Random seed source (Leave unconnected)
 - A1 - LCD Backlight (Active HIGH)
 - A4 - RTC SDA
 - A5 - RTC SCL

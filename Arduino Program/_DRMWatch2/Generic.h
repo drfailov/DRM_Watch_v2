@@ -14,6 +14,7 @@
 //#define pinLcdSck (byte)8    //for new boards  rev.2
 #define pinBuzzer (byte)12 //passive
 #define pinLed (byte)13  //active high
+// A0 - Random seed sourde (leave unconnected)
 #define pinLcdBacklight (byte)15  //A1, active high
 // A4 - RTC SDA
 // A5 - RTC SCL

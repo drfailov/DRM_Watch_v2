@@ -1,4 +1,5 @@
 #include "Display.cpp"
+#include "Buttons.cpp"
 #include "Generic.h"
 
 /*Screen with main watchface*/
@@ -14,7 +15,7 @@ void modeWatchFaceSetup() {
 }
 
 void modeWatchFaceLoop(bool animate) {
-  if (isButtonDownPressed()) {
+  if (ButtonDown.isButtonPressed()) {
     beep();
     setMode(MODE_MENU_MAIN);
     return;

@@ -197,7 +197,7 @@ bool melodyPlayerPlayMelody(const byte* const melody) {
     while(millis() - noteStarted < timeMs);
     noTone(pinBuzzer);
     delay(10);
-    if (isButtonUpPressed()) 
+    if (ButtonUp.isButtonPressed()) 
       return false;
   }
   noTone(pinBuzzer);

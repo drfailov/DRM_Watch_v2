@@ -1,10 +1,15 @@
-
+  /*Global functions related to display. 
+   * Init, draw primitives, draw text...
+   * Every call to display has to be done by some call from this file.
+   * It needed to make migration to other display easier.
+  */
 
 #ifndef DISPLAYCPP
 #define DISPLAYCPP
 
 #include "lcd1202.h"
 #include "Generic.h"
+#include "Buttons.cpp"
 
 const int32_t  PROGMEM watchFaceFont [] { 
   //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
@@ -64,11 +69,6 @@ const PROGMEM byte pathZubat[] = { 42,
 };
 
 class Display_{
-  /*Global functions related to display. 
-   * Init, draw primitives, draw text...
-   * Every call to display has to be done by some call from this file.
-   * It needed to make migration to other display easier.
-  */
   private:
   static LCD1202 lcd;
   /*
@@ -223,8 +223,8 @@ class Display_{
         displayDrawLine(/*X1*/lx + X, /*Y1*/ly + Y, /*X2*/x + X, /*Y2*/y + Y, /*C*/color);
       if(animate!=0 && i%animate==0){
         displayUpdate();
-//        if (isButtonUpPressed()) 
-//          animate = false;
+        if (ButtonUp.isButtonPressed()) 
+          animate = false;
       }
       currentIndex += 2;
       lx = x;
@@ -266,8 +266,8 @@ class Display_{
           delay(6);
         }
       }
-//      if (isButtonUpPressed()) 
-//        animate = false;
+      if (ButtonUp.isButtonPressed()) 
+        animate = false;
     }
     displayUpdate();
     if(animate)

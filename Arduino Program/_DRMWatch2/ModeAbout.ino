@@ -1,4 +1,5 @@
 #include "Display.cpp"
+#include "Buttons.cpp"
 
 /*Used to test new functionality*/
 
@@ -6,12 +7,12 @@ void modeAboutSetup() {
 }
 
 void modeAboutLoop() {
-  if(isButtonUpPressed()){
+  if(ButtonUp.isButtonPressed()){
     beep();
     goToWatchface();
     return;
   } 
-  if(isButtonDownPressed()){
+  if(ButtonDown.isButtonPressed()){
     beep();
     goToWatchface();
     return;
@@ -33,12 +34,12 @@ void modeAboutLoop() {
   Display.displayDrawVector(/*path*/Display.getPathDrmWatch(), /*x*/26, /*y*/22, /*animate*/3, /*color*/1);
   Display.displayUpdate();
   for(long st = millis(); millis() - st < 900; ){
-    if(isButtonUpPressed()){
+    if(ButtonUp.isButtonPressed()){
       beep();
       goToWatchface();
       return;
     } 
-    if(isButtonDownPressed()){
+    if(ButtonDown.isButtonPressed()){
       beep();
       goToWatchface();
       return;

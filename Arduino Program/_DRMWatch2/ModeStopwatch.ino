@@ -1,4 +1,5 @@
 #include "Display.cpp"
+#include "Buttons.cpp"
 
 /*Stopwatch functionality*/
 #define MODE_STOPWATCH_SELECTED_START 0
@@ -19,7 +20,7 @@ void modeStopwatchSetup() {
 }
 
 void modeStopwatchLoop() {
-  if(isButtonUpPressed()){
+  if(ButtonUp.isButtonPressed()){
     beep();
     if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_START){
       if(modeStopwatchIsRunning == false){
@@ -40,7 +41,7 @@ void modeStopwatchLoop() {
       return;
     }
   }
-  if(isButtonDownPressed()){
+  if(ButtonDown.isButtonPressed()){
     beep();
     modeStopwatchSelectedItem ++;
     if(modeStopwatchSelectedItem > 2) 

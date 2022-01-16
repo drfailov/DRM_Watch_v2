@@ -1,13 +1,14 @@
 #include <Arduino.h>
 #include "Generic.h"
 #include "Display.cpp"
+#include "Buttons.cpp"
 /*Used to test new functionality*/
 
 void modeStatusSetup() {
 }
 
 void modeStatusLoop() {
-  if(isButtonDownPressed()){
+  if(ButtonDown.isButtonPressed()){
     beep();
     goToWatchface();
     return;

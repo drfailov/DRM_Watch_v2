@@ -1,4 +1,5 @@
 #include "Display.cpp"
+#include "Buttons.cpp"
 #include "Generic.h"
 
 /*Screen allows to set time*/
@@ -26,7 +27,7 @@ void modeSetAlarmSetup(){
 }
 
 void modeSetAlarmLoop(){
-  if (isButtonUpPressed()) {
+  if (ButtonUp.isButtonPressed()) {
     beep();
     //change value
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_HOUR) {//hours
@@ -75,7 +76,7 @@ void modeSetAlarmLoop(){
     }
   }
 
-  if (isButtonDownPressed()) {
+  if (ButtonDown.isButtonPressed()) {
     beep();
     //move next
     modeSetAlarmSelected ++;

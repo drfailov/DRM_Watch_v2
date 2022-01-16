@@ -1,4 +1,5 @@
 #include "Display.cpp"
+#include "Buttons.cpp"
 #include "Generic.h"
 
 /*
@@ -28,14 +29,14 @@ void genericMenuSetup(){
  * progmemArray - Text has to be stored in progmem. But array can be stored in RAM or in PROGMEM. Pass true if your array stored in PROGMEM.
 */
 void genericMenuLoop(const int genericMenuItemsCount, const char* const genericMenuItems[], void (*onSelected)(byte index), bool progmemArray){
-  if (isButtonUpPressed()) {
+  if (ButtonUp.isButtonPressed()) {
     genericMenuLastActionTime = millis();
     beep();
     onSelected (genericMenuSelectPosition);
     return;
   }
 
-  if (isButtonDownPressed()) {
+  if (ButtonDown.isButtonPressed()) {
     genericMenuLastActionTime = millis();
     beep();
     genericMenuSelectPosition ++;

@@ -1,4 +1,5 @@
 #include "Display.cpp"
+#include "Buttons.cpp"
 /*Screen allows to set time*/
 
 #define MENU_SET_TIME_SELECTED_HOUR 0
@@ -31,7 +32,7 @@ void modeMenuSetTimeSetup(){
 }
 
 void modeMenuSetTimeLoop(){
-  if (isButtonUpPressed()) {
+  if (ButtonUp.isButtonPressed()) {
     beep();
     //change value
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_HOUR) {//hours
@@ -79,7 +80,7 @@ void modeMenuSetTimeLoop(){
     }
   }
 
-  if (isButtonDownPressed()) {
+  if (ButtonDown.isButtonPressed()) {
     beep();
     //move next
     modeMenuSetTimeSelected ++;
