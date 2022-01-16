@@ -34,7 +34,7 @@ void modeStatusLoop() {
 void drawParameter(byte x, byte y, const __FlashStringHelper* name, int value){
   int ram = freeRam();
   Display.displayDrawText(x, y, 1, name);
-  //ltoa(value, Generic.buffer, DEC);
+  ltoa(value, Generic.buffer, DEC);
   Display.displayDrawText(x+6+strlen_P((PGM_P)name)*6, y, 1, Generic.buffer);
   Display.displayDrawText(x+strlen_P((PGM_P)name)*6, y, 1, F(":"));
 }

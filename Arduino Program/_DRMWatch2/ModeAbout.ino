@@ -26,7 +26,7 @@ void modeAboutLoop() {
   Display.displayDrawText(0, 0, 1, F("Coфт:  Dr.Failov"));
   Display.displayDrawText(0, 9, 1, F("Xapд:  MeltemiOS"));
 #endif
-  Display.displayDrawText(74, 61, 1, F("2021"));
+  Display.displayDrawText(74, 61, 1, F("2022"));
   Display.displayDrawText(00, 61, 1, version);
 
   
