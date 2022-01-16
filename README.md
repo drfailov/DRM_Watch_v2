@@ -35,7 +35,7 @@ Watchfaces design drawn by <b>MeltemiOS</b>.\
 
 
 To get components I've desoldered modules. \
-<img src="Photos/photo_2022-01-11_15-28-52.jpg" width="250"/>
+<img src="Photos/photo_2022-01-11_15-28-52.jpg" width="350"/>
 
 ### Arduino Nano, CH340C and MEGA328P
 MEGA328P used as main controller.\
@@ -66,8 +66,9 @@ Link: https://aliexpress.ru/item/1005003227004618.html  \
 ### Board
 I've ordered boards on JLC PCB. Here's what I got:\
 <img src="Photos/photo_2021-11-30_08-55-54.jpg" width="150"/> <img src="Photos/photo_2021-11-30_16-37-08.jpg" width="150"/> <img src="Photos/photo_2021-11-30_08-59-16.jpg" width="150"/> 
+\
 Board soldering plan:\
-<img src="Circuit Board\Плата DRMW2 v4\2022-01-16 DRMW2_DOC.png" width="250"/>
+<img src="Circuit Board\Плата DRMW2 v4\2022-01-16 DRMW2_DOC.png" width="350"/>
 
 
 ## Pinout
@@ -96,16 +97,20 @@ Pins list:
 - Select watchface
 
 ## Troubleshooting
+
 ### Select WTF After flash firmware
 <img src="Photos/" width="300"/>
 To fix it, go to settings and select watchface from list.
+
 ### No device connected or Unrecognized device when connected
 <img src="Photos/" width="300"/>
 TODO
+
 ### No response from board when trying to flash firmware.
 <img src="Photos/" width="300"/>
 Check your Arduino. (if pin13 LED is blinking when power on, arduino is alive)
 TODO
+
 ### RTC FAIL on startup
 <img src="Photos/" width="300"/>
 TODO
@@ -260,9 +265,9 @@ DRM Watch firmware.\
 Melodies stored in form of one byte-one note. Array is contains tempo and notes.\
 First 2 bits of note is representing note duration (values 4, 8, 16, 32).\
 Last 6 bits represents note number counted from low note of first octave.\
-<img src="Photos/photo_2021-12-16_22-37-15.jpg" width="500"/>
+<img src="Photos/photo_2021-12-16_22-37-15.jpg" width="600"/>
 
  
 ## Prototype photos:
- <img src="Photos/photo_2021-12-05_17-01-19.jpg" width="300"/>    <img src="Photos/photo_2021-12-04_13-20-55.jpg" width="300"/>
- <img src="Photos/photo_2021-12-08_22-34-49.jpg" width="300"/>    <img src="Photos/photo_2021-12-19_16-08-34.jpg" width="300"/>
+ <img src="Photos/photo_2021-12-05_17-01-19.jpg" width="200"/>    <img src="Photos/photo_2021-12-04_13-20-55.jpg" width="200"/>
+ <img src="Photos/photo_2021-12-08_22-34-49.jpg" width="200"/>    <img src="Photos/photo_2021-12-19_16-08-34.jpg" width="200"/>
