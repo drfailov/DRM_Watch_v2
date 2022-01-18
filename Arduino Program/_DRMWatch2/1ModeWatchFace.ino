@@ -1,6 +1,7 @@
 #include "Display.cpp"
 #include "Buttons.cpp"
 #include "Battery.cpp"
+#include "RTC.cpp"
 #include "Generic.h"
 
 /*Screen with main watchface*/
@@ -22,13 +23,13 @@ void modeWatchFaceLoop(bool animate) {
     return;
   }
 
-  byte hour = rtcGetHours();
-  byte minute = rtcGetMinutes();
-  byte second = rtcGetSeconds();
-  byte dayOfWeek = rtcGetDayOfWeek();
-  byte day = rtcGetDay();
-  byte month = rtcGetMonth();
-  int year = rtcGetYear();
+  byte hour = RTC.rtcGetHours();
+  byte minute = RTC.rtcGetMinutes();
+  byte second = RTC.rtcGetSeconds();
+  byte dayOfWeek = RTC.rtcGetDayOfWeek();
+  byte day = RTC.rtcGetDay();
+  byte month = RTC.rtcGetMonth();
+  int year = RTC.rtcGetYear();
 
   { //alert
     //play melody and mark this day as playen if:

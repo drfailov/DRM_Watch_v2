@@ -1,5 +1,6 @@
 #include "Display.cpp"
 #include "Buttons.cpp"
+#include "RTC.cpp"
 #include "Generic.h"
 
 /*Screen allows to set time*/
@@ -44,9 +45,9 @@ void modeSetAlarmLoop(){
     }
     
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_SAVE) {//SAVE
-      byte hour = rtcGetHours();
-      byte minute = rtcGetMinutes();
-      byte day = rtcGetDay();
+      byte hour = RTC.rtcGetHours();
+      byte minute = RTC.rtcGetMinutes();
+      byte day = RTC.rtcGetDay();
       eepromSaveAlertEnabled(true);
       eepromSaveAlertMelodyIndex(modeSetAlarmMelody);
       eepromSaveAlertHour(modeSetAlarmHour);

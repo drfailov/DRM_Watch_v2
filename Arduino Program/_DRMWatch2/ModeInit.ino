@@ -6,7 +6,7 @@ void modeInitSetup(){
   Display.displayInit();
   Display.displayBacklightOn();
   Display.displaySimpleMessage("RTC Init");
-  rtcInit();
+  RTC.rtcInit();
   Display.displayClear();
   Display.displayDrawText(67, 61, 1, version);
   Display.displayDrawVector(/*path*/Display.getPathZubat(), /*x*/25, /*y*/10, /*animate*/6, /*color*/1);

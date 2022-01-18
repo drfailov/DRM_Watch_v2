@@ -1,5 +1,6 @@
 #include "Display.cpp"
 #include "Battery.cpp"
+#include "RTC.cpp"
 
 /* 
  * EN: 
@@ -29,7 +30,7 @@ void drawWatchFaceDrmLite(byte hour, byte minute, byte second, byte day, byte mo
   }
   
   {//Temperature
-    float temp = rtcGetTemp();
+    float temp = RTC.rtcGetTemp();
     /* 4 is mininum width, 2 is precision; float value is copied onto str_temp*/
     dtostrf(temp, 4, 1, Generic.buffer);
     sprintf(Generic.buffer, "%sC", Generic.buffer);

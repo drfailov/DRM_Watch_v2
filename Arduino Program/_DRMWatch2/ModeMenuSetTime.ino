@@ -1,5 +1,6 @@
 #include "Display.cpp"
 #include "Buttons.cpp"
+#include "RTC.cpp"
 /*Screen allows to set time*/
 
 #define MENU_SET_TIME_SELECTED_HOUR 0
@@ -22,11 +23,11 @@ int modeMenuSetTimeYears = 2021;
 
 
 void modeMenuSetTimeSetup(){
-  modeMenuSetTimeHours = rtcGetHours();
-  modeMenuSetTimeMinutes = rtcGetMinutes();
-  modeMenuSetTimeDays = rtcGetDay();
-  modeMenuSetTimeMonths = rtcGetMonth();
-  modeMenuSetTimeYears = rtcGetYear();
+  modeMenuSetTimeHours = RTC.rtcGetHours();
+  modeMenuSetTimeMinutes = RTC.rtcGetMinutes();
+  modeMenuSetTimeDays = RTC.rtcGetDay();
+  modeMenuSetTimeMonths = RTC.rtcGetMonth();
+  modeMenuSetTimeYears = RTC.rtcGetYear();
   digitalWrite(pinLcdBacklight, HIGH);
   modeMenuSetTimeSelected = 0;
 }
@@ -57,11 +58,11 @@ void modeMenuSetTimeLoop(){
     }
     
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE) {//SAVE
-      rtcSetTime(modeMenuSetTimeYears, modeMenuSetTimeMonths, modeMenuSetTimeDays, modeMenuSetTimeHours, modeMenuSetTimeMinutes);
+      RTC.rtcSetTime(modeMenuSetTimeYears, modeMenuSetTimeMonths, modeMenuSetTimeDays, modeMenuSetTimeHours, modeMenuSetTimeMinutes);
       { //fix alarm, предотвращение включения будильника сразу в момент установки
-        byte hour = rtcGetHours();
-        byte minute = rtcGetMinutes();
-        byte day = rtcGetDay();
+        byte hour = RTC.rtcGetHours();
+        byte minute = RTC.rtcGetMinutes();
+        byte day = RTC.rtcGetDay();
         
         byte modeSetAlarmHour = eepromReadAlertHour();
         byte modeSetAlarmMinute = eepromReadAlertMinute();
