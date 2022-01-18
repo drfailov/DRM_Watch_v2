@@ -1,4 +1,5 @@
 #include "Display.cpp"
+#include "Battery.cpp"
 
 /* 
  * EN: 
@@ -42,7 +43,7 @@ void drawWatchFaceNomens(byte hour, byte minute, byte second, byte day, byte mon
   {//battery
     X -= 17;
     modeWatchFaceDrawBattery(X, 0);
-    if(!batteryIsCharging() && !batteryIsLowPower()) X += 5;
+    if(!Battery.batteryIsCharging() && !Battery.batteryIsLowPower()) X += 5;
   }
 
   

@@ -1,4 +1,5 @@
 #include "Display.cpp"
+#include "Battery.cpp"
 
 /* 
  * EN: 
@@ -40,7 +41,7 @@ void drawWatchFaceDrmLite(byte hour, byte minute, byte second, byte day, byte mo
   {//battery
     X -= 17;
     modeWatchFaceDrawBattery(X, 61);
-    if(!batteryIsCharging() && !batteryIsLowPower()) X += 5;
+    if(!Battery.batteryIsCharging() && !Battery.batteryIsLowPower()) X += 5;
   }
   
   //Silent mode sign

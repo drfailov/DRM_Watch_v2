@@ -1,5 +1,6 @@
 #include "Display.cpp"
 #include "Buttons.cpp"
+#include "Battery.cpp"
 #include "Generic.h"
 
 /*Screen with main watchface*/
@@ -108,7 +109,7 @@ void modeWatchFaceLoop(bool animate) {
   }
 
   byte sleepTime = eepromReadSleepTime();
-  if (batteryIsLowPower()) //если разряжен, то макс интервал
+  if (Battery.batteryIsLowPower()) //если разряжен, то макс интервал
     sleepTime = 8;
 #ifdef LOG
   Serial.flush();
@@ -158,9 +159,9 @@ void wakeUp() { //to react for button
 }
 
 void modeWatchFaceDrawBattery(byte x, byte y) {
-  float voltage = batteryVoltage();
-  bool isCharging = batteryIsCharging();
-  bool isLowPower = batteryIsLowPower();
+  float voltage = Battery.batteryVoltage();
+  bool isCharging = Battery.batteryIsCharging();
+  bool isLowPower = Battery.batteryIsLowPower();
   byte level = 0;
   if (voltage > 3.40) level = 1;
   if (voltage > 3.65) level = 2;

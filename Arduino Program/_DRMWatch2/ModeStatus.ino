@@ -15,8 +15,8 @@ void modeStatusLoop() {
   } 
     
   Display.displayClear();
-  drawParameter(00, 00, F("VLT"), _batteryRawVoltage());
-  drawParameter(65, 00, F("CHG"), batteryIsCharging());
+  drawParameter(00, 00, F("VLT"), Battery._batteryRawVoltage());
+  drawParameter(65, 00, F("CHG"), Battery.batteryIsCharging());
   drawParameter(00, 10, F("RAM"), freeRam());
   //drawParameter(00, 20, F("SLP"), eepromReadSleepTime());
   //drawParameter(50, 20, F("SLN"), eepromReadSilentMode());
