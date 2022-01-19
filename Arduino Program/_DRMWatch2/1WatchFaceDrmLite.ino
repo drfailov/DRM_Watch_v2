@@ -46,13 +46,13 @@ void drawWatchFaceDrmLite(byte hour, byte minute, byte second, byte day, byte mo
   }
   
   //Silent mode sign
-  if(eepromReadSilentMode()){ 
+  if(MyEEPROM.eepromReadSilentMode()){ 
     X -= 10;
     Display.displayDrawSilentModeIcon(X, 61, 1);
   }
   
   //Alert sign
-  if(eepromReadAlertEnabled()){ 
+  if(MyEEPROM.eepromReadAlertEnabled()){ 
     X-= 11;
     Display.displayDrawAlertSign(X, 61, 1);
   }

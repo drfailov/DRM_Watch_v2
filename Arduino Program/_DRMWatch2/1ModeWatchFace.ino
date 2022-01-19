@@ -1,7 +1,9 @@
 #include "Display.cpp"
 #include "Buttons.cpp"
 #include "Battery.cpp"
+#include "Buzzer.cpp"
 #include "RTC.cpp"
+#include "MyEEPROM.cpp"
 #include "Generic.h"
 
 /*Screen with main watchface*/
@@ -18,7 +20,7 @@ void modeWatchFaceSetup() {
 
 void modeWatchFaceLoop(bool animate) {
   if (ButtonDown.isButtonPressed()) {
-    beep();
+    Buzzer.beep();
     setMode(MODE_MENU_MAIN);
     return;
   }
@@ -37,16 +39,16 @@ void modeWatchFaceLoop(bool animate) {
     //-in this day was not playen
     //-this is right time to play
 
-    bool alertIsEnabled = eepromReadAlertEnabled();
-    byte alertLastRunDay = eepromReadAlertLastDayRun();
-    byte alertTimeHour = eepromReadAlertHour();
-    byte alertTimeMinute = eepromReadAlertMinute();
-    byte alertMelodyIndex = eepromReadAlertMelodyIndex();
+    bool alertIsEnabled = MyEEPROM.eepromReadAlertEnabled();
+    byte alertLastRunDay = MyEEPROM.eepromReadAlertLastDayRun();
+    byte alertTimeHour = MyEEPROM.eepromReadAlertHour();
+    byte alertTimeMinute = MyEEPROM.eepromReadAlertMinute();
+    byte alertMelodyIndex = MyEEPROM.eepromReadAlertMelodyIndex();
 
     if (alertIsEnabled) {
       if (alertLastRunDay != day) {
         if ((hour == alertTimeHour && minute >= alertTimeMinute) || (hour > alertTimeHour)) {
-          eepromSaveAlertLastDayRun(day);
+          MyEEPROM.eepromSaveAlertLastDayRun(day);
           long timeStarted = millis();
           long playTime = 120000;
           Display.displayBacklightOn();
@@ -57,7 +59,7 @@ void modeWatchFaceLoop(bool animate) {
   }
 
   //Номер выбранного циферблата из памяти
-  byte wtf = eepromReadWatchface();
+  byte wtf = MyEEPROM.eepromReadWatchface();
   //Эта переменная нужна чтобы понять, удалось ли найти циферблат правильный. 
   //Чтобы если не удалось, потом вывести сообщение "Select WTF".
   bool found = false; 
@@ -109,7 +111,7 @@ void modeWatchFaceLoop(bool animate) {
       Display.displayBacklightOff();
   }
 
-  byte sleepTime = eepromReadSleepTime();
+  byte sleepTime = MyEEPROM.eepromReadSleepTime();
   if (Battery.batteryIsLowPower()) //если разряжен, то макс интервал
     sleepTime = 8;
 #ifdef LOG

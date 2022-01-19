@@ -2,6 +2,7 @@
 #include "Buttons.cpp"
 #include "RTC.cpp"
 #include "Generic.h"
+#include "Buzzer.cpp"
 
 /*Screen allows to set time*/
 
@@ -20,16 +21,16 @@ byte modeSetAlarmMelody = 00;
 
 
 void modeSetAlarmSetup(){
-  modeSetAlarmHour = eepromReadAlertHour();
-  modeSetAlarmMinute = eepromReadAlertMinute();
-  modeSetAlarmMelody = eepromReadAlertMelodyIndex();
+  modeSetAlarmHour = MyEEPROM.eepromReadAlertHour();
+  modeSetAlarmMinute = MyEEPROM.eepromReadAlertMinute();
+  modeSetAlarmMelody = MyEEPROM.eepromReadAlertMelodyIndex();
   digitalWrite(pinLcdBacklight, HIGH);
   modeSetAlarmSelected = 0;
 }
 
 void modeSetAlarmLoop(){
   if (ButtonUp.isButtonPressed()) {
-    beep();
+    Buzzer.beep();
     //change value
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_HOUR) {//hours
       modeSetAlarmHour ++;
@@ -48,20 +49,20 @@ void modeSetAlarmLoop(){
       byte hour = RTC.rtcGetHours();
       byte minute = RTC.rtcGetMinutes();
       byte day = RTC.rtcGetDay();
-      eepromSaveAlertEnabled(true);
-      eepromSaveAlertMelodyIndex(modeSetAlarmMelody);
-      eepromSaveAlertHour(modeSetAlarmHour);
-      eepromSaveAlertMinute(modeSetAlarmMinute);
+      MyEEPROM.eepromSaveAlertEnabled(true);
+      MyEEPROM.eepromSaveAlertMelodyIndex(modeSetAlarmMelody);
+      MyEEPROM.eepromSaveAlertHour(modeSetAlarmHour);
+      MyEEPROM.eepromSaveAlertMinute(modeSetAlarmMinute);
       if((hour == modeSetAlarmHour && minute >= modeSetAlarmMinute) || (hour > modeSetAlarmHour))
-          eepromSaveAlertLastDayRun(day);
+        MyEEPROM.eepromSaveAlertLastDayRun(day);
       else
-        eepromSaveAlertLastDayRun(0);
+        MyEEPROM.eepromSaveAlertLastDayRun(0);
       Display.displayMessage((const __FlashStringHelper*)textSaved);
       goToWatchface();
       return;
     }
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_DISABLE) {//OFF
-      eepromSaveAlertEnabled(false);
+      MyEEPROM.eepromSaveAlertEnabled(false);
 #ifdef LANG_EN
       Display.displayMessage(F("Alert OFF"));
 #endif
@@ -78,7 +79,7 @@ void modeSetAlarmLoop(){
   }
 
   if (ButtonDown.isButtonPressed()) {
-    beep();
+    Buzzer.beep();
     //move next
     modeSetAlarmSelected ++;
     if(modeSetAlarmSelected > 5) modeSetAlarmSelected = 0;

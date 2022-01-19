@@ -22,7 +22,7 @@ const char* const modeMenuSetSilentModeItems[] PROGMEM = {
 
 void modeMenuSetSilentModeSetup() {
   genericMenuSetup();
-  bool silent = eepromReadSilentMode();
+  bool silent = MyEEPROM.eepromReadSilentMode();
   if(silent == true)
     genericMenuSelectPosition = 1;
   if(silent == false)
@@ -39,14 +39,14 @@ void modeMenuSetSilentModeFinish() {
 
 void modeMenuSetSilentModeSelected(byte index) {
   if (index == 0) { //Sound ON
-    eepromSaveSilentMode(false);
+    MyEEPROM.eepromSaveSilentMode(false);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetSilentModeItem1);
     goToWatchface();
     return;
   }
   
   if (index == 1) { //Sound OFF
-    eepromSaveSilentMode(true);
+    MyEEPROM.eepromSaveSilentMode(true);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetSilentModeItem2);
     goToWatchface();
     return;

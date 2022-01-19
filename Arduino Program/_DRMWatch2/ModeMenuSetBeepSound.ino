@@ -30,7 +30,7 @@ const char* const modeMenuSetBeepSoundItems[] PROGMEM = {
 
 void modeMenuSetBeepSoundSetup() {
   genericMenuSetup();
-  byte selected = eepromReadBeepSound();
+  byte selected = MyEEPROM.eepromReadBeepSound();
   if(selected < 0 || selected > 4) selected = 0;
   genericMenuSelectPosition = selected;
 }
@@ -45,35 +45,35 @@ void modeMenuSetBeepSoundFinish() {
 
 void modeMenuSetBeepSoundSelected(byte index) {
   if (index == 0) { //beep
-    eepromSaveBeepSound(eepromBeepSoundBeep);
+    MyEEPROM.eepromSaveBeepSound(eepromBeepSoundBeep);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem1);
     goToWatchface();
     return;
   }
 
   if (index == 1) { //Click
-    eepromSaveBeepSound(eepromBeepSoundClick);
+    MyEEPROM.eepromSaveBeepSound(eepromBeepSoundClick);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem2);
     goToWatchface();
     return;
   }
 
   if (index == 2) { //Tone
-    eepromSaveBeepSound(eepromBeepSoundTone);
+    MyEEPROM.eepromSaveBeepSound(eepromBeepSoundTone);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem3);
     goToWatchface();
     return;
   }
 
   if (index == 3) { //Whiste
-    eepromSaveBeepSound(eepromBeepSoundWhistle);
+    MyEEPROM.eepromSaveBeepSound(eepromBeepSoundWhistle);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem4);
     goToWatchface();
     return;
   }
 
   if (index == 4) { //None
-    eepromSaveBeepSound(eepromBeepSoundNone);
+    MyEEPROM.eepromSaveBeepSound(eepromBeepSoundNone);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetBeepSoundItem5);
     goToWatchface();
     return;

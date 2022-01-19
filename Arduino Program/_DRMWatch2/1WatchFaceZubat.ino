@@ -1,4 +1,6 @@
 #include "Display.cpp"
+#include "MyEEPROM.cpp"
+
 
 /* 
  * EN: 
@@ -18,11 +20,11 @@ void drawWatchFaceZubat(byte hour, byte minute, byte second, byte day, byte mont
     Display.displayDrawText(37, 61, 1, Generic.buffer);
   }
   
-  if(eepromReadAlertEnabled()){   //Alert sign
+  if(MyEEPROM.eepromReadAlertEnabled()){   //Alert sign
     Display.displayDrawAlertSign(0, 0, 1);
   }
   
-  if(eepromReadSilentMode()){  //Silent mode sign
+  if(MyEEPROM.eepromReadSilentMode()){  //Silent mode sign
     Display.displayDrawSilentModeIcon(10, 0, 1);
   }
   

@@ -1,5 +1,6 @@
 #include "Display.cpp"
 #include "Buttons.cpp"
+#include "Buzzer.cpp"
 #include "Generic.h"
 
 /*
@@ -31,14 +32,14 @@ void genericMenuSetup(){
 void genericMenuLoop(const int genericMenuItemsCount, const char* const genericMenuItems[], void (*onSelected)(byte index), bool progmemArray){
   if (ButtonUp.isButtonPressed()) {
     genericMenuLastActionTime = millis();
-    beep();
+    Buzzer.beep();
     onSelected (genericMenuSelectPosition);
     return;
   }
 
   if (ButtonDown.isButtonPressed()) {
     genericMenuLastActionTime = millis();
-    beep();
+    Buzzer.beep();
     genericMenuSelectPosition ++;
     if (genericMenuSelectPosition >= genericMenuItemsCount) genericMenuSelectPosition = 0;
     while (genericMenuSelectPosition >= genericMenuViewPosition + genericMenuViewCount) genericMenuViewPosition ++;

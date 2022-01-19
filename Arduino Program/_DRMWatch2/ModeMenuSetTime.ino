@@ -1,6 +1,7 @@
 #include "Display.cpp"
 #include "Buttons.cpp"
 #include "RTC.cpp"
+#include "Buzzer.cpp"
 /*Screen allows to set time*/
 
 #define MENU_SET_TIME_SELECTED_HOUR 0
@@ -34,7 +35,7 @@ void modeMenuSetTimeSetup(){
 
 void modeMenuSetTimeLoop(){
   if (ButtonUp.isButtonPressed()) {
-    beep();
+    Buzzer.beep();
     //change value
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_HOUR) {//hours
       modeMenuSetTimeHours ++;
@@ -64,12 +65,12 @@ void modeMenuSetTimeLoop(){
         byte minute = RTC.rtcGetMinutes();
         byte day = RTC.rtcGetDay();
         
-        byte modeSetAlarmHour = eepromReadAlertHour();
-        byte modeSetAlarmMinute = eepromReadAlertMinute();
+        byte modeSetAlarmHour = MyEEPROM.eepromReadAlertHour();
+        byte modeSetAlarmMinute = MyEEPROM.eepromReadAlertMinute();
         if((hour == modeSetAlarmHour && minute >= modeSetAlarmMinute) || (hour > modeSetAlarmHour))
-          eepromSaveAlertLastDayRun(day);
+          MyEEPROM.eepromSaveAlertLastDayRun(day);
         else
-          eepromSaveAlertLastDayRun(0);
+          MyEEPROM.eepromSaveAlertLastDayRun(0);
       } 
       Display.displayMessage((const __FlashStringHelper*)textSaved);
       goToWatchface();
@@ -82,7 +83,7 @@ void modeMenuSetTimeLoop(){
   }
 
   if (ButtonDown.isButtonPressed()) {
-    beep();
+    Buzzer.beep();
     //move next
     modeMenuSetTimeSelected ++;
     if(modeMenuSetTimeSelected > 6) modeMenuSetTimeSelected = 0;

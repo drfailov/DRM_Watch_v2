@@ -5,13 +5,6 @@
 void(* resetFunc) (void) = 0;//объявляем функцию reset с адресом 0
 
 
-//Базовые константы
-#define version F("v1.08")   //Версию менять здесь
-//#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
-#define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
-#define LOG   //Закомментировать чтобы отключило логи
-
-
 GenericWatchface* watchfaces[] = {
   new WatchfaceDrmWatch()
 };
@@ -22,24 +15,6 @@ GenericWatchface* watchfaces[] = {
 #define WATCHFACE_NOMENS 3   //Закомментировать чтобы отключило циферблат
 #define WATCHFACE_ZUBAT 4   //Закомментировать чтобы отключило циферблат
 #define WATCHFACE_NOKIA 5   //Закомментировать чтобы отключило циферблат
-
-
-
-//sleep times
-//Значения констант сна, котоые пишутся в память
-#define eepromSleepTime05sec (byte)0 
-#define eepromSleepTime1sec (byte)1 
-#define eepromSleepTime2sec (byte)2 
-#define eepromSleepTime4sec (byte)4 
-#define eepromSleepTime8sec (byte)8 
-
-//beep sounds
-//Значения констант звука кнопок, котоые пишутся в память
-#define eepromBeepSoundBeep (byte)0
-#define eepromBeepSoundClick (byte)1
-#define eepromBeepSoundTone (byte)2
-#define eepromBeepSoundWhistle (byte)3
-#define eepromBeepSoundNone (byte)4
 
 
 /* Program contains several screens (menus, watchfaces...).
@@ -72,16 +47,6 @@ GenericWatchface* watchfaces[] = {
 #define MODE_SET_ALARM (byte)13
 #define MODE_MENU_SET_WATCHFACE (byte)14
 #define MODE_ZRADA (byte)15
-
-//Здесь определенл, которое используется во всех меню, для экономии памяти
-#ifdef LANG_RU
-const char menuItemBack[] PROGMEM = "< Haзaд";
-const char textSaved[] PROGMEM = "Coxpaнeнo";
-#endif
-#ifdef LANG_EN
-const char menuItemBack[] PROGMEM = "< Back";
-const char textSaved[] PROGMEM = "Saved";
-#endif
 
 //Переменная в которой хранится текущий режим
 byte _mode = -1;

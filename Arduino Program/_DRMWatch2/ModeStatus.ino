@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "Generic.h"
 #include "Display.cpp"
+#include "Buzzer.cpp"
 #include "Buttons.cpp"
 /*Used to test new functionality*/
 
@@ -9,7 +10,7 @@ void modeStatusSetup() {
 
 void modeStatusLoop() {
   if(ButtonDown.isButtonPressed()){
-    beep();
+    Buzzer.beep();
     goToWatchface();
     return;
   } 
@@ -24,9 +25,9 @@ void modeStatusLoop() {
   //drawParameter(50, 30, F("aEN"), eepromReadAlertEnabled());
   //drawParameter(00, 40, F("aHR"), eepromReadAlertHour());
   //drawParameter(50, 40, F("aMI"), eepromReadAlertMinute());
-  drawParameter(00, 50, F("aLD"), eepromReadAlertLastDayRun());
+  drawParameter(00, 50, F("aLD"), MyEEPROM.eepromReadAlertLastDayRun());
   //drawParameter(50, 50, F("aME"), eepromReadAlertMelodyIndex());
-  drawParameter(50, 60, F("WTF"), eepromReadWatchface());
+  drawParameter(50, 60, F("WTF"), MyEEPROM.eepromReadWatchface());
 
   Display.displayDrawCheck(0, 61, 1);
   Display.displayUpdate();

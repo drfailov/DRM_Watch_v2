@@ -30,7 +30,7 @@ const char* const modeMenuSetSleepTimeItems[] PROGMEM = {
 
 void modeMenuSetSleepTimeSetup() {
   genericMenuSetup();
-  byte selected = eepromReadSleepTime();
+  byte selected = MyEEPROM.eepromReadSleepTime();
   if(selected == eepromSleepTime05sec) genericMenuSelectPosition = 0;
   if(selected == eepromSleepTime1sec) genericMenuSelectPosition = 1;
   if(selected == eepromSleepTime2sec) genericMenuSelectPosition = 2;
@@ -48,35 +48,35 @@ void modeMenuSetSleepTimeFinish() {
 
 void modeMenuSetSleepTimeSelected(byte index) {
   if (index == 0) { //0.5 sec
-    eepromSaveSleepTime(eepromSleepTime05sec);
+    MyEEPROM.eepromSaveSleepTime(eepromSleepTime05sec);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem1);
     goToWatchface();
     return;
   }
   
   if (index == 1) { //1 s
-    eepromSaveSleepTime(eepromSleepTime1sec);
+    MyEEPROM.eepromSaveSleepTime(eepromSleepTime1sec);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem2);
     goToWatchface();
     return;
   }
 
   if (index == 2) { //2s
-    eepromSaveSleepTime(eepromSleepTime2sec);
+    MyEEPROM.eepromSaveSleepTime(eepromSleepTime2sec);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem3);
     goToWatchface();
     return;
   } 
   
   if (index == 3) { //4s
-    eepromSaveSleepTime(eepromSleepTime4sec);
+    MyEEPROM.eepromSaveSleepTime(eepromSleepTime4sec);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem4);
     goToWatchface();
     return;
   }
   
   if (index == 4) { //8s
-    eepromSaveSleepTime(eepromSleepTime8sec);
+    MyEEPROM.eepromSaveSleepTime(eepromSleepTime8sec);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetSleepTimeItem5);
     goToWatchface();
     return;

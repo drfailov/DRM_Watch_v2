@@ -23,7 +23,7 @@ const char* modeMenuAppsItems[] = {
   modeMenuAppsItem3,
   modeMenuAppsItem4,
   modeMenuAppsItem5,
-  menuItemBack
+  Generic.getMenuItemBack()
 };
 
 

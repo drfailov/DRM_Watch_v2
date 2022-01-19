@@ -1,4 +1,5 @@
 /*Show settings menu by triggerimg GenericMenu*/
+#include "Generic.h"
 
 const byte modeMenuSettingsItemsCount = 8; //сколько пунктов меню в массиве
 
@@ -79,7 +80,7 @@ void modeMenuSettingsSelected(byte index) {
 
   if (index == 6) { //Hard Reset
     //eepromFIllByZeros();
-    eepromFIllByOnes();
+    MyEEPROM.eepromFIllByOnes();
     reboot();
   }
   

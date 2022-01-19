@@ -58,7 +58,7 @@ void modeMenuSetWatchfaceSetup() {
   genericMenuSetup();
   //Выбор стандартного выбранного пункта меню исходя из текущей настройки в памяти
   genericMenuSelectPosition = 0;
-  byte value = eepromReadWatchface();
+  byte value = MyEEPROM.eepromReadWatchface();
   byte position = 0;
 #ifdef WATCHFACE_DRMWATCH
   if(value == WATCHFACE_DRMWATCH) genericMenuSelectPosition = position;
@@ -92,7 +92,7 @@ void modeMenuSetWatchfaceSelected(byte index) {
   
 #ifdef WATCHFACE_DRMWATCH
   if (index == checkingIndex++) {
-    eepromSaveWatchface(WATCHFACE_DRMWATCH);
+    MyEEPROM.eepromSaveWatchface(WATCHFACE_DRMWATCH);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemDrmWatch);
     goToWatchface();
     return;
@@ -101,7 +101,7 @@ void modeMenuSetWatchfaceSelected(byte index) {
 
 #ifdef WATCHFACE_DRMLITE
   if (index == checkingIndex++) { 
-    eepromSaveWatchface(WATCHFACE_DRMLITE);
+    MyEEPROM.eepromSaveWatchface(WATCHFACE_DRMLITE);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemDrmLite);
     goToWatchface();
     return;
@@ -110,7 +110,7 @@ void modeMenuSetWatchfaceSelected(byte index) {
 
 #ifdef WATCHFACE_NOMENS
   if (index == checkingIndex++) { 
-    eepromSaveWatchface(WATCHFACE_NOMENS);
+    MyEEPROM.eepromSaveWatchface(WATCHFACE_NOMENS);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemNomens);
     goToWatchface();
     return;
@@ -119,7 +119,7 @@ void modeMenuSetWatchfaceSelected(byte index) {
 
 #ifdef WATCHFACE_ZUBAT
   if (index == checkingIndex++) { 
-    eepromSaveWatchface(WATCHFACE_ZUBAT);
+    MyEEPROM.eepromSaveWatchface(WATCHFACE_ZUBAT);
     Display.displayMessage((__FlashStringHelper*)modeMenuSetWatchfaceItemZubat);
     goToWatchface();
     return;

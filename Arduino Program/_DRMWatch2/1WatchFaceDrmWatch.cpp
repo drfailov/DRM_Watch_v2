@@ -43,12 +43,12 @@ class WatchfaceDrmWatch : public GenericWatchface {
       }
 
       { //DayOfWeek
-#ifdef LANG_EN
-        modeWatchFaceDrawDayOfWeek(79, 0, dayOfWeek, /*color*/1);
-#endif
-#ifdef LANG_RU
-        modeWatchFaceDrawDayOfWeek(85, 0, dayOfWeek, /*color*/1);
-#endif
+//#ifdef LANG_EN
+//        modeWatchFaceDrawDayOfWeek(79, 0, dayOfWeek, /*color*/1);
+//#endif
+//#ifdef LANG_RU
+//        modeWatchFaceDrawDayOfWeek(85, 0, dayOfWeek, /*color*/1);
+//#endif
       }
 
 //      { //Temperature

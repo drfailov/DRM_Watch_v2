@@ -1,6 +1,7 @@
 /*Used to test new functionality*/
 #include "Display.cpp"
 #include "Buttons.cpp"
+#include "Buzzer.cpp"
 
 #define MODE_ZRADA_STATE_NONE  0
 #define MODE_ZRADA_STATE_PEREMOGA  1
@@ -15,12 +16,12 @@ void modeZradaSetup() {
 
 void modeZradaLoop() {
   if (ButtonDown.isButtonPressed()) {
-    beep();
+    Buzzer.beep();
     goToWatchface();
     return;
   }
   if (ButtonUp.isButtonPressed()) {
-    beep();
+    Buzzer.beep();
     for(byte i=0; i<20; i++){
       modeZradaState = 1+ (i%2);
       modeZradaDraw(false);

@@ -1,5 +1,15 @@
+/*Данные, которые требуется по всей программе*/
+
 #ifndef GENERIC_H
 #define GENERIC_H
+
+
+
+//Базовые константы
+#define version F("v1.08")   //Версию менять здесь
+//#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
+#define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
+#define LOG   //Закомментировать чтобы отключило логи
 
 //Распиновка
 #define pinButtonDown (byte)2 //active high
@@ -22,9 +32,29 @@
 //размер текстового буфера. Чем меньше тем экономнее.
 #define BUFFER_SIZE 25
 
+  
+//Здесь определенл, которое используется во всех меню, для экономии памяти
+#ifdef LANG_RU
+const char menuItemBack[] PROGMEM = "< Haзaд";
+const char textSaved[] PROGMEM = "Coxpaнeнo";
+#endif
+#ifdef LANG_EN
+const char menuItemBack[] PROGMEM = "< Back";
+const char textSaved[] PROGMEM = "Saved";
+#endif
+
 class Generic_{
   
   public:
+  
+  const char* getMenuItemBack(){ 
+    return menuItemBack;
+  }
+  static const char* getTextSaved(){ 
+    return menuItemBack;
+  }
+
+  
   //общий на всю программу текстовый буфер чтобы не объявлять каждый раз локальную.
   char buffer[BUFFER_SIZE]; 
   char* getBuffer(){return buffer;}
