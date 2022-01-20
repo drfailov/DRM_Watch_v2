@@ -1,13 +1,10 @@
 #include "GenericWatchface.cpp"
 #include "1WatchfaceDrmWatch.cpp"
+#include "1WatchfaceDrmLite.cpp"
 #include <util/atomic.h>
 #include <LowPower.h>
 void(* resetFunc) (void) = 0;//объявляем функцию reset с адресом 0
 
-
-GenericWatchface* watchfaces[] = {
-  new WatchfaceDrmWatch()
-};
 
 //Включение и выключение цифкрблатов
 #define WATCHFACE_DRMWATCH 1   //Это циферблат по умолчанию. Закомментировать чтобы отключило циферблат
@@ -53,6 +50,11 @@ byte _mode = -1;
 
 
 
+
+
+//Click MYKeypad[] = {(2, PULLUP), (3, PULLUP), (4, PULLUP)};
+GenericWatchface *watchfaces[2];
+
 void setup() {
 #ifdef LOG
   Serial.begin(115200);
@@ -63,6 +65,10 @@ void setup() {
   Serial.print(F(" at "));
   Serial.println(F(__TIME__));
 #endif  
+
+  watchfaces[0] = new WatchfaceDrmWatch();
+  watchfaces[1] = new WatchfaceDrmLite();
+  //Serial.println(watchfaces[0]->name());
   setMode(MODE_INIT);
 }
 

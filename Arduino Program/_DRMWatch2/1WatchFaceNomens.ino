@@ -1,5 +1,8 @@
+#include "GenericWatchface.cpp"
 #include "Display.cpp"
+#include "RTC.cpp"
 #include "Battery.cpp"
+#include "MyEEPROM.cpp"
 
 /* 
  * EN: 
@@ -31,10 +34,10 @@ void drawWatchFaceNomens(byte hour, byte minute, byte second, byte day, byte mon
   
   {//DayOfWeek
 #ifdef LANG_EN
-    modeWatchFaceDrawDayOfWeek(76, 58, dayOfWeek, 0);
+    Display.drawDayOfWeek(76, 58, dayOfWeek, 0);
 #endif
 #ifdef LANG_RU
-    modeWatchFaceDrawDayOfWeek(80, 58, dayOfWeek, 0);
+    Display.drawDayOfWeek(80, 58, dayOfWeek, 0);
 #endif
   }
 
@@ -42,7 +45,7 @@ void drawWatchFaceNomens(byte hour, byte minute, byte second, byte day, byte mon
   
   {//battery
     X -= 17;
-    modeWatchFaceDrawBattery(X, 0);
+    Display.displayDrawBattery(X, 0);
     if(!Battery.batteryIsCharging() && !Battery.batteryIsLowPower()) X += 5;
   }
 

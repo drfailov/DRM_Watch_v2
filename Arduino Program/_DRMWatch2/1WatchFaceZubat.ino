@@ -29,11 +29,11 @@ void drawWatchFaceZubat(byte hour, byte minute, byte second, byte day, byte mont
   }
   
   {//DayOfWeek
-    modeWatchFaceDrawDayOfWeek(0, 61, dayOfWeek, /*color*/1);
+    Display.drawDayOfWeek(0, 61, dayOfWeek, /*color*/1);
   }  
   
   {//battery
-    modeWatchFaceDrawBattery(79, 0);
+    Display.displayDrawBattery(79, 0);
   }
 
   {//zubat

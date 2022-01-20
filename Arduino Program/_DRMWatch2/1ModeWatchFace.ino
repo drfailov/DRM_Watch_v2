@@ -60,49 +60,53 @@ void modeWatchFaceLoop(bool animate) {
 
   //Номер выбранного циферблата из памяти
   byte wtf = MyEEPROM.eepromReadWatchface();
-  //Эта переменная нужна чтобы понять, удалось ли найти циферблат правильный. 
-  //Чтобы если не удалось, потом вывести сообщение "Select WTF".
-  bool found = false; 
+  GenericWatchface *watchface = watchfaces[1]; //WatchfaceDrmWatch
+  watchface->drawWatchface(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
 
-#ifdef WATCHFACE_DRMWATCH
-  if (wtf == WATCHFACE_DRMWATCH) {
-    drawWatchFaceDrmWatch(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
-    found = true;
-  }
-#endif
-
-#ifdef WATCHFACE_DRMLITE
-  if (wtf == WATCHFACE_DRMLITE) {
-    drawWatchFaceDrmLite(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
-    found = true;
-  }
-#endif
-
-#ifdef WATCHFACE_NOMENS
-  if (wtf == WATCHFACE_NOMENS) {
-    drawWatchFaceNomens(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
-    found = true;
-  }
-#endif
-
-#ifdef WATCHFACE_ZUBAT
-  if (wtf == WATCHFACE_ZUBAT) {
-    drawWatchFaceZubat(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
-    found = true;
-  }
-#endif
-
-#ifdef WATCHFACE_NOKIA
-  if (wtf == WATCHFACE_NOKIA) {
-    drawWatchFaceNokia(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
-    found = true;
-  }
-#endif
-
-  if(!found){
-    Display.displayDrawText(20, 30, 1, F("Select WTF"));
-    Display.displayUpdate();
-  }
+  
+//  //Эта переменная нужна чтобы понять, удалось ли найти циферблат правильный. 
+//  //Чтобы если не удалось, потом вывести сообщение "Select WTF".
+//  bool found = false; 
+//
+//#ifdef WATCHFACE_DRMWATCH
+//  if (wtf == WATCHFACE_DRMWATCH) {
+//    drawWatchFaceDrmWatch(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+//    found = true;
+//  }
+//#endif
+//
+//#ifdef WATCHFACE_DRMLITE
+//  if (wtf == WATCHFACE_DRMLITE) {
+//    drawWatchFaceDrmLite(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+//    found = true;
+//  }
+//#endif
+//
+//#ifdef WATCHFACE_NOMENS
+//  if (wtf == WATCHFACE_NOMENS) {
+//    drawWatchFaceNomens(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+//    found = true;
+//  }
+//#endif
+//
+//#ifdef WATCHFACE_ZUBAT
+//  if (wtf == WATCHFACE_ZUBAT) {
+//    drawWatchFaceZubat(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+//    found = true;
+//  }
+//#endif
+//
+//#ifdef WATCHFACE_NOKIA
+//  if (wtf == WATCHFACE_NOKIA) {
+//    drawWatchFaceNokia(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+//    found = true;
+//  }
+//#endif
+//
+//  if(!found){
+//    Display.displayDrawText(20, 30, 1, F("Select WTF"));
+//    Display.displayUpdate();
+//  }
 
   { //Baclight
     if (millis() - modeWatchFaceBacklightEnabledTime < modeWatchFaceBacklightTimeout)
@@ -159,40 +163,4 @@ void modeWatchFaceButtonUp() {
 
 void wakeUp() { //to react for button
 
-}
-
-void modeWatchFaceDrawBattery(byte x, byte y) {
-  float voltage = Battery.batteryVoltage();
-  bool isCharging = Battery.batteryIsCharging();
-  bool isLowPower = Battery.batteryIsLowPower();
-  byte level = 0;
-  if (voltage > 3.40) level = 1;
-  if (voltage > 3.65) level = 2;
-  if (voltage > 3.85) level = 3;
-  if (voltage > 4.00) level = 4;
-
-  Display.displayDrawBattery(x, y, level, isCharging, isLowPower);
-}
-
-void modeWatchFaceDrawDayOfWeek(byte x, byte y, byte dayOfWeek, bool color) { //
-  __FlashStringHelper* txt;
-#ifdef LANG_RU
-  if (dayOfWeek == 1) txt = F("Пн");
-  if (dayOfWeek == 2) txt = F("Вт");
-  if (dayOfWeek == 3) txt = F("Ср");
-  if (dayOfWeek == 4) txt = F("Чт");
-  if (dayOfWeek == 5) txt = F("Пт");
-  if (dayOfWeek == 6) txt = F("Сб");
-  if (dayOfWeek == 0) txt = F("Вс");
-#endif
-#ifdef LANG_EN
-  if (dayOfWeek == 1) txt = F("Mon");
-  if (dayOfWeek == 2) txt = F("Tue");
-  if (dayOfWeek == 3) txt = F("Wed");
-  if (dayOfWeek == 4) txt = F("Thu");
-  if (dayOfWeek == 5) txt = F("Fri");
-  if (dayOfWeek == 6) txt = F("Sat");
-  if (dayOfWeek == 0) txt = F("Sun");
-#endif
-  Display.displayDrawText(x, y, color, txt);
 }

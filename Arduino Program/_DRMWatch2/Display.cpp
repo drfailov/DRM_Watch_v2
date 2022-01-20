@@ -10,6 +10,7 @@
 #include "lcd1202.h"
 #include "Generic.h"
 #include "Buttons.cpp"
+#include "Battery.cpp"
 
 const int32_t  PROGMEM watchFaceFont [] { 
   //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
@@ -492,6 +493,20 @@ class Display_{
       displayDrawBitmap(x, y, img, 6, 8, 1);
     }
   }
+
+  
+  void displayDrawBattery(byte x, byte y) {
+    float voltage = Battery.batteryVoltage();
+    bool isCharging = Battery.batteryIsCharging();
+    bool isLowPower = Battery.batteryIsLowPower();
+    byte level = 0;
+    if (voltage > 3.40) level = 1;
+    if (voltage > 3.65) level = 2;
+    if (voltage > 3.85) level = 3;
+    if (voltage > 4.00) level = 4;
+  
+    displayDrawBattery(x, y, level, isCharging, isLowPower);
+  }
   
   #define BLOCK_WIDTH  4  // how many blocks contains one symbol
   #define BLOCK_HEIGHT 5  // how many blocks contains one symbol      
@@ -511,6 +526,29 @@ class Display_{
         }
       }
     }
+  }
+
+  void drawDayOfWeek(byte x, byte y, byte dayOfWeek, bool color) { //
+    __FlashStringHelper* txt;
+  #ifdef LANG_RU
+    if (dayOfWeek == 1) txt = F("Пн");
+    if (dayOfWeek == 2) txt = F("Вт");
+    if (dayOfWeek == 3) txt = F("Ср");
+    if (dayOfWeek == 4) txt = F("Чт");
+    if (dayOfWeek == 5) txt = F("Пт");
+    if (dayOfWeek == 6) txt = F("Сб");
+    if (dayOfWeek == 0) txt = F("Вс");
+  #endif
+  #ifdef LANG_EN
+    if (dayOfWeek == 1) txt = F("Mon");
+    if (dayOfWeek == 2) txt = F("Tue");
+    if (dayOfWeek == 3) txt = F("Wed");
+    if (dayOfWeek == 4) txt = F("Thu");
+    if (dayOfWeek == 5) txt = F("Fri");
+    if (dayOfWeek == 6) txt = F("Sat");
+    if (dayOfWeek == 0) txt = F("Sun");
+  #endif
+    displayDrawText(x, y, color, txt);
   }
 };
 

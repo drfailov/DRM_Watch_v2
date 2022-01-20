@@ -1,27 +1,21 @@
 #include <Arduino.h>
 #include "GenericWatchface.cpp"
 #include "Display.cpp"
+#include "RTC.cpp"
+#include "Battery.cpp"
+#include "MyEEPROM.cpp"
 
 
 #ifndef WATCHFACEDRMWATCHCPP
 #define WATCHFACEDRMWATCHCPP
-class WatchfaceDrmWatch : public GenericWatchface {
-  private:
-    //byte watchFaceCode;
-
+class WatchfaceDrmWatch : public GenericWatchface  { //
   public :
-    WatchfaceDrmWatch() {
-      //constructor
+    virtual byte code() {
+      return 1;
     }
-
-    byte code() {
-      return 0;
-    }
-
-    const char* name() {
+    virtual const char* name() {
       return (const char*)F("DRM Watch");
     }
-
 
     /*
        EN:
@@ -33,7 +27,7 @@ class WatchfaceDrmWatch : public GenericWatchface {
        hour, minute, second, day, month, year, dayOfWeek - текущие значения которые нужно вывести на циферблат
        animate - Анимировать ли вывод. 0 = не анимировать. 1 = анимировать медленно, 2 = анимировать быстрее ...
     */
-    void drawWatchface(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)
+    virtual void drawWatchface(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)
     {
       Display.displayClear();
 
@@ -43,42 +37,42 @@ class WatchfaceDrmWatch : public GenericWatchface {
       }
 
       { //DayOfWeek
-//#ifdef LANG_EN
-//        modeWatchFaceDrawDayOfWeek(79, 0, dayOfWeek, /*color*/1);
-//#endif
-//#ifdef LANG_RU
-//        modeWatchFaceDrawDayOfWeek(85, 0, dayOfWeek, /*color*/1);
-//#endif
+#ifdef LANG_EN
+        Display.drawDayOfWeek(79, 0, dayOfWeek, /*color*/1);
+#endif
+#ifdef LANG_RU
+        Display.drawDayOfWeek(85, 0, dayOfWeek, /*color*/1);
+#endif
       }
 
-//      { //Temperature
-//        float temp = rtcGetTemp();
-//        /* 4 is mininum width, 2 is precision; float value is copied onto str_temp*/
-//        dtostrf(temp, 4, 1, Generic.buffer);
-//        sprintf(Generic.buffer, "%sC", Generic.buffer);
-//        Display.displayDrawText(0, 61, 1, Generic.buffer);
-//      }
+      { //Temperature
+        float temp = RTC.rtcGetTemp();
+        /* 4 is mininum width, 2 is precision; float value is copied onto str_temp*/
+        dtostrf(temp, 4, 1, Generic.buffer);
+        sprintf(Generic.buffer, "%sC", Generic.buffer);
+        Display.displayDrawText(0, 61, 1, Generic.buffer);
+      }
 
 
       byte X = 96;
 
-//      { //battery
-//        X -= 17;
-//        //modeWatchFaceDrawBattery(X, 61);
-//        if (!batteryIsCharging() && !batteryIsLowPower()) X += 5;
-//      }
-//
-//      //Silent mode sign
-//      if (eepromReadSilentMode()) {
-//        X -= 10;
-//        Display.displayDrawSilentModeIcon(X, 61, 1);
-//      }
-//
-//      //Alert sign
-//      if (eepromReadAlertEnabled()) {
-//        X -= 11;
-//        Display.displayDrawAlertSign(X, 61, 1);
-//      }
+      { //battery
+        X -= 17;
+        Display.displayDrawBattery(X, 61);
+        if (!Battery.batteryIsCharging() && !Battery.batteryIsLowPower()) X += 5;
+      }
+
+      //Silent mode sign
+      if (MyEEPROM.eepromReadSilentMode()) {
+        X -= 10;
+        Display.displayDrawSilentModeIcon(X, 61, 1);
+      }
+
+      //Alert sign
+      if (MyEEPROM.eepromReadAlertEnabled()) {
+        X -= 11;
+        Display.displayDrawAlertSign(X, 61, 1);
+      }
 
 
       { //time

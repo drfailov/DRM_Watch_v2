@@ -1,4 +1,8 @@
+#include "GenericWatchface.cpp"
 #include "Display.cpp"
+#include "RTC.cpp"
+#include "Battery.cpp"
+#include "MyEEPROM.cpp"
 
 /* 
  * EN: 

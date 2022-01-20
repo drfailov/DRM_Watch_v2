@@ -7,24 +7,9 @@ private:
   //byte watchFaceCode;
   
 public :
-  GenericWatchface(){
-    //constructor
-  }
-  
-  byte code(){ 
-    return 0;
-  }
-  
-  const char* name(){ 
-    return 0;
-  }
-  
-  
-  void drawWatchface(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)
-  {
-    //draw here
-  }
-  
+  virtual byte code() = 0;
+  virtual const char* name() = 0;
+  virtual void drawWatchface(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate) = 0;
 };
 
 #endif
