@@ -1,18 +1,10 @@
 #include "GenericWatchface.cpp"
 #include "1WatchfaceDrmWatch.cpp"
 #include "1WatchfaceDrmLite.cpp"
+#include "1WatchfaceNomens.cpp"
 #include <util/atomic.h>
 #include <LowPower.h>
 void(* resetFunc) (void) = 0;//объявляем функцию reset с адресом 0
-
-
-//Включение и выключение цифкрблатов
-#define WATCHFACE_DRMWATCH 1   //Это циферблат по умолчанию. Закомментировать чтобы отключило циферблат
-#define WATCHFACE_DRMLITE 2   //Закомментировать чтобы отключило циферблат
-#define WATCHFACE_NOMENS 3   //Закомментировать чтобы отключило циферблат
-#define WATCHFACE_ZUBAT 4   //Закомментировать чтобы отключило циферблат
-#define WATCHFACE_NOKIA 5   //Закомментировать чтобы отключило циферблат
-
 
 /* Program contains several screens (menus, watchfaces...).
  * Every screen is a separate mode. Every mode contains of: modeSetup(), modeLoop(), modeFinish().
@@ -44,18 +36,20 @@ void(* resetFunc) (void) = 0;//объявляем функцию reset с адр
 #define MODE_SET_ALARM (byte)13
 #define MODE_MENU_SET_WATCHFACE (byte)14
 #define MODE_ZRADA (byte)15
-
 //Переменная в которой хранится текущий режим
 byte _mode = -1;
 
 
 
-
-
-//Click MYKeypad[] = {(2, PULLUP), (3, PULLUP), (4, PULLUP)};
-GenericWatchface *watchfaces[2];
+//Набор циферблатов следует менять именно здесь. Обязательно обновить количество если оно изменилось.
+const byte watchfacesCount = 3;
+GenericWatchface *watchfaces[watchfacesCount];
 
 void setup() {
+  watchfaces[0] = new WatchfaceDrmWatch();
+  watchfaces[1] = new WatchfaceDrmLite();
+  watchfaces[2] = new WatchfaceNomens();
+  
 #ifdef LOG
   Serial.begin(115200);
   Serial.println(F("\nDRM Watch V2"));
@@ -66,9 +60,6 @@ void setup() {
   Serial.println(F(__TIME__));
 #endif  
 
-  watchfaces[0] = new WatchfaceDrmWatch();
-  watchfaces[1] = new WatchfaceDrmLite();
-  //Serial.println(watchfaces[0]->name());
   setMode(MODE_INIT);
 }
 

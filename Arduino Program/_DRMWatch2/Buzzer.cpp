@@ -12,9 +12,6 @@ class Buzzer_{
   void beepConfirm() {
     if(MyEEPROM.eepromReadSilentMode())
       return;
-  #ifdef LOG
-    Serial.print(F("Beep init..."));
-  #endif
     pinMode(pinBuzzer, OUTPUT);
     for(byte i=2; i<5; i++){
       tone(pinBuzzer, i*1000);  // пищать на пине 12, 1 кГц
@@ -29,9 +26,6 @@ class Buzzer_{
       delay(30);
     }
     pinMode(pinBuzzer, INPUT);
-  #ifdef LOG
-    Serial.println(F("OK"));
-  #endif
   }
   
   void beep() {
@@ -47,7 +41,7 @@ class Buzzer_{
     }
     else if(MyEEPROM.eepromReadBeepSound() == eepromBeepSoundTone){
       tone(pinBuzzer, 1000);  
-      delay(150);
+      delay(100);
     }
     else if(MyEEPROM.eepromReadBeepSound() == eepromBeepSoundWhistle){
       tone(pinBuzzer, 2000);  

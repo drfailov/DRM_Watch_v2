@@ -26,7 +26,7 @@ void modeInitSetup(){
 }
 
 void modeInitLoop(){
-  delay(300);
+  delay(200);
   goToWatchface();
 }
 

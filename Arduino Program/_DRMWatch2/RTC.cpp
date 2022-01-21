@@ -18,7 +18,7 @@ class RTC_{
     while (!DS3231M.begin())  // Initialize RTC communications
     {
   #ifdef LOG
-      Serial.println(F("DS3231M error..."));
+      Serial.println(F("FAIL"));
   #endif
   #ifdef LANG_EN
       Display.displayMessage(F("RTC FAIL."));
@@ -32,9 +32,10 @@ class RTC_{
     rtcReady = true;
   #ifdef LOG
     Serial.println(F("OK"));
-    Serial.print(F("DS3231M temp: "));
-    Serial.print(DS3231M.temperature() / 100.0, 1);  // Value is in 100ths of a degree
-    Serial.println("\xC2\xB0""C");
+    Serial.print(F("Temp: "));
+    Serial.println(DS3231M.temperature());
+    //Serial.print(DS3231M.temperature() / 100.0, 1);  // Value is in 100ths of a degree
+    //Serial.println("\xC2\xB0""C");
   #endif
   }
   
@@ -43,60 +44,44 @@ class RTC_{
   }
   
   byte rtcGetSeconds() {
-    if (!rtcReady)
-      return rand() % 60;
     DateTime now = DS3231M.now();
-    delayMicroseconds(100);
+    //delayMicroseconds(100);
     return now.second();
   }
   byte rtcGetMinutes() {
-    if (!rtcReady)
-      return rand() % 60;
     DateTime now = DS3231M.now();
-    delayMicroseconds(100);
+    //delayMicroseconds(100);
     return now.minute();
   }
   byte rtcGetHours() {
-    if (!rtcReady)
-      return rand() % 60;
     DateTime now = DS3231M.now();
-    delayMicroseconds(100);
+    //delayMicroseconds(100);
     return now.hour();
   }
   byte rtcGetDay() {
-    if (!rtcReady)
-      return rand() % 30;
     DateTime now = DS3231M.now();
-    delayMicroseconds(100);
+    //delayMicroseconds(100);
     return now.day();
   }
   
   byte rtcGetDayOfWeek() {
-    if (!rtcReady)
-      return rand() % 7;
     DateTime now = DS3231M.now();
-    delayMicroseconds(100);
+    //delayMicroseconds(100);
     return now.dayOfTheWeek();
   }
   byte rtcGetMonth() {
-    if (!rtcReady)
-      return rand() % 12;
     DateTime now = DS3231M.now();
-    delayMicroseconds(100);
+    //delayMicroseconds(100);
     return now.month();
   }
   int rtcGetYear() {
-    if (!rtcReady)
-      return rand() % 3000;
     DateTime now = DS3231M.now();
-    delayMicroseconds(100);
+    //delayMicroseconds(100);
     return now.year();
   }
   float rtcGetTemp() {
-    if (!rtcReady)
-      return (rand() % 3000) / 100.0;
     float temp =  DS3231M.temperature() / 100.0;
-    delayMicroseconds(100);
+    //delayMicroseconds(100);
     return temp;
   }
 };

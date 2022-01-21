@@ -24,6 +24,7 @@ void modeSetAlarmSetup(){
   modeSetAlarmHour = MyEEPROM.eepromReadAlertHour();
   modeSetAlarmMinute = MyEEPROM.eepromReadAlertMinute();
   modeSetAlarmMelody = MyEEPROM.eepromReadAlertMelodyIndex();
+  if(modeSetAlarmMelody >= getMelodiesCount()) modeSetAlarmMelody = 0;
   digitalWrite(pinLcdBacklight, HIGH);
   modeSetAlarmSelected = 0;
 }
@@ -109,7 +110,8 @@ void modeSetAlarmLoop(){
     byte x = 15;
     byte y = 33;
     //strlcpy_P(buffer, pgm_read_word(getMelodyName(modeSetAlarmMelody)), BUFFER_SIZE);
-    strlcpy_P(Generic.getBuffer(), getMelodyName(modeSetAlarmMelody), BUFFER_SIZE);
+    //strcpy_P(Generic.buffer, getMelodyName(modeSetAlarmMelody));
+    strlcpy_P(Generic.buffer, getMelodyName(modeSetAlarmMelody), BUFFER_SIZE);
     if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MELODY){
       Display.displayFillRect(/*x*/x, /*y*/y, /*w*/80, /*h*/15, /*c*/1);
       Display.displayDrawText(x+4, y+4, 0, Generic.buffer);

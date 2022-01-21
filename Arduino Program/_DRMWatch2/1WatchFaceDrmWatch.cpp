@@ -10,9 +10,6 @@
 #define WATCHFACEDRMWATCHCPP
 class WatchfaceDrmWatch : public GenericWatchface  { //
   public :
-    virtual byte code() {
-      return 1;
-    }
     virtual const char* name() {
       return (const char*)F("DRM Watch");
     }
@@ -32,7 +29,7 @@ class WatchfaceDrmWatch : public GenericWatchface  { //
       Display.displayClear();
 
       { //date
-        sprintf(Generic.buffer, "%02d.%02d.%04d", day, month, year);
+        sprintf(Generic.buffer, Generic.getDateFormat(), day, month, year);
         Display.displayDrawText(0, 0, 1, Generic.buffer);
       }
 
