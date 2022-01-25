@@ -4,7 +4,7 @@
 #include "Buzzer.cpp"
 #include "RTC.cpp"
 #include "MyEEPROM.cpp"
-#include "Generic.h"
+#include "Generic.cpp"
 
 /*Screen with main watchface*/
 long modeWatchFaceBacklightTimeout = 15000;

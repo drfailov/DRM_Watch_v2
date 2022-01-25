@@ -1,7 +1,7 @@
 #include "Display.cpp"
 #include "Buttons.cpp"
 #include "RTC.cpp"
-#include "Generic.h"
+#include "Generic.cpp"
 #include "Buzzer.cpp"
 
 /*Screen allows to set time*/

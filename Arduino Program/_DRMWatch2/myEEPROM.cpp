@@ -11,7 +11,7 @@
 
 #include <Arduino.h>
 #include <EEPROM.h>
-#include "Generic.h"
+#include "Generic.cpp"
 
 
 class myEEPROM_ {

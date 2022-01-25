@@ -2,6 +2,8 @@
 #include "1WatchfaceDrmWatch.cpp"
 #include "1WatchfaceDrmLite.cpp"
 #include "1WatchfaceNomens.cpp"
+#include "1WatchfaceZubat.cpp"
+#include "1WatchfaceXelibri.cpp"
 #include <util/atomic.h>
 #include <LowPower.h>
 void(* resetFunc) (void) = 0;//объявляем функцию reset с адресом 0
@@ -25,12 +27,12 @@ void(* resetFunc) (void) = 0;//объявляем функцию reset с адр
 #define MODE_MENU_MAIN (byte)2
 #define MODE_STATUS (byte)3
 #define MODE_MENU_MELODIES (byte)4
-#define MODE_MENU_SETTINGS (byte)5
+  #define MODE_MENU_SETTINGS (byte)5
 #define MODE_MENU_SET_TIME (byte)6
-#define MODE_MENU_SET_SLEEP_TIME (byte)7
+  #define MODE_MENU_SET_SLEEP_TIME (byte)7
 #define MODE_ABOUT (byte)8
-#define MODE_MENU_SET_BEEP_SOUND (byte)9
-#define MODE_MENU_SET_SILENT_MODE (byte)10
+  #define MODE_MENU_SET_BEEP_SOUND (byte)9
+  #define MODE_MENU_SET_SILENT_MODE (byte)10
 #define MODE_MENU_APPS (byte)11
 #define MODE_STOPWATCH (byte)12
 #define MODE_SET_ALARM (byte)13
@@ -42,13 +44,16 @@ byte _mode = -1;
 
 
 //Набор циферблатов следует менять именно здесь. Обязательно обновить количество если оно изменилось.
-const byte watchfacesCount = 3;
+const byte watchfacesCount = 2;
 GenericWatchface *watchfaces[watchfacesCount];
 
 void setup() {
-  watchfaces[0] = new WatchfaceDrmWatch();
-  watchfaces[1] = new WatchfaceDrmLite();
-  watchfaces[2] = new WatchfaceNomens();
+  byte i=0;
+  //watchfaces[i++] = new WatchfaceDrmWatch();
+  watchfaces[i++] = new WatchfaceDrmLite();
+  //watchfaces[i++] = new WatchfaceNomens();
+  //watchfaces[i++] = new WatchfaceZubat();
+  watchfaces[i++] = new WatchfaceXelibri();
   
 #ifdef LOG
   Serial.begin(115200);

@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "Generic.h"
+#include "Generic.cpp"
 #include "Display.cpp"
 #include "Buzzer.cpp"
 #include "Buttons.cpp"

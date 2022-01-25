@@ -8,7 +8,7 @@
 #define DISPLAYCPP
 
 #include "lcd1202.h"
-#include "Generic.h"
+#include "Generic.cpp"
 #include "Buttons.cpp"
 #include "Battery.cpp"
 
@@ -28,7 +28,7 @@ const int32_t  PROGMEM watchFaceFont [] {
   //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
   0b00000000000011111001111100011111, //6
   //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
-  0b00000000000010001000100010001111, //7
+  0b00000000000001000100010010001111, //7
   //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
   0b00000000000011111001111110011111, //8
   //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<

@@ -4,7 +4,7 @@
 #define BUTTONCPP
 
 #include <Arduino.h>
-#include "Generic.h"
+#include "Generic.cpp"
 
 class Button_{
   private:

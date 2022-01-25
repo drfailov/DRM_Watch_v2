@@ -4,7 +4,7 @@
 #define BUZZERCPP
 
 #include <Arduino.h>
-#include "Generic.h"
+#include "Generic.cpp"
 #include "myEEPROM.cpp"
 
 class Buzzer_{

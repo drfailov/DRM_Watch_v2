@@ -1,5 +1,5 @@
 /*Show settings menu by triggerimg GenericMenu*/
-#include "Generic.h"
+#include "Generic.cpp"
 
 const byte modeMenuSettingsItemsCount = 8; //сколько пунктов меню в массиве
 

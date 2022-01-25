@@ -4,7 +4,7 @@
 #define BATTERYCPP
 
 #include <Arduino.h>
-#include "Generic.h"
+#include "Generic.cpp"
 
 class Battery_{
   public:

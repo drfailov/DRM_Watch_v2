@@ -14,7 +14,10 @@ void modeMenuSetWatchfaceSetup() {
 void modeMenuSetWatchfaceLoop() {
   char* modeMenuSetWatchfaceItems[watchfacesCount + 1];
   for(byte i = 0; i < watchfacesCount; i++){
-    modeMenuSetWatchfaceItems[i] = watchfaces[i]->name();
+    if(watchfaces[i] == 0)
+      modeMenuSetWatchfaceItems[i] = (char*)F("-");
+    else
+      modeMenuSetWatchfaceItems[i] = watchfaces[i]->name();
   }
   modeMenuSetWatchfaceItems[watchfacesCount] = menuItemBack;
   
@@ -26,7 +29,7 @@ void modeMenuSetWatchfaceFinish() {
 }
 
 void modeMenuSetWatchfaceSelected(byte index) {
-  if(index < watchfacesCount){
+  if(index < watchfacesCount && watchfaces[index] != 0){
     MyEEPROM.eepromSaveWatchface(index);
     Display.displayMessage((const __FlashStringHelper*)(watchfaces[index] -> name()));
     goToWatchface();

@@ -1,7 +1,7 @@
 #include "Display.cpp"
 #include "Buttons.cpp"
 #include "Buzzer.cpp"
-#include "Generic.h"
+#include "Generic.cpp"
 
 /*
  * Code contains basic functionality for every list menu in device.
