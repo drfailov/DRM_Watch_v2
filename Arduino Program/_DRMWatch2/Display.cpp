@@ -434,17 +434,59 @@ class Display_{
       displayDrawBitmap(x, y, img, 8, 8, color);
   }
   
+  static void displayDrawAppsIcon(byte x, byte y, bool color){
+        static const char img[8] PROGMEM = { 
+        0b01110111,
+        0b01110111,
+        0b01110111,
+        0b00000000,
+        0b01110111,
+        0b01110111,
+        0b01110111,
+        0b00000000
+      };
+      displayDrawBitmap(x, y, img, 8, 8, color);
+  }
+  //Рисование иконки стрелки влево. Используется на многи экранах как кнопка НАЗАД.
+  //Рисунок находится в битовом массиве.
+  //Начало массива - левая часть рисунка. Один бит - один пиксель.
+  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
+  static void displayDrawArrowLeft(byte x, byte y, bool color){
+    static const char img[7] PROGMEM = { 
+        0b00001000,
+        0b00001000,
+        0b00011100,
+        0b00011100,
+        0b00110110,
+        0b00110110,
+        0b01100011
+      };
+    displayDrawBitmap(x, y, img, 7, 8, color);
+  }
+  
   //Рисование прямоугольника с цифрами. Используется на экранах настройки будильника и времени
   static void displayDraw2DigitNumberWithFrame(byte x, byte y, byte number, bool selected){
-    char chars[4];
-    sprintf(chars, "%02d", number);
+    sprintf(Generic.buffer, "%02d", number);
     if(selected){
       displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, chars);
+      displayDrawText(x + 4, y+4, 0, Generic.buffer);
     }
     else{
       displayDrawRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, chars);
+      displayDrawText(x+4, y+4, 1, Generic.buffer);
+    }
+  }
+  //Рисование рамки с картинкой
+  
+  //Рисование прямоугольника с иконкой 7x7. Используется на экранах главного меню, секундомера
+  static void displayDrawIconWithFrame(byte x, byte y, void (*drawIcon)(byte x,byte y,bool color), bool selected){
+    if(selected){
+      displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+      drawIcon(x + 8, y+4, 0);
+    }
+    else{
+      displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+      drawIcon(x + 8, y+4, 1);
     }
   }
   

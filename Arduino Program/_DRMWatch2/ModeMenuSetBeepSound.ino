@@ -32,7 +32,7 @@ void modeMenuSetBeepSoundSetup() {
   genericMenuSetup();
   byte selected = MyEEPROM.eepromReadBeepSound();
   if(selected < 0 || selected > 4) selected = 0;
-  genericMenuSelectPosition = selected;
+  Generic.selected = selected;
 }
 
 void modeMenuSetBeepSoundLoop() {

@@ -111,33 +111,37 @@ class WatchfaceXelibri : public GenericWatchface  { //
     {
       Display.displayClear();
 
-
-      
-      byte X = 96;
-      
       {//battery
-        X -= 17;
-        Display.displayDrawBattery(X, 61);
-        if(!Battery.batteryIsCharging() && !Battery.batteryIsLowPower()) X += 5;
-      }
-      
-      //Silent mode sign
-      if(MyEEPROM.eepromReadSilentMode()){ 
-        X -= 10;
-        Display.displayDrawSilentModeIcon(X, 61, 1);
-      }
-      
-      //Alert sign
-      if(MyEEPROM.eepromReadAlertEnabled()){ 
-        X-= 11;
-        Display.displayDrawAlertSign(X, 61, 1);
-      }
-
-      
+        Display.displayDrawBattery(79, 61);
+      }      
        
       {//date
-        sprintf(Generic.buffer, Generic.getDateFormat(), day, month, year);
-        Display.displayDrawText(19, 49, 1, Generic.buffer);
+        sprintf(Generic.buffer, "%2d ", day);
+        if(month == 1)
+          strcpy (Generic.buffer+3, "Jan");   
+        if(month == 2)
+          strcpy (Generic.buffer+3, "Feb");   
+        if(month == 3)
+          strcpy (Generic.buffer+3, "Mar");   
+        if(month == 4)
+          strcpy (Generic.buffer+3, "Apr");   
+        if(month == 5)
+          strcpy (Generic.buffer+3, "May");   
+        if(month == 6)
+          strcpy (Generic.buffer+3, "Jun");   
+        if(month == 7)
+          strcpy (Generic.buffer+3, "Jul");   
+        if(month == 8)
+          strcpy (Generic.buffer+3, "Aug");   
+        if(month == 9)
+          strcpy (Generic.buffer+3, "Sep");   
+        if(month == 10)
+          strcpy (Generic.buffer+3, "Oct");   
+        if(month == 11)
+          strcpy (Generic.buffer+3, "Now");   
+        if(month == 12)
+          strcpy (Generic.buffer+3, "Dec");   
+        Display.displayDrawText(29, 49, 1, Generic.buffer);
       }
       
 
@@ -146,8 +150,8 @@ class WatchfaceXelibri : public GenericWatchface  { //
         byte hour2 = hour - (hour1 * 10);
         byte minute1 = minute / 10;
         byte minute2 = minute - (minute1 * 10);
-        drawNumber(/*x*/4, /*y*/12, /*num*/hour1, /*animate*/ animate);
-        drawNumber(/*x*/25, /*y*/12, /*num*/hour2, /*animate*/ animate);
+        drawNumber(/*x*/5, /*y*/12, /*num*/hour1, /*animate*/ animate);
+        drawNumber(/*x*/26, /*y*/12, /*num*/hour2, /*animate*/ animate);
         Display.displayDrawNumber(10, 48, 16, 4, 5, animate); // :
         drawNumber(/*x*/53, /*y*/12, /*num*/minute1, /*animate*/ animate);
         drawNumber(/*x*/74, /*y*/12, /*num*/minute2, /*animate*/ animate);

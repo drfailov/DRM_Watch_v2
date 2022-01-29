@@ -24,9 +24,9 @@ void modeMenuSetSilentModeSetup() {
   genericMenuSetup();
   bool silent = MyEEPROM.eepromReadSilentMode();
   if(silent == true)
-    genericMenuSelectPosition = 1;
+    Generic.selected = 1;
   if(silent == false)
-    genericMenuSelectPosition = 0;
+    Generic.selected = 0;
 }
 
 void modeMenuSetSilentModeLoop() {

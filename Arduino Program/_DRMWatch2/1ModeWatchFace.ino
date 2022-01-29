@@ -7,19 +7,19 @@
 #include "Generic.cpp"
 
 /*Screen with main watchface*/
-long modeWatchFaceBacklightTimeout = 15000;
+const long modeWatchFaceBacklightTimeout = 15000;
 long modeWatchFaceBacklightEnabledTime = millis();
 
 void modeWatchFaceSetup() {
   Display.displayInit();
   modeWatchFaceBacklightEnabledTime = millis();
-  attachInterrupt(1, modeWatchFaceButtonUp, HIGH); //up
-  attachInterrupt(0, wakeUp, HIGH);  //down
+  attachInterrupt(0, modeWatchFaceTriggerBacklight, HIGH); //down
+  attachInterrupt(1, wakeUp, HIGH);  //up
   modeWatchFaceLoop(true);
 }
 
 void modeWatchFaceLoop(bool animate) {
-  if (ButtonDown.isButtonPressed()) {
+  if (ButtonUp.isButtonPressed()) {
     Buzzer.beep();
     setMode(MODE_MENU_MAIN);
     return;
@@ -120,7 +120,7 @@ void modeWatchFaceFinish() {
   detachInterrupt(1);
 }
 
-void modeWatchFaceButtonUp() {
+void modeWatchFaceTriggerBacklight() {
   modeWatchFaceBacklightEnabledTime = millis();
 }
 

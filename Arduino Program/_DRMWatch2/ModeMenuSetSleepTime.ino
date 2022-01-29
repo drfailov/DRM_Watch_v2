@@ -31,11 +31,11 @@ const char* const modeMenuSetSleepTimeItems[] PROGMEM = {
 void modeMenuSetSleepTimeSetup() {
   genericMenuSetup();
   byte selected = MyEEPROM.eepromReadSleepTime();
-  if(selected == eepromSleepTime05sec) genericMenuSelectPosition = 0;
-  if(selected == eepromSleepTime1sec) genericMenuSelectPosition = 1;
-  if(selected == eepromSleepTime2sec) genericMenuSelectPosition = 2;
-  if(selected == eepromSleepTime4sec) genericMenuSelectPosition = 3;
-  if(selected == eepromSleepTime8sec) genericMenuSelectPosition = 4;  
+  if(selected == eepromSleepTime05sec) Generic.selected = 0;
+  if(selected == eepromSleepTime1sec) Generic.selected = 1;
+  if(selected == eepromSleepTime2sec) Generic.selected = 2;
+  if(selected == eepromSleepTime4sec) Generic.selected = 3;
+  if(selected == eepromSleepTime8sec) Generic.selected = 4;  
 }
 
 void modeMenuSetSleepTimeLoop() {

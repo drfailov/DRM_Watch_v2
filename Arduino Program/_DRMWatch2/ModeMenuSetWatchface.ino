@@ -7,7 +7,7 @@ void modeMenuSetWatchfaceSetup() {
   
   byte value = MyEEPROM.eepromReadWatchface();
   if(value > watchfacesCount) value = 0;
-  genericMenuSelectPosition = value;
+  Generic.selected = value;
 
 }
 

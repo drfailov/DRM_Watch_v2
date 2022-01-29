@@ -12,7 +12,6 @@
 #define MODE_SET_ALARM_SELECTED_SAVE  3
 #define MODE_SET_ALARM_SELECTED_DISABLE 4
 #define MODE_SET_ALARM_SELECTED_BACK 5
-int modeSetAlarmSelected = MODE_SET_ALARM_SELECTED_HOUR;
 
 
 byte modeSetAlarmHour = 00;
@@ -26,27 +25,27 @@ void modeSetAlarmSetup(){
   modeSetAlarmMelody = MyEEPROM.eepromReadAlertMelodyIndex();
   if(modeSetAlarmMelody >= getMelodiesCount()) modeSetAlarmMelody = 0;
   digitalWrite(pinLcdBacklight, HIGH);
-  modeSetAlarmSelected = 0;
+  Generic.selected = 0;
 }
 
 void modeSetAlarmLoop(){
   if (ButtonUp.isButtonPressed()) {
     Buzzer.beep();
     //change value
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_HOUR) {//hours
+    if(Generic.selected == MODE_SET_ALARM_SELECTED_HOUR) {//hours
       modeSetAlarmHour ++;
       if(modeSetAlarmHour > 23) modeSetAlarmHour = 0;
     }
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MINUTE) {//Minutes
+    if(Generic.selected == MODE_SET_ALARM_SELECTED_MINUTE) {//Minutes
       modeSetAlarmMinute ++;
       if(modeSetAlarmMinute > 59) modeSetAlarmMinute = 0;
     }
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MELODY) {//melody
+    if(Generic.selected == MODE_SET_ALARM_SELECTED_MELODY) {//melody
       modeSetAlarmMelody ++;
       if(modeSetAlarmMelody >= getMelodiesCount()) modeSetAlarmMelody = 0;
     }
     
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_SAVE) {//SAVE
+    if(Generic.selected == MODE_SET_ALARM_SELECTED_SAVE) {//SAVE
       byte hour = RTC.rtcGetHours();
       byte minute = RTC.rtcGetMinutes();
       byte day = RTC.rtcGetDay();
@@ -62,7 +61,7 @@ void modeSetAlarmLoop(){
       goToWatchface();
       return;
     }
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_DISABLE) {//OFF
+    if(Generic.selected == MODE_SET_ALARM_SELECTED_DISABLE) {//OFF
       MyEEPROM.eepromSaveAlertEnabled(false);
 #ifdef LANG_EN
       Display.displayMessage(F("Alert OFF"));
@@ -73,7 +72,7 @@ void modeSetAlarmLoop(){
       goToWatchface();
       return;
     }
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_BACK) {//BACK
+    if(Generic.selected == MODE_SET_ALARM_SELECTED_BACK) {//BACK
       setMode(MODE_MENU_APPS);
       return;
     }
@@ -82,8 +81,8 @@ void modeSetAlarmLoop(){
   if (ButtonDown.isButtonPressed()) {
     Buzzer.beep();
     //move next
-    modeSetAlarmSelected ++;
-    if(modeSetAlarmSelected > 5) modeSetAlarmSelected = 0;
+    Generic.selected ++;
+    if(Generic.selected > 5) Generic.selected = 0;
   }
 
   
@@ -94,7 +93,7 @@ void modeSetAlarmLoop(){
 #ifdef LANG_RU
   Display.displayDrawText(15, 2, 1, F("Бyдильник"));
 #endif
-  if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_SAVE || modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_DISABLE || modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_BACK)
+  if(Generic.selected == MODE_SET_ALARM_SELECTED_SAVE || Generic.selected == MODE_SET_ALARM_SELECTED_DISABLE || Generic.selected == MODE_SET_ALARM_SELECTED_BACK)
     Display.displayDrawCheck(/*X*/1, /*Y*/2, 1);
   else
     Display.displayDrawText(/*X*/1, /*Y*/2, /*C*/1, "+");
@@ -102,9 +101,9 @@ void modeSetAlarmLoop(){
   
   Display.displayDrawText(35, 19, 1, ":");
   //hours
-  Display.displayDraw2DigitNumberWithFrame(/*x*/15, /*y*/15, /*number*/modeSetAlarmHour, /*selected*/modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_HOUR); 
+  Display.displayDraw2DigitNumberWithFrame(/*x*/15, /*y*/15, /*number*/modeSetAlarmHour, /*selected*/Generic.selected == MODE_SET_ALARM_SELECTED_HOUR); 
   //minutes
-  Display.displayDraw2DigitNumberWithFrame(/*x*/40, /*y*/15, /*number*/modeSetAlarmMinute, /*selected*/modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MINUTE); 
+  Display.displayDraw2DigitNumberWithFrame(/*x*/40, /*y*/15, /*number*/modeSetAlarmMinute, /*selected*/Generic.selected == MODE_SET_ALARM_SELECTED_MINUTE); 
   
   { //melody
     byte x = 15;
@@ -112,7 +111,7 @@ void modeSetAlarmLoop(){
     //strlcpy_P(buffer, pgm_read_word(getMelodyName(modeSetAlarmMelody)), BUFFER_SIZE);
     //strcpy_P(Generic.buffer, getMelodyName(modeSetAlarmMelody));
     strlcpy_P(Generic.buffer, getMelodyName(modeSetAlarmMelody), BUFFER_SIZE);
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_MELODY){
+    if(Generic.selected == MODE_SET_ALARM_SELECTED_MELODY){
       Display.displayFillRect(/*x*/x, /*y*/y, /*w*/80, /*h*/15, /*c*/1);
       Display.displayDrawText(x+4, y+4, 0, Generic.buffer);
     }
@@ -132,7 +131,7 @@ void modeSetAlarmLoop(){
 #ifdef LANG_RU
     const __FlashStringHelper* chars = F("Coxp");    
 #endif
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_SAVE){
+    if(Generic.selected == MODE_SET_ALARM_SELECTED_SAVE){
       Display.displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
       Display.displayDrawText(x + 4, y+4, 0, chars);
     }
@@ -151,7 +150,7 @@ void modeSetAlarmLoop(){
 #ifdef LANG_RU
     const __FlashStringHelper* chars = F("Bыкл");
 #endif
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_DISABLE){
+    if(Generic.selected == MODE_SET_ALARM_SELECTED_DISABLE){
       Display.displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
       Display.displayDrawText(x + 4, y+4, 0, chars);
     }
@@ -165,7 +164,7 @@ void modeSetAlarmLoop(){
     byte x = 83;
     byte y = 53;
     const __FlashStringHelper* chars = F("<");
-    if(modeSetAlarmSelected == MODE_SET_ALARM_SELECTED_BACK){
+    if(Generic.selected == MODE_SET_ALARM_SELECTED_BACK){
       Display.displayFillRect(/*x*/x, /*y*/y, /*w*/13, /*h*/15, /*c*/1);
       Display.displayDrawText(x + 4, y+4, 0, chars);
     }

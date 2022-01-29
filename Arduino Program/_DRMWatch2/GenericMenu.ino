@@ -10,7 +10,7 @@
 const byte genericMenuViewCount = 5; //сколько на экран помещается
 const long genericMenuAutoExitTimeout = 120000; //MS Время до автоматического выхода с меню
 
-byte genericMenuSelectPosition = 0; //текущий выделенный элемени
+//byte genericMenuSelectPosition = 0; //текущий выделенный элемени
 byte genericMenuViewPosition = 0; //первый элемент который сейчас на экране отображается
 long genericMenuLastActionTime = 0; //последнее действие кнопками, нужно для автоматического выхода
 
@@ -18,7 +18,7 @@ long genericMenuLastActionTime = 0; //последнее действие кно
 void genericMenuSetup(){
   Display.displayInit();
   Display.displayBacklightOn();
-  genericMenuSelectPosition = 0;
+  Generic.selected = 0;
   genericMenuViewPosition = 0;
   genericMenuLastActionTime = millis();
 }
@@ -33,17 +33,17 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
   if (ButtonUp.isButtonPressed()) {
     genericMenuLastActionTime = millis();
     Buzzer.beep();
-    onSelected (genericMenuSelectPosition);
+    onSelected (Generic.selected);
     return;
   }
 
   if (ButtonDown.isButtonPressed()) {
     genericMenuLastActionTime = millis();
     Buzzer.beep();
-    genericMenuSelectPosition ++;
-    if (genericMenuSelectPosition >= genericMenuItemsCount) genericMenuSelectPosition = 0;
-    while (genericMenuSelectPosition >= genericMenuViewPosition + genericMenuViewCount) genericMenuViewPosition ++;
-    while (genericMenuSelectPosition < genericMenuViewPosition) genericMenuViewPosition --;
+    Generic.selected ++;
+    if (Generic.selected >= genericMenuItemsCount) Generic.selected = 0;
+    while (Generic.selected >= genericMenuViewPosition + genericMenuViewCount) genericMenuViewPosition ++;
+    while (Generic.selected < genericMenuViewPosition) genericMenuViewPosition --;
   }
   //auto exit
   if (millis() - genericMenuLastActionTime > genericMenuAutoExitTimeout) {
@@ -60,7 +60,7 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
         strcpy_P(Generic.buffer, pgm_read_word(&(genericMenuItems[index])));  //for PROGMEM arrays
       else
         strcpy_P(Generic.buffer, (genericMenuItems[index]));      //for RAM arrays
-      if (index == genericMenuSelectPosition) {
+      if (index == Generic.selected) {
         Display.displayFillRect(/*x*/11, /*y*/1 + 13 * i, /*w*/81, /*h*/13, /*c*/1);
         Display.displayDrawText(/*X*/15, /*Y*/4 + 13 * i, /*C*/0, Generic.buffer);
       }
@@ -73,7 +73,7 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
     float h = 66;
     Display.displayDrawLine(/*X1*/94, /*Y1*/0, /*X2*/94, /*Y2*/h, /*C*/1);
     float barHeight = h / genericMenuItemsCount;
-    float barPosition = barHeight * genericMenuSelectPosition;
+    float barPosition = barHeight * Generic.selected;
     Display.displayFillRect(/*x*/93, /*y*/barPosition, /*w*/3, /*h*/barHeight, /*c*/1);
   }
   Display.displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);

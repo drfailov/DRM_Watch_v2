@@ -7,14 +7,13 @@
 #define MODE_STOPWATCH_SELECTED_RESET 1
 #define MODE_STOPWATCH_SELECTED_BACK 2
 
-byte modeStopwatchSelectedItem = 0;
 long modeStopwatchStartedTime = 0;
 long modeStopwatchFinishedTime = 0;
 bool modeStopwatchIsRunning = false;
 
 void modeStopwatchSetup() {
   Display.displayInit();
-  modeStopwatchSelectedItem = 0;
+  Generic.selected = 0;
   modeStopwatchStartedTime = 0;
   modeStopwatchFinishedTime = 0;
   modeStopwatchIsRunning = false;
@@ -23,7 +22,7 @@ void modeStopwatchSetup() {
 void modeStopwatchLoop() {
   if(ButtonUp.isButtonPressed()){
     Buzzer.beep();
-    if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_START){
+    if(Generic.selected == MODE_STOPWATCH_SELECTED_START){
       if(modeStopwatchIsRunning == false){
         modeStopwatchStartedTime = millis() - (modeStopwatchFinishedTime-modeStopwatchStartedTime);
         modeStopwatchIsRunning = true;
@@ -33,20 +32,20 @@ void modeStopwatchLoop() {
         modeStopwatchIsRunning = false;
       }
     }
-    if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_RESET){
+    if(Generic.selected == MODE_STOPWATCH_SELECTED_RESET){
       modeStopwatchStartedTime = millis();
       modeStopwatchFinishedTime = millis();
     }
-    if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_BACK){
+    if(Generic.selected == MODE_STOPWATCH_SELECTED_BACK){
       goToWatchface();
       return;
     }
   }
   if(ButtonDown.isButtonPressed()){
     Buzzer.beep();
-    modeStopwatchSelectedItem ++;
-    if(modeStopwatchSelectedItem > 2) 
-      modeStopwatchSelectedItem = 0;
+    Generic.selected ++;
+    if(Generic.selected > 2) 
+      Generic.selected = 0;
     return;
   } 
   
@@ -92,7 +91,7 @@ void modeStopwatchLoop() {
     byte x = 17;
     byte y = 43;
     if(modeStopwatchIsRunning == false){
-      if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_START){
+      if(Generic.selected == MODE_STOPWATCH_SELECTED_START){
         Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
         Display.displayDrawPlaySign(x + 7, y+4, 0);
       }
@@ -102,7 +101,7 @@ void modeStopwatchLoop() {
       }
     }
     if(modeStopwatchIsRunning == true){
-      if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_START){
+      if(Generic.selected == MODE_STOPWATCH_SELECTED_START){        
         Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
         Display.displayDrawPauseSign(x + 6, y+4, 0);
       }
@@ -115,23 +114,26 @@ void modeStopwatchLoop() {
 
   
   { //Reset
-    byte x = 44;
-    byte y = 43;
-    if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_RESET){
-      Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-      Display.displayDrawResetIcon(x + 8, y+4, 0);
-    }
-    else{
-      Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-      Display.displayDrawResetIcon(x + 8, y+4, 1);
-    }
+//    byte x = 44;
+//    byte y = 43;
+    //displayDrawIconWithFrame(byte x, byte y, void (*drawIcon)(byte x,byte y,bool color), byte w, byte h, bool selected)
+    Display.displayDrawIconWithFrame(/*x*/44, /*y*/43, /*drawIcon(x,y,color)*/Display.displayDrawResetIcon, /*selected*/Generic.selected == MODE_STOPWATCH_SELECTED_RESET);
+//    if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_RESET){
+//      Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+//      Display.displayDrawResetIcon(x + 8, y+4, 0);
+//    }
+//    else{
+//      Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+//      Display.displayDrawResetIcon(x + 8, y+4, 1);
+//    }
   }
     
   { //Back
+    //Display.displayDrawIconWithFrame(/*x*/44, /*y*/43, /*drawIcon(x,y,color)*/Display.displayDrawResetIcon, /*selected*/modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_RESET);
     byte x = 70;
     byte y = 43;
     const __FlashStringHelper* chars = F("<");
-    if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_BACK){
+    if(Generic.selected  == MODE_STOPWATCH_SELECTED_BACK){
       Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
       Display.displayDrawText(x + 8, y+4, 0, chars);
     }

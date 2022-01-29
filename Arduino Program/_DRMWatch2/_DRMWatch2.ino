@@ -1,3 +1,4 @@
+#include "Generic.cpp"
 #include "GenericWatchface.cpp"
 #include "1WatchfaceDrmWatch.cpp"
 #include "1WatchfaceDrmLite.cpp"
@@ -44,13 +45,13 @@ byte _mode = -1;
 
 
 //Набор циферблатов следует менять именно здесь. Обязательно обновить количество если оно изменилось.
-const byte watchfacesCount = 2;
+const byte watchfacesCount = 3;
 GenericWatchface *watchfaces[watchfacesCount];
 
 void setup() {
   byte i=0;
   //watchfaces[i++] = new WatchfaceDrmWatch();
-  watchfaces[i++] = new WatchfaceDrmLite();
+  //watchfaces[i++] = new WatchfaceDrmLite();
   //watchfaces[i++] = new WatchfaceNomens();
   //watchfaces[i++] = new WatchfaceZubat();
   watchfaces[i++] = new WatchfaceXelibri();
