@@ -36,7 +36,18 @@ void modeMenuMainLoop() {
     genericMenuLastActionTime = millis();
     Buzzer.beep();
     //onSelected (genericMenuSelectPosition);
-    goToWatchface();
+    if(Generic.selected == MAIN_MENU_SELECTED_BACK){
+      goToWatchface();
+    }
+    else if (Generic.selected == MAIN_MENU_SELECTED_APPS){
+      setMode(MODE_MENU_APPS);
+    }
+    else if (Generic.selected == MAIN_MENU_SELECTED_SETTINGS){
+      setMode(MODE_MENU_SETTINGS);
+    }
+    else if (Generic.selected == MAIN_MENU_SELECTED_ABOUT){
+      setMode(MODE_ABOUT);
+    }
     return;
   }
   
@@ -79,25 +90,11 @@ void modeMenuMainLoop() {
     X-= 11;
     Display.displayDrawAlertSign(/*x*/X, /*y*/0, /*color*/1);
   }
-
-//  { //Back
-//    //Display.displayDrawIconWithFrame(/*x*/44, /*y*/43, /*drawIcon(x,y,color)*/Display.displayDrawResetIcon, /*selected*/modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_RESET);
-//    byte x = 20;
-//    byte y = 17;
-//    const __FlashStringHelper* chars = F("<");
-//    if(Generic.selected == MAIN_MENU_SELECTED_BACK){
-//      Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-//      Display.displayDrawText(x + 8, y+4, 0, chars);
-//    }
-//    else{
-//      Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-//      Display.displayDrawText(x+8, y+4, 1, chars);
-//    }
-//  }
+  
   Display.displayDrawIconWithFrame(/*x*/20, /*y*/17, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_BACK);
   Display.displayDrawIconWithFrame(/*x*/20, /*y*/35, /*drawIcon(x,y,color)*/Display.displayDrawAppsIcon, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_APPS);
-
-  
+  Display.displayDrawIconWithFrame(/*x*/45, /*y*/35, /*drawIcon(x,y,color)*/Display.displayDrawIconSettings, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_SETTINGS);
+  Display.displayDrawIconWithFrame(/*x*/70, /*y*/35, /*drawIcon(x,y,color)*/Display.displayDrawIconAbout, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_ABOUT);
   
 
   Display.displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
