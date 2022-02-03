@@ -508,6 +508,42 @@ class Display_{
     displayDrawBitmap(x, y, img, 7, 8, color);
   }
   
+  
+  //Рисование иконки перезагрузки. Используется в меню настроек
+  //Рисунок находится в битовом массиве.
+  //Начало массива - левая часть рисунка. Один бит - один пиксель.
+  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
+  static void displayDrawIconReboot(byte x, byte y, bool color){
+    static const char img[7] PROGMEM = { 
+        0b01110110,
+        0b00110001,
+        0b01010001,
+        0b01000001,
+        0b01000101,
+        0b01000110,
+        0b00110111
+      };
+    displayDrawBitmap(x, y, img, 7, 8, color);
+  }
+  
+  
+  //Рисование иконки вочфейс. Используется в меню настроек
+  //Рисунок находится в битовом массиве.
+  //Начало массива - левая часть рисунка. Один бит - один пиксель.
+  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
+  static void displayDrawIconWatchface(byte x, byte y, bool color){
+    static const char img[7] PROGMEM = { 
+        0b00000000,
+        0b01111111,
+        0b00111010,
+        0b00101110,
+        0b00111010,
+        0b01111111,
+        0b00000000
+      };
+    displayDrawBitmap(x, y, img, 7, 8, color);
+  }
+  
   //Рисование прямоугольника с цифрами. Используется на экранах настройки будильника и времени
   static void displayDraw2DigitNumberWithFrame(byte x, byte y, byte number, bool selected){
     sprintf(Generic.buffer, "%02d", number);
@@ -523,13 +559,13 @@ class Display_{
   //Рисование рамки с картинкой
   
   //Рисование прямоугольника с иконкой 7x7. Используется на экранах главного меню, секундомера
-  static void displayDrawIconWithFrame(byte x, byte y, void (*drawIcon)(byte x,byte y,bool color), bool selected){
+  static void displayDrawIconWithFrame(byte x, byte y, byte additionalWidth, void (*drawIcon)(byte x,byte y,bool color), bool selected){
     if(selected){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+      displayFillRect(/*x*/x, /*y*/y, /*w*/20 + additionalWidth, /*h*/15, /*c*/1);
       drawIcon(x + 6, y+4, 0);
     }
     else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
+      displayDrawRect(/*x*/x, /*y*/y, /*w*/20 + additionalWidth, /*h*/15, /*c*/1);
       drawIcon(x + 6, y+4, 1);
     }
   }

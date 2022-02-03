@@ -45,16 +45,16 @@ byte _mode = -1;
 
 
 //Набор циферблатов следует менять именно здесь. Обязательно обновить количество если оно изменилось.
-const byte watchfacesCount = 3;
+const byte watchfacesCount = 2;
 GenericWatchface *watchfaces[watchfacesCount];
 
 void setup() {
   byte i=0;
   //watchfaces[i++] = new WatchfaceDrmWatch();
-  //watchfaces[i++] = new WatchfaceDrmLite();
+  watchfaces[i++] = new WatchfaceDrmLite();
   //watchfaces[i++] = new WatchfaceNomens();
-  //watchfaces[i++] = new WatchfaceZubat();
-  watchfaces[i++] = new WatchfaceXelibri();
+  watchfaces[i++] = new WatchfaceZubat();
+  //watchfaces[i++] = new WatchfaceXelibri();
   
 #ifdef LOG
   Serial.begin(115200);

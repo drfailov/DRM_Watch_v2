@@ -117,7 +117,7 @@ void modeStopwatchLoop() {
 //    byte x = 44;
 //    byte y = 43;
     //displayDrawIconWithFrame(byte x, byte y, void (*drawIcon)(byte x,byte y,bool color), byte w, byte h, bool selected)
-    Display.displayDrawIconWithFrame(/*x*/44, /*y*/43, /*drawIcon(x,y,color)*/Display.displayDrawResetIcon, /*selected*/Generic.selected == MODE_STOPWATCH_SELECTED_RESET);
+    Display.displayDrawIconWithFrame(/*x*/44, /*y*/43, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawResetIcon, /*selected*/Generic.selected == MODE_STOPWATCH_SELECTED_RESET);
 //    if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_RESET){
 //      Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
 //      Display.displayDrawResetIcon(x + 8, y+4, 0);

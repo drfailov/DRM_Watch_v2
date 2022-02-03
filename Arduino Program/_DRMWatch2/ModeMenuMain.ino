@@ -91,10 +91,10 @@ void modeMenuMainLoop() {
     Display.displayDrawAlertSign(/*x*/X, /*y*/0, /*color*/1);
   }
   
-  Display.displayDrawIconWithFrame(/*x*/20, /*y*/17, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_BACK);
-  Display.displayDrawIconWithFrame(/*x*/20, /*y*/35, /*drawIcon(x,y,color)*/Display.displayDrawAppsIcon, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_APPS);
-  Display.displayDrawIconWithFrame(/*x*/45, /*y*/35, /*drawIcon(x,y,color)*/Display.displayDrawIconSettings, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_SETTINGS);
-  Display.displayDrawIconWithFrame(/*x*/70, /*y*/35, /*drawIcon(x,y,color)*/Display.displayDrawIconAbout, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_ABOUT);
+  Display.displayDrawIconWithFrame(/*x*/20, /*y*/17, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_BACK);
+  Display.displayDrawIconWithFrame(/*x*/20, /*y*/35, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawAppsIcon, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_APPS);
+  Display.displayDrawIconWithFrame(/*x*/45, /*y*/35, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconSettings, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_SETTINGS);
+  Display.displayDrawIconWithFrame(/*x*/70, /*y*/35, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconAbout, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_ABOUT);
   
 
   Display.displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);

@@ -111,9 +111,9 @@ class WatchfaceXelibri : public GenericWatchface  { //
     {
       Display.displayClear();
 
-      {//battery
-        Display.displayDrawBattery(79, 61);
-      }      
+//      {//battery
+//        Display.displayDrawBattery(79, 61);
+//      }      
        
       {//date
         sprintf(Generic.buffer, "%2d ", day);
@@ -152,7 +152,7 @@ class WatchfaceXelibri : public GenericWatchface  { //
         byte minute2 = minute - (minute1 * 10);
         drawNumber(/*x*/5, /*y*/12, /*num*/hour1, /*animate*/ animate);
         drawNumber(/*x*/26, /*y*/12, /*num*/hour2, /*animate*/ animate);
-        Display.displayDrawNumber(10, 48, 16, 4, 5, animate); // :
+        Display.displayDrawNumber(10, 47, 15, 4, 5, animate); // :
         drawNumber(/*x*/53, /*y*/12, /*num*/minute1, /*animate*/ animate);
         drawNumber(/*x*/74, /*y*/12, /*num*/minute2, /*animate*/ animate);
       }
