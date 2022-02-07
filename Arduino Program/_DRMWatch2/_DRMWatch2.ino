@@ -28,16 +28,12 @@ void(* resetFunc) (void) = 0;//объявляем функцию reset с адр
 #define MODE_MENU_MAIN (byte)2
 #define MODE_STATUS (byte)3
 #define MODE_MENU_MELODIES (byte)4
-  #define MODE_MENU_SETTINGS (byte)5
+#define MODE_MENU_SETTINGS (byte)5
 #define MODE_MENU_SET_TIME (byte)6
-  #define MODE_MENU_SET_SLEEP_TIME (byte)7
 #define MODE_ABOUT (byte)8
-  #define MODE_MENU_SET_BEEP_SOUND (byte)9
-  #define MODE_MENU_SET_SILENT_MODE (byte)10
 #define MODE_MENU_APPS (byte)11
 #define MODE_STOPWATCH (byte)12
 #define MODE_SET_ALARM (byte)13
-#define MODE_MENU_SET_WATCHFACE (byte)14
 #define MODE_ZRADA (byte)15
 //Переменная в которой хранится текущий режим
 byte _mode = -1;
@@ -53,7 +49,7 @@ void setup() {
   //watchfaces[i++] = new WatchfaceDrmWatch();
   watchfaces[i++] = new WatchfaceDrmLite();
   //watchfaces[i++] = new WatchfaceNomens();
-  watchfaces[i++] = new WatchfaceZubat();
+  //watchfaces[i++] = new WatchfaceZubat();
   //watchfaces[i++] = new WatchfaceXelibri();
   
 #ifdef LOG
@@ -77,14 +73,10 @@ void loop() {
   if (_mode == MODE_MENU_MELODIES ) modeMenuMelodiesLoop();
   if (_mode == MODE_MENU_SETTINGS ) modeMenuSettingsLoop();
   if (_mode == MODE_MENU_SET_TIME ) modeMenuSetTimeLoop();
-  if (_mode == MODE_MENU_SET_SLEEP_TIME ) modeMenuSetSleepTimeLoop();
   if (_mode == MODE_ABOUT ) modeAboutLoop();
-  if (_mode == MODE_MENU_SET_BEEP_SOUND ) modeMenuSetBeepSoundLoop();
-  if (_mode == MODE_MENU_SET_SILENT_MODE ) modeMenuSetSilentModeLoop();
   if (_mode == MODE_MENU_APPS ) modeMenuAppsLoop();
   if (_mode == MODE_STOPWATCH ) modeStopwatchLoop();
   if (_mode == MODE_SET_ALARM ) modeSetAlarmLoop();
-  if (_mode == MODE_MENU_SET_WATCHFACE ) modeMenuSetWatchfaceLoop();
   if (_mode == MODE_ZRADA ) modeZradaLoop();
 }
 
@@ -108,14 +100,10 @@ void setMode(int _modeNew) {
   if (_mode == MODE_MENU_MELODIES ) modeMenuMelodiesFinish();
   if (_mode == MODE_MENU_SETTINGS ) modeMenuSettingsFinish();
   if (_mode == MODE_MENU_SET_TIME ) modeMenuSetTimeFinish();
-  if (_mode == MODE_MENU_SET_SLEEP_TIME ) modeMenuSetSleepTimeFinish();
   if (_mode == MODE_ABOUT ) modeAboutFinish();
-  if (_mode == MODE_MENU_SET_BEEP_SOUND ) modeMenuSetBeepSoundFinish();
-  if (_mode == MODE_MENU_SET_SILENT_MODE ) modeMenuSetSilentModeFinish();
   if (_mode == MODE_MENU_APPS ) modeMenuAppsFinish();
   if (_mode == MODE_STOPWATCH ) modeStopwatchFinish();
   if (_mode == MODE_SET_ALARM ) modeSetAlarmFinish();
-  if (_mode == MODE_MENU_SET_WATCHFACE ) modeMenuSetWatchfaceFinish();
   if (_mode == MODE_ZRADA) modeZradaFinish();
   
   //init new
@@ -126,14 +114,10 @@ void setMode(int _modeNew) {
   if (_modeNew == MODE_MENU_MELODIES ) modeMenuMelodiesSetup();
   if (_modeNew == MODE_MENU_SETTINGS ) modeMenuSettingsSetup();
   if (_modeNew == MODE_MENU_SET_TIME ) modeMenuSetTimeSetup();
-  if (_modeNew == MODE_MENU_SET_SLEEP_TIME ) modeMenuSetSleepTimeSetup();
   if (_modeNew == MODE_ABOUT ) modeAboutSetup();
-  if (_modeNew == MODE_MENU_SET_BEEP_SOUND ) modeMenuSetBeepSoundSetup();
-  if (_modeNew == MODE_MENU_SET_SILENT_MODE ) modeMenuSetSilentModeSetup();
   if (_modeNew == MODE_MENU_APPS ) modeMenuAppsSetup();
   if (_modeNew == MODE_STOPWATCH ) modeStopwatchSetup();
   if (_modeNew == MODE_SET_ALARM ) modeSetAlarmSetup();
-  if (_modeNew == MODE_MENU_SET_WATCHFACE ) modeMenuSetWatchfaceSetup();
   if (_modeNew == MODE_ZRADA) modeZradaSetup();
   
   
