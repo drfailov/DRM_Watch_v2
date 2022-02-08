@@ -8,6 +8,7 @@ const byte modeMenuSettingsItemsCount = 8; //сколько пунктов ме�
 #define MENU_SETTINS_SELECTED_WATCHFACE 3
 #define MENU_SETTINS_SELECTED_SLEEP 4
 #define MENU_SETTINS_SELECTED_BEEP 5
+#define MENU_SETTINS_SELECTED_TIME 6
 
 
 //Максимальная длина строки:                  |          |
@@ -15,9 +16,9 @@ const byte modeMenuSettingsItemsCount = 8; //сколько пунктов ме�
 //#ifdef LANG_EN
 //+const char modeMenuSettingsItem1[] PROGMEM = "Reboot";
 //+const char modeMenuSettingsItem2[] PROGMEM = "Select WTF";
-//const char modeMenuSettingsItem3[] PROGMEM = "Set silent";
+//+const char modeMenuSettingsItem3[] PROGMEM = "Set silent";
 //+const char modeMenuSettingsItem4[] PROGMEM = "Set sleep";
-//const char modeMenuSettingsItem5[] PROGMEM = "Set sound";
+//+const char modeMenuSettingsItem5[] PROGMEM = "Set sound";
 //const char modeMenuSettingsItem6[] PROGMEM = "Set time";
 //const char modeMenuSettingsItem7[] PROGMEM = "Hard reset";
 //#endif
@@ -100,6 +101,11 @@ void modeMenuSettingsLoop() {
   Display.displayDrawIconWithFrame(/*x*/57, /*y*/32, /*additionalWidth*/13, /*drawIcon(x,y,color)*/Display.displayDrawIconBeep, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_BEEP);
   Display.displayDrawText(/*X*/75, /*Y*/36, /*C*/Generic.selected  != MENU_SETTINS_SELECTED_BEEP, /*text*/Generic.buffer);
 
+  //SET TIME
+  Display.displayDrawIconWithFrame(/*x*/20, /*y*/48, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconTime, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_TIME);
+  
+  
+
   //UPADTE
   Display.displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
   Display.displayDrawCheck(/*X*/2, /*Y*/2, 1);
@@ -161,7 +167,7 @@ void modeMenuSettingsSelected(byte index) {
     return;
   }
 
-  if (index == 6) { //Set time
+  if (index == MENU_SETTINS_SELECTED_TIME) { //Set time
     setMode(MODE_MENU_SET_TIME); 
     return;
   }

@@ -16,7 +16,7 @@ long genericMenuLastActionTime = 0; //последнее действие кно
 
 
 void genericMenuSetup(){
-  Display.displayInit();
+  //Display.displayInit();
   Display.displayBacklightOn();
   Generic.selected = 0;
   genericMenuViewPosition = 0;

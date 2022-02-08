@@ -597,6 +597,42 @@ class Display_{
     displayDrawBitmap(x, y, img, 7, 8, color);
   }
   
+  
+  //Рисование иконки времени. Используется в меню настроек
+  //Рисунок находится в битовом массиве.
+  //Начало массива - левая часть рисунка. Один бит - один пиксель.
+  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
+  static void displayDrawIconTime(byte x, byte y, bool color){
+    static const char img[7] PROGMEM = { 
+        0b00111110,
+        0b01000001,
+        0b01001001,
+        0b01001101,
+        0b01000001,
+        0b01000001,
+        0b00111110
+      };
+    displayDrawBitmap(x, y, img, 7, 8, color);
+  }
+  
+  
+  //Рисование иконки сброса. Используется в меню настроек
+  //Рисунок находится в битовом массиве.
+  //Начало массива - левая часть рисунка. Один бит - один пиксель.
+  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
+  static void displayDrawIconTime(byte x, byte y, bool color){
+    static const char img[7] PROGMEM = { 
+        0b01011110,
+        0b01100001,
+        0b00000000,
+        0b00101110,
+        0b00000000,
+        0b01000011,
+        0b00111101
+      };
+    displayDrawBitmap(x, y, img, 7, 8, color);
+  }
+  
   //Рисование прямоугольника с цифрами. Используется на экранах настройки будильника и времени
   static void displayDraw2DigitNumberWithFrame(byte x, byte y, byte number, bool selected){
     sprintf(Generic.buffer, "%02d", number);
