@@ -9,6 +9,7 @@ const byte modeMenuSettingsItemsCount = 8; //сколько пунктов ме�
 #define MENU_SETTINS_SELECTED_SLEEP 4
 #define MENU_SETTINS_SELECTED_BEEP 5
 #define MENU_SETTINS_SELECTED_TIME 6
+#define MENU_SETTINS_SELECTED_RESET 7
 
 
 //Максимальная длина строки:                  |          |
@@ -103,7 +104,10 @@ void modeMenuSettingsLoop() {
 
   //SET TIME
   Display.displayDrawIconWithFrame(/*x*/20, /*y*/48, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconTime, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_TIME);
-  
+
+  //RESET
+  Display.displayDrawIconWithFrame(/*x*/45, /*y*/48, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconReset, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_RESET);
+  //displayDrawIconReset
   
 
   //UPADTE
@@ -172,7 +176,7 @@ void modeMenuSettingsSelected(byte index) {
     return;
   }
 
-  if (index == 7) { //Hard Reset
+  if (index == MENU_SETTINS_SELECTED_RESET) { //Hard Reset
     //eepromFIllByZeros();
     MyEEPROM.eepromFIllByOnes();
     reboot();
