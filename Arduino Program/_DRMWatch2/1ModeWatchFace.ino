@@ -13,13 +13,19 @@ long modeWatchFaceBacklightEnabledTime = millis();
 void modeWatchFaceSetup() {
   Display.displayInit();
   modeWatchFaceBacklightEnabledTime = millis();
-  attachInterrupt(0, modeWatchFaceTriggerBacklight, HIGH); //down
-  attachInterrupt(1, wakeUp, HIGH);  //up
+  if(/*flip*/MyEEPROM.eepromReadFlipScreen()){
+    attachInterrupt(1, modeWatchFaceTriggerBacklight, HIGH); //down
+    attachInterrupt(0, wakeUp, HIGH);  //up
+  }
+  else{
+    attachInterrupt(0, modeWatchFaceTriggerBacklight, HIGH); //down
+    attachInterrupt(1, wakeUp, HIGH);  //up
+  }
   modeWatchFaceLoop(true);
 }
 
 void modeWatchFaceLoop(bool animate) {
-  if (ButtonUp.isButtonPressed()) {
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
     Buzzer.beep();
     setMode(MODE_MENU_MAIN);
     return;

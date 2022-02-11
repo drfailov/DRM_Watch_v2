@@ -34,7 +34,7 @@ void modeMenuSetTimeSetup(){
 }
 
 void modeMenuSetTimeLoop(){
-  if (ButtonUp.isButtonPressed()) {
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()){
     Buzzer.beep();
     //change value
     if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_HOUR) {//hours
@@ -82,7 +82,7 @@ void modeMenuSetTimeLoop(){
     }
   }
 
-  if (ButtonDown.isButtonPressed()) {
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()){
     Buzzer.beep();
     //move next
     modeMenuSetTimeSelected ++;

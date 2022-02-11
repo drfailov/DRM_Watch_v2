@@ -5,6 +5,7 @@
 
 #include <Arduino.h>
 #include "Generic.cpp"
+#include "MyEEPROM.cpp"
 
 class Button_{
   private:

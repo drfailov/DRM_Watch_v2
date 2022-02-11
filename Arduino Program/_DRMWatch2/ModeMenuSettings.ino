@@ -1,7 +1,7 @@
 /*Show settings menu by triggerimg GenericMenu*/
 #include "Generic.cpp"
 
-const byte modeMenuSettingsItemsCount = 8; //сколько пунктов меню в массиве
+const byte modeMenuSettingsItemsCount = 9; //сколько пунктов меню в массиве
 #define MENU_SETTINS_SELECTED_BACK 0
 #define MENU_SETTINS_SELECTED_REBOOT 1
 #define MENU_SETTINS_SELECTED_SILENT 2
@@ -10,54 +10,21 @@ const byte modeMenuSettingsItemsCount = 8; //сколько пунктов ме�
 #define MENU_SETTINS_SELECTED_BEEP 5
 #define MENU_SETTINS_SELECTED_TIME 6
 #define MENU_SETTINS_SELECTED_RESET 7
-
-
-//Максимальная длина строки:                  |          |
-//
-//#ifdef LANG_EN
-//+const char modeMenuSettingsItem1[] PROGMEM = "Reboot";
-//+const char modeMenuSettingsItem2[] PROGMEM = "Select WTF";
-//+const char modeMenuSettingsItem3[] PROGMEM = "Set silent";
-//+const char modeMenuSettingsItem4[] PROGMEM = "Set sleep";
-//+const char modeMenuSettingsItem5[] PROGMEM = "Set sound";
-//const char modeMenuSettingsItem6[] PROGMEM = "Set time";
-//const char modeMenuSettingsItem7[] PROGMEM = "Hard reset";
-//#endif
-//#ifdef LANG_RU
-//const char modeMenuSettingsItem1[] PROGMEM = "Пepeзaгpyзкa";
-//const char modeMenuSettingsItem2[] PROGMEM = "Цифepблaт";
-//const char modeMenuSettingsItem3[] PROGMEM = "Бeззвyчный";
-//const char modeMenuSettingsItem4[] PROGMEM = "Bpeмя cнa";
-//const char modeMenuSettingsItem5[] PROGMEM = "Звyк кнoпoк";
-//const char modeMenuSettingsItem6[] PROGMEM = "Зaдaть вpeмя";
-//const char modeMenuSettingsItem7[] PROGMEM = "Пoлный cбpoc";
-//#endif
-//
-//const char* const modeMenuSettingsItems[] PROGMEM = {
-//  modeMenuSettingsItem1,
-//  modeMenuSettingsItem2,
-//  modeMenuSettingsItem3,
-//  modeMenuSettingsItem4,
-//  modeMenuSettingsItem5,
-//  modeMenuSettingsItem6,
-//  modeMenuSettingsItem7,
-//  menuItemBack
-//};
-
+#define MENU_SETTINS_SELECTED_FLIP 8
 
 void modeMenuSettingsSetup() {
   genericMenuSetup();
 }
 
 void modeMenuSettingsLoop() {
-  if (ButtonUp.isButtonPressed()) {
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
     genericMenuLastActionTime = millis();
     modeMenuSettingsSelected (Generic.selected);
     Buzzer.beep();
     return;
   }
 
-  if (ButtonDown.isButtonPressed()) {
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()) {
     genericMenuLastActionTime = millis();
     Buzzer.beep();
     Generic.selected ++;
@@ -107,7 +74,9 @@ void modeMenuSettingsLoop() {
 
   //RESET
   Display.displayDrawIconWithFrame(/*x*/45, /*y*/48, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconReset, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_RESET);
-  //displayDrawIconReset
+
+  //FLIP
+  Display.displayDrawIconWithFrame(/*x*/70, /*y*/48, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconReboot, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_FLIP);
   
 
   //UPADTE
@@ -180,5 +149,11 @@ void modeMenuSettingsSelected(byte index) {
     //eepromFIllByZeros();
     MyEEPROM.eepromFIllByOnes();
     reboot();
+  }
+
+  
+  if (index == MENU_SETTINS_SELECTED_FLIP) { //Flip screen
+    MyEEPROM.eepromSaveFlipScreen(!MyEEPROM.eepromReadFlipScreen());
+    return;
   }
 }

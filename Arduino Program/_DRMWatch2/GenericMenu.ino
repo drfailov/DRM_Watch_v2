@@ -30,14 +30,14 @@ void genericMenuSetup(){
  * progmemArray - Text has to be stored in progmem. But array can be stored in RAM or in PROGMEM. Pass true if your array stored in PROGMEM.
 */
 void genericMenuLoop(const int genericMenuItemsCount, const char* const genericMenuItems[], void (*onSelected)(byte index), bool progmemArray){
-  if (ButtonUp.isButtonPressed()) {
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
     genericMenuLastActionTime = millis();
     Buzzer.beep();
     onSelected (Generic.selected);
     return;
   }
 
-  if (ButtonDown.isButtonPressed()) {
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()) {
     genericMenuLastActionTime = millis();
     Buzzer.beep();
     Generic.selected ++;

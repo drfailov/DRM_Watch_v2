@@ -20,7 +20,7 @@ void modeStopwatchSetup() {
 }
 
 void modeStopwatchLoop() {
-  if(ButtonUp.isButtonPressed()){
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()){
     Buzzer.beep();
     if(Generic.selected == MODE_STOPWATCH_SELECTED_START){
       if(modeStopwatchIsRunning == false){
@@ -41,7 +41,7 @@ void modeStopwatchLoop() {
       return;
     }
   }
-  if(ButtonDown.isButtonPressed()){
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()){
     Buzzer.beep();
     Generic.selected ++;
     if(Generic.selected > 2) 
@@ -146,7 +146,6 @@ void modeStopwatchLoop() {
   Display.displayDrawArrowRight(0, 61, 1);
   Display.displayDrawCheck(/*X*/2, /*Y*/2, 1);
   Display.displayUpdate();
-  
 }
 
 void modeStopwatchFinish() {

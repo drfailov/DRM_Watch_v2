@@ -137,6 +137,18 @@ class myEEPROM_ {
   
   
   
+  #define eepromAddressFlipScreen (byte)19
+  bool eepromReadFlipScreen(){
+    byte result = 0;
+    EEPROM.get(eepromAddressFlipScreen, result);
+    return result == 1;
+  }
+  void eepromSaveFlipScreen(bool data){
+    EEPROM.put(eepromAddressFlipScreen, data);
+  }
+  
+  
+  
   
   void eepromReadToBuffer(){
     for(int i=0; i<BUFFER_SIZE; i++){

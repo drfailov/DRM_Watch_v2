@@ -197,7 +197,7 @@ bool melodyPlayerPlayMelody(const byte* const melody) {
     while(millis() - noteStarted < timeMs);
     noTone(pinBuzzer);
     delay(10);
-    if (ButtonUp.isButtonPressed()) 
+    if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed())
       return false;
   }
   noTone(pinBuzzer);

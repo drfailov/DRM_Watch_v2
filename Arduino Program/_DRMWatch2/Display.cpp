@@ -8,6 +8,7 @@
 #define DISPLAYCPP
 
 #include "lcd1202.h"
+#include "MyEEPROM.cpp"
 #include "Generic.cpp"
 #include "Buttons.cpp"
 #include "Battery.cpp"
@@ -159,8 +160,10 @@ class Display_{
   }
   
   //Функция оновления дисплея из буфера. Она здесь указана для простоты перехода на другой дисплей - всё взаимодействие с дисплее происходит через эти "обёртки".
+  //Если в параметрах указано перевернктый дисплей, эта функция сама это сделает. Она обращается к MyEEPROM
   static void displayUpdate(){
-    lcd.Update();
+    //true is flip 180, false is no flip
+    lcd.Update(/*flip*/MyEEPROM.eepromReadFlipScreen()); 
   }
   
   //Функция рисования линии. Она здесь указана для простоты перехода на другой дисплей - всё взаимодействие с дисплее происходит через эти "обёртки".
@@ -224,7 +227,7 @@ class Display_{
         displayDrawLine(/*X1*/lx + X, /*Y1*/ly + Y, /*X2*/x + X, /*Y2*/y + Y, /*C*/color);
       if(animate!=0 && i%animate==0){
         displayUpdate();
-        if (ButtonUp.isButtonPressed()) 
+        if (ButtonUp.isButtonPressed() || ButtonDown.isButtonPressed()) 
           animate = false;
       }
       currentIndex += 2;
