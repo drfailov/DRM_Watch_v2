@@ -31,11 +31,9 @@ void modeMenuMainSetup() {
 }
 
 void modeMenuMainLoop() {
-  //genericMenuLoop(modeMenuMainItemsCount, modeMenuMainItems, modeMenuMainSelected, true);
   if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
-    genericMenuLastActionTime = millis();
+    Generic.genericMenuLastActionTime = millis();
     Buzzer.beep();
-    //onSelected (genericMenuSelectPosition);
     if(Generic.selected == MAIN_MENU_SELECTED_BACK){
       goToWatchface();
     }
@@ -52,17 +50,21 @@ void modeMenuMainLoop() {
   }
   
   if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()){
+    Generic.genericMenuLastActionTime = millis();
     Buzzer.beep();
     Generic.selected ++;
     if(Generic.selected > 3) 
       Generic.selected = 0;
     return;
   }
+  //auto exit
+  if (millis() - Generic.genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
+    goToWatchface();
+    return;
+  }
   
   Display.displayClear();
   byte xOffset = MyEEPROM.eepromReadFlipScreen()? 0 : 13;
-  
-  //Display.displayDrawLine(/*X1*/10, /*Y1*/9, /*X2*/96, /*Y2*/9, /*C*/1);
 
   {//Temperature
     float temp = RTC.rtcGetTemp();
@@ -97,12 +99,12 @@ void modeMenuMainLoop() {
   Display.displayDrawIconWithFrame(/*x*/xOffset+32, /*y*/35, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconSettings, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_SETTINGS);
   Display.displayDrawIconWithFrame(/*x*/xOffset+57, /*y*/35, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconAbout, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_ABOUT);
   
-  if(MyEEPROM.eepromReadFlipScreen()){
-    Display.displayDrawLine(/*X1*/86, /*Y1*/0, /*X2*/86, /*Y2*/68, /*C*/1);
-    Display.displayDrawCheck(/*X*/89, /*Y*/2, 1);
-    Display.displayDrawArrowDown(/*X*/89, /*Y*/59, 1);
+  if(MyEEPROM.eepromReadFlipScreen()){ //flip
+    Display.displayDrawLine(/*X1*/96-11, /*Y1*/0, /*X2*/96-11, /*Y2*/68, /*C*/1);
+    Display.displayDrawCheck(/*X*/96-8, /*Y*/2, 1);
+    Display.displayDrawArrowDown(/*X*/96-8, /*Y*/59, 1);
   }
-  else{
+  else{  //no flip
     Display.displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
     Display.displayDrawCheck(/*X*/2, /*Y*/2, 1);
     Display.displayDrawArrowDown(/*X*/1, /*Y*/59, 1);

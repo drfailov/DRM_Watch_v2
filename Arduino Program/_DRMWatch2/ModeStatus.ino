@@ -9,7 +9,7 @@ void modeStatusSetup() {
 }
 
 void modeStatusLoop() {
-  if(ButtonDown.isButtonPressed()){
+  if(ButtonDown.isButtonPressed() || ButtonUp.isButtonPressed() ){
     Buzzer.beep();
     goToWatchface();
     return;
@@ -29,7 +29,7 @@ void modeStatusLoop() {
   //drawParameter(50, 50, F("aME"), eepromReadAlertMelodyIndex());
   drawParameter(50, 60, F("WTF"), MyEEPROM.eepromReadWatchface());
 
-  Display.displayDrawCheck(0, 61, 1);
+  //Display.displayDrawCheck(0, 61, 1);
   Display.displayUpdate();
 }
 

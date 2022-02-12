@@ -11,7 +11,6 @@
 #define MENU_SET_TIME_SELECTED_YEAR 4
 #define MENU_SET_TIME_SELECTED_SAVE 5
 #define MENU_SET_TIME_SELECTED_BACK 6
-int modeMenuSetTimeSelected = MENU_SET_TIME_SELECTED_HOUR;
 
 
 byte modeMenuSetTimeHours = 00;
@@ -24,41 +23,41 @@ int modeMenuSetTimeYears = 2021;
 
 
 void modeMenuSetTimeSetup(){
+  Generic.selected = MENU_SET_TIME_SELECTED_HOUR;
   modeMenuSetTimeHours = RTC.rtcGetHours();
   modeMenuSetTimeMinutes = RTC.rtcGetMinutes();
   modeMenuSetTimeDays = RTC.rtcGetDay();
   modeMenuSetTimeMonths = RTC.rtcGetMonth();
   modeMenuSetTimeYears = RTC.rtcGetYear();
   digitalWrite(pinLcdBacklight, HIGH);
-  modeMenuSetTimeSelected = 0;
 }
 
 void modeMenuSetTimeLoop(){
   if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()){
     Buzzer.beep();
     //change value
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_HOUR) {//hours
+    if(Generic.selected == MENU_SET_TIME_SELECTED_HOUR) {//hours
       modeMenuSetTimeHours ++;
       if(modeMenuSetTimeHours > 23) modeMenuSetTimeHours = 0;
     }
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MINUTE) {//Minutes
+    if(Generic.selected == MENU_SET_TIME_SELECTED_MINUTE) {//Minutes
       modeMenuSetTimeMinutes ++;
       if(modeMenuSetTimeMinutes > 59) modeMenuSetTimeMinutes = 0;
     }
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_DAY) {//Day
+    if(Generic.selected == MENU_SET_TIME_SELECTED_DAY) {//Day
       modeMenuSetTimeDays ++;
       if(modeMenuSetTimeDays > 31) modeMenuSetTimeDays = 0;
     }
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MONTH) {//Month
+    if(Generic.selected == MENU_SET_TIME_SELECTED_MONTH) {//Month
       modeMenuSetTimeMonths ++;
       if(modeMenuSetTimeMonths > 12) modeMenuSetTimeMonths = 0;
     }
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_YEAR) {//Month
+    if(Generic.selected == MENU_SET_TIME_SELECTED_YEAR) {//Month
       modeMenuSetTimeYears ++;
       if(modeMenuSetTimeYears > 2050) modeMenuSetTimeYears = 2020;
     }
     
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE) {//SAVE
+    if(Generic.selected == MENU_SET_TIME_SELECTED_SAVE) {//SAVE
       RTC.rtcSetTime(modeMenuSetTimeYears, modeMenuSetTimeMonths, modeMenuSetTimeDays, modeMenuSetTimeHours, modeMenuSetTimeMinutes);
       { //fix alarm, предотвращение включения будильника сразу в момент установки
         byte hour = RTC.rtcGetHours();
@@ -76,7 +75,7 @@ void modeMenuSetTimeLoop(){
       goToWatchface();
       return;
     }
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK) {//BACK
+    if(Generic.selected == MENU_SET_TIME_SELECTED_BACK) {//BACK
       setMode(MODE_MENU_SETTINGS);
       return;
     }
@@ -85,77 +84,54 @@ void modeMenuSetTimeLoop(){
   if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()){
     Buzzer.beep();
     //move next
-    modeMenuSetTimeSelected ++;
-    if(modeMenuSetTimeSelected > 6) modeMenuSetTimeSelected = 0;
+    Generic.selected ++;
+    if(Generic.selected > 6) Generic.selected = 0;
   }
 
-  
+
+  //draw
   Display.displayClear();
+  byte xOffset = 15;
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen())
+    xOffset = 5;
+
 #ifdef LANG_EN
-  Display.displayDrawText(15, 2, 1, F("Set time"));
+  Display.displayDrawText(xOffset+0, /*y*/2, /*c*/1, F("Set time"));
 #endif
 #ifdef LANG_RU
-  Display.displayDrawText(15, 2, 1, F("Зaдaть вpeмя"));
+  Display.displayDrawText(xOffset+0, /*y*/2, /*c*/1, F("Зaдaть вpeмя"));
 #endif
-  if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE || modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK)
-    Display.displayDrawCheck(/*X*/1, /*Y*/2, 1);
-  else
-    Display.displayDrawText(/*X*/1, /*Y*/2, /*C*/1, "+");
-  Display.displayDrawArrowRight(/*X*/1, /*Y*/59, 1);
   
-  Display.displayDrawText(35, 19, 1, ":");
+  
+  Display.displayDrawText(xOffset+20, 19, 1, ":");
   //hours
-  Display.displayDraw2DigitNumberWithFrame(/*x*/15, /*y*/15, /*number*/modeMenuSetTimeHours, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_HOUR);
+  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+0, /*y*/15, /*number*/modeMenuSetTimeHours, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_HOUR);
   //minutes
-  Display.displayDraw2DigitNumberWithFrame(/*x*/40, /*y*/15, /*number*/modeMenuSetTimeMinutes, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MINUTE);
+  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+25, /*y*/15, /*number*/modeMenuSetTimeMinutes, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_MINUTE);
   
 
-  Display.displayDrawText(35, 39, 1, ".");
-  Display.displayDrawText(60, 39, 1, ".");
+  Display.displayDrawText(xOffset+20, 39, 1, ".");
+  Display.displayDrawText(xOffset+45, 39, 1, ".");
   //days
-  Display.displayDraw2DigitNumberWithFrame(/*x*/15, /*y*/33, /*number*/modeMenuSetTimeDays, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_DAY);
+  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+0, /*y*/33, /*number*/modeMenuSetTimeDays, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_DAY);
   //months
-  Display.displayDraw2DigitNumberWithFrame(/*x*/40, /*y*/33, /*number*/modeMenuSetTimeMonths, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_MONTH); 
+  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+25, /*y*/33, /*number*/modeMenuSetTimeMonths, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_MONTH); 
   //Year
-  Display.displayDraw2DigitNumberWithFrame(/*x*/65, /*y*/33, /*number*/modeMenuSetTimeYears%2000, /*selected*/modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_YEAR); 
+  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+50, /*y*/33, /*number*/modeMenuSetTimeYears%2000, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_YEAR); 
 
   
-  { //Save
-    byte x = 15;
-    byte y = 53;
-#ifdef LANG_EN
-    const __FlashStringHelper* chars = F("Save");    
-#endif
-#ifdef LANG_RU
-    const __FlashStringHelper* chars = F("Coxp");    
-#endif
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_SAVE){
-      Display.displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
-      Display.displayDrawText(x + 4, y+4, 0, chars);
-    }
-    else{
-      Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
-      Display.displayDrawText(x+4, y+4, 1, chars);
-    }
-  }
-  { //BACK
-    byte x = 50;
-    byte y = 53;
-#ifdef LANG_EN
-    const __FlashStringHelper* chars = F("Back");
-#endif
-#ifdef LANG_RU
-    const __FlashStringHelper* chars = F("Haзд");
-#endif
-    if(modeMenuSetTimeSelected == MENU_SET_TIME_SELECTED_BACK){
-      Display.displayFillRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
-      Display.displayDrawText(x + 4, y+4, 0, chars);
-    }
-    else{
-      Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/30, /*h*/15, /*c*/1);
-      Display.displayDrawText(x+4, y+4, 1, chars);
-    }
-  }
+  //Save
+  Display.displayDrawIconWithFrame(/*x*/xOffset+0, /*y*/53, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawCheck, /*selected*/Generic.selected  == MENU_SET_TIME_SELECTED_SAVE);
+  //BACK
+  Display.displayDrawIconWithFrame(/*x*/xOffset+25, /*y*/53, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected  == MENU_SET_TIME_SELECTED_BACK);
+    
+
+  //button icons
+  if(Generic.selected == MENU_SET_TIME_SELECTED_SAVE || Generic.selected == MENU_SET_TIME_SELECTED_BACK)
+    Display.displayDrawCheck(/*X*/MyEEPROM.eepromReadFlipScreen()?89:1, /*Y*/2, 1);
+  else
+    Display.displayDrawText(/*X*/MyEEPROM.eepromReadFlipScreen()?89:1, /*Y*/2, /*C*/1, "+");
+  Display.displayDrawArrowRight(/*X*/MyEEPROM.eepromReadFlipScreen()?89:1, /*Y*/59, 1);
   
   Display.displayUpdate();
 }

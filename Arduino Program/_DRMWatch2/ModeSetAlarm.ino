@@ -29,7 +29,7 @@ void modeSetAlarmSetup(){
 }
 
 void modeSetAlarmLoop(){
-  if (ButtonUp.isButtonPressed()) {
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()){
     Buzzer.beep();
     //change value
     if(Generic.selected == MODE_SET_ALARM_SELECTED_HOUR) {//hours
@@ -78,7 +78,7 @@ void modeSetAlarmLoop(){
     }
   }
 
-  if (ButtonDown.isButtonPressed()) {
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()){
     Buzzer.beep();
     //move next
     Generic.selected ++;

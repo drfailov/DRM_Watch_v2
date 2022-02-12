@@ -51,7 +51,9 @@ void modeStopwatchLoop() {
   
   
   Display.displayClear();
-  
+  byte xOffset = 13;
+  if(MyEEPROM.eepromReadFlipScreen())
+    xOffset = 0;
   { //time
     long difference = 0;
     long minute = 0;
@@ -76,75 +78,25 @@ void modeStopwatchLoop() {
     byte millisecond1 = millisecond / 10;
     byte millisecond2 = millisecond - (millisecond1 * 10);
     
-    Display.displayDrawNumber(minute1 , 13, 10, 3, 4, false);
-    Display.displayDrawNumber(minute2 , 27, 10, 3, 4, false);
-    Display.displayDrawNumber(10      , 41, 10, 3, 4, false); // :
-    Display.displayDrawNumber(second1 , 46, 10, 3, 4, false);
-    Display.displayDrawNumber(second2 , 60, 10, 3, 4, false);
-    Display.displayDrawNumber(10      , 74, 15, 2, 3, false); // :
-    Display.displayDrawNumber(millisecond1 , 78, 15, 2, 3, false);
-    Display.displayDrawNumber(millisecond2 , 88, 15, 2, 3, false);
-  }
-
-  
-  { //Start
-    byte x = 17;
-    byte y = 43;
-    if(modeStopwatchIsRunning == false){
-      if(Generic.selected == MODE_STOPWATCH_SELECTED_START){
-        Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-        Display.displayDrawPlaySign(x + 7, y+4, 0);
-      }
-      else{
-        Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-        Display.displayDrawPlaySign(x + 7, y+4, 1);
-      }
-    }
-    if(modeStopwatchIsRunning == true){
-      if(Generic.selected == MODE_STOPWATCH_SELECTED_START){        
-        Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-        Display.displayDrawPauseSign(x + 6, y+4, 0);
-      }
-      else{
-        Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-        Display.displayDrawPauseSign(x + 6, y+4, 1);
-      }
-    }
-  }
-
-  
-  { //Reset
-//    byte x = 44;
-//    byte y = 43;
-    //displayDrawIconWithFrame(byte x, byte y, void (*drawIcon)(byte x,byte y,bool color), byte w, byte h, bool selected)
-    Display.displayDrawIconWithFrame(/*x*/44, /*y*/43, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawResetIcon, /*selected*/Generic.selected == MODE_STOPWATCH_SELECTED_RESET);
-//    if(modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_RESET){
-//      Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-//      Display.displayDrawResetIcon(x + 8, y+4, 0);
-//    }
-//    else{
-//      Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-//      Display.displayDrawResetIcon(x + 8, y+4, 1);
-//    }
-  }
-    
-  { //Back
-    //Display.displayDrawIconWithFrame(/*x*/44, /*y*/43, /*drawIcon(x,y,color)*/Display.displayDrawResetIcon, /*selected*/modeStopwatchSelectedItem == MODE_STOPWATCH_SELECTED_RESET);
-    byte x = 70;
-    byte y = 43;
-    const __FlashStringHelper* chars = F("<");
-    if(Generic.selected  == MODE_STOPWATCH_SELECTED_BACK){
-      Display.displayFillRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-      Display.displayDrawText(x + 8, y+4, 0, chars);
-    }
-    else{
-      Display.displayDrawRect(/*x*/x, /*y*/y, /*w*/20, /*h*/15, /*c*/1);
-      Display.displayDrawText(x+8, y+4, 1, chars);
-    }
+    Display.displayDrawNumber(minute1 , /*x*/xOffset+0, /*y*/10, /*w*/3, /*h*/4, /*animate*/false);
+    Display.displayDrawNumber(minute2 , /*x*/xOffset+14, /*y*/10, /*w*/3, /*h*/4, /*animate*/false);
+    Display.displayDrawNumber(10      , /*x*/xOffset+28, /*y*/10, /*w*/3, /*h*/4, /*animate*/false); // :
+    Display.displayDrawNumber(second1 , /*x*/xOffset+33, /*y*/10, /*w*/3, /*h*/4, /*animate*/false);
+    Display.displayDrawNumber(second2 , /*x*/xOffset+47, /*y*/10, /*w*/3, /*h*/4, /*animate*/false);
+    Display.displayDrawNumber(10      , /*x*/xOffset+61, /*y*/15, /*w*/2, /*h*/3, /*animate*/false); // :
+    Display.displayDrawNumber(millisecond1 , /*x*/xOffset+65, /*y*/15, /*w*/2, /*h*/3, /*animate*/false);
+    Display.displayDrawNumber(millisecond2 , /*x*/xOffset+75, /*y*/15, /*w*/2, /*h*/3, /*animate*/false);
   }
   
-  Display.displayDrawArrowRight(0, 61, 1);
-  Display.displayDrawCheck(/*X*/2, /*Y*/2, 1);
+  //Start
+  Display.displayDrawIconWithFrame(/*x*/xOffset+4, /*y*/43, /*additionalWidth*/0, /*drawIcon(x,y,color)*/modeStopwatchIsRunning?Display.displayDrawPauseSign:Display.displayDrawPlaySign, /*selected*/Generic.selected == MODE_STOPWATCH_SELECTED_START);  
+  //Reset
+  Display.displayDrawIconWithFrame(/*x*/xOffset+31, /*y*/43, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconReboot, /*selected*/Generic.selected == MODE_STOPWATCH_SELECTED_RESET);  
+  //Back
+  Display.displayDrawIconWithFrame(/*x*/xOffset+57, /*y*/43, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected  == MODE_STOPWATCH_SELECTED_BACK);
+  
+  Display.displayDrawArrowRight(/*x*/MyEEPROM.eepromReadFlipScreen()?88:0, /*Y*/61, /*c*/1);
+  Display.displayDrawCheck(/*X*/MyEEPROM.eepromReadFlipScreen()?89:2, /*Y*/2, /*c*/1);
   Display.displayUpdate();
 }
 

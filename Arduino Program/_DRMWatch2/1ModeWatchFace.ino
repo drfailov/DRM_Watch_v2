@@ -26,6 +26,10 @@ void modeWatchFaceSetup() {
 
 void modeWatchFaceLoop(bool animate) {
   if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
+    if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonHold():ButtonUp.isButtonHold()){
+      reboot();
+      return;
+    }
     Buzzer.beep();
     setMode(MODE_MENU_MAIN);
     return;
@@ -84,7 +88,7 @@ void modeWatchFaceLoop(bool animate) {
       Display.displayBacklightOff();
   }
 
-  byte sleepTime = MyEEPROM.eepromReadSleepTime();
+  byte sleepTime = watchface->secondsUpdate()?1:8;
   if (Battery.batteryIsLowPower()) //если разряжен, то макс интервал
     sleepTime = 8;
 #ifdef LOG
@@ -92,29 +96,13 @@ void modeWatchFaceLoop(bool animate) {
   Serial.end();
 #endif
   delay(5);
-  if (sleepTime == eepromSleepTime05sec) {
-    setMillis(millis() + 500);
-    LowPower.powerDown(SLEEP_500MS, ADC_OFF, BOD_OFF);
-  }
-  else if (sleepTime == eepromSleepTime1sec) {
+  if (sleepTime == 1) {
     setMillis(millis() + 1000);
     LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
   }
-  else if (sleepTime == eepromSleepTime2sec) {
-    setMillis(millis() + 2000);
-    LowPower.powerDown(SLEEP_2S, ADC_OFF, BOD_OFF);
-  }
-  else if (sleepTime == eepromSleepTime4sec) {
-    setMillis(millis() + 4000);
-    LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
-  }
-  else if (sleepTime == eepromSleepTime8sec) {
+  else {
     setMillis(millis() + 8000);
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
-  }
-  else { //if some garbage in memory
-    setMillis(millis() + 1000);
-    LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
   }
 #ifdef LOG
   Serial.begin(115200);

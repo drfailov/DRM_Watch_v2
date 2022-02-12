@@ -126,12 +126,6 @@ void setMode(int _modeNew) {
 
 //Выплнить всю последовательность действий требуемых для выполнения перезагрузки.
 void reboot(){
-#ifdef LANG_EN
-  Display.displayMessage(F("Rebooting..."));
-#endif
-#ifdef LANG_RU
-  Display.displayMessage(F("Перезагрузка"));
-#endif    
   Display.displayPowerOff();
   delay(1000);
   resetFunc(); //вызываем reset

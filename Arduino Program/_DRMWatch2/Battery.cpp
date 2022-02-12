@@ -28,9 +28,6 @@ class Battery_{
   }
   
   long _batteryRawVoltage() {
-  #ifdef LOG
-    Serial.print(F("Volt:"));
-  #endif
     long result;
     // Read 1.1V reference against AVcc
     ADMUX = _BV(REFS0) | _BV(MUX3) | _BV(MUX2) | _BV(MUX1);

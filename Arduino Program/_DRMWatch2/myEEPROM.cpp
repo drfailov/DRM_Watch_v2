@@ -15,25 +15,7 @@
 
 
 class myEEPROM_ {
-  public:
-
-  //sleep times
-  //Значения констант сна, котоые пишутся в память
-  #define eepromSleepTime05sec (byte)0 
-  #define eepromSleepTime1sec (byte)1 
-  #define eepromSleepTime2sec (byte)2 
-  #define eepromSleepTime4sec (byte)4 
-  #define eepromSleepTime8sec (byte)8 
-  #define eepromAddressSleepTime (byte)10 
-  byte eepromReadSleepTime(){
-    byte result = 1;
-    EEPROM.get(eepromAddressSleepTime, result);
-    return result;
-  }
-  void eepromSaveSleepTime(byte data){
-    EEPROM.put(eepromAddressSleepTime, data);
-  }
-  
+  public:  
   
   #define eepromAddressSilentMode (byte)11
   bool eepromReadSilentMode(){

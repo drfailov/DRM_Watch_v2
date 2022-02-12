@@ -5,6 +5,7 @@
 /*Used to test new functionality*/
 
 void modeAboutSetup() {
+  genericMenuSetup();
 }
 
 void modeAboutLoop() {
@@ -18,6 +19,12 @@ void modeAboutLoop() {
     goToWatchface();
     return;
   } 
+  
+  //auto exit
+  if (millis() - Generic.genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
+    goToWatchface();
+    return;
+  }
   
   Display.displayClear();
 #ifdef LANG_EN

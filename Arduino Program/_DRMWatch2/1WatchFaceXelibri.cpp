@@ -96,6 +96,12 @@ class WatchfaceXelibri : public GenericWatchface  { //
     virtual const char* name() {
       return (const char*)F("Xelibri");
     }
+    virtual const bool secondsUpdate() {
+      /* true - циферблат рисует секунды, требуется обновление экрана раз в секунду
+       * false - циферблат не рисует секунды, можно обновлять экран реже
+      */
+      return false;
+    }
 
     /*
        EN:
