@@ -1,5 +1,5 @@
 /*Show menu with melodies by triggerimg GenericMenu*/
-const byte modeMenuMelodiesItemsCount = 8; //сколько пунктов меню в массиве
+//const byte modeMenuMelodiesItemsCount = 8; //сколько пунктов меню в массиве
 
 //Максимальная длина строки:                  |          |
 const char modeMenuMelodiesItem1[] PROGMEM = "Entertainer";
@@ -11,14 +11,14 @@ const char modeMenuMelodiesItem6[] PROGMEM = "Groovy Blue";
 const char modeMenuMelodiesItem7[] PROGMEM = "Toreador";
 
 const char* const modeMenuMelodiesItems[] PROGMEM = {
+  menuItemBack,
   modeMenuMelodiesItem1,
   modeMenuMelodiesItem2,
   modeMenuMelodiesItem3,
   modeMenuMelodiesItem4,
   modeMenuMelodiesItem5,
   modeMenuMelodiesItem6,
-  modeMenuMelodiesItem7,
-  menuItemBack
+  modeMenuMelodiesItem7
 };
 
 
@@ -27,7 +27,7 @@ void modeMenuMelodiesSetup() {
 }
 
 void modeMenuMelodiesLoop() {
-  genericMenuLoop(modeMenuMelodiesItemsCount, modeMenuMelodiesItems, modeMenuMelodiesSelected, true);
+  genericMenuLoop(eepromMelodyCount + 1, modeMenuMelodiesItems, modeMenuMelodiesSelected, true);
 }
 
 void modeMenuMelodiesFinish() {
@@ -36,22 +36,18 @@ void modeMenuMelodiesFinish() {
 
 void modeMenuMelodiesSelected(byte index) {
   delay(200);
-  if (index == 7) { //Back
+  if (index == 0) { //Back
     setMode(MODE_MENU_APPS);
     return;
   }
   else{
-    melodyPlayerPlayMelody(getMelodyByIndex(index));
+    melodyPlayerPlayMelody(getMelodyByIndex(index-1));
   }
 }
 
 const char* getMelodyName(byte index){
-  uint16_t ptr = pgm_read_word(&modeMenuMelodiesItems[index]);
+  uint16_t ptr = pgm_read_word(&modeMenuMelodiesItems[index+1]);
   return ptr;
-}
-
-byte getMelodiesCount(){
-  return modeMenuMelodiesItemsCount-1;
 }
 
 const byte* const getMelodyByIndex(byte index){

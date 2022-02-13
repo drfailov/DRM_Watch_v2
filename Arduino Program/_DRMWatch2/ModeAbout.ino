@@ -9,12 +9,7 @@ void modeAboutSetup() {
 }
 
 void modeAboutLoop() {
-  if(ButtonUp.isButtonPressed()){
-    Buzzer.beep();
-    goToWatchface();
-    return;
-  } 
-  if(ButtonDown.isButtonPressed()){
+  if(ButtonUp.isButtonPressed() || ButtonDown.isButtonPressed()){
     Buzzer.beep();
     goToWatchface();
     return;
@@ -42,12 +37,7 @@ void modeAboutLoop() {
   Display.displayDrawVector(/*path*/Display.getPathDrmWatch(), /*x*/26, /*y*/22, /*animate*/3, /*color*/1);
   Display.displayUpdate();
   for(long st = millis(); millis() - st < 900; ){
-    if(ButtonUp.isButtonPressed()){
-      Buzzer.beep();
-      goToWatchface();
-      return;
-    } 
-    if(ButtonDown.isButtonPressed()){
+    if(ButtonUp.isButtonPressed() || ButtonDown.isButtonPressed()){
       Buzzer.beep();
       goToWatchface();
       return;

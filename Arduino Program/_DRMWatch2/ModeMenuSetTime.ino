@@ -4,13 +4,13 @@
 #include "Buzzer.cpp"
 /*Screen allows to set time*/
 
-#define MENU_SET_TIME_SELECTED_HOUR 0
-#define MENU_SET_TIME_SELECTED_MINUTE 1
-#define MENU_SET_TIME_SELECTED_DAY 2
-#define MENU_SET_TIME_SELECTED_MONTH  3
-#define MENU_SET_TIME_SELECTED_YEAR 4
-#define MENU_SET_TIME_SELECTED_SAVE 5
-#define MENU_SET_TIME_SELECTED_BACK 6
+#define MENU_SET_TIME_SELECTED_BACK 0
+#define MENU_SET_TIME_SELECTED_HOUR 1
+#define MENU_SET_TIME_SELECTED_MINUTE 2
+#define MENU_SET_TIME_SELECTED_DAY 3
+#define MENU_SET_TIME_SELECTED_MONTH  4
+#define MENU_SET_TIME_SELECTED_YEAR 5
+#define MENU_SET_TIME_SELECTED_SAVE 6
 
 
 byte modeMenuSetTimeHours = 00;
@@ -23,13 +23,12 @@ int modeMenuSetTimeYears = 2021;
 
 
 void modeMenuSetTimeSetup(){
-  Generic.selected = MENU_SET_TIME_SELECTED_HOUR;
+  genericMenuSetup();
   modeMenuSetTimeHours = RTC.rtcGetHours();
   modeMenuSetTimeMinutes = RTC.rtcGetMinutes();
   modeMenuSetTimeDays = RTC.rtcGetDay();
   modeMenuSetTimeMonths = RTC.rtcGetMonth();
   modeMenuSetTimeYears = RTC.rtcGetYear();
-  digitalWrite(pinLcdBacklight, HIGH);
 }
 
 void modeMenuSetTimeLoop(){
@@ -59,18 +58,8 @@ void modeMenuSetTimeLoop(){
     
     if(Generic.selected == MENU_SET_TIME_SELECTED_SAVE) {//SAVE
       RTC.rtcSetTime(modeMenuSetTimeYears, modeMenuSetTimeMonths, modeMenuSetTimeDays, modeMenuSetTimeHours, modeMenuSetTimeMinutes);
-      { //fix alarm, предотвращение включения будильника сразу в момент установки
-        byte hour = RTC.rtcGetHours();
-        byte minute = RTC.rtcGetMinutes();
-        byte day = RTC.rtcGetDay();
-        
-        byte modeSetAlarmHour = MyEEPROM.eepromReadAlertHour();
-        byte modeSetAlarmMinute = MyEEPROM.eepromReadAlertMinute();
-        if((hour == modeSetAlarmHour && minute >= modeSetAlarmMinute) || (hour > modeSetAlarmHour))
-          MyEEPROM.eepromSaveAlertLastDayRun(day);
-        else
-          MyEEPROM.eepromSaveAlertLastDayRun(0);
-      } 
+      //fix alarm, предотвращение включения будильника сразу в момент установки
+      resetAlertMetadata();
       Display.displayMessage((const __FlashStringHelper*)textSaved);
       goToWatchface();
       return;
@@ -93,37 +82,42 @@ void modeMenuSetTimeLoop(){
   Display.displayClear();
   byte xOffset = 15;
   if (/*flip*/MyEEPROM.eepromReadFlipScreen())
-    xOffset = 5;
+    xOffset = 0;
 
+
+  //BACK
+  Display.displayDrawIconWithFrame(/*x*/xOffset, /*y*/0, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_BACK);
+
+  //TITLE
 #ifdef LANG_EN
-  Display.displayDrawText(xOffset+0, /*y*/2, /*c*/1, F("Set time"));
+  Display.displayDrawText(xOffset+25, 4, 1, F("Time"));
 #endif
 #ifdef LANG_RU
-  Display.displayDrawText(xOffset+0, /*y*/2, /*c*/1, F("Зaдaть вpeмя"));
+  Display.displayDrawText(xOffset+25, 4, 1, F("Bpeмя"));
 #endif
+
+
   
   
-  Display.displayDrawText(xOffset+20, 19, 1, ":");
+  Display.displayDrawText(xOffset+20, 21, 1, ":");
   //hours
-  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+0, /*y*/15, /*number*/modeMenuSetTimeHours, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_HOUR);
+  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+10, /*y*/17, /*number*/modeMenuSetTimeHours, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_HOUR);
   //minutes
-  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+25, /*y*/15, /*number*/modeMenuSetTimeMinutes, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_MINUTE);
+  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+35, /*y*/17, /*number*/modeMenuSetTimeMinutes, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_MINUTE);
   
 
-  Display.displayDrawText(xOffset+20, 39, 1, ".");
-  Display.displayDrawText(xOffset+45, 39, 1, ".");
+  Display.displayDrawText(xOffset+30, 41, 1, ".");
+  Display.displayDrawText(xOffset+55, 41, 1, ".");
   //days
-  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+0, /*y*/33, /*number*/modeMenuSetTimeDays, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_DAY);
+  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+10, /*y*/35, /*number*/modeMenuSetTimeDays, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_DAY);
   //months
-  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+25, /*y*/33, /*number*/modeMenuSetTimeMonths, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_MONTH); 
+  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+35, /*y*/35, /*number*/modeMenuSetTimeMonths, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_MONTH); 
   //Year
-  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+50, /*y*/33, /*number*/modeMenuSetTimeYears%2000, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_YEAR); 
+  Display.displayDraw2DigitNumberWithFrame(/*x*/xOffset+60, /*y*/35, /*number*/modeMenuSetTimeYears%2000, /*selected*/Generic.selected == MENU_SET_TIME_SELECTED_YEAR); 
 
   
   //Save
-  Display.displayDrawIconWithFrame(/*x*/xOffset+0, /*y*/53, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawCheck, /*selected*/Generic.selected  == MENU_SET_TIME_SELECTED_SAVE);
-  //BACK
-  Display.displayDrawIconWithFrame(/*x*/xOffset+25, /*y*/53, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected  == MENU_SET_TIME_SELECTED_BACK);
+  Display.displayDrawIconWithFrame(/*x*/xOffset+30, /*y*/53, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawCheck, /*selected*/Generic.selected  == MENU_SET_TIME_SELECTED_SAVE);
     
 
   //button icons

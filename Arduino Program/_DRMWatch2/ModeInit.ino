@@ -23,10 +23,13 @@ void modeInitSetup(){
   Display.displayDrawVector(/*path*/Display.getPathZubat(), /*x*/0, /*y*/10, /*animate*/false, /*color*/1);
   Display.displayDrawVector(/*path*/Display.getPathDrmWatch(), /*x*/48, /*y*/15, /*animate*/4, /*color*/1);
   Display.displayUpdate();
+  
 //  for(int i=0; i< 5; i++){
 //    Display.displayMessage (F("Срочно"));
 //    Display.displayMessage (F("Иди нахуй"));
 //  }
+
+    //MyEEPROM.eepromFIllByOnes();
 }
 
 void modeInitLoop(){

@@ -18,12 +18,12 @@ const char modeMenuAppsItem5[] PROGMEM = "Зpaдa";
 #endif
 
 const char* modeMenuAppsItems[] = {
+  Generic.getMenuItemBack(),
   modeMenuAppsItem1,
   modeMenuAppsItem2,
   modeMenuAppsItem3,
   modeMenuAppsItem4,
-  modeMenuAppsItem5,
-  Generic.getMenuItemBack()
+  modeMenuAppsItem5
 };
 
 
@@ -40,22 +40,22 @@ void modeMenuAppsFinish() {
 }
 
 void modeMenuAppsSelected(byte index) {
-  if (index == 0) { //Status screen
+  if (index == 0) { //Back
+    setMode(MODE_MENU_MAIN);
+  }
+  else if (index == 1) { //Status screen
     setMode(MODE_STATUS);
   }
-  else if (index == 1) { //Melodies
+  else if (index == 2) { //Melodies
     setMode(MODE_MENU_MELODIES);
   }
-  else if (index == 2) { //Stopwatch
+  else if (index == 3) { //Stopwatch
     setMode(MODE_STOPWATCH);
   }
-  else if (index == 3) { //alarm
+  else if (index == 4) { //alarm
     setMode(MODE_SET_ALARM);
   }
-  else if (index == 4) { //Zrada
+  else if (index == 5) { //Zrada
     setMode(MODE_ZRADA);
-  }
-  else if (index == 5) { //Back
-    setMode(MODE_MENU_MAIN);
   }
 }

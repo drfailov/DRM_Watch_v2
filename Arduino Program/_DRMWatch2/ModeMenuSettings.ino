@@ -1,15 +1,15 @@
 /*Show settings menu by triggerimg GenericMenu*/
 #include "Generic.cpp"
 
-#define modeMenuSettingsItemsCount 7 //сколько пунктов меню в массиве
+#define modeMenuSettingsItemsCount 6 //сколько пунктов меню в массиве
+
 #define MENU_SETTINS_SELECTED_BACK 0
-//#define MENU_SETTINS_SELECTED_REBOOT 1
 #define MENU_SETTINS_SELECTED_SILENT 1
-#define MENU_SETTINS_SELECTED_WATCHFACE 2
-#define MENU_SETTINS_SELECTED_BEEP 3
-#define MENU_SETTINS_SELECTED_TIME 4
-#define MENU_SETTINS_SELECTED_RESET 5
-#define MENU_SETTINS_SELECTED_FLIP 6
+#define MENU_SETTINS_SELECTED_FLIP 2
+#define MENU_SETTINS_SELECTED_WATCHFACE 3
+#define MENU_SETTINS_SELECTED_BEEP 4
+#define MENU_SETTINS_SELECTED_TIME 5
+
 
 void modeMenuSettingsSetup() {
   genericMenuSetup();
@@ -36,19 +36,21 @@ void modeMenuSettingsLoop() {
     return;
   }
 
-  byte xOffset = 20;
+  byte xOffset = 12;
   if(/*flip*/MyEEPROM.eepromReadFlipScreen())
-    xOffset = 5;
+    xOffset = 0;
   Display.displayClear();
 
   //BACK
   Display.displayDrawIconWithFrame(/*x*/xOffset+0, /*y*/0, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_BACK);
-  
-  //REBOOT
-  //Display.displayDrawIconWithFrame(/*x*/xOffset+25, /*y*/0, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconReboot, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_REBOOT);
 
   //SILENT MODE
-  Display.displayDrawIconWithFrame(/*x*/xOffset+50, /*y*/0, /*additionalWidth*/1, /*drawIcon(x,y,color)*/(MyEEPROM.eepromReadSilentMode()?Display.displayDrawSilentModeIcon:Display.displayDrawSilentModeOffIcon), /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_SILENT);
+  Display.displayDrawIconWithFrame(/*x*/xOffset+24, /*y*/0, /*additionalWidth*/1, /*drawIcon(x,y,color)*/(MyEEPROM.eepromReadSilentMode()?Display.displayDrawSilentModeIcon:Display.displayDrawSilentModeOffIcon), /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_SILENT);
+
+  //FLIP
+  Display.displayDrawIconWithFrame(/*x*/xOffset+49, /*y*/0, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconFlip, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_FLIP);
+
+
   
   //WATCHFACE
   byte wtfIndex = MyEEPROM.eepromReadWatchface();
@@ -57,35 +59,56 @@ void modeMenuSettingsLoop() {
     strcpy_P(Generic.buffer, (char*)F("-"));      //for RAM arrays
   else
     strcpy_P(Generic.buffer, watchfaces[wtfIndex]->name());
-  Display.displayDrawIconWithFrame(/*x*/xOffset+0, /*y*/16, /*additionalWidth*/55, /*drawIcon(x,y,color)*/Display.displayDrawIconWatchface, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_WATCHFACE);
-  Display.displayDrawText(/*X*/xOffset+18, /*Y*/20, /*C*/Generic.selected  != MENU_SETTINS_SELECTED_WATCHFACE, /*text*/Generic.buffer);
+  Display.displayDrawIconWithFrame(/*x*/xOffset+0, /*y*/18, /*additionalWidth*/64, /*drawIcon(x,y,color)*/Display.displayDrawIconWatchface, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_WATCHFACE);
+  Display.displayDrawText(/*X*/xOffset+18, /*Y*/22, /*C*/Generic.selected  != MENU_SETTINS_SELECTED_WATCHFACE, /*text*/Generic.buffer);
 
-  //SLEEP
-//  byte sleepTimeCurrent = MyEEPROM.eepromReadSleepTime();
-//  ltoa(sleepTimeCurrent, Generic.buffer, DEC);
-//  Generic.buffer[1] = 's';
-//  Generic.buffer[2] = '\0';
-//  Display.displayDrawIconWithFrame(/*x*/xOffset+0, /*y*/32, /*additionalWidth*/13, /*drawIcon(x,y,color)*/Display.displayDrawIconSleep, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_SLEEP);
-//  Display.displayDrawText(/*X*/xOffset+18, /*Y*/36, /*C*/Generic.selected  != MENU_SETTINS_SELECTED_SLEEP, /*text*/Generic.buffer);
+
 
   //BEEP
   byte beepCurrent = MyEEPROM.eepromReadBeepSound();
   ltoa(beepCurrent, Generic.buffer, DEC);
   Generic.buffer[1] = '\0';
-  Display.displayDrawIconWithFrame(/*x*/xOffset+37, /*y*/32, /*additionalWidth*/13, /*drawIcon(x,y,color)*/Display.displayDrawIconBeep, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_BEEP);
-  Display.displayDrawText(/*X*/xOffset+55, /*Y*/36, /*C*/Generic.selected  != MENU_SETTINS_SELECTED_BEEP, /*text*/Generic.buffer);
+  Display.displayDrawIconWithFrame(/*x*/xOffset+0, /*y*/36, /*additionalWidth*/7, /*drawIcon(x,y,color)*/Display.displayDrawIconBeep, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_BEEP);
+  Display.displayDrawText(/*X*/xOffset+17, /*Y*/40, /*C*/Generic.selected  != MENU_SETTINS_SELECTED_BEEP, /*text*/Generic.buffer);
 
   //SET TIME
-  Display.displayDrawIconWithFrame(/*x*/xOffset+0, /*y*/48, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconTime, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_TIME);
+  Display.displayDrawIconWithFrame(/*x*/xOffset+31, /*y*/36, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconTime, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_TIME);
 
-  //RESET
-  Display.displayDrawIconWithFrame(/*x*/xOffset+25, /*y*/48, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconReset, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_RESET);
 
-  //FLIP
-  Display.displayDrawIconWithFrame(/*x*/xOffset+50, /*y*/48, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconFlip, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_FLIP);
+
+  //ITEM NAME
+#ifdef LANG_RU
+  if(Generic.selected  == MENU_SETTINS_SELECTED_BACK) 
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/(__FlashStringHelper*)menuItemBack);
+  else if(Generic.selected  == MENU_SETTINS_SELECTED_SILENT) 
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Бeззвyчный"));
+  else if(Generic.selected  == MENU_SETTINS_SELECTED_FLIP) 
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Пepeвopoт"));
+  else if(Generic.selected  == MENU_SETTINS_SELECTED_TIME) 
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Bpeмя"));
+  else if(Generic.selected  == MENU_SETTINS_SELECTED_WATCHFACE) 
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Цифepблaт"));
+  else if(Generic.selected  == MENU_SETTINS_SELECTED_BEEP) 
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("3вeк кнoпoк"));
   
+#endif
+#ifdef LANG_EN
+  if(Generic.selected  == MENU_SETTINS_SELECTED_BACK) 
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/(__FlashStringHelper*)menuItemBack);
+  else if(Generic.selected  == MENU_SETTINS_SELECTED_SILENT) 
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Silent"));
+  else if(Generic.selected  == MENU_SETTINS_SELECTED_FLIP) 
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Flip"));
+  else if(Generic.selected  == MENU_SETTINS_SELECTED_TIME) 
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Time"));
+  else if(Generic.selected  == MENU_SETTINS_SELECTED_WATCHFACE) 
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("WTF"));
+  else if(Generic.selected  == MENU_SETTINS_SELECTED_BEEP) 
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Beep"));
+#endif
 
-  //UPADTE
+
+  //LEGEND
   if(/*flip*/MyEEPROM.eepromReadFlipScreen()){
     Display.displayDrawLine(/*X1*/96-11, /*Y1*/0, /*X2*/96-11, /*Y2*/68, /*C*/1);
     Display.displayDrawCheck(/*X*/96-8, /*Y*/2, 1);
@@ -96,6 +119,7 @@ void modeMenuSettingsLoop() {
     Display.displayDrawCheck(/*X*/2, /*Y*/2, 1);
     Display.displayDrawArrowDown(/*X*/1, /*Y*/59, 1);
   }
+  
   Display.displayUpdate();
 }
 
@@ -118,21 +142,8 @@ void modeMenuSettingsSelected(byte index) {
     else{
       MyEEPROM.eepromSaveWatchface(0);
     }
-    //setMode(MODE_MENU_SET_WATCHFACE); 
     return;
   }
-  
-//  if (index == MENU_SETTINS_SELECTED_SLEEP) { //sleep time
-//    byte sleepTimeCurrent = MyEEPROM.eepromReadSleepTime();
-//    if(sleepTimeCurrent == eepromSleepTime05sec) sleepTimeCurrent = eepromSleepTime1sec;
-//    else if(sleepTimeCurrent == eepromSleepTime1sec) sleepTimeCurrent = eepromSleepTime2sec;
-//    else if(sleepTimeCurrent == eepromSleepTime2sec) sleepTimeCurrent = eepromSleepTime4sec;
-//    else if(sleepTimeCurrent == eepromSleepTime4sec) sleepTimeCurrent = eepromSleepTime8sec;
-//    else sleepTimeCurrent = eepromSleepTime05sec;
-//    MyEEPROM.eepromSaveSleepTime(sleepTimeCurrent);
-//    return;
-//  }
-  
 
   if (index == MENU_SETTINS_SELECTED_SILENT) { //Set silent mode
     MyEEPROM.eepromSaveSilentMode(!MyEEPROM.eepromReadSilentMode());
@@ -152,13 +163,6 @@ void modeMenuSettingsSelected(byte index) {
     setMode(MODE_MENU_SET_TIME); 
     return;
   }
-
-  if (index == MENU_SETTINS_SELECTED_RESET) { //Hard Reset
-    //eepromFIllByZeros();
-    MyEEPROM.eepromFIllByOnes();
-    reboot();
-  }
-
   
   if (index == MENU_SETTINS_SELECTED_FLIP) { //Flip screen
     MyEEPROM.eepromSaveFlipScreen(!MyEEPROM.eepromReadFlipScreen());

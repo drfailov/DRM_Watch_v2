@@ -728,14 +728,15 @@ class Display_{
 
   
   void displayDrawBattery(byte x, byte y) {
-    float voltage = Battery.batteryVoltage();
+    //float voltage = Battery.batteryVoltage();
+    int voltage = Battery.batteryRawVoltage();
     bool isCharging = Battery.batteryIsCharging();
     bool isLowPower = Battery.batteryIsLowPower();
     byte level = 0;
-    if (voltage > 3.40) level = 1;
-    if (voltage > 3.65) level = 2;
-    if (voltage > 3.85) level = 3;
-    if (voltage > 4.00) level = 4;
+    if (voltage > 3400) level = 1;
+    if (voltage > 3650) level = 2;
+    if (voltage > 3850) level = 3;
+    if (voltage > 4000) level = 4;
   
     displayDrawBattery(x, y, level, isCharging, isLowPower);
   }

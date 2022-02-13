@@ -7,14 +7,10 @@
 #include "Generic.cpp"
 
 class Battery_{
-  public:
-  float batteryVoltage() {
-    return ((float)_batteryRawVoltage()) / 1000;
-  }
-  
+  public:  
   
   bool batteryIsLowPower() {
-    return batteryVoltage() < 3.65;
+    return batteryRawVoltage() < 3650;
   }
   
   bool batteryIsCharging() {
@@ -27,7 +23,7 @@ class Battery_{
     return sum > 5;
   }
   
-  long _batteryRawVoltage() {
+  long batteryRawVoltage() {
     long result;
     // Read 1.1V reference against AVcc
     ADMUX = _BV(REFS0) | _BV(MUX3) | _BV(MUX2) | _BV(MUX1);
@@ -37,9 +33,6 @@ class Battery_{
     result = ADCL;
     result |= ADCH << 8;
     result = 1125300L / result; // Back-calculate AVcc in mV
-  #ifdef LOG
-    Serial.println(result);
-  #endif
     return result;
   }
 
