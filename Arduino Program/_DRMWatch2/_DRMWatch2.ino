@@ -34,7 +34,6 @@ void(* resetFunc) (void) = 0;//объявляем функцию reset с адр
 #define MODE_MENU_APPS (byte)11
 #define MODE_STOPWATCH (byte)12
 #define MODE_SET_ALARM (byte)13
-#define MODE_ZRADA (byte)15
 //Переменная в которой хранится текущий режим
 byte _mode = -1;
 
@@ -77,7 +76,6 @@ void loop() {
   if (_mode == MODE_MENU_APPS ) modeMenuAppsLoop();
   if (_mode == MODE_STOPWATCH ) modeStopwatchLoop();
   if (_mode == MODE_SET_ALARM ) modeSetAlarmLoop();
-  if (_mode == MODE_ZRADA ) modeZradaLoop();
 }
 
 void setMode(int _modeNew) {
@@ -104,7 +102,6 @@ void setMode(int _modeNew) {
   if (_mode == MODE_MENU_APPS ) modeMenuAppsFinish();
   if (_mode == MODE_STOPWATCH ) modeStopwatchFinish();
   if (_mode == MODE_SET_ALARM ) modeSetAlarmFinish();
-  if (_mode == MODE_ZRADA) modeZradaFinish();
   
   //init new
   if (_modeNew == MODE_INIT) modeInitSetup();
@@ -117,9 +114,7 @@ void setMode(int _modeNew) {
   if (_modeNew == MODE_ABOUT ) modeAboutSetup();
   if (_modeNew == MODE_MENU_APPS ) modeMenuAppsSetup();
   if (_modeNew == MODE_STOPWATCH ) modeStopwatchSetup();
-  if (_modeNew == MODE_SET_ALARM ) modeSetAlarmSetup();
-  if (_modeNew == MODE_ZRADA) modeZradaSetup();
-  
+  if (_modeNew == MODE_SET_ALARM ) modeSetAlarmSetup();  
   
   _mode = _modeNew;
 }

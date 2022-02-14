@@ -56,6 +56,11 @@ void modeMenuAppsSelected(byte index) {
     setMode(MODE_SET_ALARM);
   }
   else if (index == 5) { //Zrada
-    setMode(MODE_ZRADA);
+    if(millis()%2==0){
+      Display.displayMessage(F("3paдa"));
+    }
+    else{
+      Display.displayMessage(F("Пepeмoгa"));
+    }
   }
 }
