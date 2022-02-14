@@ -65,17 +65,59 @@ void LCD1202::SendByte(byte mode, byte c){
   dWrite(Clock, 0);
 }
 //=====================================================Обновить дисплей
-void LCD1202::Update(){
+byte flipByte(byte c){
+  char r=0;
+  for(byte i = 0; i < 8; i++){
+    r <<= 1;
+    r |= c & 1;
+    c >>= 1;
+  }
+  return r;
+}
+
+void LCD1202::Update(bool flip = false){
   for(byte p = 0; p < 9; p++){
     SendByte(LCD_C, SetYAddr| p); 
     SendByte(LCD_C, SetXAddr4);
     SendByte(LCD_C, SetXAddr3);
 
     for(byte col=0; col < LCD_X; col++){
-      SendByte(LCD_D, LCD_RAM[(LCD_X * p) + col]);
+		if(flip){
+			//max = LCD_X*9 - 1
+			int totalBytes = LCD_X*9 - 1;
+			int currentByteIndex = (LCD_X * p) + col;
+			int nextRowByteIndex = (LCD_X * p) + col + LCD_X;
+			byte b1 = LCD_RAM[totalBytes - currentByteIndex];
+			b1 = flipByte(b1);
+			byte b2 = LCD_RAM[totalBytes - nextRowByteIndex];
+			b2 = flipByte(b2);
+			/*
+			dolboebu ,  pidorasi  =  oebupido
+			dolboebu << 4 = oebu0000
+			pidorasi >> 4 = 0000pido
+			oebu0000 || 4 = 0000pido = oebupido
+			*/
+			byte b = b1 >> 4 | b2 << 4;
+			SendByte(LCD_D, b);
+		}
+		else{//if no flip
+			SendByte(LCD_D, LCD_RAM[(LCD_X * p) + col]);
+		}
     }
   }
 }
+
+// void LCD1202::Update(){
+  // for(byte p = 0; p < 9; p++){
+    // SendByte(LCD_C, SetYAddr| p); 
+    // SendByte(LCD_C, SetXAddr4);
+    // SendByte(LCD_C, SetXAddr3);
+
+    // for(byte col=0; col < LCD_X; col++){
+      // SendByte(LCD_D, LCD_RAM[(LCD_X * p) + col]);
+    // }
+  // }
+// }
 
 //===================================================Инициализация дисплея
 void LCD1202::Inicialize(){

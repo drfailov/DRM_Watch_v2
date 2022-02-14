@@ -9,7 +9,7 @@ class LCD1202 {
        LCD1202(uint8_t _RES, uint8_t _CS, uint8_t _Data, uint8_t _Clock);
        void Inicialize();
        void Clear_LCD();
-       void Update();
+       void Update(bool flip = false);
        void drawPixel(byte x, byte y, boolean color);
        void fillScreen(boolean color);
        void drawChar(byte x, byte y, boolean color, unsigned char c);
