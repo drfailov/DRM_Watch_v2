@@ -89,7 +89,7 @@ void modeMenuSettingsLoop() {
   else if(Generic.selected  == MENU_SETTINS_SELECTED_WATCHFACE) 
     Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Цифepблaт"));
   else if(Generic.selected  == MENU_SETTINS_SELECTED_BEEP) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("3вeк кнoпoк"));
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("3вyк кнoпoк"));
   
 #endif
 #ifdef LANG_EN

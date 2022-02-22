@@ -9,7 +9,7 @@ void modeInitSetup(){
   RTC.rtcInit();
   Display.displayClear();
   Display.displayDrawText(67, 61, 1, version);
-  Display.displayDrawVector(/*path*/Display.getPathZubat(), /*x*/25, /*y*/10, /*animate*/6, /*color*/1);
+  Display.displayDrawVector(/*path*/Display.getPathZubat(), /*x*/25, /*y*/10, /*animate*/false, /*color*/1);
   Display.displayUpdate();
   Buzzer.beepConfirm();
   for(byte x=25; x > 0; x -= 5){

@@ -5,6 +5,7 @@
 #include "1WatchfaceNomens.cpp"
 #include "1WatchfaceZubat.cpp"
 #include "1WatchfaceXelibri.cpp"
+#include "1WatchfaceMatrix.cpp"
 #include <util/atomic.h>
 #include <LowPower.h>
 void(* resetFunc) (void) = 0;//объявляем функцию reset с адресом 0
@@ -47,9 +48,10 @@ void setup() {
   byte i=0;
   //watchfaces[i++] = new WatchfaceDrmWatch();
   watchfaces[i++] = new WatchfaceDrmLite();
-  watchfaces[i++] = new WatchfaceNomens();
+  //watchfaces[i++] = new WatchfaceNomens();
   //watchfaces[i++] = new WatchfaceZubat();
   //watchfaces[i++] = new WatchfaceXelibri();
+  watchfaces[i++] = new WatchfaceMatrix();
   
 #ifdef LOG
   Serial.begin(115200);

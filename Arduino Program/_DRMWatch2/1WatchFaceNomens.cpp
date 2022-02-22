@@ -22,11 +22,13 @@ const byte fontWtf3[] PROGMEM = {
   0b11110110 //9
 };
 static const PROGMEM byte pathUp[] = { 6,
-   2,0,    12,0,   11,1,   3,1,   4,2,
+// 00,00, 00,00, 00,00, 00,00, 00,00,
+   2,0,   12,0,  11,1,  3,1,   4,2,
    10,2
 };
 static const PROGMEM byte pathUpLeft[] = { 6,
-   0,1,    0,12,   1,11,   1,2,   2,3,
+// 00,00, 00,00, 00,00, 00,00, 00,00,
+   0,1,   0,12,  1,11,  1,2,   2,3,
    2,10
 };
 static const PROGMEM byte pathUpRight[] = { 6,

@@ -7,7 +7,7 @@
 #include "Generic.cpp"
 
 /*Screen with main watchface*/
-const long modeWatchFaceBacklightTimeout = 15000;
+const long modeWatchFaceBacklightTimeout = 7000;
 long modeWatchFaceBacklightEnabledTime = millis();
 
 void modeWatchFaceSetup() {
