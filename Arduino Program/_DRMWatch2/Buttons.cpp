@@ -5,7 +5,6 @@
 
 #include <Arduino.h>
 #include "Generic.cpp"
-#include "MyEEPROM.cpp"
 
 class Button_{
   private:
@@ -21,14 +20,7 @@ class Button_{
   //Выдаёт true если кнопка сейчас нажата, а во время прошлого вызова не была.
   //Если вызывать снова, начнёт выдавать true если держать кнопку полсекунды не отпуская
   bool isButtonPressed(){
-    pinMode(pin, INPUT);
-    delay(1);
-    int sum = 0;
-    for(int i=0; i<10; i++)
-      if(digitalRead(pin) == HIGH)
-        sum += 1;
-    bool value = sum > 5;
-    
+    bool value = readDebounce();
     bool lastValue = buttonLastValue;
     buttonLastValue = value;
     bool isButtonPressDown = value && !lastValue;
@@ -45,8 +37,20 @@ class Button_{
   //Вызывать после того как получен true на pressed. Выдает true после нажатия кнопку не отпускать в течении 5 секунды
   bool isButtonHold(){
     long started = millis();
-    while(digitalRead(pin) == HIGH && millis() - started < 5000);
-    return digitalRead(pin) == HIGH;
+    while(readDebounce() && millis() - started < 3000);
+    return readDebounce();
+  }
+
+  
+  
+  bool readDebounce(){
+    pinMode(pin, INPUT);
+    delay(1);
+    byte sum = 0;
+    for(int i=0; i<10; i++)
+      if(digitalRead(pin) == HIGH)
+        sum += 1;
+    return sum > 5;
   }
 };
 

@@ -8,7 +8,7 @@
 
 
 //Базовые константы
-#define version F("v1.16")   //Версию менять здесь
+#define version F("v1.17")   //Версию менять здесь
 //#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
 #define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
 #define LOG   //Закомментировать чтобы отключило логи
@@ -20,14 +20,11 @@
 #define pinLcdRst (byte)5
 #define pinLcdCs (byte)6
 #define pinLcdMosi (byte)7
-//#define pinUsbVoltage (byte)9    //for old boards rev.1
 #define pinUsbVoltage (byte)11  //for new boards  rev.2
 #define pinLcdPower (byte)10
-//#define pinLcdSck (byte)11   //for old boards  rev.1
 #define pinLcdSck (byte)8    //for new boards  rev.2
 #define pinBuzzer (byte)12 //passive
 #define pinLed (byte)13  //active high
-// A0 - Random seed sourde (leave unconnected)
 #define pinLcdBacklight (byte)15  //A1, active high
 // A4 - RTC SDA
 // A5 - RTC SCL

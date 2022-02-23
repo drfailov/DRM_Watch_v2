@@ -25,14 +25,16 @@ void modeWatchFaceSetup() {
 }
 
 void modeWatchFaceLoop(bool animate) {
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
-    if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonHold():ButtonUp.isButtonHold()){
-      reboot();
+  if(! animate){ //не обрабатывать кнопки если это анимированный вывод на экран (предотвращает блокировку кнопками первой отрисовки экрана)
+    if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
+      if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonHold():ButtonUp.isButtonHold()){
+        reboot();
+        return;
+      }
+      Buzzer.beep();
+      setMode(MODE_MENU_MAIN);
       return;
     }
-    Buzzer.beep();
-    setMode(MODE_MENU_MAIN);
-    return;
   }
 
   byte hour = RTC.rtcGetHours();

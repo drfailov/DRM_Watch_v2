@@ -18,18 +18,11 @@ void modeStatusLoop() {
   Display.displayClear();
   
   drawParameter(00, 00, F("VLT"), Battery.batteryRawVoltage());
-  drawParameter(65, 00, F("CHG"), Battery.batteryIsCharging());
   drawParameter(00, 10, F("RAM"), freeRam());
-  //drawParameter(50, 20, F("SLN"), eepromReadSilentMode());
-  //drawParameter(00, 30, F("BEE"), eepromReadBeepSound());
-  //drawParameter(50, 30, F("aEN"), eepromReadAlertEnabled());
-  //drawParameter(00, 40, F("aHR"), eepromReadAlertHour());
-  //drawParameter(50, 40, F("aMI"), eepromReadAlertMinute());
-  drawParameter(00, 50, F("aLD"), MyEEPROM.eepromReadAlertLastDayRun());
-  //drawParameter(50, 50, F("aME"), eepromReadAlertMelodyIndex());
-  drawParameter(50, 60, F("WTF"), MyEEPROM.eepromReadWatchface());
+  drawParameter(00, 20, F("CHG"), Battery.batteryIsCharging());
+  drawParameter(00, 30, F("aLD"), MyEEPROM.eepromReadAlertLastDayRun());
+  drawParameter(00, 40, F("WTF"), MyEEPROM.eepromReadWatchface());
 
-  //Display.displayDrawCheck(0, 61, 1);
   Display.displayUpdate();
 }
 

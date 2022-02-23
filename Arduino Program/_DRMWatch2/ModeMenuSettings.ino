@@ -16,14 +16,19 @@ void modeMenuSettingsSetup() {
 }
 
 void modeMenuSettingsLoop() {
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) { //upper button
+    if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonHold():ButtonUp.isButtonHold()){
+      Buzzer.beep();
+      goToWatchface();
+      return;
+    }
     Generic.genericMenuLastActionTime = millis();
     modeMenuSettingsSelected (Generic.selected);
     Buzzer.beep();
     return;
   }
 
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()) {
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()) { //down button
     Generic.genericMenuLastActionTime = millis();
     Buzzer.beep();
     Generic.selected ++;
@@ -42,13 +47,13 @@ void modeMenuSettingsLoop() {
   Display.displayClear();
 
   //BACK
-  Display.displayDrawIconWithFrame(/*x*/xOffset+0, /*y*/0, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_BACK);
+  Display.displayDrawIconWithFrame(/*x*/xOffset+7, /*y*/3, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_BACK);
 
   //SILENT MODE
-  Display.displayDrawIconWithFrame(/*x*/xOffset+24, /*y*/0, /*additionalWidth*/1, /*drawIcon(x,y,color)*/(MyEEPROM.eepromReadSilentMode()?Display.displayDrawSilentModeIcon:Display.displayDrawSilentModeOffIcon), /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_SILENT);
+  Display.displayDrawIconWithFrame(/*x*/xOffset+31, /*y*/3, /*additionalWidth*/1, /*drawIcon(x,y,color)*/(MyEEPROM.eepromReadSilentMode()?Display.displayDrawSilentModeIcon:Display.displayDrawSilentModeOffIcon), /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_SILENT);
 
   //FLIP
-  Display.displayDrawIconWithFrame(/*x*/xOffset+49, /*y*/0, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconFlip, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_FLIP);
+  Display.displayDrawIconWithFrame(/*x*/xOffset+56, /*y*/3, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconFlip, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_FLIP);
 
 
   
@@ -59,8 +64,8 @@ void modeMenuSettingsLoop() {
     strcpy_P(Generic.buffer, (char*)F("-"));      //for RAM arrays
   else
     strcpy_P(Generic.buffer, watchfaces[wtfIndex]->name());
-  Display.displayDrawIconWithFrame(/*x*/xOffset+0, /*y*/18, /*additionalWidth*/64, /*drawIcon(x,y,color)*/Display.displayDrawIconWatchface, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_WATCHFACE);
-  Display.displayDrawText(/*X*/xOffset+18, /*Y*/22, /*C*/Generic.selected  != MENU_SETTINS_SELECTED_WATCHFACE, /*text*/Generic.buffer);
+  Display.displayDrawIconWithFrame(/*x*/xOffset+7, /*y*/21, /*additionalWidth*/49, /*drawIcon(x,y,color)*/Display.displayDrawIconWatchface, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_WATCHFACE);
+  Display.displayDrawText(/*X*/xOffset+25, /*Y*/25, /*C*/Generic.selected  != MENU_SETTINS_SELECTED_WATCHFACE, /*text*/Generic.buffer);
 
 
 
@@ -68,11 +73,11 @@ void modeMenuSettingsLoop() {
   byte beepCurrent = MyEEPROM.eepromReadBeepSound();
   ltoa(beepCurrent, Generic.buffer, DEC);
   Generic.buffer[1] = '\0';
-  Display.displayDrawIconWithFrame(/*x*/xOffset+0, /*y*/36, /*additionalWidth*/7, /*drawIcon(x,y,color)*/Display.displayDrawIconBeep, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_BEEP);
-  Display.displayDrawText(/*X*/xOffset+17, /*Y*/40, /*C*/Generic.selected  != MENU_SETTINS_SELECTED_BEEP, /*text*/Generic.buffer);
+  Display.displayDrawIconWithFrame(/*x*/xOffset+7, /*y*/39, /*additionalWidth*/7, /*drawIcon(x,y,color)*/Display.displayDrawIconBeep, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_BEEP);
+  Display.displayDrawText(/*X*/xOffset+24, /*Y*/43, /*C*/Generic.selected  != MENU_SETTINS_SELECTED_BEEP, /*text*/Generic.buffer);
 
   //SET TIME
-  Display.displayDrawIconWithFrame(/*x*/xOffset+31, /*y*/36, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconTime, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_TIME);
+  Display.displayDrawIconWithFrame(/*x*/xOffset+38, /*y*/39, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconTime, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_TIME);
 
 
 
