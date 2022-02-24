@@ -4,24 +4,21 @@
 
 /*Used to test new functionality*/
 
+bool color = 1;
+
 void modeAboutSetup() {
   genericMenuSetup();
+  Display.displayClear();
+  color = 1;
 }
 
-void modeAboutLoop() {
-  if(ButtonUp.isButtonPressed() || ButtonDown.isButtonPressed()){
-    Buzzer.beep();
-    goToWatchface();
-    return;
-  } 
-  
+void modeAboutLoop() {  
   //auto exit
   if (millis() - Generic.genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
     goToWatchface();
     return;
   }
   
-  Display.displayClear();
 #ifdef LANG_EN
   Display.displayDrawText(0, 0, 1, F("Softw: Dr.Failov"));
   Display.displayDrawText(0, 9, 1, F("Hardw: MeltemiOS"));
@@ -34,17 +31,20 @@ void modeAboutLoop() {
   Display.displayDrawText(00, 61, 1, version);
 
   
-  Display.displayDrawVector(/*path*/Display.getPathDrmWatch(), /*x*/26, /*y*/22, /*animate*/3, /*color*/1);
+  Display.displayDrawVector(/*path*/Display.getPathDrmWatch(), /*x*/26, /*y*/22, /*animate*/4, /*color*/color);
   Display.displayUpdate();
-  for(long st = millis(); millis() - st < 900; ){
+  color = !color;
+  for(long st = millis(); millis() - st < 900 && !color; ){
     if(ButtonUp.isButtonPressed() || ButtonDown.isButtonPressed()){
+      if(ButtonUp.isButtonHold() || ButtonDown.isButtonHold()){
+        setMode(MODE_STATUS);
+        return;
+      }
       Buzzer.beep();
       goToWatchface();
       return;
     } 
   }
-  Display.displayDrawVector(/*path*/Display.getPathDrmWatch(), /*x*/26, /*y*/22, /*animate*/5, /*color*/0);
-  Display.displayUpdate();
   
 }
 

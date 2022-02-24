@@ -36,6 +36,8 @@ class Button_{
 
   //Вызывать после того как получен true на pressed. Выдает true после нажатия кнопку не отпускать в течении 5 секунды
   bool isButtonHold(){
+    if(!readDebounce()) 
+      return false;
     long started = millis();
     while(readDebounce() && millis() - started < 3000);
     return readDebounce();

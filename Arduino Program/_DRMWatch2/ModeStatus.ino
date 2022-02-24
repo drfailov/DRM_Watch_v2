@@ -6,6 +6,8 @@
 /*Used to test new functionality*/
 
 void modeStatusSetup() {
+  modeStatusDraw(); 
+  genericMenuSetup();
 }
 
 void modeStatusLoop() {
@@ -14,7 +16,11 @@ void modeStatusLoop() {
     goToWatchface();
     return;
   } 
-    
+  
+  modeStatusDraw();  
+}
+
+void modeStatusDraw(){
   Display.displayClear();
   
   drawParameter(00, 00, F("VLT"), Battery.batteryRawVoltage());

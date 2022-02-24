@@ -18,6 +18,9 @@ void genericMenuSetup(){
   Generic.selected = 0;
   genericMenuViewPosition = 0;
   Generic.genericMenuLastActionTime = millis();
+  //Защита от срабатывания кнопки после перехода на этот экран
+  ButtonUp.isButtonHold();
+  ButtonDown.isButtonHold();
 }
 
 
