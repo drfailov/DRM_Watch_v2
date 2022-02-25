@@ -8,6 +8,7 @@
 
 #ifndef WATCHFACEDRMLITECPP
 #define WATCHFACEDRMLITECPP
+
 class WatchfaceDrmLite : public GenericWatchface  { //
   public :
     virtual const char* name() {
@@ -90,7 +91,7 @@ class WatchfaceDrmLite : public GenericWatchface  { //
           Display.displayDrawNumber(minute1 , 55, 18, 4, 5, animate);
           Display.displayDrawNumber(minute2 , 74, 18, 4, 5, animate);
         }
-
+        
         Display.displayUpdate();
     }
 

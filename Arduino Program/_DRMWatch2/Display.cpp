@@ -7,6 +7,9 @@
 #ifndef DISPLAYCPP
 #define DISPLAYCPP
 
+#define LCD_X        96
+#define LCD_Y        68
+
 #include "lcd1202.h"
 #include "MyEEPROM.cpp"
 #include "Generic.cpp"
@@ -199,6 +202,15 @@ class Display_{
   static void displayDrawBitmap(byte x, byte y, const unsigned char *img, byte w, byte h, byte color){
     lcd.drawBitmap(x, y, img, w, h, color);
   }
+  
+  static void displaySetPixel(byte x, byte y, bool color){
+    lcd.drawPixel(x, y, color);
+  }
+  
+  static bool displayGetPixel(byte x, byte y){
+    return lcd.getPixel(x, y);
+  }
+  
   
   //-------- Display independent functions
   

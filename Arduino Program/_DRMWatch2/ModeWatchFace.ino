@@ -25,18 +25,15 @@ void modeWatchFaceSetup() {
 }
 
 void modeWatchFaceLoop(bool animate) {
-  if(! animate){ //не обрабатывать кнопки если это анимированный вывод на экран (предотвращает блокировку кнопками первой отрисовки экрана)
-    if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
-      if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonHold():ButtonUp.isButtonHold()){
-        reboot();
-        return;
-      }
-      Buzzer.beep();
-      setMode(MODE_MENU_MAIN);
-      return;
-    }
+  //Обработка подстветки
+  { //Baclight
+    if (millis() - modeWatchFaceBacklightEnabledTime < modeWatchFaceBacklightTimeout)
+      Display.displayBacklightOn();
+    else
+      Display.displayBacklightOff();
   }
-
+  
+  //Загрузка данных
   byte hour = RTC.rtcGetHours();
   byte minute = RTC.rtcGetMinutes();
   byte second = RTC.rtcGetSeconds();
@@ -45,6 +42,7 @@ void modeWatchFaceLoop(bool animate) {
   byte month = RTC.rtcGetMonth();
   int year = RTC.rtcGetYear();
 
+  //Обработка будильника
   { //alert
     //play melody and mark this day as playen if:
     //-alert enabled
@@ -70,6 +68,7 @@ void modeWatchFaceLoop(bool animate) {
     }
   }
 
+  //Отрисовка циферблата
   //Номер выбранного циферблата из памяти
   byte wtf = MyEEPROM.eepromReadWatchface();
   if(wtf >= watchfacesCount) wtf = 0;
@@ -82,14 +81,21 @@ void modeWatchFaceLoop(bool animate) {
     Display.displayUpdate();
   }
 
-
-  { //Baclight
-    if (millis() - modeWatchFaceBacklightEnabledTime < modeWatchFaceBacklightTimeout)
-      Display.displayBacklightOn();
-    else
-      Display.displayBacklightOff();
+  //Обработка кнопок
+  if(! animate){ //не обрабатывать кнопки если это анимированный вывод на экран (предотвращает блокировку кнопками первой отрисовки экрана)
+    if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
+      if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonHold():ButtonUp.isButtonHold()){
+        reboot();
+        return;
+      }
+      Buzzer.beep();
+      setMode(MODE_MENU_MAIN);
+      return;
+    }
   }
 
+
+  //Обработка сна
   byte sleepTime = watchface->secondsUpdate()?1:8;
   if (Battery.batteryIsLowPower()) //если разряжен, то макс интервал
     sleepTime = 8;
