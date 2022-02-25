@@ -149,7 +149,7 @@ class WatchfaceMatrix : public GenericWatchface  { //
         byte hour2 = hour - (hour1 * 10);
         byte minute1 = minute / 10;
         byte minute2 = minute - (minute1 * 10);
-        Display.displayDrawNumber(10, 46, 18, 4, 5, animate); // :
+        Display.displayDrawNumber(10, 47, 18, 4, 5, animate); // :
         drawNumber(/*x*/8, /*y*/12, /*num*/hour1, /*animate*/ animate);
         drawNumber(/*x*/26, /*y*/12, /*num*/hour2, /*animate*/ animate);
         drawNumber(/*x*/54, /*y*/12, /*num*/minute1, /*animate*/ animate);
