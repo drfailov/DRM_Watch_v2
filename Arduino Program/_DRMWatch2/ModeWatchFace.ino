@@ -9,20 +9,21 @@
 /*Screen with main watchface*/
 const long modeWatchFaceBacklightTimeout = 7000;
 long modeWatchFaceBacklightEnabledTime = millis();
+byte modeWatchFaceFramesCounter = 0; //used to count frames and draw animation without sleep
 
 void modeWatchFaceSetup() {
   Display.displayInit();
   modeWatchFaceBacklightEnabledTime = millis();
-  if(/*flip*/MyEEPROM.eepromReadFlipScreen()){
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen()) {
     attachInterrupt(1, modeWatchFaceTriggerBacklight, HIGH); //down
     attachInterrupt(0, wakeUp, HIGH);  //up
   }
-  else{
+  else {
     attachInterrupt(0, modeWatchFaceTriggerBacklight, HIGH); //down
     attachInterrupt(1, wakeUp, HIGH);  //up
   }
-//  ButtonUp.isButtonPressed();
-//  ButtonDown.isButtonPressed();
+  //  ButtonUp.isButtonPressed();
+  //  ButtonDown.isButtonPressed();
   modeWatchFaceLoop(true);
 }
 
@@ -34,7 +35,7 @@ void modeWatchFaceLoop(bool animate) {
     else
       Display.displayBacklightOff();
   }
-  
+
   //Загрузка данных
   byte hour = RTC.rtcGetHours();
   byte minute = RTC.rtcGetMinutes();
@@ -73,25 +74,34 @@ void modeWatchFaceLoop(bool animate) {
   //Отрисовка циферблата
   //Номер выбранного циферблата из памяти
   byte wtf = MyEEPROM.eepromReadWatchface();
-  if(wtf >= watchfacesCount) wtf = 0;
-  GenericWatchface *watchface = watchfaces[wtf]; 
-  if(watchface != 0){
-    watchface->drawWatchface(hour, minute, second, day, month, year, dayOfWeek, animate?5:0);
+  if (wtf >= watchfacesCount) wtf = 0;
+  GenericWatchface *watchface = watchfaces[wtf];
+  byte updateMode = WATCHFACE_UPDATE_MODE_8S_1FRAME;
+  if (watchface != 0) {
+    updateMode = watchface->updateMode();
+    watchface->drawWatchface(hour, minute, second, day, month, year, dayOfWeek, animate ? 5 : 0);
   }
-  else{
+  else {
     Display.displayDrawText(20, 30, 1, F("Select WTF"));
     Display.displayUpdate();
   }
 
-  if(!animate){
-    //Обработка сна
-    byte sleepTime = watchface->secondsUpdate()?1:8;
-    if (Battery.batteryIsLowPower()) //если разряжен, то макс интервал
-      sleepTime = 8;
-  #ifdef LOG
+  //Обработка сна
+  modeWatchFaceFramesCounter ++;
+  if (modeWatchFaceFramesCounter > 10) modeWatchFaceFramesCounter = 0;
+  byte sleepTime = 8;
+  if (updateMode == WATCHFACE_UPDATE_MODE_8S_1FRAME || updateMode == WATCHFACE_UPDATE_MODE_8S_10FRAMES) sleepTime = 8;
+  if (updateMode == WATCHFACE_UPDATE_MODE_1S_1FRAME || updateMode == WATCHFACE_UPDATE_MODE_1S_10FRAMES) sleepTime = 1;
+  if ((updateMode == WATCHFACE_UPDATE_MODE_8S_10FRAMES || updateMode == WATCHFACE_UPDATE_MODE_1S_10FRAMES) && modeWatchFaceFramesCounter != 10) sleepTime = 0; //в режимах на 10 кадров не спать на всех кадрах кроме одного
+  if (updateMode == WATCHFACE_UPDATE_MODE_NO_SLEEP) sleepTime = 0;
+  if (animate) sleepTime = 0; //После первой отрисовки не впадать в сон, чтобы сразу отрисовался второй раз. Чтобы кнопки инициализировались.
+  if (Battery.batteryIsLowPower()) sleepTime = 8; //если разряжен, то макс интервал
+
+  if (sleepTime != 0) {
+#ifdef LOG
     Serial.flush();
     Serial.end();
-  #endif
+#endif
     delay(5);
     if (sleepTime == 1) {
       setMillis(millis() + 1000);
@@ -101,24 +111,24 @@ void modeWatchFaceLoop(bool animate) {
       setMillis(millis() + 8000);
       LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
     }
-  #ifdef LOG
+#ifdef LOG
     Serial.begin(115200);
-  #endif
+#endif
   }
 
 
 
   //Обработка кнопок
   //if(! animate){ //не обрабатывать кнопки если это анимированный вывод на экран (предотвращает блокировку кнопками первой отрисовки экрана)
-    if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
-      if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.waitHold():ButtonUp.waitHold()){
-        reboot();
-        return;
-      }
-      Buzzer.beep();
-      setMode(MODE_MENU_MAIN);
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonDown.isButtonPressed() : ButtonUp.isButtonPressed()) {
+    if (/*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonDown.waitHold() : ButtonUp.waitHold()) {
+      reboot();
       return;
     }
+    Buzzer.beep();
+    setMode(MODE_MENU_MAIN);
+    return;
+  }
   //}
 }
 
