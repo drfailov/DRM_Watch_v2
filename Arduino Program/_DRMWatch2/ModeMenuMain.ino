@@ -11,7 +11,7 @@ void modeMenuMainSetup() {
 }
 
 void modeMenuMainLoop() {
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
+  if (MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
     Generic.genericMenuLastActionTime = millis();
     Buzzer.beep();
     if(Generic.selected == MAIN_MENU_SELECTED_BACK){
@@ -35,7 +35,6 @@ void modeMenuMainLoop() {
     Generic.selected ++;
     if(Generic.selected > 3) 
       Generic.selected = 0;
-    return;
   }
   //auto exit
   if (millis() - Generic.genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {

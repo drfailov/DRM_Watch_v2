@@ -11,6 +11,7 @@ class LCD1202 {
        void Clear_LCD();
        void Update(bool flip = false);
        void drawPixel(byte x, byte y, boolean color);
+	   bool LCD1202::getPixel (byte x, byte y);
        void fillScreen(boolean color);
        void drawChar(byte x, byte y, boolean color, unsigned char c);
        void print(byte x, byte y, boolean color, const char *str);

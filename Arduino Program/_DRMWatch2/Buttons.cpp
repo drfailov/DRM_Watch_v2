@@ -6,10 +6,15 @@
 #include <Arduino.h>
 #include "Generic.cpp"
 
+#define BUTTON_ACTION_NOTHING 0
+#define BUTTON_ACTION_PRESS 1
+#define BUTTON_ACTION_LONG 2
+
 class Button_{
   private:
   byte pin;
   bool buttonLastValue = false;
+  bool holded = false;
   long lastTimePushDownTimeForButton = 0;
 
   public:
@@ -24,28 +29,36 @@ class Button_{
 
   //Выдаёт true если кнопка сейчас нажата, а во время прошлого вызова не была.
   //Если вызывать снова, начнёт выдавать true если держать кнопку полсекунды не отпуская
-  bool isButtonPressed(){
+  byte isButtonPressed(){
     bool value = readDebounce();
+    if(!value) holded = false;
     bool lastValue = buttonLastValue;
     buttonLastValue = value;
     bool isButtonPressDown = value && !lastValue;
-  
     if(isButtonPressDown)
       lastTimePushDownTimeForButton = millis();
-    if(isButtonPressDown)
-      return true;
-    if(value && lastValue && millis()-lastTimePushDownTimeForButton > 500)
-      return true;
-    return false;
+
+  
+    if(isButtonPressDown){ //if down
+      return BUTTON_ACTION_PRESS;
+    }
+    
+    //multipress
+    if(!holded && value && lastValue && millis()-lastTimePushDownTimeForButton > 500)
+      return BUTTON_ACTION_PRESS;
+    return BUTTON_ACTION_NOTHING;
   }
 
   //Вызывать после того как получен true на pressed. Выдает true после нажатия кнопку не отпускать в течении 5 секунды
-  bool isButtonHold(){
+  bool waitHold(){
     if(!readDebounce()) 
       return false;
     long started = millis();
     while(readDebounce() && millis() - started < 3000);
-    return readDebounce();
+    buttonLastValue = readDebounce();
+    if(buttonLastValue)
+      holded = true;
+    return buttonLastValue;
   }
 
   

@@ -36,7 +36,7 @@ void modeAboutLoop() {
   color = !color;
   for(long st = millis(); millis() - st < 900 && !color; ){
     if(ButtonUp.isButtonPressed() || ButtonDown.isButtonPressed()){
-      if(ButtonUp.isButtonHold() || ButtonDown.isButtonHold()){
+      if(ButtonUp.waitHold() || ButtonDown.waitHold()){
         setMode(MODE_STATUS);
         return;
       }

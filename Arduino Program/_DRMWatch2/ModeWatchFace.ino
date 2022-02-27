@@ -21,6 +21,8 @@ void modeWatchFaceSetup() {
     attachInterrupt(0, modeWatchFaceTriggerBacklight, HIGH); //down
     attachInterrupt(1, wakeUp, HIGH);  //up
   }
+//  ButtonUp.isButtonPressed();
+//  ButtonDown.isButtonPressed();
   modeWatchFaceLoop(true);
 }
 
@@ -81,10 +83,35 @@ void modeWatchFaceLoop(bool animate) {
     Display.displayUpdate();
   }
 
+  if(!animate){
+    //Обработка сна
+    byte sleepTime = watchface->secondsUpdate()?1:8;
+    if (Battery.batteryIsLowPower()) //если разряжен, то макс интервал
+      sleepTime = 8;
+  #ifdef LOG
+    Serial.flush();
+    Serial.end();
+  #endif
+    delay(5);
+    if (sleepTime == 1) {
+      setMillis(millis() + 1000);
+      LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
+    }
+    else {
+      setMillis(millis() + 8000);
+      LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+    }
+  #ifdef LOG
+    Serial.begin(115200);
+  #endif
+  }
+
+
+
   //Обработка кнопок
-  if(! animate){ //не обрабатывать кнопки если это анимированный вывод на экран (предотвращает блокировку кнопками первой отрисовки экрана)
+  //if(! animate){ //не обрабатывать кнопки если это анимированный вывод на экран (предотвращает блокировку кнопками первой отрисовки экрана)
     if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
-      if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonHold():ButtonUp.isButtonHold()){
+      if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.waitHold():ButtonUp.waitHold()){
         reboot();
         return;
       }
@@ -92,29 +119,7 @@ void modeWatchFaceLoop(bool animate) {
       setMode(MODE_MENU_MAIN);
       return;
     }
-  }
-
-
-  //Обработка сна
-  byte sleepTime = watchface->secondsUpdate()?1:8;
-  if (Battery.batteryIsLowPower()) //если разряжен, то макс интервал
-    sleepTime = 8;
-#ifdef LOG
-  Serial.flush();
-  Serial.end();
-#endif
-  delay(5);
-  if (sleepTime == 1) {
-    setMillis(millis() + 1000);
-    LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
-  }
-  else {
-    setMillis(millis() + 8000);
-    LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
-  }
-#ifdef LOG
-  Serial.begin(115200);
-#endif
+  //}
 }
 
 void modeWatchFaceFinish() {
@@ -127,5 +132,5 @@ void modeWatchFaceTriggerBacklight() {
 }
 
 void wakeUp() { //to react for button
-
+  modeWatchFaceBacklightEnabledTime = millis();
 }

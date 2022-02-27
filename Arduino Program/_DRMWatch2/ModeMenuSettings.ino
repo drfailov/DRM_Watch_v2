@@ -17,7 +17,7 @@ void modeMenuSettingsSetup() {
 
 void modeMenuSettingsLoop() {
   if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) { //upper button
-    if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonHold():ButtonUp.isButtonHold()){
+    if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.waitHold():ButtonUp.waitHold()){
       Buzzer.beep();
       goToWatchface();
       return;

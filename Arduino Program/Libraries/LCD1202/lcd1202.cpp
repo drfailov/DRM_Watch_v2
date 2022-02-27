@@ -107,18 +107,6 @@ void LCD1202::Update(bool flip = false){
   }
 }
 
-// void LCD1202::Update(){
-  // for(byte p = 0; p < 9; p++){
-    // SendByte(LCD_C, SetYAddr| p); 
-    // SendByte(LCD_C, SetXAddr4);
-    // SendByte(LCD_C, SetXAddr3);
-
-    // for(byte col=0; col < LCD_X; col++){
-      // SendByte(LCD_D, LCD_RAM[(LCD_X * p) + col]);
-    // }
-  // }
-// }
-
 //===================================================Инициализация дисплея
 void LCD1202::Inicialize(){
   pinMode(RES,   OUTPUT);
@@ -147,6 +135,16 @@ void LCD1202::drawPixel (byte x, byte y, boolean color) {
 
   if (color) LCD_RAM[x+ (y/8)*LCD_X] |= _BV(y%8);
   else       LCD_RAM[x+ (y/8)*LCD_X] &= ~_BV(y%8); 
+}
+//===================================================Нарисовать пиксель
+bool LCD1202::getPixel (byte x, byte y) {
+  if ((x < 0) || (x >= LCD_X) || (y < 0) || (y >= LCD_Y)) return false;
+//_BV(0)      0b01001111
+  byte b = LCD_RAM[x+ (y/8)*LCD_X]; //этo нужный бит
+  bool result = bitRead(b, y%8);
+  //LCD_RAM[x+ (y/8)*LCD_X] |= _BV(y%8); 
+  return result;
+  
 }
 
 //**********************************************************************************************************//

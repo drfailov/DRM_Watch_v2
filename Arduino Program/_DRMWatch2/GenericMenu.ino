@@ -19,8 +19,8 @@ void genericMenuSetup(){
   genericMenuViewPosition = 0;
   Generic.genericMenuLastActionTime = millis();
   //Защита от срабатывания кнопки после перехода на этот экран
-  ButtonUp.isButtonHold();
-  ButtonDown.isButtonHold();
+//  ButtonUp.isButtonPressed();
+//  ButtonDown.isButtonPressed();
 }
 
 
@@ -31,7 +31,7 @@ void genericMenuSetup(){
 */
 void genericMenuLoop(const int genericMenuItemsCount, const char* const genericMenuItems[], void (*onSelected)(byte index), bool progmemArray){
   if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) { //UP button
-    if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonHold():ButtonUp.isButtonHold()){
+    if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.waitHold():ButtonUp.waitHold()){
       Buzzer.beep();
       goToWatchface();
       return;

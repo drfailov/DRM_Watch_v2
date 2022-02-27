@@ -34,10 +34,11 @@ class WatchfaceLife : public GenericWatchface  { //
     */
     virtual void drawWatchface(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)
     {
+      //loop every 200 steps
       if(animate) steps = 0;
-      if(steps > 300) steps = 0;
-
-      //fill screen with random pattern
+      if(steps > 200) steps = 0;
+      
+      //if first step, fill screen with random pattern
       if(steps == 0){
         Display.displayClear();
         for(byte x = 0; x < LCD_X; x++){
@@ -47,14 +48,11 @@ class WatchfaceLife : public GenericWatchface  { //
           }
         }
       }
-      
-      for(byte i=0; i<10 ; i++){
-        lifeStep();
-        drawTime (hour, minute);
-        Display.displayUpdate();
-        if(ButtonUp.readDebounce() || ButtonDown.readDebounce())
-          break;
-      }
+
+      //draw
+      lifeStep();
+      drawTime (hour, minute);
+      Display.displayUpdate();
     }
 
     void drawTime(byte hour, byte minute){
