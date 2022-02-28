@@ -47,7 +47,7 @@ GenericWatchface *watchfaces[watchfacesCount];
 void setup() {
   byte i=0;
   watchfaces[i++] = new WatchfaceDrmWatch();
-  watchfaces[i++] = new WatchfaceDrmLite();
+  //watchfaces[i++] = new WatchfaceDrmLite();
   //watchfaces[i++] = new WatchfaceNomens();
   //watchfaces[i++] = new WatchfaceZubat();
   //watchfaces[i++] = new WatchfaceXelibri();

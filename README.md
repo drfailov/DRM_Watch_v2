@@ -21,9 +21,16 @@ Example:\
 <img src="Photos/config_watchfaces.jpg" width="300"/>
 
 ### Watchface "DRM Watch"
-The first watchface in project:)
-Updates once in second. Not very power-efficient. Takes about <b>486 bytes</b> of FLASH memory. \
+The first watchface in project:) \
+Updates once in second. Not very power-efficient. 
+Takes about <b>486 bytes</b> of FLASH memory. \
 <img src="Photos/20220228_161025.jpg" width="300"/>
+
+### Watchface "DRM Lite"
+"DRM Watch" without seconds. \
+Updates once in 8 seconds. Power-efficient. 
+Takes about <b>430 bytes</b> of FLASH memory. \
+<img src="Photos/20220228_160327.jpg" width="300"/>
 
 
 ## Functions
