@@ -17,8 +17,12 @@ Hardware design is made by <b>MeltemiOS</b>.
 You can include multiple watcfaces in firmware. As much as enough FLASH memory.\
 You can configure included wathfaces in file `_DRMWatch2.ino`.\
 Update number of included watchfaces, comment or uncomment needed watchfaces, check memory usage.\
-Example:
+Example:\
 <img src="Photos/config_watchfaces.jpg" width="300"/>
+
+### DRM Watch
+Updates once in second. Not very power-efficient. Takes about 486 bytes of FLASH memory. \
+<img src="Photos/20220228_161025.jpg" width="300"/>
 
 
 ## Functions
@@ -35,6 +39,8 @@ Example:
 - Zrada-Peremoga
 - About screen
 
+
+# How to build
 
 ## Used components:
 
