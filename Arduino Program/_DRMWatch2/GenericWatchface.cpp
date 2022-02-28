@@ -14,6 +14,7 @@ class GenericWatchface{
 public :
   //returns visible name of watchface which will be shown at settings screen.
   //Name should not be too long, othervise it will not fit on screen.
+  //Max length is 8 char
   //Example of usage:    return (const char*)F("Matrix");
   virtual const char* name() = 0;
 

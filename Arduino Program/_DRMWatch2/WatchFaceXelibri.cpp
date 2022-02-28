@@ -115,9 +115,9 @@ class WatchfaceXelibri : public GenericWatchface  { //
     {
       Display.displayClear();
 
-//      {//battery
-//        Display.displayDrawBattery(79, 61);
-//      }      
+      {//battery
+        Display.displayDrawBattery(79, 61);
+      }      
        
       {//date
         sprintf(Generic.buffer, "%2d ", day);

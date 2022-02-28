@@ -54,9 +54,11 @@ class WatchfaceLife : public GenericWatchface  { //
     }
 
     void drawTime(byte hour, byte minute){
-      Display.displayFillRect(/*x*/ 30, /*y*/ 25, /*w*/ 39, /*h*/ 17, /*color*/ 0);
+      Display.displayFillRect(/*x*/ 29, /*y*/ 20, /*w*/ 42, /*h*/ 29, /*color*/ 0);
+      Display.displayDrawRect(/*x*/ 30, /*y*/ 21, /*w*/ 40, /*h*/ 27, /*color*/ 1);
       sprintf(Generic.buffer, "%02d:%02d", hour, minute);
-      Display.displayDrawText(35, 30, 1, Generic.buffer);
+      Display.displayDrawText(35, 25, 1, Generic.buffer);
+      Display.displayDrawBattery(39, 38);
     }
 
     void lifeStep(){

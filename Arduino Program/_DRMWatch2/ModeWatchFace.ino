@@ -15,11 +15,11 @@ void modeWatchFaceSetup() {
   Display.displayInit();
   modeWatchFaceBacklightEnabledTime = millis();
   if (/*flip*/MyEEPROM.eepromReadFlipScreen()) {
-    attachInterrupt(1, modeWatchFaceTriggerBacklight, HIGH); //down
+    attachInterrupt(1, wakeUp, HIGH); //down
     attachInterrupt(0, wakeUp, HIGH);  //up
   }
   else {
-    attachInterrupt(0, modeWatchFaceTriggerBacklight, HIGH); //down
+    attachInterrupt(0, wakeUp, HIGH); //down
     attachInterrupt(1, wakeUp, HIGH);  //up
   }
   //  ButtonUp.isButtonPressed();
@@ -30,7 +30,10 @@ void modeWatchFaceSetup() {
 void modeWatchFaceLoop(bool animate) {
   //Обработка подстветки
   { //Baclight
-    if (millis() - modeWatchFaceBacklightEnabledTime < modeWatchFaceBacklightTimeout)
+    bool backlight = millis() - modeWatchFaceBacklightEnabledTime < modeWatchFaceBacklightTimeout;
+    if (/*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonUp.readDebounce() : ButtonDown.readDebounce()) backlight = true; //если нажата кнопка вниз, не тушить подсветку
+    
+    if (backlight)
       Display.displayBacklightOn();
     else
       Display.displayBacklightOff();
@@ -93,9 +96,10 @@ void modeWatchFaceLoop(bool animate) {
   if (updateMode == WATCHFACE_UPDATE_MODE_8S_1FRAME || updateMode == WATCHFACE_UPDATE_MODE_8S_10FRAMES) sleepTime = 8;
   if (updateMode == WATCHFACE_UPDATE_MODE_1S_1FRAME || updateMode == WATCHFACE_UPDATE_MODE_1S_10FRAMES) sleepTime = 1;
   if ((updateMode == WATCHFACE_UPDATE_MODE_8S_10FRAMES || updateMode == WATCHFACE_UPDATE_MODE_1S_10FRAMES) && modeWatchFaceFramesCounter != 10) sleepTime = 0; //в режимах на 10 кадров не спать на всех кадрах кроме одного
-  if (updateMode == WATCHFACE_UPDATE_MODE_NO_SLEEP) sleepTime = 0;
+  if (updateMode == WATCHFACE_UPDATE_MODE_NO_SLEEP) sleepTime = 0; //Если режим работы текущего циферблата не предусматривает сон, не спать
   if (animate) sleepTime = 0; //После первой отрисовки не впадать в сон, чтобы сразу отрисовался второй раз. Чтобы кнопки инициализировались.
   if (Battery.batteryIsLowPower()) sleepTime = 8; //если разряжен, то макс интервал
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonUp.readDebounce() : ButtonDown.readDebounce()) sleepTime = 0; //если нажата кнопка вниз, не спать
 
   if (sleepTime != 0) {
 #ifdef LOG
@@ -135,10 +139,6 @@ void modeWatchFaceLoop(bool animate) {
 void modeWatchFaceFinish() {
   detachInterrupt(0);
   detachInterrupt(1);
-}
-
-void modeWatchFaceTriggerBacklight() {
-  modeWatchFaceBacklightEnabledTime = millis();
 }
 
 void wakeUp() { //to react for button

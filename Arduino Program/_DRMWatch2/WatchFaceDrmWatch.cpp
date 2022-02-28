@@ -11,7 +11,7 @@
 class WatchfaceDrmWatch : public GenericWatchface  { //
   public :
     virtual const char* name() {
-      return (const char*)F("DRM Watch");
+      return (const char*)F("DRM Wat");
     }
     
     virtual const byte updateMode() {  

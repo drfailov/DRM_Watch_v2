@@ -6,10 +6,20 @@
 
 Arduino-based watch with Nokia 1280 LCD. \
 Main challenge of this project is packing as much
-as possible stuff inside Arduino Nano with its 15KB of memory.\
+as possible stuff inside Arduino Nano with its 32KB of memory and 2KB RAM.\
 Programming contributions made by <b>Dr. Failov</b>.\
-Hardware part is made by <b>MeltemiOS</b>.\
-Watchfaces design drawn by <b>MeltemiOS</b>.\
+Hardware design is made by <b>MeltemiOS</b>.
+
+
+# Overview of project
+
+## Watchfaces
+You can include multiple watcfaces in firmware. As much as enough FLASH memory.\
+You can configure included wathfaces in file `_DRMWatch2.ino`.\
+Update number of included watchfaces, comment or uncomment needed watchfaces, check memory usage.\
+Example:
+<img src="Photos/config_watchfaces.jpg" width="300"/>
+
 
 ## Functions
 - 4 Watchfaces
