@@ -2,7 +2,7 @@
 <!-- Picture: <img src="Photos/" width="300"/>  -->
 
 # DRM_Watch v2
-<img src="Photos/DRMWatch.png" width="200"/>
+<img src="Photos/header.png" width="400"/>
 
 Arduino-based watch with Nokia 1280 LCD. \
 Main challenge of this project is packing as much
