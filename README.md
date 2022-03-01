@@ -51,6 +51,16 @@ Updates once in 8 seconds. Power-efficient.
 Takes about <b>336 bytes</b> of FLASH memory. \
 <img src="Photos/20220228_161255.jpg" width="300"/>
 
+### Watchface "Zubat"
+Inspired by Siemens Xelibri product line. Very memory-hungry watchface.\
+Designed by <b>MeltemiOS</b>.
+Updates once in 8 seconds. Power-efficient. 
+Takes about <b>1528 bytes</b> of FLASH memory. \
+<img src="Photos/20220228_162136.jpg" width="300"/>
+<img src="Photos/photo_2022-01-01_05-27-44.jpg" width="100"/>
+
+
+
 
 
 ## Functions
