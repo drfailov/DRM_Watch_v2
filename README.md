@@ -67,6 +67,14 @@ Takes about <b>886 bytes</b> of FLASH memory. \
 <img src="Photos/20220228_162259.jpg" width="300"/>
 <img src="Photos/photo_2022-03-01_17-50-55.jpg" width="100"/>
 
+### Watchface "Life"
+Conway's Game of Life as background.\
+Designed by <b>Dr. Failov</b>.
+Draws 10 frames every 8 seconds. Not Power-efficient, because of animation. 
+Takes about <b>684 bytes</b> of FLASH memory. \
+<img src="Photos/20220228_160803.jpg" width="300"/>
+<img src="Photos/game of life.jpg" width="100"/>
+
 
 
 
