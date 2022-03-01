@@ -44,6 +44,14 @@ Takes about <b>666 bytes</b> of FLASH memory. \
 <img src="Photos/photo_2021-12-17_08-58-21.jpg" width="100"/>
 <img src="Photos/photo_2022-01-05_09-30-16.jpg" width="100"/>
 
+### Watchface "Zubat"
+Project logo on watchface.\
+Designed by <b>Dr. Failov</b>.
+Updates once in 8 seconds. Power-efficient. 
+Takes about <b>336 bytes</b> of FLASH memory. \
+<img src="Photos/20220228_161255.jpg" width="300"/>
+
+
 
 ## Functions
 - 4 Watchfaces
