@@ -26,7 +26,7 @@ Designed by <b>MeltemiOS</b>.
 Updates once in second. Not very power-efficient. 
 Takes about <b>486 bytes</b> of FLASH memory. \
 <img src="Photos/20220228_161025.jpg" width="300"/>
-<img src="Photos/photo_2022-01-16_13-16-34.jpg" width="200"/>
+<img src="Photos/photo_2022-01-16_13-16-34.jpg" width="100"/>
 
 ### Watchface "DRM Lite"
 "DRM Watch" without seconds. \
@@ -41,8 +41,8 @@ Designed by <b>MeltemiOS</b>.
 Updates once in 8 seconds. Power-efficient. 
 Takes about <b>666 bytes</b> of FLASH memory. \
 <img src="Photos/20220228_161238.jpg" width="300"/>
-<img src="Photos/photo_2021-12-17_08-58-21.jpg" width="200"/>
-<img src="Photos/photo_2022-01-05_09-30-16.jpg" width="200"/>
+<img src="Photos/photo_2021-12-17_08-58-21.jpg" width="100"/>
+<img src="Photos/photo_2022-01-05_09-30-16.jpg" width="100"/>
 
 
 ## Functions
