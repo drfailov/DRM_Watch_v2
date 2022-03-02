@@ -339,6 +339,7 @@ Changelog
 	+ Schematics
 	- 3d model
 	- assembly instructions
+	- Assembly photos
 	- Troubleshooting
 - Software
 	- Used libraries

@@ -148,18 +148,18 @@ Link: https://aliexpress.ru/item/1005003227004618.html  \
 
 ### Board
 I've ordered boards on JLC PCB. Here's what I got:\
-(It`s older revision on photo) \
-Actual version of gerber files to make your order see at `Circuit Board` folder.
+(It's older revision on photo) \
+Actual version of gerber files to make your order see at `Circuit Board` folder. \
 <img src="Photos/photo_2021-11-30_08-55-54.jpg" width="150"/> <img src="Photos/photo_2021-11-30_16-37-08.jpg" width="150"/> <img src="Photos/photo_2021-11-30_08-59-16.jpg" width="150"/> 
 
 
 ## Schematics
 
 ### Board soldering plan, elements list and LCD pinout
-<img src="Photos\2022-01-16 DRMW2_DOC.png" width="350"/>
+<img src="Photos\2022-01-16 DRMW2_DOC.png" width="300"/>
 
 ### Atmel 328P chip pinout
-<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="700"/>
+<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="300"/>
 
 ### Pins list
 - D0 - UART RX
@@ -183,22 +183,23 @@ Actual version of gerber files to make your order see at `Circuit Board` folder.
 
 
 # Software
+Description of software components and how to build.
 
 ## Used libraries
 ### LCD1202
 Used to run nokia display. Also may be compatible with this LCD controllers: `pcf8814`, `ste2007`, `ST7565`, `HX1230`.
-Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`).
+Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`). \
+This library is modified, to allow display flip options and direct access to buffer. So use version of library that included in this repository.
 Source: http://arduino.ru/forum/proekty/khronograf-izmeritel-skorosti-puli-ot-prostogo-k-slozhnomu?page=5#comment-136147
-
 ### Low-Power-master
 Used to allow deep sleep between screen refreshing. 
-Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`).
-
+Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`). \
+Source: https://github.com/rocketscream/Low-Power
 ### DS3231M-1.0.6
 Used to communicate with RTC module.
-Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`).
-
-## How to add your own watchface
+Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`). \
+Source: https://www.arduino.cc/reference/en/libraries/ds3231m/
+## How to set watchfaces list
 You can include multiple watcfaces in firmware. As much as enough FLASH memory.\
 You can configure included wathfaces in file `_DRMWatch2.ino`.\
 Update number of included watchfaces, comment or uncomment needed watchfaces, check memory usage.\
@@ -207,8 +208,14 @@ Example:\
 
 
 
+# Project history
+A long time ago...
+## First steps
 
-
+## Prototype photos
+<img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="200"/>
+<img src="Photos/photo_2021-12-05_17-01-19.jpg" width="200"/>    <img src="Photos/photo_2021-12-04_13-20-55.jpg" width="200"/>
+<img src="Photos/photo_2021-12-08_22-34-49.jpg" width="200"/>    <img src="Photos/photo_2021-12-19_16-08-34.jpg" width="200"/>
 
 
 
@@ -410,5 +417,4 @@ Last 6 bits represents note number counted from low note of first octave.\
 
  
 ## Prototype photos:
- <img src="Photos/photo_2021-12-05_17-01-19.jpg" width="200"/>    <img src="Photos/photo_2021-12-04_13-20-55.jpg" width="200"/>
- <img src="Photos/photo_2021-12-08_22-34-49.jpg" width="200"/>    <img src="Photos/photo_2021-12-19_16-08-34.jpg" width="200"/>
+ 
