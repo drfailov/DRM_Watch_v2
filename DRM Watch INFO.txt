@@ -329,9 +329,9 @@ Changelog
 Общая информация которая должна быть на странице проекта:
 - About this project
 	+ List of features
-	- Photos of device
+	+ Photos of device
 	- Video demo of usage on YouTube
-	- Overview of watchfaces with photos
+	+ Overview of watchfaces with photos
 	- Overview of screens with photos and description
 	- Overview of settings with description
 - Hardware and case

@@ -34,28 +34,24 @@ Hardware design is made by <b>MeltemiOS</b>.
 
 
 ## Photos of device
-I have assembled few watches and using ni as my everyday watch. Here`s some photos: \
+I have assembled few watches and using it as my everyday watch. Here`s some photos: \
 <img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26.jpg" width="150"/>     <img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="150"/>
 <img src="Photos/photo_2022-02-18_12-43-26 (5).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="150"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" width="150"/>
+
 
 ## Video overview
 <b> TODO </b>
 
 
-
-## Watchfaces
-You can include multiple watcfaces in firmware. As much as enough FLASH memory.\
-You can configure included wathfaces in file `_DRMWatch2.ino`.\
-Update number of included watchfaces, comment or uncomment needed watchfaces, check memory usage.\
-Example:\
-<img src="Photos/config_watchfaces.jpg" width="300"/>
+## Overview of Watchfaces
+You can change set of watchfaces in firmware. More info about it is "Software" block.
 
 ### Watchface "DRM Watch"
 The first watchface in project, back from 2016. Inspired by iPod nano. \
 Designed by <b>MeltemiOS</b>.
 Updates once in second. Not very power-efficient. 
 Takes about <b>486 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_161025.jpg" width="300"/>
+<img src="Photos/20220228_161025.jpg" width="200"/>
 <img src="Photos/photo_2022-01-16_13-16-34.jpg" width="100"/>
 
 ### Watchface "DRM Lite"
@@ -63,14 +59,14 @@ Takes about <b>486 bytes</b> of FLASH memory. \
 Designed by <b>Dr. Failov</b>.
 Updates once in 8 seconds. Power-efficient. 
 Takes about <b>430 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_160327.jpg" width="300"/>
+<img src="Photos/20220228_160327.jpg" width="200"/>
 
 ### Watchface "Nomens"
 Inspired by Siemens screensaver and Nokia home screen.\
 Designed by <b>MeltemiOS</b>.
 Updates once in 8 seconds. Power-efficient. 
 Takes about <b>666 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_161238.jpg" width="300"/>
+<img src="Photos/20220228_161238.jpg" width="200"/>
 <img src="Photos/photo_2021-12-17_08-58-21.jpg" width="100"/>
 <img src="Photos/photo_2022-01-05_09-30-16.jpg" width="100"/>
 
@@ -79,14 +75,14 @@ Project logo on watchface.\
 Designed by <b>Dr. Failov</b>.
 Updates once in 8 seconds. Power-efficient. 
 Takes about <b>336 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_161255.jpg" width="300"/>
+<img src="Photos/20220228_161255.jpg" width="200"/>
 
 ### Watchface "Xelibri"
 Inspired by Siemens Xelibri product line. Very memory-hungry watchface.\
 Designed by <b>MeltemiOS</b>.
 Updates once in 8 seconds. Power-efficient. 
 Takes about <b>1528 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_162136.jpg" width="300"/>
+<img src="Photos/20220228_162136.jpg" width="200"/>
 <img src="Photos/photo_2022-01-01_05-27-44.jpg" width="100"/>
 
 ### Watchface "Matrix"
@@ -94,7 +90,7 @@ Inspired by Matrix film, like font on secret documents.\
 Designed by <b>MeltemiOS</b>.
 Updates once in 8 seconds. Power-efficient. 
 Takes about <b>886 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_162259.jpg" width="300"/>
+<img src="Photos/20220228_162259.jpg" width="200"/>
 <img src="Photos/photo_2022-03-01_17-50-55.jpg" width="100"/>
 
 ### Watchface "Life"
@@ -102,19 +98,19 @@ Conway's Game of Life as background.\
 Designed by <b>Dr. Failov</b>.
 Draws 10 frames every 8 seconds. Not Power-efficient, because of animation. 
 Takes about <b>684 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_160803.jpg" width="300"/>
+<img src="Photos/20220228_160803.jpg" width="200"/>
 <img src="Photos/game of life.jpg" width="100"/>
 
 
 
 
+# Hardware and case
+<img src="Photos/2022-03-02 Hardware-and-case.jpg" width="300"/>
+If you want to assemble your own DRM Watch, this block is for you:)
+To assemble watch, you will need: circuit board, parts or modules to desolder, case. 
+Also, some instruments, much time and some experience.
 
-
-
-# How to build
-
-## Used components:
-
+## Used parts
 - Arduino Nano (MEGA328P chip)
 - Nokia 1280 LCD (PCF8814 chip)
 - RTC module (DS3231M chip)
@@ -156,6 +152,51 @@ I've ordered boards on JLC PCB. Here's what I got:\
 \
 Board soldering plan:\
 <img src="Circuit Board\Плата DRMW2 v4\2022-01-16 DRMW2_DOC.png" width="350"/>
+
+
+
+# Software
+## How to add your own watchface
+You can include multiple watcfaces in firmware. As much as enough FLASH memory.\
+You can configure included wathfaces in file `_DRMWatch2.ino`.\
+Update number of included watchfaces, comment or uncomment needed watchfaces, check memory usage.\
+Example:\
+<img src="Photos/config_watchfaces.jpg" width="300"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# How to build
+
+## Used components:
+
+
 
 
 ## Pinout
