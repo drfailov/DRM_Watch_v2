@@ -211,6 +211,9 @@ Example:\
 # Project history
 A long time ago...
 ## First steps
+<img src="Photos/xwYFapverSc.jpg" width="200"/> <img src="Photos/Kcf5E-HmfqE.jpg" width="200"/> 
+<img src="RHoSkpuC5Ek.jpg" width="200"/> <img src="z0RViSCt2jg.jpg" width="200"/> 
+<img src="ApKsKMTuODI.jpg" width="200"/> <img src="n7C6VvySHto.jpg" width="200"/> 
 
 ## Prototype photos
 <img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="200"/>
