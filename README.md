@@ -1,7 +1,7 @@
 <!-- For new line: \ -->
 <!-- Picture: <img src="Photos/" width="300"/>  -->
 
-# DRM Watch v2
+# About project DRM Watch v2
 <img src="Photos/header.png" width="600"/>
 
 Arduino-based watch with Nokia 1280 LCD. \
@@ -11,7 +11,7 @@ Programming contributions made by <b>Dr. Failov</b>.\
 Hardware design is made by <b>MeltemiOS</b>.
 
 
-## Features
+## About project > Features
 - Low power consumption, while screen is always showing time;
 - Charging over USB, battery status indication;
 - Easy to get components needed to assemble;
@@ -33,17 +33,17 @@ Hardware design is made by <b>MeltemiOS</b>.
 - Screen "About" shows credits and firmware version. Long-press will show you some debug information.
 
 
-## Photos of device
+## About project > Photos of device
 I have assembled few watches and using it as my everyday watch. Here`s some photos: \
 <img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26.jpg" width="150"/>     <img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="150"/>
 <img src="Photos/photo_2022-02-18_12-43-26 (5).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="150"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" width="150"/>
 
 
-## Video overview
+## About project > Video overview
 <b> TODO </b>
 
 
-## Overview of Watchfaces
+## About project > Overview of Watchfaces
 You can change set of watchfaces in firmware. More info about it is "Software" block.
 
 ### Watchface "DRM Watch"
@@ -104,13 +104,13 @@ Takes about <b>684 bytes</b> of FLASH memory. \
 
 
 
-# Hardware and case
+# Hardware
 <img src="Photos/2022-03-02 Hardware-and-case.jpg" width="300"/>
-If you want to assemble your own DRM Watch, this block is for you:)
+If you want to assemble your own DRM Watch, this block is for you:) \
 To assemble watch, you will need: <b>circuit board, parts or modules to desolder, case</b>. 
 Also, some instruments, much time and some experience.
 
-## Used parts
+## Hardware > Used parts
 - Arduino Nano (MEGA328P chip)
 - Nokia 1280 LCD (PCF8814 chip)
 - RTC module (DS3231M chip)
@@ -143,22 +143,22 @@ Link: https://aliexpress.ru/item/1005003227004618.html  \
 <img src="Photos/buzzer.jpg" width="150"/> <img src="Photos/photo_2021-12-03_20-30-06.jpg" width="150"/> <img src="Photos/photo_2021-12-03_20-30-32.jpg" width="150"/>
 
 ### Board
-I've ordered boards on JLC PCB. Here's what I got:\
+I've ordered boards on JLC PCB. Actual version of gerber files to make your order see at `Circuit Board` folder. \
+Here's what I got: \
 (It's older revision on photo) \
-Actual version of gerber files to make your order see at `Circuit Board` folder. \
 <img src="Photos/photo_2021-11-30_08-55-54.jpg" width="150"/> <img src="Photos/photo_2021-11-30_16-37-08.jpg" width="150"/> <img src="Photos/photo_2021-11-30_08-59-16.jpg" width="150"/> 
 
-## Schematics
+## Hardware > Schematics
 ### Board gerber files
-<img src="Photos\v4 20mm.JPG" width="200"/>
-TODO
+You can fing GERBER files for DRM Watch board in `Circuit Board` folder. \
+<img src="Photos\v4 20mm.JPG" width="250"/>
 
 ### Board soldering plan, elements list and LCD pinout
-You can fing GERBER files for DRM Watch board in `Circuit Board` folder.
-<img src="Photos\2022-01-16 DRMW2_DOC.png" width="300"/>
+Description of elements on board: \
+<img src="Photos\2022-01-16 DRMW2_DOC.png" width="250"/>
 
 ### Atmel 328P chip pinout
-You can use this schematic as reference
+You can use this schematic as reference. \
 <img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="200"/>
 
 ### Pins list
@@ -179,15 +179,16 @@ You can use this schematic as reference
 - A4 - RTC SDA
 - A5 - RTC SCL
 
-## Case 3D Model
+## Hardware > Case 3D Model
 You can fing STL files for DRM Watch case in `Case` folder. \
-<img src="Photos/Screenshot 2022-03-01 224852.jpg" width="150"/> <img src="Photos/Screenshot 2022-03-01 224938.jpg" width="150"/>
+<img src="Photos/Screenshot 2022-03-01 224852.jpg" width="230"/> <img src="Photos/Screenshot 2022-03-01 224938.jpg" width="200"/>
 
-## Assembly instruction
+## Hardware > Assembly instruction
 General way to assemble watch:
 - Assemble device
 - Connect it to PC and flash firmware
-- Select watchface
+- Select watchface 
+
 Assembly video on YouTube:
 https://youtu.be/IrAri0zF-KY
 
@@ -197,7 +198,7 @@ https://youtu.be/IrAri0zF-KY
 # Software
 Description of software components and how to build.
 
-## Used libraries
+## Software > Used libraries
 ### LCD1202
 Used to run nokia display. Also may be compatible with this LCD controllers: `pcf8814`, `ste2007`, `ST7565`, `HX1230`.
 Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`). \
@@ -211,7 +212,8 @@ Source: https://github.com/rocketscream/Low-Power
 Used to communicate with RTC module.
 Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`). \
 Source: https://www.arduino.cc/reference/en/libraries/ds3231m/
-## How to set watchfaces list
+
+## Software > How to set watchfaces list
 You can include multiple watcfaces in firmware. As much as enough FLASH memory.\
 You can configure included wathfaces in file `_DRMWatch2.ino`.\
 Update number of included watchfaces, comment or uncomment needed watchfaces, check memory usage.\
