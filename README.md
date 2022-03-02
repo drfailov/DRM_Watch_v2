@@ -2,10 +2,6 @@
 <!-- Picture: <img src="Photos/" width="300"/>  -->
 
 # DRM Watch v2
-
-
-# Overview of project
-
 <img src="Photos/header.png" width="600"/>
 
 Arduino-based watch with Nokia 1280 LCD. \
@@ -16,7 +12,6 @@ Hardware design is made by <b>MeltemiOS</b>.
 
 
 ## Features
-
 - Low power consumption, while screen is always showing time;
 - Charging over USB, battery status indication;
 - Easy to get components needed to assemble;
@@ -37,8 +32,9 @@ Hardware design is made by <b>MeltemiOS</b>.
 - Random decision helper: Zrada-Peremoga;
 - Screen "About" shows credits and firmware version. Long-press will show you some debug infirmation.
 
-## Photos of device
 
+## Photos of device
+I have assembled few watches and using ni as my everyday watch. Here`s some photos: \
 <img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26.jpg" width="150"/>     <img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="150"/>
 <img src="Photos/photo_2022-02-18_12-43-26 (5).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="150"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" width="150"/>
 
