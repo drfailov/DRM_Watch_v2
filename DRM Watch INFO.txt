@@ -326,6 +326,32 @@ Changelog
 - выяснить как и добавить на репозиторий хештег Arduino
 
 
+Общая информация которая должна быть на странице проекта:
+- About this project
+	+ List of features
+	- Photos of device
+	- Video demo of usage on YouTube
+	- Overview of watchfaces with photos
+	- Overview of screens with photos and description
+	- Overview of settings with description
+- Hardware and case
+	- Used parts
+	- Schematics
+	- Notes for soldering
+	- 3d model
+	- assembly instructions
+- Software
+	- How to build
+	- How to set watchfaces list
+	- How to add your own watchface
+	- How to add your own melodies
+- Project history
+	- First steps
+	- Prototype photos
+	
+	
+
+
 Информация которая должна быть в инструкции:
 - Чтобы перезагрузить - зажать кнопку вверх на 5 секунд
 - Назначение кнопок подписано в боковой части экрана
@@ -341,6 +367,8 @@ Changelog
 - Описание приложений: Зрада
 - Описание экрана настройки врмени
 - Экран о программе: долгое нажатие экран статуса
+- пока держишь кнопку вниз, подсветка не тушится
+- секундомер специально не работает пока не открыт, для экономии энергии
 
 - Циферблаты 
 - Будильник

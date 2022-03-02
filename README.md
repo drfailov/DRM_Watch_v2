@@ -2,7 +2,7 @@
 <!-- Picture: <img src="Photos/" width="300"/>  -->
 
 # DRM_Watch v2
-<img src="Photos/header.png" width="400"/>
+<img src="Photos/header.png" width="600"/>
 
 Arduino-based watch with Nokia 1280 LCD. \
 Main challenge of this project is packing as much
@@ -12,6 +12,34 @@ Hardware design is made by <b>MeltemiOS</b>.
 
 
 # Overview of project
+
+## List of features
+
+- Multiple Watchfaces, can be changed from menu;
+- 2-button controlled graphic menu allow access to all functions;
+- Alarm, can be set from menu;
+- Monophonic melodies, can be used as alarm or played from menu;
+- Stopwatch, can be accessed from menu;
+- Time can be set from menu;
+- Silent mode can be set from menu. Disable all sounds except alarm;
+- Sound of pressing buttons can be set from menu;
+- If needed, you can reboot watch by long-pressing "Up" button on watchface;
+- Flip screen allows you to choose between left-hand and right-hand buttons position;
+- Random decision helper: Zrada-Peremoga;
+- Screen "About" shows credits and firmware version. Long-press will show you some debug infirmation.
+
+## Photos of device
+
+<img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="300"/>
+<img src="Photos/photo_2022-02-18_12-43-26.jpg" width="300"/>
+<img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="300"/>
+<img src="Photos/photo_2022-02-18_12-43-26 (5).jpg" width="300"/>
+<img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="300"/>
+
+## Video overview
+<b> TODO </b>
+
+
 
 ## Watchfaces
 You can include multiple watcfaces in firmware. As much as enough FLASH memory.\
@@ -79,19 +107,6 @@ Takes about <b>684 bytes</b> of FLASH memory. \
 
 
 
-## Functions
-- 4 Watchfaces
-- Menu screens
-- Alert
-- Play monophonic melodies
-- Stopwatch
-- Set time screen
-- Set sleep time screen
-- Set silent mode screen
-- Set button sound screen
-- Force reboot
-- Zrada-Peremoga
-- About screen
 
 
 # How to build
