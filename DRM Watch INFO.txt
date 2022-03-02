@@ -342,14 +342,14 @@ Changelog
 	- Assembly photos
 	- Troubleshooting
 - Software
-	- Used libraries
+	+ Used libraries
 	- How to build
-	- How to set watchfaces list
+	+ How to set watchfaces list
 	- How to add your own watchface
 	- How to add your own melodies
 - Project history
-	- First steps
-	- Prototype photos
+	+ First steps
+	+ Prototype photos
 	
 	
 

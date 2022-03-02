@@ -30,7 +30,7 @@ Hardware design is made by <b>MeltemiOS</b>.
 - If needed, you can reboot watch by long-pressing "Up" button on watchface;
 - Flip screen allows you to choose between left-hand and right-hand buttons position;
 - Random decision helper: Zrada-Peremoga;
-- Screen "About" shows credits and firmware version. Long-press will show you some debug infirmation.
+- Screen "About" shows credits and firmware version. Long-press will show you some debug information.
 
 
 ## Photos of device
@@ -115,52 +115,40 @@ Also, some instruments, much time and some experience.
 - Nokia 1280 LCD (PCF8814 chip)
 - RTC module (DS3231M chip)
 - Li-Po charger module (TC4056A chip)
-
-
 To get components I've desoldered modules. \
 <img src="Photos/photo_2022-01-11_15-28-52.jpg" width="350"/>
-
 ### Arduino Nano, CH340C and MEGA328P
 MEGA328P used as main controller.\
 CH340C Is needed to allow programming with USB port.\
 Link: https://aliexpress.ru/item/4000903444456.html  \
 <img src="Photos/photo_2021-11-05_13-17-31.jpg" width="150"/> <img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="150"/>
-
-
 ### Nokia 1280, PCF8814 LCD
 Also, this display is used in: Nokia 1202, Nokia 1280, Nokia 1203.
 And also compatible with Nokia 1100 LCD, Nokia 1101 LCD, Nokia 1110 LCD, but it will not fit with board.
 Display is main output device. \
 Link: https://aliexpress.ru/item/32864378445.html  \
 <img src="Photos/photo_2021-10-24_09-22-21.jpg" width="150"/> <img src="Photos/photo_2021-10-16_11-31-45.jpg" width="150"/>
-
-
 ### RTC module, DS3231M chip
 DS3231M is needed to precisely calculate time. \
 Link: https://aliexpress.ru/item/4000004876793.html  \
 <img src="Photos/1PCS-DS3231-AT24C32-IIC-Precision-RTC-Real-Time-Clock-Memory-Module-For-Arduino-new-original.jpg_220x220xzq55.jpg" width="150"/> <img src="Photos/photo_2021-12-08_22-56-06.jpg" width="150"/> <img src="Photos/Screenshot 2021-12-09 004224.png" width="150"/>
-
-
 ### Passive buzzer, 5.2mm x 5.2mm 
 Buzzer allows to play sound signals and melodies. \
 Link: https://aliexpress.ru/item/1005003227004618.html  \
 <img src="Photos/buzzer.jpg" width="150"/> <img src="Photos/photo_2021-12-03_20-30-06.jpg" width="150"/> <img src="Photos/photo_2021-12-03_20-30-32.jpg" width="150"/>
-
 ### Board
 I've ordered boards on JLC PCB. Here's what I got:\
 (It's older revision on photo) \
 Actual version of gerber files to make your order see at `Circuit Board` folder. \
 <img src="Photos/photo_2021-11-30_08-55-54.jpg" width="150"/> <img src="Photos/photo_2021-11-30_16-37-08.jpg" width="150"/> <img src="Photos/photo_2021-11-30_08-59-16.jpg" width="150"/> 
 
-
 ## Schematics
-
+### Board gerber files
+TODO
 ### Board soldering plan, elements list and LCD pinout
 <img src="Photos\2022-01-16 DRMW2_DOC.png" width="300"/>
-
 ### Atmel 328P chip pinout
 <img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="300"/>
-
 ### Pins list
 - D0 - UART RX
 - D1 - UART TX
@@ -178,6 +166,18 @@ Actual version of gerber files to make your order see at `Circuit Board` folder.
 - A1(D15) - LCD Backlight (Active HIGH)
 - A4 - RTC SDA
 - A5 - RTC SCL
+
+## Case 3D Model
+You can fing STL files for DRM Watch case in `Case` folder.
+<img src="Photos/Screenshot 2022-03-01 224852.jpg" width="100"/> <img src="Photos/Screenshot 2022-03-01 224938.jpg" width="100"/>
+
+## Assembly instruction
+General way to assemble watch:
+- Assemble device
+- Connect it to PC and flash firmware
+- Select watchface
+Assembly video on YouTube:
+https://youtu.be/IrAri0zF-KY
 
 
 
@@ -214,17 +214,15 @@ A long time ago...
 Back in 2016 me and my friend <b>MeltemiOS</b> was playing with arduino and Nokia 5110 LCD.
 Then idea of DRM Watch was born. We've assembled one DIY working prototype stopped development. \
 Here's some prorotype photos of these days: \
-<img src="Photos/xwYFapverSc.jpg" width="200"/> <img src="Photos/Kcf5E-HmfqE.jpg" width="200"/> 
-<img src="Photos/RHoSkpuC5Ek.jpg" width="200"/> <img src="Photos/z0RViSCt2jg.jpg" width="200"/> 
-<img src="Photos/ApKsKMTuODI.jpg" width="200"/> <img src="Photos/n7C6VvySHto.jpg" width="200"/> 
+<img src="Photos/xwYFapverSc.jpg" width="200"/> <img src="Photos/Kcf5E-HmfqE.jpg" width="200"/> <img src="Photos/RHoSkpuC5Ek.jpg" width="200"/>
+<img src="Photos/z0RViSCt2jg.jpg" width="200"/> <img src="Photos/ApKsKMTuODI.jpg" width="200"/> <img src="Photos/n7C6VvySHto.jpg" width="200"/> 
 
 ## Prototype photos
 Later, in 2021 for some reason project continued. 
-LCD Was chenged to Nokia 1280 LCD, because it is easier to get and has more reliable connection. 
+LCD was chenged to Nokia 1280 LCD, because it is easier to get and has more reliable connection. 
 Here's some prototypes:\
-<img src="Photos/photo_2021-12-19_16-08-34.jpg" width="200"/> <img src="Photos/photo_2021-12-05_17-01-19.jpg" width="200"/>
-<img src="Photos/photo_2021-12-04_13-20-55.jpg" width="200"/> <img src="Photos/photo_2021-12-08_22-34-49.jpg" width="200"/> 
-<img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="200"/> 
+<img src="Photos/photo_2021-12-19_16-08-34.jpg" width="200"/> <img src="Photos/photo_2021-12-05_17-01-19.jpg" width="200"/> <img src="Photos/photo_2021-12-04_13-20-55.jpg" width="200"/>
+<img src="Photos/photo_2021-12-08_22-34-49.jpg" width="200"/> <img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="200"/> 
 
 
 
@@ -247,24 +245,9 @@ Here's some prototypes:\
 
 
 
-
-
-
-# How to build
-
-## Used components:
-
-
-
-
-## Pinout
 
 
 ## First steps
-- Assemble device
-- Connect it to PC and flash firmware
-- Select watchface
-
 ## Troubleshooting
 
 ### Select WTF After flash firmware
