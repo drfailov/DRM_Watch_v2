@@ -211,14 +211,20 @@ Example:\
 # Project history
 A long time ago...
 ## First steps
+Back in 2016 me and my friend <b>MeltemiOS</b> was playing with arduino and Nokia 5110 LCD.
+Then idea of DRM Watch was born. We've assembled one DIY working prototype stopped development. \
+Here's some prorotype photos of these days: \
 <img src="Photos/xwYFapverSc.jpg" width="200"/> <img src="Photos/Kcf5E-HmfqE.jpg" width="200"/> 
-<img src="RHoSkpuC5Ek.jpg" width="200"/> <img src="z0RViSCt2jg.jpg" width="200"/> 
-<img src="ApKsKMTuODI.jpg" width="200"/> <img src="n7C6VvySHto.jpg" width="200"/> 
+<img src="Photos/RHoSkpuC5Ek.jpg" width="200"/> <img src="Photos/z0RViSCt2jg.jpg" width="200"/> 
+<img src="Photos/ApKsKMTuODI.jpg" width="200"/> <img src="Photos/n7C6VvySHto.jpg" width="200"/> 
 
 ## Prototype photos
-<img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="200"/>
-<img src="Photos/photo_2021-12-05_17-01-19.jpg" width="200"/>    <img src="Photos/photo_2021-12-04_13-20-55.jpg" width="200"/>
-<img src="Photos/photo_2021-12-08_22-34-49.jpg" width="200"/>    <img src="Photos/photo_2021-12-19_16-08-34.jpg" width="200"/>
+Later, in 2021 for some reason project continued. 
+LCD Was chenged to Nokia 1280 LCD, because it is easier to get and has more reliable connection. 
+Here's some prototypes:\
+<img src="Photos/photo_2021-12-19_16-08-34.jpg" width="200"/> <img src="Photos/photo_2021-12-05_17-01-19.jpg" width="200"/>
+<img src="Photos/photo_2021-12-04_13-20-55.jpg" width="200"/> <img src="Photos/photo_2021-12-08_22-34-49.jpg" width="200"/> 
+<img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="200"/> 
 
 
 
