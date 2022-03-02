@@ -115,27 +115,33 @@ Also, some instruments, much time and some experience.
 - Nokia 1280 LCD (PCF8814 chip)
 - RTC module (DS3231M chip)
 - Li-Po charger module (TC4056A chip)
+
 To get components I've desoldered modules. \
 <img src="Photos/photo_2022-01-11_15-28-52.jpg" width="350"/>
+
 ### Arduino Nano, CH340C and MEGA328P
 MEGA328P used as main controller.\
 CH340C Is needed to allow programming with USB port.\
 Link: https://aliexpress.ru/item/4000903444456.html  \
 <img src="Photos/photo_2021-11-05_13-17-31.jpg" width="150"/> <img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="150"/>
+
 ### Nokia 1280, PCF8814 LCD
 Also, this display is used in: Nokia 1202, Nokia 1280, Nokia 1203.
 And also compatible with Nokia 1100 LCD, Nokia 1101 LCD, Nokia 1110 LCD, but it will not fit with board.
 Display is main output device. \
 Link: https://aliexpress.ru/item/32864378445.html  \
 <img src="Photos/photo_2021-10-24_09-22-21.jpg" width="150"/> <img src="Photos/photo_2021-10-16_11-31-45.jpg" width="150"/>
+
 ### RTC module, DS3231M chip
 DS3231M is needed to precisely calculate time. \
 Link: https://aliexpress.ru/item/4000004876793.html  \
 <img src="Photos/1PCS-DS3231-AT24C32-IIC-Precision-RTC-Real-Time-Clock-Memory-Module-For-Arduino-new-original.jpg_220x220xzq55.jpg" width="150"/> <img src="Photos/photo_2021-12-08_22-56-06.jpg" width="150"/> <img src="Photos/Screenshot 2021-12-09 004224.png" width="150"/>
+
 ### Passive buzzer, 5.2mm x 5.2mm 
 Buzzer allows to play sound signals and melodies. \
 Link: https://aliexpress.ru/item/1005003227004618.html  \
 <img src="Photos/buzzer.jpg" width="150"/> <img src="Photos/photo_2021-12-03_20-30-06.jpg" width="150"/> <img src="Photos/photo_2021-12-03_20-30-32.jpg" width="150"/>
+
 ### Board
 I've ordered boards on JLC PCB. Here's what I got:\
 (It's older revision on photo) \
@@ -144,11 +150,17 @@ Actual version of gerber files to make your order see at `Circuit Board` folder.
 
 ## Schematics
 ### Board gerber files
+<img src="Photos\v4 20mm.JPG" width="200"/>
 TODO
+
 ### Board soldering plan, elements list and LCD pinout
+You can fing GERBER files for DRM Watch board in `Circuit Board` folder.
 <img src="Photos\2022-01-16 DRMW2_DOC.png" width="300"/>
+
 ### Atmel 328P chip pinout
-<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="300"/>
+You can use this schematic as reference
+<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="200"/>
+
 ### Pins list
 - D0 - UART RX
 - D1 - UART TX
@@ -168,8 +180,8 @@ TODO
 - A5 - RTC SCL
 
 ## Case 3D Model
-You can fing STL files for DRM Watch case in `Case` folder.
-<img src="Photos/Screenshot 2022-03-01 224852.jpg" width="100"/> <img src="Photos/Screenshot 2022-03-01 224938.jpg" width="100"/>
+You can fing STL files for DRM Watch case in `Case` folder. \
+<img src="Photos/Screenshot 2022-03-01 224852.jpg" width="150"/> <img src="Photos/Screenshot 2022-03-01 224938.jpg" width="150"/>
 
 ## Assembly instruction
 General way to assemble watch:
