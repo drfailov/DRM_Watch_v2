@@ -30,11 +30,7 @@ Hardware design is made by <b>MeltemiOS</b>.
 
 ## Photos of device
 
-<img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="100"/>
-<img src="Photos/photo_2022-02-18_12-43-26.jpg" width="100"/>
-<img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="100"/>
-<img src="Photos/photo_2022-02-18_12-43-26 (5).jpg" width="100"/>
-<img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="100"/>
+<img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26.jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="150"/>  <img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="150"/>
 
 ## Video overview
 <b> TODO </b>
