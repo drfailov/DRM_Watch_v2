@@ -107,7 +107,7 @@ Takes about <b>684 bytes</b> of FLASH memory. \
 # Hardware and case
 <img src="Photos/2022-03-02 Hardware-and-case.jpg" width="300"/>
 If you want to assemble your own DRM Watch, this block is for you:)
-To assemble watch, you will need: circuit board, parts or modules to desolder, case. 
+To assemble watch, you will need: <b>circuit board, parts or modules to desolder, case</b>. 
 Also, some instruments, much time and some experience.
 
 ## Used parts
@@ -148,14 +148,56 @@ Link: https://aliexpress.ru/item/1005003227004618.html  \
 
 ### Board
 I've ordered boards on JLC PCB. Here's what I got:\
+(It`s older revision on photo) \
+Actual version of gerber files to make your order see at `Circuit Board` folder.
 <img src="Photos/photo_2021-11-30_08-55-54.jpg" width="150"/> <img src="Photos/photo_2021-11-30_16-37-08.jpg" width="150"/> <img src="Photos/photo_2021-11-30_08-59-16.jpg" width="150"/> 
-\
-Board soldering plan:\
-<img src="Circuit Board\Плата DRMW2 v4\2022-01-16 DRMW2_DOC.png" width="350"/>
+
+
+## Schematics
+
+### Board soldering plan, elements list and LCD pinout
+<img src="Photos\2022-01-16 DRMW2_DOC.png" width="350"/>
+
+### Atmel 328P chip pinout
+<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="700"/>
+
+### Pins list
+- D0 - UART RX
+- D1 - UART TX
+- D2 - Button DOWN (Active HIGH)
+- D3 - Button UP (Active HIGH)
+- D5 - LCD RST
+- D6 - LCD CS
+- D7 - LCD MOSI
+- D8 - LCD SCK
+- D9 - not used
+- D10 - LCD Power
+- D11 - USB Voltage    
+- D12 - Buzzer (Passive)
+- D13 - Debug LED
+- A1(D15) - LCD Backlight (Active HIGH)
+- A4 - RTC SDA
+- A5 - RTC SCL
+
 
 
 
 # Software
+
+## Used libraries
+### LCD1202
+Used to run nokia display. Also may be compatible with this LCD controllers: `pcf8814`, `ste2007`, `ST7565`, `HX1230`.
+Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`).
+Source: http://arduino.ru/forum/proekty/khronograf-izmeritel-skorosti-puli-ot-prostogo-k-slozhnomu?page=5#comment-136147
+
+### Low-Power-master
+Used to allow deep sleep between screen refreshing. 
+Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`).
+
+### DS3231M-1.0.6
+Used to communicate with RTC module.
+Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`).
+
 ## How to add your own watchface
 You can include multiple watcfaces in firmware. As much as enough FLASH memory.\
 You can configure included wathfaces in file `_DRMWatch2.ino`.\
@@ -200,26 +242,7 @@ Example:\
 
 
 ## Pinout
-<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="700"/>
 
-Pins list:
-- D0 - UART RX
-- D1 - UART TX
-- D2 - Button DOWN (Active HIGH)
-- D3 - Button UP (Active HIGH)
-- D5 - LCD RST
-- D6 - LCD CS
-- D7 - LCD MOSI
-- D8 - LCD SCK
-- D9 - 
-- D10 - LCD Power
-- D11 - USB Voltage    
-- D12 - Buzzer (Passive)
-- D13 - Debug LED
-- A0 - Random seed source (Leave unconnected)
-- A1 - LCD Backlight (Active HIGH)
-- A4 - RTC SDA
-- A5 - RTC SCL
 
 ## First steps
 - Assemble device
@@ -287,18 +310,6 @@ This is needed to count active watchfaces and show correct number of menu items.
 
 ### Used Libraries
 
-#### LCD1202
-Used to run nokia display. Also may be compatible with this LCD controllers: `pcf8814`, `ste2007`, `ST7565`, `HX1230`.
-Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`).
-Source: http://arduino.ru/forum/proekty/khronograf-izmeritel-skorosti-puli-ot-prostogo-k-slozhnomu?page=5#comment-136147
-
-#### Low-Power-master
-Used to allow deep sleep between screen refreshing. 
-Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`).
-
-#### DS3231M-1.0.6
-Used to communicate with RTC module.
-Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`).
 
 
 
