@@ -106,7 +106,7 @@ Takes about <b>684 bytes</b> of FLASH memory. \
 
 # Hardware
 <img src="Photos/2022-03-02 Hardware-and-case.jpg" width="300"/>
-If you want to assemble your own DRM Watch, this block is for you:) \
+If you want to assemble your own DRM Watch, this block is for you! \
 To assemble watch, you will need: <b>circuit board, parts or modules to desolder, case</b>. 
 Also, some instruments, much time and some experience.
 
@@ -160,8 +160,6 @@ Description of elements on board: \
 ### Atmel 328P chip pinout
 You can use this schematic as reference. \
 <img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="200"/>
-
-### Pins list
 - D0 - UART RX
 - D1 - UART TX
 - D2 - Button DOWN (Active HIGH)
@@ -221,7 +219,7 @@ Example:\
 <img src="Photos/config_watchfaces.jpg" width="300"/>
 
 ## Software > How to add your own melodies
-Because of Arduino have <b>VERY</b> limited space, byt I want to store long melodies, I made algorythm to 
+Because of Arduino have <b>VERY</b> limited space, but I want to store long melodies, I made algorythm to 
 compress music as much as possible.\
 As source I using Nokia-style composer music, named `RTTTL`.\
 I made software to convert `RTTTL` to binary codes, which can be played by synthesizer of 
@@ -270,7 +268,10 @@ Here's some prototypes:\
 
 
 --------------------------------------------------------------------------------------------
+Next part of this page is not structured
+--------------------------------------------------------------------------------------------
 # Under development
+--------------------------------------------------------------------------------------------
 
 
 
@@ -291,8 +292,6 @@ TODO
 <img src="Photos/" width="300"/>
 TODO
 
-
-## Code description
 
 ### Menu language
 There is 2 options to select language: `Russian` and `English`.\
@@ -316,8 +315,6 @@ When adding new mode:
 - Call `setMode(YOUR_MODE);` when you want to enter your new screen.
 - Don't forget to call `goToWatchface()` or `setMode()` to exit your mode if needed.
 
-
-
 ### How to add my own watchface?
 Watchfaces is the same that Mode, but called from `goToWatchface()`.
 - Create constant for your watchface in file `_DRMWatch2.ino`. Use not used previously number for your constant: `#define WATCHFACE_NOKIA 5`.
@@ -330,54 +327,25 @@ This is needed to count active watchfaces and show correct number of menu items.
 - Write script to draw yout watchface. You can only use non-blocking functions. 
 
 
-
-
-
-## Mode description
-
 ### ModeInit
 Initial mode. Its goal to init Serial, init display, init RTC, show startup animation, and go to watchface.
 If RTC can not be initialized, watchface will not open.\
 <img src="Photos/photo_2021-12-19_19-43-52.jpg" width="300"/>
-
 
 ### ModeWatchFace
 Whow time, date. Watchfaces is only screen with deep sleep, so device can run for a long time if in watchface mode.
 Press button Up to turn on backlight. Press button down to open main menu.\
 <img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="300"/>
 
-
-### WatchFace1
-Watchface 1\
-<img src="Photos/" width="300"/>
-
-
-### WatchFace2
-Watchface 2\
-<img src="Photos/" width="300"/>
-
-
-### WatchFace3
-Watchface 3\
-<img src="Photos/" width="300"/>
-
-
-### WatchFace4
-Watchface 4\
-<img src="Photos/" width="300"/>
-
-
 ### ModeMenuMain
 Main menu, opens when you click bottom button. If inactive for 120 sec, will automatically go to watchface.
 Press button Up to select. Press button Down to move cursor down.\
 <img src="Photos/photo_2021-12-19_19-43-52 (3).jpg" width="300"/>
 
-
 ### ModeMenuMelodies
 Menu with list of melodies, which can be played. If inactive for 120 sec, will automatically go to watchface.
 Press button Up to select. Press button Down to move cursor down.\
 <img src="Photos/photo_2021-12-19_19-43-52 (4).jpg" width="300"/>
-
 
 ### ModeMenuSetTime
 Menu to set correct time manually. There is no auto-exit from this menu, 
