@@ -1,7 +1,11 @@
 <!-- For new line: \ -->
 <!-- Picture: <img src="Photos/" width="300"/>  -->
 
-# DRM_Watch v2
+# DRM Watch v2
+
+
+# Overview of project
+
 <img src="Photos/header.png" width="600"/>
 
 Arduino-based watch with Nokia 1280 LCD. \
@@ -10,15 +14,6 @@ as possible stuff inside Arduino Nano with its 32KB of memory and 2KB RAM.\
 Programming contributions made by <b>Dr. Failov</b>.\
 Hardware design is made by <b>MeltemiOS</b>.
 
-
-** (Table of Contents)**
-
-[TOCM]
-
-[TOC]
-
-
-# Overview of project
 
 ## Features
 
