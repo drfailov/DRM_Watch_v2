@@ -337,7 +337,7 @@ Changelog
 - Hardware and case
 	+ Used parts
 	+ Schematics
-	- 3d model
+	+ 3d model
 	- assembly instructions
 	- Assembly photos
 	- Troubleshooting
@@ -346,7 +346,7 @@ Changelog
 	- How to build
 	+ How to set watchfaces list
 	- How to add your own watchface
-	- How to add your own melodies
+	+ How to add your own melodies
 - Project history
 	+ First steps
 	+ Prototype photos

@@ -220,18 +220,29 @@ Update number of included watchfaces, comment or uncomment needed watchfaces, ch
 Example:\
 <img src="Photos/config_watchfaces.jpg" width="300"/>
 
+## Software > How to add your own melodies
+Because of Arduino have <b>VERY</b> limited space, byt I want to store long melodies, I made algorythm to 
+compress music as much as possible.\
+As source I using Nokia-style composer music, named `RTTTL`.\
+I made software to convert `RTTTL` to binary codes, which can be played by synthesizer of 
+DRM Watch firmware.\
+Melodies stored in form of one byte-one note. Array is contains tempo and notes.\
+First 2 bits of note is representing note duration (values 4, 8, 16, 32).\
+Last 6 bits represents note number counted from low note of first octave.\
+<img src="Photos/photo_2021-12-16_22-37-15.jpg" width="500"/>
+
 
 
 # Project history
 A long time ago...
-## First steps
+## Project history > First steps
 Back in 2016 me and my friend <b>MeltemiOS</b> was playing with arduino and Nokia 5110 LCD.
 Then idea of DRM Watch was born. We've assembled one DIY working prototype stopped development. \
 Here's some prorotype photos of these days: \
 <img src="Photos/xwYFapverSc.jpg" width="200"/> <img src="Photos/Kcf5E-HmfqE.jpg" width="200"/> <img src="Photos/RHoSkpuC5Ek.jpg" width="200"/>
 <img src="Photos/z0RViSCt2jg.jpg" width="200"/> <img src="Photos/ApKsKMTuODI.jpg" width="200"/> <img src="Photos/n7C6VvySHto.jpg" width="200"/> 
 
-## Prototype photos
+## Project history > Prototype photos
 Later, in 2021 for some reason project continued. 
 LCD was chenged to Nokia 1280 LCD, because it is easier to get and has more reliable connection. 
 Here's some prototypes:\
@@ -258,11 +269,10 @@ Here's some prototypes:\
 
 
 
+--------------------------------------------------------------------------------------------
+# Under development
 
 
-
-## First steps
-## Troubleshooting
 
 ### Select WTF After flash firmware
 <img src="Photos/" width="300"/>
@@ -318,11 +328,6 @@ Put this call under `#ifdef WATCHFACE_NOKIA` statement. Use other watchfaces as 
 - In file `ModeMenuSetWatchface.ino` function `modeMenuSetWatchfaceItemsCount()` add `cnt++;` for your watchface. 
 This is needed to count active watchfaces and show correct number of menu items.
 - Write script to draw yout watchface. You can only use non-blocking functions. 
-
-
-
-### Used Libraries
-
 
 
 
@@ -404,23 +409,3 @@ Genegates random conscusion: "Peremoga" or "Zrada". This is local Ukrainian meme
 "Peremoga" is "win", "Zrada" is "treason".
 Mechanics the same as heads and tails.\
 <img src="Photos/" width="300"/>
-
-### Mode
-<img src="Photos/" width="300"/>
- 
- 
- 
-## Melodies converter
-Because of Arduino have <b>VERY</b> limited space, byt I want to store long melodies, I made algorythm to 
-compress music as much as possible.\
-As source I using Nokia-style composer music, named `RTTTL`.\
-I made software to convert `RTTTL` to binary codes, which can be played by synthesizer of 
-DRM Watch firmware.\
-Melodies stored in form of one byte-one note. Array is contains tempo and notes.\
-First 2 bits of note is representing note duration (values 4, 8, 16, 32).\
-Last 6 bits represents note number counted from low note of first octave.\
-<img src="Photos/photo_2021-12-16_22-37-15.jpg" width="600"/>
-
- 
-## Prototype photos:
- 
