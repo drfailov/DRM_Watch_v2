@@ -11,10 +11,24 @@ Programming contributions made by <b>Dr. Failov</b>.\
 Hardware design is made by <b>MeltemiOS</b>.
 
 
+** (Table of Contents)**
+
+[TOCM]
+
+[TOC]
+
+
 # Overview of project
 
-## List of features
+## Features
 
+- Low power consumption, while screen is always showing time;
+- Charging over USB, battery status indication;
+- Easy to get components needed to assemble;
+- For now firmware is stable enough to use device daily;
+- Case fits to default 20mm watch bands;
+- No need to disassemble device for firmwate update;
+- Device easily can be used as arduino playground: battery powered, equipped with 2 buttons, display, buzzer;
 - Multiple Watchfaces, can be changed from menu;
 - 2-button controlled graphic menu allow access to all functions;
 - Alarm, can be set from menu;
