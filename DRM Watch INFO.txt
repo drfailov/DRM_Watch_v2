@@ -316,6 +316,7 @@ Changelog
 2022-03-02 Обновление документации: Prototype photos
 2022-03-02 Обновление документации: First steps
 2022-03-03 Обновление документации: Video demo of usage on YouTube
+2022-03-03 Обновление документации: Assembly Video
 2022-03-03 Обновление документации: Assembly photos
 2022-03-03 Обновление документации: assembly instructions
 2022-03-03 Обновление документации: How to set language
@@ -359,6 +360,7 @@ Changelog
 	+ How to set language
 	+ How to set watchfaces list
 	- How to add your own watchface
+	- How to add your own application
 	+ How to add your own melodies
 - Project history
 	+ First steps
