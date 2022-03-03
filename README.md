@@ -188,6 +188,15 @@ You can fing STL files for DRM Watch case in `Case` folder. \
 
 ## Hardware > Assembly instruction
 General way to assemble watch:
+- Order PCB using `gerber` files, Get all [parts you needed](Photos/photo_2022-01-11_15-28-52.jpg), desolder modules;
+- At first, solder parts from Arduino and Lipo charger modules, Double-check all the connections, especially for shorts between chip pins, Let board cool down before testing;
+- Connect battery and check if no fire or heat from PCB, Connect charger and check current. Normal value is about 200mA (or about 1A if you did not replacd 1.2K resistance), Don't connect USB without battery - board will not work this way.
+- Connect board to USB. If modules works properly, PC will recognize CH340G as connected device;
+- If needed, install driver for CH340G: https://drive.google.com/file/d/1BqUo6f5WEd1vqdxt1UWzDh4OgjdQ7Mx1/view ;
+- If needed, install Arduino IDE: https://www.arduino.cc/en/software ;
+- Copy libraries to your Arduino IDE libraries folder;
+- Build project and try to flash firmware. Open
+
 - Assemble device
 - Connect it to PC and flash firmware
 - Select watchface 
