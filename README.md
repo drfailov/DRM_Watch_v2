@@ -195,7 +195,7 @@ General way to assemble watch:
 - If needed, install driver for CH340G: https://drive.google.com/file/d/1BqUo6f5WEd1vqdxt1UWzDh4OgjdQ7Mx1/view ;
 - If needed, install Arduino IDE: https://www.arduino.cc/en/software ;
 - Copy libraries to your Arduino IDE libraries folder;
-- Build project and try to flash firmware. If [flashing successful](Photos/photo_2022-01-11_15-28-52.jpg), you can continue;
+- Build project and try to flash firmware. If [flashing successful](Photos/photo_2022-02-17_21-01-05.jpg), you can continue;
 
 
 - Assemble device
