@@ -42,7 +42,7 @@ I have assembled few watches and using it as my everyday watch. Here`s some phot
 ## About project > Video overview
 YouTube video with device overview: 
 \
-[<img alt="DRM Watch v2 Overview" width="300px" src="Photos/youtube-overview.jpg" /> ](https://youtu.be/VYrUO039QUw)
+[<img alt="DRM Watch v2 Overview" width="400px" src="Photos/youtube-overview.jpg" /> ](https://youtu.be/VYrUO039QUw)
 \
 https://youtu.be/VYrUO039QUw 
 
@@ -193,9 +193,10 @@ General way to assemble watch:
 - Select watchface 
 
 Assembly video on YouTube:
+\
+[<img alt="DRM Watch v2 Assembly" width="400px" src="Photos/youtube-assembly.jpg" /> ](https://youtu.be/IrAri0zF-KY)
+\
 https://youtu.be/IrAri0zF-KY
-DRM Watch v2 Assembly
-
 
 
 
