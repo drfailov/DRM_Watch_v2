@@ -203,8 +203,8 @@ You can fing STL files for DRM Watch case in `Case` folder. \
 - Now you can assemble device to case and start using it :)
 
 ### Here's some photos of assembly process:
-<img src="Photos/photo_2022-02-18_11-24-21.jpg" width="100"/> <img src="Photos/photo_2022-02-17_21-01-05.jpg" width="100"/> <img src="Photos/photo_2022-02-17_21-01-24.jpg" width="100"/>
-<img src="Photos/photo_2022-02-17_22-31-56.jpg" width="100"/> <img src="Photos/photo_2022-02-17_22-41-40.jpg" width="100"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" width="100"/>
+<img src="Photos/photo_2022-02-18_11-24-21.jpg" width="150"/> <img src="Photos/photo_2022-02-17_21-01-05.jpg" width="150"/> <img src="Photos/photo_2022-02-17_21-01-24.jpg" width="150"/>
+<img src="Photos/photo_2022-02-17_22-31-56.jpg" width="150"/> <img src="Photos/photo_2022-02-17_22-41-40.jpg" width="150"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" width="150"/>
 
 ### Assembly video on YouTube:
 [<img alt="DRM Watch v2 Assembly" width="300px" src="Photos/youtube-assembly.jpg" /> ](https://youtu.be/IrAri0zF-KY)
