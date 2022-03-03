@@ -20,9 +20,9 @@
 #define pinLcdRst (byte)5
 #define pinLcdCs (byte)6
 #define pinLcdMosi (byte)7
-#define pinUsbVoltage (byte)11  //for new boards  rev.2
+#define pinLcdSck (byte)8   
 #define pinLcdPower (byte)10
-#define pinLcdSck (byte)8    //for new boards  rev.2
+#define pinUsbVoltage (byte)11  
 #define pinBuzzer (byte)12 //passive
 #define pinLed (byte)13  //active high
 #define pinLcdBacklight (byte)15  //A1, active high

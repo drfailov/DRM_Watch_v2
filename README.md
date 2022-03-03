@@ -40,7 +40,9 @@ I have assembled few watches and using it as my everyday watch. Here`s some phot
 
 
 ## About project > Video overview
-<b> TODO </b>
+YouTube video with device overview:
+https://youtu.be/VYrUO039QUw
+DRM Watch v2 Overview
 
 
 ## About project > Overview of Watchfaces
@@ -106,7 +108,7 @@ Takes about <b>684 bytes</b> of FLASH memory. \
 
 # Hardware
 <img src="Photos/2022-03-02 Hardware-and-case.jpg" width="300"/>
-If you want to assemble your own DRM Watch, this block is for you! \
+If you want to assemble your own DRM Watch, this block is for you:) 
 To assemble watch, you will need: <b>circuit board, parts or modules to desolder, case</b>. 
 Also, some instruments, much time and some experience.
 
@@ -189,6 +191,7 @@ General way to assemble watch:
 
 Assembly video on YouTube:
 https://youtu.be/IrAri0zF-KY
+DRM Watch v2 Assembly
 
 
 
