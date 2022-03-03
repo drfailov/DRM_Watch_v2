@@ -338,12 +338,13 @@ Changelog
 	+ Used parts
 	+ Schematics
 	+ 3d model
-	- assembly instructions
-	- Assembly photos
+	+ assembly instructions
+	+ Assembly photos
 	- Troubleshooting
 - Software
 	+ Used libraries
 	- How to build
+	- How to set language
 	+ How to set watchfaces list
 	- How to add your own watchface
 	+ How to add your own melodies

@@ -187,7 +187,7 @@ You can fing STL files for DRM Watch case in `Case` folder. \
 <img src="Photos/Screenshot 2022-03-01 224852.jpg" width="230"/> <img src="Photos/Screenshot 2022-03-01 224938.jpg" width="200"/>
 
 ## Hardware > Assembly instruction
-General way to assemble watch:
+### General way to assemble watch:
 - Order PCB using `gerber` files, Get all [parts you needed](Photos/photo_2022-01-11_15-28-52.jpg), desolder modules;
 - At first, solder parts from Arduino and Lipo charger modules, Double-check all the connections, especially for shorts between chip pins, Let board cool down before testing;
 - Connect battery and check if no fire or heat from PCB, Connect charger and check current. Normal value is about 200mA (or about 1A if you did not replacd 1.2K resistance), Don't connect USB without battery - board will not work this way.
@@ -195,18 +195,46 @@ General way to assemble watch:
 - If needed, install driver for CH340G: https://drive.google.com/file/d/1BqUo6f5WEd1vqdxt1UWzDh4OgjdQ7Mx1/view ;
 - If needed, install Arduino IDE: https://www.arduino.cc/en/software ;
 - Copy libraries to your Arduino IDE libraries folder;
-- Build project and try to flash firmware. If [flashing successful](Photos/photo_2022-02-17_21-01-05.jpg), you can continue;
+- Build project and try to flash firmware. If [flashing successful](Photos/photo_2022-02-17_21-01-05.jpg), you can continue. [Normal log for this state](Photos/photo_2022-02-17_21-01-24.jpg) ;
+- Now you can solder RTC, buttons, buzzer, LCD. [Photo](Photos/photo_2022-02-17_22-31-56.jpg) ;
+- If successful, watch will turn on, play sound and [show time](Photos/photo_2022-02-17_22-41-40.jpg);
+- If any of functions is not working, always keep in mind that any module can be defective out of the box, so you need to have spare ones to replace;
+- If all works, carefully wash flux all over the board.
+- Now you can assemble device to case and start using it :)
 
+### Here's some photos of assembly process:
+<img src="Photos/photo_2022-02-18_11-24-21.jpg" width="100"/>
+<img src="Photos/photo_2022-02-17_21-01-05.jpg" width="100"/>
+<img src="Photos/photo_2022-02-17_21-01-24.jpg" width="100"/>
+<img src="Photos/photo_2022-02-17_22-31-56.jpg" width="100"/>
+<img src="Photos/photo_2022-02-17_22-41-40.jpg" width="100"/>
+<img src="Photos/photo_2022-02-18_00-19-38.jpg" width="100"/>
 
-- Assemble device
-- Connect it to PC and flash firmware
-- Select watchface 
-
-Assembly video on YouTube:
+### Assembly video on YouTube:
 \
 [<img alt="DRM Watch v2 Assembly" width="400px" src="Photos/youtube-assembly.jpg" /> ](https://youtu.be/IrAri0zF-KY)
 \
 https://youtu.be/IrAri0zF-KY
+
+## Hardware > Troubleshooting
+
+### Select WTF After flash firmware
+<img src="Photos/" width="300"/>
+To fix it, go to settings and select watchface from list.
+
+### No device connected or Unrecognized device when connected
+<img src="Photos/" width="300"/>
+TODO
+
+### No response from board when trying to flash firmware.
+<img src="Photos/" width="300"/>
+Check your Arduino. (if pin13 LED is blinking when power on, arduino is alive)
+TODO
+
+### RTC FAIL on startup
+<img src="Photos/" width="300"/>
+TODO
+
 
 
 
@@ -227,6 +255,12 @@ Source: https://github.com/rocketscream/Low-Power
 Used to communicate with RTC module.
 Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`). \
 Source: https://www.arduino.cc/reference/en/libraries/ds3231m/
+
+## Software > How to set language
+There is 2 options to select language: `Russian` and `English`.\
+If you want use `Russian` language, uncomment `#define LANG_RU` string in `Generic.cpp` file.\
+If you want use `English` language, uncomment `#define LANG_EN` string in `Generic.cpp` file.\
+Only one string can be active at the time. If you select any language, you have to comment other one.
 
 ## Software > How to set watchfaces list
 You can include multiple watcfaces in firmware. As much as enough FLASH memory.\
@@ -292,29 +326,9 @@ Next part of this page is not structured
 
 
 
-### Select WTF After flash firmware
-<img src="Photos/" width="300"/>
-To fix it, go to settings and select watchface from list.
-
-### No device connected or Unrecognized device when connected
-<img src="Photos/" width="300"/>
-TODO
-
-### No response from board when trying to flash firmware.
-<img src="Photos/" width="300"/>
-Check your Arduino. (if pin13 LED is blinking when power on, arduino is alive)
-TODO
-
-### RTC FAIL on startup
-<img src="Photos/" width="300"/>
-TODO
 
 
-### Menu language
-There is 2 options to select language: `Russian` and `English`.\
-If you want use `Russian` language, uncomment `#define LANG_RU` string in main file.\
-If you want use `English` language, uncomment `#define LANG_EN` string in main file.\
-Only one string can be active at the time. If you select any language, you have to comment other one.
+
 
 ### How to add my own screen?
 Program contains several screens (menus, watchfaces...).
