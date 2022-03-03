@@ -42,7 +42,7 @@ I have assembled few watches and using it as my everyday watch. Here`s some phot
 ## About project > Video overview
 YouTube video with device overview: 
 \
-[<img alt="DRM Watch v2 Overview" width="400px" src="Photos/youtube-overview.jpg" /> ](https://youtu.be/VYrUO039QUw)
+[<img alt="DRM Watch v2 Overview" width="300px" src="Photos/youtube-overview.jpg" /> ](https://youtu.be/VYrUO039QUw)
 \
 https://youtu.be/VYrUO039QUw 
 
@@ -203,16 +203,10 @@ You can fing STL files for DRM Watch case in `Case` folder. \
 - Now you can assemble device to case and start using it :)
 
 ### Here's some photos of assembly process:
-<img src="Photos/photo_2022-02-18_11-24-21.jpg" width="100"/>
-<img src="Photos/photo_2022-02-17_21-01-05.jpg" width="100"/>
-<img src="Photos/photo_2022-02-17_21-01-24.jpg" width="100"/>
-<img src="Photos/photo_2022-02-17_22-31-56.jpg" width="100"/>
-<img src="Photos/photo_2022-02-17_22-41-40.jpg" width="100"/>
-<img src="Photos/photo_2022-02-18_00-19-38.jpg" width="100"/>
+<img src="Photos/photo_2022-02-18_11-24-21.jpg" width="100"/><img src="Photos/photo_2022-02-17_21-01-05.jpg" width="100"/><img src="Photos/photo_2022-02-17_21-01-24.jpg" width="100"/><img src="Photos/photo_2022-02-17_22-31-56.jpg" width="100"/><img src="Photos/photo_2022-02-17_22-41-40.jpg" width="100"/><img src="Photos/photo_2022-02-18_00-19-38.jpg" width="100"/>
 
 ### Assembly video on YouTube:
-\
-[<img alt="DRM Watch v2 Assembly" width="400px" src="Photos/youtube-assembly.jpg" /> ](https://youtu.be/IrAri0zF-KY)
+[<img alt="DRM Watch v2 Assembly" width="300px" src="Photos/youtube-assembly.jpg" /> ](https://youtu.be/IrAri0zF-KY)
 \
 https://youtu.be/IrAri0zF-KY
 

@@ -308,6 +308,18 @@ Changelog
 2022-02-28 1.20 Добавлено:  пока держишь кнопку вниз, подсветка не тушится
 2022-02-28 1.20 Добавлено:  пока держишь кнопку вниз, анимация продолжается
 2022-02-28 1.20 Допиливаю документацию
+2022-03-01 Обновление документации: List of features
+2022-03-01 Обновление документации: Overview of watchfaces with photos
+2022-03-02 Обновление документации: Photos of device
+2022-03-02 Обновление документации: Schematics
+2022-03-02 Обновление документации: 3d model
+2022-03-02 Обновление документации: Prototype photos
+2022-03-02 Обновление документации: First steps
+2022-03-03 Обновление документации: Video demo of usage on YouTube
+2022-03-03 Обновление документации: Assembly photos
+2022-03-03 Обновление документации: assembly instructions
+2022-03-03 Обновление документации: How to set language
+
 
 
 Планы на будущее:
@@ -323,14 +335,14 @@ Changelog
 - свастон
 - игра гонки
 
-- выяснить как и добавить на репозиторий хештег Arduino
+
 
 
 Общая информация которая должна быть на странице проекта:
 - About this project
 	+ List of features
 	+ Photos of device
-	- Video demo of usage on YouTube
+	+ Video demo of usage on YouTube
 	+ Overview of watchfaces with photos
 	- Overview of screens with photos and description
 	- Overview of settings with description
@@ -344,7 +356,7 @@ Changelog
 - Software
 	+ Used libraries
 	- How to build
-	- How to set language
+	+ How to set language
 	+ How to set watchfaces list
 	- How to add your own watchface
 	+ How to add your own melodies
