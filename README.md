@@ -41,9 +41,11 @@ I have assembled few watches and using it as my everyday watch. Here`s some phot
 
 ## About project > Video overview
 YouTube video with device overview: \
-//https://youtu.be/VYrUO039QUw
-[<img alt="DRM Watch v2 Overview" width="200px" src="Photos/youtube-overview.jpg" />](https://youtu.be/VYrUO039QUw)
-[DRM Watch v2 Overview](https://youtu.be/VYrUO039QUw)
+
+[<img alt="DRM Watch v2 Overview" width="300px" src="Photos/youtube-overview.jpg" />/
+DRM Watch v2 Overview]
+(https://youtu.be/VYrUO039QUw)
+
 
 
 
