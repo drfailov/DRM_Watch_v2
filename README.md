@@ -116,8 +116,8 @@ Initial mode. Its goal to init Serial, init display, init RTC, show startup anim
 Current firmware version is shown on this screen.
 If RTC can not be initialized, watchface will not open.
 No user input on this screen.
-<img src="Photos/20220228_160743.jpg" width="250"/>
-<img src="Photos/rtc_err.jpg" width="150"/>
+<p align="center"><img src="Photos/20220228_160743.jpg" width="250"/></p>
+<p align="center"><img src="Photos/rtc_err.jpg" width="150"/></p>
 
 ### Watchface screen
 Screen with watchface. 
@@ -128,7 +128,7 @@ Most watcfaces draws 1 frame and sleeps 8 seconds.
 - To force reboot watch, hold <b>up</b> button for 3 seconds. 
 - To enable backlight for 7 seconds, press <b>down</b> button once. 
 - To keep backlight on and continue animation (if any), hold <b>down</b> button. 
-<img src="Photos/20220228_160327.jpg" width="250"/>
+<p align="center"><img src="Photos/20220228_160327.jpg" width="250"/></p>
 
 ### Main menu screen
 Main menu to access all the features. 
@@ -139,7 +139,7 @@ If inactive for 120 sec, will automatically go to watchface.
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
 - Press <b>down</b> button to move cursor down.
-<img src="Photos/20220228_160333.jpg" width="250"/>
+<p align="center"><img src="Photos/20220228_160333.jpg" width="250"/></p>
 
 ### Application list screen
 List of useful applications.
@@ -148,7 +148,7 @@ If inactive for 120 sec, will automatically go to watchface.
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
 - Press <b>down</b> button to move cursor down.
-<img src="Photos/20220228_160342.jpg" width="250"/>
+<p align="center"><img src="Photos/20220228_160342.jpg" width="250"/></p>
 
 ### Stopwatch application
 Stopwatch designed to measure the amount of time that elapses between its activation and deactivation.
@@ -163,13 +163,12 @@ Menu items is:
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
 - Press <b>down</b> button to move cursor down.
-<p align="center">
-<img src="Photos/20220228_160438.jpg" width="250"/>
-</p>
+<p align="center"><img src="Photos/20220228_160438.jpg" width="250"/></p>
+
 
 # Hardware
-<img src="Photos/2022-03-02 Hardware-and-case.jpg" width="300"/>
-If you want to assemble your own DRM Watch, this block is for you:) 
+<p align="center"><img src="Photos/2022-03-02 Hardware-and-case.jpg" width="350"/></p>
+If you want to assemble your own DRM Watch, this block is for you:)
 To assemble watch, you will need: <b>circuit board, parts or modules to desolder, case</b>. 
 Also, some instruments, much time and some experience.
 
