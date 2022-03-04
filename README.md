@@ -2,7 +2,7 @@
 <!-- Picture: <img src="Photos/" width="300"/>  -->
 
 # About project DRM Watch v2
-<img src="Photos/header.png" width="600"/>
+<p align="center"><img src="Photos/header.png" width="600"/></p>
 
 Arduino-based watch with Nokia 1280 LCD. \
 Main challenge of this project is packing as much
@@ -35,17 +35,18 @@ Hardware design is made by <b>MeltemiOS</b>.
 
 ## About project > Photos of device
 I have assembled few watches and using it as my everyday watch. Here`s some photos: \
+<p align="center">
 <img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26.jpg" width="150"/>     <img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="150"/>
 <img src="Photos/photo_2022-02-18_12-43-26 (5).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="150"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" width="150"/>
-
+</p>
 
 ## About project > Video overview
 YouTube video with device overview: 
-\
+<p align="center">
 [<img alt="DRM Watch v2 Overview" width="300px" src="Photos/youtube-overview.jpg" /> ](https://youtu.be/VYrUO039QUw)
 \
 https://youtu.be/VYrUO039QUw 
-
+</p>
 
 
 ## About project > Overview of Watchfaces
@@ -55,7 +56,7 @@ You can change set of watchfaces in firmware. More info about it in "Software" b
 The first watchface in project, back from 2016. Inspired by iPod nano. \
 Designed by <b>MeltemiOS</b>.
 Updates once in second. Not very power-efficient. 
-Takes about <b>486 bytes</b> of FLASH memory. \
+Takes about <b>486 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_161025.jpg" width="250"/>
 <img src="Photos/photo_2022-01-16_13-16-34.jpg" width="100"/></p>
 
@@ -63,14 +64,14 @@ Takes about <b>486 bytes</b> of FLASH memory. \
 "DRM Watch" without seconds. \
 Designed by <b>Dr. Failov</b>.
 Updates once in 8 seconds. Power-efficient. 
-Takes about <b>430 bytes</b> of FLASH memory. \
+Takes about <b>430 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_160327.jpg" width="250"/></p>
 
 ### Watchface "Nomens"
 Inspired by Siemens screensaver and Nokia home screen.\
 Designed by <b>MeltemiOS</b>.
 Updates once in 8 seconds. Power-efficient. 
-Takes about <b>666 bytes</b> of FLASH memory. \
+Takes about <b>666 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_161238.jpg" width="250"/>
 <img src="Photos/photo_2021-12-17_08-58-21.jpg" width="100"/>
 <img src="Photos/photo_2022-01-05_09-30-16.jpg" width="100"/></p>
@@ -79,14 +80,14 @@ Takes about <b>666 bytes</b> of FLASH memory. \
 Project logo on watchface.\
 Designed by <b>Dr. Failov</b>.
 Updates once in 8 seconds. Power-efficient. 
-Takes about <b>336 bytes</b> of FLASH memory. \
+Takes about <b>336 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_161255.jpg" width="250"/></p>
 
 ### Watchface "Xelibri"
 Inspired by Siemens Xelibri product line. Very memory-hungry watchface.\
 Designed by <b>MeltemiOS</b>.
 Updates once in 8 seconds. Power-efficient. 
-Takes about <b>1528 bytes</b> of FLASH memory. \
+Takes about <b>1528 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_162136.jpg" width="250"/>
 <img src="Photos/photo_2022-01-01_05-27-44.jpg" width="100"/></p>
 
@@ -94,7 +95,7 @@ Takes about <b>1528 bytes</b> of FLASH memory. \
 Inspired by Matrix film, like font on secret documents.\
 Designed by <b>MeltemiOS</b>.
 Updates once in 8 seconds. Power-efficient. 
-Takes about <b>886 bytes</b> of FLASH memory. \
+Takes about <b>886 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_162259.jpg" width="250"/>
 <img src="Photos/photo_2022-03-01_17-50-55.jpg" width="100"/></p>
 
@@ -102,7 +103,7 @@ Takes about <b>886 bytes</b> of FLASH memory. \
 Conway's Game of Life as background.\
 Designed by <b>Dr. Failov</b>.
 Draws 10 frames every 8 seconds. Not Power-efficient, because of animation. 
-Takes about <b>684 bytes</b> of FLASH memory. \
+Takes about <b>684 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_160803.jpg" width="250"/>
 <img src="Photos/game of life.jpg" width="100"/></p>
 
@@ -116,7 +117,8 @@ Initial mode. Its goal to init Serial, init display, init RTC, show startup anim
 Current firmware version is shown on this screen.
 If RTC can not be initialized, watchface will not open.
 No user input on this screen.
-<p align="center"><img src="Photos/20220228_160743.jpg" width="250"/><img src="Photos/rtc_err.jpg" width="150"/></p>
+<p align="center"><img src="Photos/20220228_160743.jpg" width="250"/>
+<img src="Photos/rtc_err.jpg" width="150"/></p>
 
 ### Watchface screen
 Screen with watchface. 
@@ -177,37 +179,57 @@ Also, some instruments, much time and some experience.
 - RTC module (DS3231M chip)
 - Li-Po charger module (TC4056A chip)
 
-To get components I've desoldered modules. \
+To get components I've desoldered modules. 
+<p align="center">
 <img src="Photos/photo_2022-01-11_15-28-52.jpg" width="350"/>
+</p>
 
 ### Arduino Nano, CH340C and MEGA328P
 MEGA328P used as main controller.\
 CH340C Is needed to allow programming with USB port.\
-Link: https://aliexpress.ru/item/4000903444456.html  \
-<img src="Photos/photo_2021-11-05_13-17-31.jpg" width="150"/> <img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="150"/>
+Link: https://aliexpress.ru/item/4000903444456.html  
+<p align="center">
+<img src="Photos/photo_2021-11-05_13-17-31.jpg" width="150"/>
+<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="150"/>
+</p>
 
 ### Nokia 1280, PCF8814 LCD
 Also, this display is used in: Nokia 1202, Nokia 1280, Nokia 1203.
 And also compatible with Nokia 1100 LCD, Nokia 1101 LCD, Nokia 1110 LCD, but it will not fit with board.
 Display is main output device. \
-Link: https://aliexpress.ru/item/32864378445.html  \
-<img src="Photos/photo_2021-10-24_09-22-21.jpg" width="150"/> <img src="Photos/photo_2021-10-16_11-31-45.jpg" width="150"/>
+Link: https://aliexpress.ru/item/32864378445.html  
+<p align="center">
+<img src="Photos/photo_2021-10-24_09-22-21.jpg" width="150"/>
+<img src="Photos/photo_2021-10-16_11-31-45.jpg" width="150"/>
+</p>
 
 ### RTC module, DS3231M chip
 DS3231M is needed to precisely calculate time. \
-Link: https://aliexpress.ru/item/4000004876793.html  \
-<img src="Photos/1PCS-DS3231-AT24C32-IIC-Precision-RTC-Real-Time-Clock-Memory-Module-For-Arduino-new-original.jpg_220x220xzq55.jpg" width="150"/> <img src="Photos/photo_2021-12-08_22-56-06.jpg" width="150"/> <img src="Photos/Screenshot 2021-12-09 004224.png" width="150"/>
+Link: https://aliexpress.ru/item/4000004876793.html  
+<p align="center">
+<img src="Photos/1PCS-DS3231-AT24C32-IIC-Precision-RTC-Real-Time-Clock-Memory-Module-For-Arduino-new-original.jpg_220x220xzq55.jpg" width="150"/>
+<img src="Photos/photo_2021-12-08_22-56-06.jpg" width="150"/>
+<img src="Photos/Screenshot 2021-12-09 004224.png" width="150"/>
+</p>
 
 ### Passive buzzer, 5.2mm x 5.2mm 
 Buzzer allows to play sound signals and melodies. \
-Link: https://aliexpress.ru/item/1005003227004618.html  \
-<img src="Photos/buzzer.jpg" width="150"/> <img src="Photos/photo_2021-12-03_20-30-06.jpg" width="150"/> <img src="Photos/photo_2021-12-03_20-30-32.jpg" width="150"/>
+Link: https://aliexpress.ru/item/1005003227004618.html  
+<p align="center">
+<img src="Photos/buzzer.jpg" width="150"/>
+<img src="Photos/photo_2021-12-03_20-30-06.jpg" width="150"/>
+<img src="Photos/photo_2021-12-03_20-30-32.jpg" width="150"/>
+</p>
 
 ### Board
 I've ordered boards on JLC PCB. Actual version of gerber files to make your order see at `Circuit Board` folder. \
-Here's what I got: \
-(It's older revision on photo) \
-<img src="Photos/photo_2021-11-30_08-55-54.jpg" width="150"/> <img src="Photos/photo_2021-11-30_16-37-08.jpg" width="150"/> <img src="Photos/photo_2021-11-30_08-59-16.jpg" width="150"/> 
+Here's what I got: 
+<p align="center">
+<img src="Photos/photo_2021-11-30_08-55-54.jpg" width="150"/> 
+<img src="Photos/photo_2021-11-30_16-37-08.jpg" width="150"/> 
+<img src="Photos/photo_2021-11-30_08-59-16.jpg" width="150"/> 
+(It's older revision on photo) 
+</p>
 
 ## Hardware > Schematics
 ### Board gerber files
