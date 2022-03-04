@@ -167,7 +167,7 @@ Buttons are indicated on the side of the screen.
 
 
 # Hardware
-<p align="center"><img src="Photos/2022-03-02 Hardware-and-case.jpg" width="350"/></p>
+<p align="center"><img src="Photos/2022-03-02 Hardware-and-case.jpg" width="400"/></p>
 If you want to assemble your own DRM Watch, this block is for you:)
 To assemble watch, you will need: <b>circuit board, parts or modules to desolder, case</b>. 
 Also, some instruments, much time and some experience.
@@ -235,13 +235,13 @@ Here's what I got:
 ### Board gerber files
 You can fing GERBER files for DRM Watch board in `Circuit Board` folder.
 <p align="center">
-<img src="Photos\v4 20mm.JPG" width="250"/>
+<img src="Photos\v4 20mm.JPG" width="3000"/>
 </p>
 
 ### Board soldering plan, elements list and LCD pinout
 Description of elements on board:
 <p align="center">
-<img src="Photos\2022-01-16 DRMW2_DOC.png" width="250"/>
+<img src="Photos\2022-01-16 DRMW2_DOC.png" width="300"/>
 </p>
 
 ### Atmel 328P chip pinout
@@ -294,9 +294,9 @@ You can fing STL files for DRM Watch case in `Case` folder. \
 ### Here's some photos of assembly process:
 <p align="center">
 <img src="Photos/photo_2022-02-18_11-24-21.jpg" height="250"/> <img src="Photos/photo_2022-02-17_21-01-05.jpg" height="250"/> <img src="Photos/photo_2022-02-17_21-01-24.jpg" height="250"/>
-<img src="Photos/photo_2022-02-17_22-31-56.jpg" height="250"/> <img src="Photos/photo_2022-02-17_22-41-40.jpg" height="250"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" height="250"/>
+<img src="Photos/photo_2022-02-17_22-31-56.jpg" height="200"/> <img src="Photos/photo_2022-02-17_22-41-40.jpg" height="200"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" height="200"/>
 <img src="Photos/photo_2022-02-19_00-35-44.jpg" height="250"/> <img src="Photos/photo_2022-02-19_13-24-18.jpg" height="250"/> <img src="Photos/photo_2022-02-19_13-35-22.jpg" height="250"/>
-<img src="Photos/photo_2022-02-20_20-00-38.jpg" width="300"/>
+<img src="Photos/photo_2022-02-20_20-00-38.jpg" width="350"/>
 </p>
 
 ### Assembly video on YouTube:
