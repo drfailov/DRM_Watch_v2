@@ -34,7 +34,7 @@ Hardware design is made by <b>MeltemiOS</b>.
 
 
 ## About project > Photos of device
-I have assembled few watches and using it as my everyday watch. Here`s some photos: \
+I have assembled few watches and using it as my everyday watch. Here`s some photos: 
 <p align="center">
 <img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26.jpg" width="150"/>     <img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="150"/>
 <img src="Photos/photo_2022-02-18_12-43-26 (5).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="150"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" width="150"/>
@@ -235,7 +235,7 @@ Here's what I got:
 ### Board gerber files
 You can fing GERBER files for DRM Watch board in `Circuit Board` folder.
 <p align="center">
-<img src="Photos\v4 20mm.JPG" width="3000"/>
+<img src="Photos\v4 20mm.JPG" width="300"/>
 </p>
 
 ### Board soldering plan, elements list and LCD pinout
@@ -247,7 +247,7 @@ Description of elements on board:
 ### Atmel 328P chip pinout
 You can use this schematic as reference. 
 <p align="center">
-<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="200"/>
+<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="300"/>
 </p>
 
 Used pins:
@@ -269,7 +269,7 @@ Used pins:
 - A5 - RTC SCL
 
 ## Hardware > Case 3D Model
-You can fing STL files for DRM Watch case in `Case` folder. \
+You can fing STL files for DRM Watch case in `Case` folder. 
 <p align="center">
 <img src="Photos/Screenshot 2022-03-01 224852.jpg" width="230"/>
 <img src="Photos/Screenshot 2022-03-01 224938.jpg" width="200"/>
@@ -294,8 +294,8 @@ You can fing STL files for DRM Watch case in `Case` folder. \
 ### Here's some photos of assembly process:
 <p align="center">
 <img src="Photos/photo_2022-02-18_11-24-21.jpg" height="250"/> <img src="Photos/photo_2022-02-17_21-01-05.jpg" height="250"/> <img src="Photos/photo_2022-02-17_21-01-24.jpg" height="250"/>
-<img src="Photos/photo_2022-02-17_22-31-56.jpg" height="200"/> <img src="Photos/photo_2022-02-17_22-41-40.jpg" height="200"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" height="200"/>
-<img src="Photos/photo_2022-02-19_00-35-44.jpg" height="250"/> <img src="Photos/photo_2022-02-19_13-24-18.jpg" height="250"/> <img src="Photos/photo_2022-02-19_13-35-22.jpg" height="250"/>
+<img src="Photos/photo_2022-02-17_22-31-56.jpg" height="180"/> <img src="Photos/photo_2022-02-17_22-41-40.jpg" height="180"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" height="180"/>
+<img src="Photos/photo_2022-02-19_00-35-44.jpg" height="180"/> <img src="Photos/photo_2022-02-19_13-24-18.jpg" height="180"/> <img src="Photos/photo_2022-02-19_13-35-22.jpg" height="180"/>
 <img src="Photos/photo_2022-02-20_20-00-38.jpg" width="350"/>
 </p>
 
@@ -353,8 +353,8 @@ Only one string can be active at the time. If you select any language, you have 
 You can include multiple watcfaces in firmware. As much as enough FLASH memory.\
 You can configure included wathfaces in file `_DRMWatch2.ino`.\
 Update number of included watchfaces, comment or uncomment needed watchfaces, check memory usage.\
-Example:\
-<img src="Photos/config_watchfaces.jpg" width="300"/>
+Example:
+<p align="center"><img src="Photos/config_watchfaces.jpg" width="300"/></p>
 
 ## Software > How to add your own melodies
 Because of Arduino have <b>VERY</b> limited space, but I want to store long melodies, I made algorythm to 
@@ -366,8 +366,8 @@ Melodies stored in form of one byte-one note. Array is contains tempo and notes.
 First 2 bits of note is representing note duration (values 4, 8, 16, 32).\
 Last 6 bits represents note number counted from low note of first octave.\
 Software can be found in `Windows RTTTL to binary converter\RTTTL Converter\bin\Release\net5.0-windows` folder.
-<img src="Photos/photo_2021-12-16_22-37-15.jpg" width="400"/>
-\
+<p align="center"><img src="Photos/photo_2021-12-16_22-37-15.jpg" width="400"/></p>
+
 To add your melody to melody list:
 - Convert your RTTTL melody to binary array;
 - In file `MelodyPlayer.ino` add array and `get...()` function with your melody;
@@ -383,17 +383,20 @@ A long time ago...
 ## Project history > 2016, First steps
 Back in 2016 me and my friend <b>MeltemiOS</b> was playing with arduino and Nokia 5110 LCD.
 Then idea of DRM Watch was born. We've assembled one DIY working prototype and stopped development. \
-Here's some prorotype photos of these days: \
+Here's some prorotype photos of these days: 
+<p align="center">
 <img src="Photos/xwYFapverSc.jpg" width="200"/> <img src="Photos/Kcf5E-HmfqE.jpg" width="200"/> <img src="Photos/RHoSkpuC5Ek.jpg" width="200"/>
 <img src="Photos/z0RViSCt2jg.jpg" width="200"/> <img src="Photos/ApKsKMTuODI.jpg" width="200"/> <img src="Photos/n7C6VvySHto.jpg" width="200"/> 
+</p>
 
 ## Project history > 2021, Development continued
 Later, in 2021 for some reason project continued. 
 LCD was changed to Nokia 1280 LCD, because it is easier to get and has more reliable connection. 
-Here's some prototypes:\
-<img src="Photos/photo_2021-12-19_16-08-34.jpg" width="200"/> <img src="Photos/photo_2021-12-05_17-01-19.jpg" width="200"/> <img src="Photos/photo_2021-12-04_13-20-55.jpg" width="200"/>
-<img src="Photos/photo_2021-12-08_22-34-49.jpg" width="200"/> <img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="200"/> 
-
+Here's some prototypes:
+<p align="center">
+<img src="Photos/photo_2021-12-19_16-08-34.jpg" height="200"/> <img src="Photos/photo_2021-12-05_17-01-19.jpg" height="200"/> <img src="Photos/photo_2021-12-04_13-20-55.jpg" height="200"/>
+<img src="Photos/photo_2021-12-08_22-34-49.jpg" height="200"/> <img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" height="200"/> 
+</p>
 
 
 
