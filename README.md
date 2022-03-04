@@ -153,7 +153,7 @@ Buttons are indicated on the side of the screen.
 ### Stopwatch application
 Stopwatch designed to measure the amount of time that elapses between its activation and deactivation.
 Stopwatch count time only while application is opened due to power consumption reasons.
-There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off. \
+There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off. 
 
 Menu items is:
 - Back to watchface. Stopwatch will reset.
