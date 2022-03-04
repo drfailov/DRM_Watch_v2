@@ -270,7 +270,10 @@ Used pins:
 
 ## Hardware > Case 3D Model
 You can fing STL files for DRM Watch case in `Case` folder. \
-<img src="Photos/Screenshot 2022-03-01 224852.jpg" width="230"/> <img src="Photos/Screenshot 2022-03-01 224938.jpg" width="200"/>
+<p align="center">
+<img src="Photos/Screenshot 2022-03-01 224852.jpg" width="230"/>
+<img src="Photos/Screenshot 2022-03-01 224938.jpg" width="200"/>
+</p>
 
 ## Hardware > Assembly instruction
 ### General way to assemble watch:
@@ -289,15 +292,16 @@ You can fing STL files for DRM Watch case in `Case` folder. \
 - Now you can assemble device to case and start using it :)
 
 ### Here's some photos of assembly process:
-<img src="Photos/photo_2022-02-18_11-24-21.jpg" width="150"/> <img src="Photos/photo_2022-02-17_21-01-05.jpg" width="150"/> <img src="Photos/photo_2022-02-17_21-01-24.jpg" width="150"/>
-<img src="Photos/photo_2022-02-17_22-31-56.jpg" width="150"/> <img src="Photos/photo_2022-02-17_22-41-40.jpg" width="150"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" width="150"/>
-<img src="Photos/photo_2022-02-19_00-35-44.jpg" width="150"/> <img src="Photos/photo_2022-02-19_13-24-18.jpg" width="150"/> <img src="Photos/photo_2022-02-19_13-35-22.jpg" width="150"/>
-<img src="Photos/photo_2022-02-20_20-00-38.jpg" width="250"/>
+<p align="center">
+<img src="Photos/photo_2022-02-18_11-24-21.jpg" height="250"/> <img src="Photos/photo_2022-02-17_21-01-05.jpg" height="250"/> <img src="Photos/photo_2022-02-17_21-01-24.jpg" height="250"/>
+<img src="Photos/photo_2022-02-17_22-31-56.jpg" height="250"/> <img src="Photos/photo_2022-02-17_22-41-40.jpg" height="250"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" height="250"/>
+<img src="Photos/photo_2022-02-19_00-35-44.jpg" height="250"/> <img src="Photos/photo_2022-02-19_13-24-18.jpg" height="250"/> <img src="Photos/photo_2022-02-19_13-35-22.jpg" height="250"/>
+<img src="Photos/photo_2022-02-20_20-00-38.jpg" width="300"/>
+</p>
 
 ### Assembly video on YouTube:
-[<img alt="DRM Watch v2 Assembly" width="300px" src="Photos/youtube-assembly.jpg" /> ](https://youtu.be/IrAri0zF-KY)
-\
-https://youtu.be/IrAri0zF-KY
+[<p align="center"><img alt="DRM Watch v2 Assembly" width="300px" src="Photos/youtube-assembly.jpg" /> </p>](https://youtu.be/IrAri0zF-KY)
+<p align="center">https://youtu.be/IrAri0zF-KY </p>
 
 ## Hardware > Troubleshooting
 
