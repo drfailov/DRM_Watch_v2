@@ -117,7 +117,7 @@ Current firmware version is shown on this screen.
 If RTC can not be initialized, watchface will not open.
 No user input on this screen.
 <img src="Photos/20220228_160743.jpg" width="250"/>
-<img src="Photos/rtc-err.jpg" width="150"/>
+<img src="Photos/rtc_err.jpg" width="150"/>
 
 
 ### Watchface screen
