@@ -163,7 +163,7 @@ Menu items is:
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
 - Press <b>down</b> button to move cursor down.
-<img src="Photos/20220228_160438.jpg" width="250"/>
+<img align="center" src="Photos/20220228_160438.jpg" width="250"/>
 
 
 # Hardware
