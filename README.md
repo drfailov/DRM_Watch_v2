@@ -43,7 +43,8 @@ I have assembled few watches and using it as my everyday watch. Here`s some phot
 ## About project > Video overview
 YouTube video with device overview: 
 <p align="center">
-[<img alt="DRM Watch v2 Overview" width="300px" src="Photos/youtube-overview.jpg" /> ](https://youtu.be/VYrUO039QUw) \
+[<img alt="DRM Watch v2 Overview" width="300px" src="Photos/youtube-overview.jpg" /> ](https://youtu.be/VYrUO039QUw) 
+
 https://youtu.be/VYrUO039QUw 
 </p>
 
@@ -227,22 +228,30 @@ Here's what I got:
 <img src="Photos/photo_2021-11-30_08-55-54.jpg" height="150"/> 
 <img src="Photos/photo_2021-11-30_16-37-08.jpg" height="150"/> 
 <img src="Photos/photo_2021-11-30_08-59-16.jpg" height="150"/> 
-\
+
 (It's older revision on photo) 
 </p>
 
 ## Hardware > Schematics
 ### Board gerber files
-You can fing GERBER files for DRM Watch board in `Circuit Board` folder. \
+You can fing GERBER files for DRM Watch board in `Circuit Board` folder.
+<p align="center">
 <img src="Photos\v4 20mm.JPG" width="250"/>
+</p>
 
 ### Board soldering plan, elements list and LCD pinout
-Description of elements on board: \
+Description of elements on board:
+<p align="center">
 <img src="Photos\2022-01-16 DRMW2_DOC.png" width="250"/>
+</p>
 
 ### Atmel 328P chip pinout
-You can use this schematic as reference. \
+You can use this schematic as reference. 
+<p align="center">
 <img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="200"/>
+</p>
+
+Used pins:
 - D0 - UART RX
 - D1 - UART TX
 - D2 - Button DOWN (Active HIGH)
