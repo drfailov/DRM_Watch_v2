@@ -165,7 +165,21 @@ Buttons are indicated on the side of the screen.
 - Press <b>down</b> button to move cursor down.
 <p align="center"><img src="Photos/20220228_160438.jpg" width="250"/></p>
 
+### Alarm
+You can select time and melody and alarm will play at that time. Alarm will start only if watchface is opened.
+There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off. 
 
+Menu items is:
+- Back to apps list.
+- Enable/Disable alarm.
+- Alarm hour.
+- Alarm Minute.
+- Alarm Melody.
+
+Buttons are indicated on the side of the screen.
+- Press <b>up</b> button to confirm selected item or increment item.
+- Press <b>down</b> button to move cursor down.
+<p align="center"><img src="Photos/20220228_160517.jpg" width="250"/></p>
 
 # Hardware
 <p align="center"><img src="Photos/2022-03-02 Hardware-and-case.jpg" width="400"/></p>
@@ -294,16 +308,16 @@ You can fing STL files for DRM Watch case in `Case` folder.
 
 ### Here's some photos of assembly process:
 <p align="center">
-<img src="Photos/photo_2022-02-18_11-24-21.jpg" height="200"/> 
-<img src="Photos/photo_2022-02-17_21-01-05.jpg" height="200"/> 
-<img src="Photos/photo_2022-02-17_21-01-24.jpg" height="200"/>
-<img src="Photos/photo_2022-02-17_22-31-56.jpg" height="200"/> 
-<img src="Photos/photo_2022-02-17_22-41-40.jpg" height="200"/> 
-<img src="Photos/photo_2022-02-18_00-19-38.jpg" height="200"/>
-<img src="Photos/photo_2022-02-19_00-35-44.jpg" height="200"/> 
-<img src="Photos/photo_2022-02-19_13-24-18.jpg" height="200"/> 
-<img src="Photos/photo_2022-02-19_13-35-22.jpg" height="200"/>
-<img src="Photos/photo_2022-02-20_20-00-38.jpg" height="200"/>
+<img src="Photos/photo_2022-02-18_11-24-21.jpg" height="190"/> 
+<img src="Photos/photo_2022-02-17_21-01-05.jpg" height="190"/> 
+<img src="Photos/photo_2022-02-17_21-01-24.jpg" height="190"/>
+<img src="Photos/photo_2022-02-17_22-31-56.jpg" height="190"/> 
+<img src="Photos/photo_2022-02-17_22-41-40.jpg" height="190"/> 
+<img src="Photos/photo_2022-02-18_00-19-38.jpg" height="190"/>
+<img src="Photos/photo_2022-02-19_00-35-44.jpg" height="190"/> 
+<img src="Photos/photo_2022-02-19_13-24-18.jpg" height="190"/> 
+<img src="Photos/photo_2022-02-19_13-35-22.jpg" height="190"/>
+<img src="Photos/photo_2022-02-20_20-00-38.jpg" height="190"/>
 </p>
 
 ### Assembly video on YouTube:
@@ -479,10 +493,6 @@ Button down is moving field selection, button up is incrementing value.\
 ### ModeAbout
 Information about developers and version.\
 <img src="Photos/photo_2021-12-19_19-43-52 (8).jpg" width="300"/>
-
-### ModeSetAlarm
-You can select time and melody and alarm will play at that time. Alarm will start only if watchface is opened.\
-<img src="Photos/" width="300"/>
 
 ### modeZrada
 Genegates random conscusion: "Peremoga" or "Zrada". This is local Ukrainian meme.
