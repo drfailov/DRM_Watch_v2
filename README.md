@@ -111,14 +111,33 @@ Takes about <b>684 bytes</b> of FLASH memory. \
 Here's detailed overview of every screen and mode with recomendations how to use it.
 You also can add your own screens, more info about it in "Software" block.
 
+### Init screen
+Initial mode. Its goal to init Serial, init display, init RTC, show startup animation, and go to watchface.
+Current firmware version is shown on this screen.
+If RTC can not be initialized, watchface will not open.
+No user input on this screen.
+<img src="Photos/20220228_160743.jpg" width="250"/>
+
 ### Watchface screen
-Screen with watchface. This screen enables power-saving sleep. Sleep depends on watchface sleep mode.
-Most watcfaces draws 1 frame and sleeps 8 seconds. \
-- To enter main menu, press <b>up</b> button once. \
-- To force reboot watch, hold <b>up</b> button for 3 seconds. \
-- To enable backlight for 7 seconds, press <b>down</b> button once. \
-- To keep backlight on and continue animation (if any), hold <b>down</b> button. \
-<img src="Photos/20220228_160327.jpg" width="200"/>
+Screen with watchface. 
+Watchfaces is only screen with deep sleep, so device can run for a long time if in watchface mode.
+Sleep depends on watchface sleep mode.
+Most watcfaces draws 1 frame and sleeps 8 seconds. 
+- To enter main menu, press <b>up</b> button once. 
+- To force reboot watch, hold <b>up</b> button for 3 seconds. 
+- To enable backlight for 7 seconds, press <b>down</b> button once. 
+- To keep backlight on and continue animation (if any), hold <b>down</b> button. 
+<img src="Photos/20220228_160327.jpg" width="250"/>
+
+### Main menu screen
+Main menu to access all the features. 
+Upper bar contains current temperature (read from RTC), battery status and icons.
+Bottom bar contains description of selected item. 
+Text available in russian and english. See `Software` block for more.
+If inactive for 120 sec, will automatically go to watchface. 
+- Press <b>up</b> button to confirm selected item.
+- Press <b>down</b> button to move cursor down.
+<img src="Photos/20220228_160333.jpg" width="250"/>
 
 
 
@@ -288,6 +307,7 @@ First 2 bits of note is representing note duration (values 4, 8, 16, 32).\
 Last 6 bits represents note number counted from low note of first octave.\
 Software can be found in `Windows RTTTL to binary converter\RTTTL Converter\bin\Release\net5.0-windows` folder.
 <img src="Photos/photo_2021-12-16_22-37-15.jpg" width="400"/>
+\
 To add your melody to melody list:
 - Convert your RTTTL melody to binary array;
 - In file `MelodyPlayer.ino` add array and `get...()` function with your melody;
