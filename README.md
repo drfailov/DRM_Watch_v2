@@ -124,7 +124,7 @@ No user input on this screen.
 ### Watchface screen
 Screen with watchface. 
 Watchfaces is only screen with deep sleep, so device can run for a long time if in watchface mode.
-Sleep depends on watchface sleep mode.
+Sleep depends on watchface sleep mode. When battery is low, 1 frame in 8s sleep is used for any watchface.
 Most watcfaces draws 1 frame and sleeps 8 seconds. 
 - To enter main menu, press <b>up</b> button once. 
 - To force reboot watch, hold <b>up</b> button for 3 seconds. 
@@ -153,6 +153,7 @@ Text available in russian and english. See "Software" block for more.
 If inactive for 120 sec, will automatically go to watchface. 
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
+- Hold <b>up</b> button for 3 seconds to go back to watchface.
 - Press <b>down</b> button to move cursor down.
 <p align="center">
 <img src="Photos/20220228_160342.jpg" width="250"/>
@@ -209,10 +210,35 @@ Menu with list of melodies, which can be played.
 If inactive for 120 sec, will automatically go to watchface. 
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
+- Hold <b>up</b> button for 3 seconds to go back to watchface.
 - Press <b>down</b> button to move cursor down.
 <p align="center">
 <img src="Photos/20220228_160601.jpg" width="250"/>
 <img src="Photos/20220228_160610.jpg" width="250"/>
+</p>
+
+### Settings screen
+Main place where you can change parameters of wor DRM Watch.
+If inactive for 120 sec, will automatically go to watchface. 
+
+Menu items is:
+- Back to main menu.
+- Enable or disable silent mode. In silent mode watch will not play any sound except alarm.
+- Flip screen. 
+You can select optimal screen orientation for wearing watch on left or right hand. 
+- Watchface selection.
+You can choose watchface from list of watchfaces you included in firmware.
+- Sound on keypress. 
+There are different options for buttons sound: beep, click, tone, whistle, none.
+- Set time and date.
+
+Buttons are indicated on the side of the screen.
+- Press <b>up</b> button to confirm/change selected item.
+- Hold <b>up</b> button for 3 seconds to go back to watchface.
+- Press <b>down</b> button to move cursor down.
+<p align="center">
+<img src="Photos/20220228_160650.jpg" width="250"/>
+<img src="Photos/20220228_160658.jpg" width="250"/>
 </p>
 
 
