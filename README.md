@@ -49,14 +49,14 @@ https://youtu.be/VYrUO039QUw
 
 
 ## About project > Overview of Watchfaces
-You can change set of watchfaces in firmware. More info about it is "Software" block.
+You can change set of watchfaces in firmware. More info about it in "Software" block.
 
 ### Watchface "DRM Watch"
 The first watchface in project, back from 2016. Inspired by iPod nano. \
 Designed by <b>MeltemiOS</b>.
 Updates once in second. Not very power-efficient. 
 Takes about <b>486 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_161025.jpg" width="200"/>
+<img src="Photos/20220228_161025.jpg" width="250"/>
 <img src="Photos/photo_2022-01-16_13-16-34.jpg" width="100"/>
 
 ### Watchface "DRM Lite"
@@ -64,14 +64,14 @@ Takes about <b>486 bytes</b> of FLASH memory. \
 Designed by <b>Dr. Failov</b>.
 Updates once in 8 seconds. Power-efficient. 
 Takes about <b>430 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_160327.jpg" width="200"/>
+<img src="Photos/20220228_160327.jpg" width="250"/>
 
 ### Watchface "Nomens"
 Inspired by Siemens screensaver and Nokia home screen.\
 Designed by <b>MeltemiOS</b>.
 Updates once in 8 seconds. Power-efficient. 
 Takes about <b>666 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_161238.jpg" width="200"/>
+<img src="Photos/20220228_161238.jpg" width="250"/>
 <img src="Photos/photo_2021-12-17_08-58-21.jpg" width="100"/>
 <img src="Photos/photo_2022-01-05_09-30-16.jpg" width="100"/>
 
@@ -80,14 +80,14 @@ Project logo on watchface.\
 Designed by <b>Dr. Failov</b>.
 Updates once in 8 seconds. Power-efficient. 
 Takes about <b>336 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_161255.jpg" width="200"/>
+<img src="Photos/20220228_161255.jpg" width="250"/>
 
 ### Watchface "Xelibri"
 Inspired by Siemens Xelibri product line. Very memory-hungry watchface.\
 Designed by <b>MeltemiOS</b>.
 Updates once in 8 seconds. Power-efficient. 
 Takes about <b>1528 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_162136.jpg" width="200"/>
+<img src="Photos/20220228_162136.jpg" width="250"/>
 <img src="Photos/photo_2022-01-01_05-27-44.jpg" width="100"/>
 
 ### Watchface "Matrix"
@@ -95,7 +95,7 @@ Inspired by Matrix film, like font on secret documents.\
 Designed by <b>MeltemiOS</b>.
 Updates once in 8 seconds. Power-efficient. 
 Takes about <b>886 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_162259.jpg" width="200"/>
+<img src="Photos/20220228_162259.jpg" width="250"/>
 <img src="Photos/photo_2022-03-01_17-50-55.jpg" width="100"/>
 
 ### Watchface "Life"
@@ -103,9 +103,22 @@ Conway's Game of Life as background.\
 Designed by <b>Dr. Failov</b>.
 Draws 10 frames every 8 seconds. Not Power-efficient, because of animation. 
 Takes about <b>684 bytes</b> of FLASH memory. \
-<img src="Photos/20220228_160803.jpg" width="200"/>
+<img src="Photos/20220228_160803.jpg" width="250"/>
 <img src="Photos/game of life.jpg" width="100"/>
 
+
+## About project > Overview of screens
+Here's detailed overview of every screen and mode with recomendations how to use it.
+You also can add your own screens, more info about it in "Software" block.
+
+### Watchface screen
+Screen with watchface. This screen enables power-saving sleep. Sleep depends on watchface sleep mode.
+Most watcfaces draws 1 frame and sleeps 8 seconds. \
+- To enter main menu, press <b>up</b> button once. \
+- To force reboot watch, hold <b>up</b> button for 3 seconds. \
+- To enable backlight for 7 seconds, press <b>down</b> button once. \
+- To keep backlight on and continue animation (if any), hold <b>down</b> button. \
+<img src="Photos/20220228_160327.jpg" width="200"/>
 
 
 
@@ -273,8 +286,16 @@ DRM Watch firmware.\
 Melodies stored in form of one byte-one note. Array is contains tempo and notes.\
 First 2 bits of note is representing note duration (values 4, 8, 16, 32).\
 Last 6 bits represents note number counted from low note of first octave.\
-<img src="Photos/photo_2021-12-16_22-37-15.jpg" width="500"/>
-
+Software can be found in `Windows RTTTL to binary converter\RTTTL Converter\bin\Release\net5.0-windows` folder.
+<img src="Photos/photo_2021-12-16_22-37-15.jpg" width="400"/>
+To add your melody to melody list:
+- Convert your RTTTL melody to binary array;
+- In file `MelodyPlayer.ino` add array and `get...()` function with your melody;
+- In file `ModeMenuMelodies.ino` in function `getMelodyByIndex()` add index for your melody;
+- In file `ModeMenuMelodies.ino` in array `modeMenuMelodiesItems` add name of your melody;
+- In file `myEEPROM.cpp` in constant `#define eepromMelodyCount` update melody count;
+- Update firmware on your watch;
+- Now your melody will appear in list and can be set as alarm.
 
 
 # Project history
