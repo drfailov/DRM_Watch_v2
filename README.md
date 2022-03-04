@@ -42,11 +42,10 @@ I have assembled few watches and using it as my everyday watch. Here`s some phot
 
 ## About project > Video overview
 YouTube video with device overview: 
-<p align="center">
-[<img alt="DRM Watch v2 Overview" width="300px" src="Photos/youtube-overview.jpg" /> ](https://youtu.be/VYrUO039QUw) 
 
-https://youtu.be/VYrUO039QUw 
-</p>
+[<p align="center"><img alt="DRM Watch v2 Overview" width="300px" src="Photos/youtube-overview.jpg" /> </p>](https://youtu.be/VYrUO039QUw) 
+<p align="center">https://youtu.be/VYrUO039QUw </p>
+
 
 
 ## About project > Overview of Watchfaces
@@ -228,9 +227,9 @@ Here's what I got:
 <img src="Photos/photo_2021-11-30_08-55-54.jpg" height="150"/> 
 <img src="Photos/photo_2021-11-30_16-37-08.jpg" height="150"/> 
 <img src="Photos/photo_2021-11-30_08-59-16.jpg" height="150"/> 
-
-(It's older revision on photo) 
 </p>
+<p align="center">(It's older revision on photo) </p>
+
 
 ## Hardware > Schematics
 ### Board gerber files
