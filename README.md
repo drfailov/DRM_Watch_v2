@@ -154,14 +154,16 @@ Buttons are indicated on the side of the screen.
 Stopwatch designed to measure the amount of time that elapses between its activation and deactivation.
 Stopwatch count time only while application is opened due to power consumption reasons.
 There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off. \
+
 Menu items is:
 - Back to watchface. Stopwatch will reset.
 - Start/Pause stopwatch.
 - Reset stopwatch to zero value.
+
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
 - Press <b>down</b> button to move cursor down.
-<img src="Photos/20220228_160342.jpg" width="250"/>
+<img src="Photos/20220228_160438.jpg" width="250"/>
 
 
 # Hardware
