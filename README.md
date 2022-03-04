@@ -119,7 +119,6 @@ No user input on this screen.
 <img src="Photos/20220228_160743.jpg" width="250"/>
 <img src="Photos/rtc_err.jpg" width="150"/>
 
-
 ### Watchface screen
 Screen with watchface. 
 Watchfaces is only screen with deep sleep, so device can run for a long time if in watchface mode.
@@ -137,10 +136,32 @@ Upper bar contains current temperature (read from RTC), battery status and icons
 Bottom bar contains description of selected item. 
 Text available in russian and english. See `Software` block for more.
 If inactive for 120 sec, will automatically go to watchface. 
+Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
 - Press <b>down</b> button to move cursor down.
 <img src="Photos/20220228_160333.jpg" width="250"/>
 
+### Application list screen
+List of useful applications.
+Text available in russian and english. See `Software` block for more.
+If inactive for 120 sec, will automatically go to watchface. 
+Buttons are indicated on the side of the screen.
+- Press <b>up</b> button to confirm selected item.
+- Press <b>down</b> button to move cursor down.
+<img src="Photos/20220228_160342.jpg" width="250"/>
+
+### Stopwatch application
+Stopwatch designed to measure the amount of time that elapses between its activation and deactivation.
+Stopwatch count time only while application is opened due to power consumption reasons.
+There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off. \
+Menu items is:
+- Back to watchface. Stopwatch will reset.
+- Start/Pause stopwatch.
+- Reset stopwatch to zero value.
+Buttons are indicated on the side of the screen.
+- Press <b>up</b> button to confirm selected item.
+- Press <b>down</b> button to move cursor down.
+<img src="Photos/20220228_160342.jpg" width="250"/>
 
 
 # Hardware
@@ -398,20 +419,8 @@ This is needed to count active watchfaces and show correct number of menu items.
 - Write script to draw yout watchface. You can only use non-blocking functions. 
 
 
-### ModeInit
-Initial mode. Its goal to init Serial, init display, init RTC, show startup animation, and go to watchface.
-If RTC can not be initialized, watchface will not open.\
-<img src="Photos/photo_2021-12-19_19-43-52.jpg" width="300"/>
 
-### ModeWatchFace
-Whow time, date. Watchfaces is only screen with deep sleep, so device can run for a long time if in watchface mode.
-Press button Up to turn on backlight. Press button down to open main menu.\
-<img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" width="300"/>
 
-### ModeMenuMain
-Main menu, opens when you click bottom button. If inactive for 120 sec, will automatically go to watchface.
-Press button Up to select. Press button Down to move cursor down.\
-<img src="Photos/photo_2021-12-19_19-43-52 (3).jpg" width="300"/>
 
 ### ModeMenuMelodies
 Menu with list of melodies, which can be played. If inactive for 120 sec, will automatically go to watchface.
@@ -423,17 +432,6 @@ Menu to set correct time manually. There is no auto-exit from this menu,
 so if you leave watch untouched in this mode, it will discharge and power off.
 Button down is moving field selection, button up is incrementing value.\
 <img src="Photos/photo_2021-12-19_19-43-52 (5).jpg" width="300"/>
-
-### ModeMenuSetSleepTime
-Menu allows you to select interval of sleep in watchface. 
-With less interval watchface will update more frequently, so battery will drain faster.
-If inactive for 120 sec, will automatically go to watchface.
-Press button Up to select. Press button Down to move cursor down.\
-<img src="Photos/photo_2021-12-19_19-43-52 (6).jpg" width="300"/>
-
-### ModeMenuSetBeepSound
-Select sound of buttons.\
-<img src="Photos/photo_2021-12-19_19-43-52 (7).jpg" width="300"/>
 
 ### ModeAbout
 Information about developers and version.\
