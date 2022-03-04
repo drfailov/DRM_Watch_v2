@@ -43,8 +43,7 @@ I have assembled few watches and using it as my everyday watch. Here`s some phot
 ## About project > Video overview
 YouTube video with device overview: 
 <p align="center">
-[<img alt="DRM Watch v2 Overview" width="300px" src="Photos/youtube-overview.jpg" /> ](https://youtu.be/VYrUO039QUw)
-\
+[<img alt="DRM Watch v2 Overview" width="300px" src="Photos/youtube-overview.jpg" /> ](https://youtu.be/VYrUO039QUw) \
 https://youtu.be/VYrUO039QUw 
 </p>
 
@@ -189,8 +188,8 @@ MEGA328P used as main controller.\
 CH340C Is needed to allow programming with USB port.\
 Link: https://aliexpress.ru/item/4000903444456.html  
 <p align="center">
-<img src="Photos/photo_2021-11-05_13-17-31.jpg" width="150"/>
-<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" width="150"/>
+<img src="Photos/photo_2021-11-05_13-17-31.jpg" height="150"/>
+<img src="Photos/Atmega328P-AU.thumb.png.db7299316d0d61c1b34ebc4f1f3128a0.png" height="150"/>
 </p>
 
 ### Nokia 1280, PCF8814 LCD
@@ -199,8 +198,8 @@ And also compatible with Nokia 1100 LCD, Nokia 1101 LCD, Nokia 1110 LCD, but it 
 Display is main output device. \
 Link: https://aliexpress.ru/item/32864378445.html  
 <p align="center">
-<img src="Photos/photo_2021-10-24_09-22-21.jpg" width="150"/>
-<img src="Photos/photo_2021-10-16_11-31-45.jpg" width="150"/>
+<img src="Photos/photo_2021-10-24_09-22-21.jpg" height="150"/>
+<img src="Photos/photo_2021-10-16_11-31-45.jpg" height="150"/>
 </p>
 
 ### RTC module, DS3231M chip
@@ -208,26 +207,27 @@ DS3231M is needed to precisely calculate time. \
 Link: https://aliexpress.ru/item/4000004876793.html  
 <p align="center">
 <img src="Photos/1PCS-DS3231-AT24C32-IIC-Precision-RTC-Real-Time-Clock-Memory-Module-For-Arduino-new-original.jpg_220x220xzq55.jpg" width="150"/>
-<img src="Photos/photo_2021-12-08_22-56-06.jpg" width="150"/>
-<img src="Photos/Screenshot 2021-12-09 004224.png" width="150"/>
+<img src="Photos/photo_2021-12-08_22-56-06.jpg" height="150"/>
+<img src="Photos/Screenshot 2021-12-09 004224.png" height="150"/>
 </p>
 
 ### Passive buzzer, 5.2mm x 5.2mm 
 Buzzer allows to play sound signals and melodies. \
 Link: https://aliexpress.ru/item/1005003227004618.html  
 <p align="center">
-<img src="Photos/buzzer.jpg" width="150"/>
-<img src="Photos/photo_2021-12-03_20-30-06.jpg" width="150"/>
-<img src="Photos/photo_2021-12-03_20-30-32.jpg" width="150"/>
+<img src="Photos/buzzer.jpg" height="150"/>
+<img src="Photos/photo_2021-12-03_20-30-06.jpg" height="150"/>
+<img src="Photos/photo_2021-12-03_20-30-32.jpg" height="150"/>
 </p>
 
 ### Board
 I've ordered boards on JLC PCB. Actual version of gerber files to make your order see at `Circuit Board` folder. \
 Here's what I got: 
 <p align="center">
-<img src="Photos/photo_2021-11-30_08-55-54.jpg" width="150"/> 
-<img src="Photos/photo_2021-11-30_16-37-08.jpg" width="150"/> 
-<img src="Photos/photo_2021-11-30_08-59-16.jpg" width="150"/> 
+<img src="Photos/photo_2021-11-30_08-55-54.jpg" height="150"/> 
+<img src="Photos/photo_2021-11-30_16-37-08.jpg" height="150"/> 
+<img src="Photos/photo_2021-11-30_08-59-16.jpg" height="150"/> 
+\
 (It's older revision on photo) 
 </p>
 
