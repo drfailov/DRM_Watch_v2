@@ -116,8 +116,10 @@ Initial mode. Its goal to init Serial, init display, init RTC, show startup anim
 Current firmware version is shown on this screen.
 If RTC can not be initialized, watchface will not open.
 No user input on this screen.
-<p align="center"><img src="Photos/20220228_160743.jpg" width="250"/>
-<img src="Photos/rtc_err.jpg" width="150"/></p>
+<p align="center">
+<img src="Photos/20220228_160743.jpg" width="250"/>
+<img src="Photos/rtc_err.jpg" width="150"/>
+</p>
 
 ### Watchface screen
 Screen with watchface. 
@@ -128,7 +130,9 @@ Most watcfaces draws 1 frame and sleeps 8 seconds.
 - To force reboot watch, hold <b>up</b> button for 3 seconds. 
 - To enable backlight for 7 seconds, press <b>down</b> button once. 
 - To keep backlight on and continue animation (if any), hold <b>down</b> button. 
-<p align="center"><img src="Photos/20220228_160327.jpg" width="250"/></p>
+<p align="center">
+<img src="Photos/20220228_160327.jpg" width="250"/>
+</p>
 
 ### Main menu screen
 Main menu to access all the features. 
@@ -139,7 +143,9 @@ If inactive for 120 sec, will automatically go to watchface.
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
 - Press <b>down</b> button to move cursor down.
-<p align="center"><img src="Photos/20220228_160333.jpg" width="250"/></p>
+<p align="center">
+<img src="Photos/20220228_160333.jpg" width="250"/>
+</p>
 
 ### Application list screen
 List of useful applications.
@@ -148,7 +154,9 @@ If inactive for 120 sec, will automatically go to watchface.
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
 - Press <b>down</b> button to move cursor down.
-<p align="center"><img src="Photos/20220228_160342.jpg" width="250"/></p>
+<p align="center">
+<img src="Photos/20220228_160342.jpg" width="250"/>
+</p>
 
 ### Stopwatch application
 Stopwatch designed to measure the amount of time that elapses between its activation and deactivation.
@@ -163,7 +171,9 @@ Menu items is:
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
 - Press <b>down</b> button to move cursor down.
-<p align="center"><img src="Photos/20220228_160438.jpg" width="250"/></p>
+<p align="center">
+<img src="Photos/20220228_160438.jpg" width="250"/>
+</p>
 
 ### Alarm
 You can select time and melody and alarm will play at that time. Alarm will start only if watchface is opened.
@@ -179,7 +189,32 @@ Menu items is:
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item or increment item.
 - Press <b>down</b> button to move cursor down.
-<p align="center"><img src="Photos/20220228_160517.jpg" width="250"/></p>
+<p align="center">
+<img src="Photos/20220228_160517.jpg" width="250"/>
+<img src="Photos/20220228_160610.jpg" width="250"/>
+</p>
+
+### Zrada
+Genegates random conscusion: "Peremoga" or "Zrada". This is local Ukrainian meme.
+"Peremoga" is "win", "Zrada" is "treason".
+Mechanics the same as heads and tails.
+There is no user input, after message opens apps list.
+<p align="center">
+<img src="Photos/20220228_160539.jpg" width="250"/>
+<img src="Photos/20220228_160543.jpg" width="250"/>
+</p>
+
+### Melodies list
+Menu with list of melodies, which can be played.
+If inactive for 120 sec, will automatically go to watchface. 
+Buttons are indicated on the side of the screen.
+- Press <b>up</b> button to confirm selected item.
+- Press <b>down</b> button to move cursor down.
+<p align="center">
+<img src="Photos/20220228_160601.jpg" width="250"/>
+<img src="Photos/20220228_160610.jpg" width="250"/>
+</p>
+
 
 # Hardware
 <p align="center"><img src="Photos/2022-03-02 Hardware-and-case.jpg" width="400"/></p>
@@ -478,12 +513,6 @@ When adding new mode:
 - Call `setMode(YOUR_MODE);` when you want to enter your new screen.
 - Don't forget to call `goToWatchface()` or `setMode()` to exit your mode if needed.
 
-
-### ModeMenuMelodies
-Menu with list of melodies, which can be played. If inactive for 120 sec, will automatically go to watchface.
-Press button Up to select. Press button Down to move cursor down.\
-<img src="Photos/photo_2021-12-19_19-43-52 (4).jpg" width="300"/>
-
 ### ModeMenuSetTime
 Menu to set correct time manually. There is no auto-exit from this menu, 
 so if you leave watch untouched in this mode, it will discharge and power off.
@@ -493,9 +522,3 @@ Button down is moving field selection, button up is incrementing value.\
 ### ModeAbout
 Information about developers and version.\
 <img src="Photos/photo_2021-12-19_19-43-52 (8).jpg" width="300"/>
-
-### modeZrada
-Genegates random conscusion: "Peremoga" or "Zrada". This is local Ukrainian meme.
-"Peremoga" is "win", "Zrada" is "treason".
-Mechanics the same as heads and tails.\
-<img src="Photos/" width="300"/>
