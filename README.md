@@ -19,6 +19,7 @@ Hardware design is made by <b>MeltemiOS</b>.
 - Case fits to default 20mm watch bands;
 - No need to disassemble device for firmwate update;
 - Device easily can be used as arduino playground: battery powered, equipped with 2 buttons, display, buzzer;
+- Water-resistance up to 0 meters :)
 - Multiple Watchfaces, can be changed from menu;
 - 2-button controlled graphic menu allow access to all functions;
 - Alarm, can be set from menu;
@@ -34,7 +35,11 @@ Hardware design is made by <b>MeltemiOS</b>.
 
 
 ## About project > Photos of device
-I have assembled few watches and using it as my everyday watch. Here`s some photos: 
+I have assembled few watches and using it as my everyday watch. 
+My device has battery about 80mAh capacity and works about 5 days for one charge.
+According to my tests, time error can't be noticed in 1 mounth perspective: RTC is very precise.
+
+Here`s some photos: 
 <p align="center">
 <img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26.jpg" width="150"/>     <img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="150"/>
 <img src="Photos/photo_2022-02-18_12-43-26 (5).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="150"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" width="150"/>
@@ -226,10 +231,14 @@ Menu items is:
 - Enable or disable silent mode. In silent mode watch will not play any sound except alarm.
 - Flip screen. 
 You can select optimal screen orientation for wearing watch on left or right hand. 
+Every screen and application will adapt to selected screen orientation.
 - Watchface selection.
 You can choose watchface from list of watchfaces you included in firmware.
+If watchface count set incorrectly, "-" option can appear in list.
+If no watchface is included in firmware, "Select WTF" text will appear on watchfaces screen.
 - Sound on keypress. 
 There are different options for buttons sound: beep, click, tone, whistle, none.
+After changing value you can immediately hear new sound.
 - Set time and date.
 
 Buttons are indicated on the side of the screen.
@@ -255,6 +264,9 @@ Also, some instruments, much time and some experience.
 - Li-Po charger module (TC4056A chip)
 
 To get components I've desoldered modules. 
+Why desoldering instead of buying components separately?
+Because I had a lot of situations when received defective chips out of the box.
+Buying modules can be more expencive, but more reliable.
 <p align="center">
 <img src="Photos/photo_2022-01-11_15-28-52.jpg" width="350"/>
 </p>
@@ -387,23 +399,53 @@ You can fing STL files for DRM Watch case in `Case` folder.
 
 ## Hardware > Troubleshooting
 
-### Select WTF After flash firmware
-<img src="Photos/" width="300"/>
-To fix it, go to settings and select watchface from list.
+### No any activity after connecting battery
+- Battery protection is blocking power. Connect to USB or charger to start BMS.
+- Connect charger and check for current by USC Charger Doctor. Correct value is about 200-600mA.
+- Check if battery protection ICs soldered in correct orientation.
+- Check voltage on Arduino.
+- Replace battery protection ICs and its related components.
 
-### No device connected or Unrecognized device when connected
-<img src="Photos/" width="300"/>
-TODO
+### No device connected or Unrecognized device on PC when USB connected
+- Check if CH340 is soldered in correct orientation. 
+- Check or replace resonator (if any). 
+- Check USB wiring.
+- Check if USB contacts is dirty.
+- Wipe flux from USB port.
+- Check for shorts between chip pins.
+- Replace CH340 and its related components.
 
 ### No response from board when trying to flash firmware.
-<img src="Photos/" width="300"/>
-Check your Arduino. (if pin13 LED is blinking when power on, arduino is alive)
-TODO
+- Check if Atmel328 is soldered in correct orientation.
+- Check your Arduino. (if pin13 LED is blinking when power on, arduino is alive) 
+- Check wiring from CH340 to Atmel328.
+- Check if resistance for UART line is not broken.
+- Check if capacitance for RESET pin is not broken or shorted.
+- Check for shorts between chip pins.
+- Wipe flux from board.
+- Replace CH340 and Atmel328 and its related components.
+
+### Arduino is not working, pin13 LED is not blinking
+- Check if Atmel328 is soldered in correct orientation.
+- Check if battery is connected. Device will not work without battery.
+- Check if Atmel328 is OK at all: if it was working on original Arduino board.
+- Check for shorts between chip pins.
+- Check or replace resonator (if any). 
+- Wipe flux from board.
+- Replace Atmel328 and its related components.
 
 ### RTC FAIL on startup
-<img src="Photos/" width="300"/>
-TODO
+- Check if RTC is soldered in correct orientation.
+- Check if resistance for i2c line is not shorted or broken.
+- Check if power is present on RTC chip.
+- Check for shorts between chip pins.
+- Wipe flux from board.
+- Replace RTC and its related components.
 
+### Select WTF After flash firmware
+- Check if watchfaces count set correctly
+- Check if watchfaces is included in firmware. 
+- Add or uncomment watchfaces and flash again.
 
 
 
@@ -437,6 +479,7 @@ Only one string can be active at the time. If you select any language, you have 
 You can include multiple watcfaces in firmware. As much as enough FLASH memory.\
 You can configure included wathfaces in file `_DRMWatch2.ino`.\
 Update number of included watchfaces, comment or uncomment needed watchfaces, check memory usage.\
+If no watchface is included in firmware, "Select WTF" text will appear on watchfaces screen.\
 Example:
 <p align="center"><img src="Photos/config_watchfaces.jpg" width="300"/></p>
 

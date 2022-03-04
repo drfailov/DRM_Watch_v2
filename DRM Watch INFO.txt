@@ -330,6 +330,7 @@ Changelog
 2022-03-04 Обновление документации: Init screen
 2022-03-04 Обновление документации: How to add your own watchface
 2022-03-04 Обновление документации: Alarm
+2022-03-04 Обновление документации: Troubleshooting
 
 
 Планы на будущее:
@@ -356,7 +357,7 @@ Changelog
 	+ 3d model
 	+ assembly instructions
 	+ Assembly photos
-	- Troubleshooting
+	+ Troubleshooting
 - Software
 	+ Used libraries
 	- How to build
