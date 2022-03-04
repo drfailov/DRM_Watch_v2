@@ -320,7 +320,15 @@ Changelog
 2022-03-03 Обновление документации: Assembly photos
 2022-03-03 Обновление документации: assembly instructions
 2022-03-03 Обновление документации: How to set language
-How to add your own melodies
+
+2022-03-04 Обновление документации: How to add your own melodies
+2022-03-04 Обновление документации: Text formatting
+2022-03-04 Обновление документации: Stopwatch application
+2022-03-04 Обновление документации: Application list screen
+2022-03-04 Обновление документации: Main menu screen
+2022-03-04 Обновление документации: Watchface screen
+2022-03-04 Обновление документации: Init screen
+2022-03-04 Обновление документации: How to add your own watchface
 
 
 Планы на будущее:
@@ -353,7 +361,7 @@ How to add your own melodies
 	- How to build
 	+ How to set language
 	+ How to set watchfaces list
-	- How to add your own watchface
+	+ How to add your own watchface
 	- How to add your own application
 	+ How to add your own melodies
 - Project history

@@ -134,7 +134,7 @@ Most watcfaces draws 1 frame and sleeps 8 seconds.
 Main menu to access all the features. 
 Upper bar contains current temperature (read from RTC), battery status and icons.
 Bottom bar contains description of selected item. 
-Text available in russian and english. See `Software` block for more.
+Text available in russian and english. See "Software" block for more.
 If inactive for 120 sec, will automatically go to watchface. 
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
@@ -143,7 +143,7 @@ Buttons are indicated on the side of the screen.
 
 ### Application list screen
 List of useful applications.
-Text available in russian and english. See `Software` block for more.
+Text available in russian and english. See "Software" block for more.
 If inactive for 120 sec, will automatically go to watchface. 
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
@@ -164,6 +164,7 @@ Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
 - Press <b>down</b> button to move cursor down.
 <p align="center"><img src="Photos/20220228_160438.jpg" width="250"/></p>
+
 
 
 # Hardware
@@ -293,10 +294,16 @@ You can fing STL files for DRM Watch case in `Case` folder.
 
 ### Here's some photos of assembly process:
 <p align="center">
-<img src="Photos/photo_2022-02-18_11-24-21.jpg" height="250"/> <img src="Photos/photo_2022-02-17_21-01-05.jpg" height="250"/> <img src="Photos/photo_2022-02-17_21-01-24.jpg" height="250"/>
-<img src="Photos/photo_2022-02-17_22-31-56.jpg" height="180"/> <img src="Photos/photo_2022-02-17_22-41-40.jpg" height="180"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" height="180"/>
-<img src="Photos/photo_2022-02-19_00-35-44.jpg" height="180"/> <img src="Photos/photo_2022-02-19_13-24-18.jpg" height="180"/> <img src="Photos/photo_2022-02-19_13-35-22.jpg" height="180"/>
-<img src="Photos/photo_2022-02-20_20-00-38.jpg" width="350"/>
+<img src="Photos/photo_2022-02-18_11-24-21.jpg" height="200"/> 
+<img src="Photos/photo_2022-02-17_21-01-05.jpg" height="200"/> 
+<img src="Photos/photo_2022-02-17_21-01-24.jpg" height="200"/>
+<img src="Photos/photo_2022-02-17_22-31-56.jpg" height="200"/> 
+<img src="Photos/photo_2022-02-17_22-41-40.jpg" height="200"/> 
+<img src="Photos/photo_2022-02-18_00-19-38.jpg" height="200"/>
+<img src="Photos/photo_2022-02-19_00-35-44.jpg" height="200"/> 
+<img src="Photos/photo_2022-02-19_13-24-18.jpg" height="200"/> 
+<img src="Photos/photo_2022-02-19_13-35-22.jpg" height="200"/>
+<img src="Photos/photo_2022-02-20_20-00-38.jpg" height="200"/>
 </p>
 
 ### Assembly video on YouTube:
@@ -343,11 +350,13 @@ Used to communicate with RTC module.
 Library included in this repo. Just copy it to your libraries folder (`C:\Users\USER\Documents\Arduino\libraries`). \
 Source: https://www.arduino.cc/reference/en/libraries/ds3231m/
 
+
 ## Software > How to set language
 There is 2 options to select language: `Russian` and `English`.\
 If you want use `Russian` language, uncomment `#define LANG_RU` string in `Generic.cpp` file.\
 If you want use `English` language, uncomment `#define LANG_EN` string in `Generic.cpp` file.\
 Only one string can be active at the time. If you select any language, you have to comment other one.
+
 
 ## Software > How to set watchfaces list
 You can include multiple watcfaces in firmware. As much as enough FLASH memory.\
@@ -355,6 +364,22 @@ You can configure included wathfaces in file `_DRMWatch2.ino`.\
 Update number of included watchfaces, comment or uncomment needed watchfaces, check memory usage.\
 Example:
 <p align="center"><img src="Photos/config_watchfaces.jpg" width="300"/></p>
+
+
+## Software > How to add your own watchface
+Project has several watchfaces included, but you always can create your own watchface and use it.
+Here's instruction how to do it:
+- Create file like `WatchFaceMy.cpp` and inherit class `GenericWatchface`. Use other watchfaces as reference.
+- Implement virtual methods of `GenericWatchface`. Detailed description of each method you can find in `GenericWatchface.cpp`. Use other watchfaces as reference.
+- Function `drawWatchface` draws watchface. You can draw everything you want calling functions from `Display.cpp`.
+`drawWatchface` have to be a non-blocking function, othervise watch will not work properly.
+Use other watchfaces as reference.
+- In file `_DRMWatch2.ino` include your `WatchFaceMy.cpp`. Use other watchfaces as reference.
+- In file `_DRMWatch2.ino` in `setup()` function add your watchface to array. Use other watchfaces as reference.
+- Update `watchfacesCount` if needed.
+- Now update your watch firmware and you can select your new watchface and use it!
+
+
 
 ## Software > How to add your own melodies
 Because of Arduino have <b>VERY</b> limited space, but I want to store long melodies, I made algorythm to 
@@ -423,12 +448,6 @@ Next part of this page is not structured
 # Under development
 --------------------------------------------------------------------------------------------
 
-
-
-
-
-
-
 ### How to add my own screen?
 Program contains several screens (menus, watchfaces...).
 Every screen is a separate mode. Every mode contains of: modeSetup(), modeLoop(), modeFinish().
@@ -444,20 +463,6 @@ When adding new mode:
 - Call your `modeFinish()` from `setMode()` when leaving your mode.
 - Call `setMode(YOUR_MODE);` when you want to enter your new screen.
 - Don't forget to call `goToWatchface()` or `setMode()` to exit your mode if needed.
-
-### How to add my own watchface?
-Watchfaces is the same that Mode, but called from `goToWatchface()`.
-- Create constant for your watchface in file `_DRMWatch2.ino`. Use not used previously number for your constant: `#define WATCHFACE_NOKIA 5`.
-- Create file like `1WatchFaceNokia`.
-- Create function like `void drawWatchFaceNokia(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)`.
-- Add call of your `drawWatchFaceNokia` from file `1ModeWatchFace.ino` function `modeWatchFaceLoop`. 
-Put this call under `#ifdef WATCHFACE_NOKIA` statement. Use other watchfaces as example.
-- In file `ModeMenuSetWatchface.ino` function `modeMenuSetWatchfaceItemsCount()` add `cnt++;` for your watchface. 
-This is needed to count active watchfaces and show correct number of menu items.
-- Write script to draw yout watchface. You can only use non-blocking functions. 
-
-
-
 
 
 ### ModeMenuMelodies
