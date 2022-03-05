@@ -250,6 +250,27 @@ Buttons are indicated on the side of the screen.
 <img src="Photos/20220228_160658.jpg" width="250"/>
 </p>
 
+### Time setting screen
+Menu to set correct time manually. 
+There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off.
+Time is storing in RTC while RTC is powered. If battery is discharged and watch power off, time will reset.
+To prevent resetting time you can attach backup power to RTC's Vbat according to its datasheet.
+
+Menu items is:
+- Back to settings list.
+- Current hour.
+- Current minute.
+- Current day of month.
+- Current month.
+- Current year (20xx).
+- Save values: write data to RTC.
+
+Buttons are indicated on the side of the screen.
+- Press <b>up</b> button to confirm/change selected item.
+- Press <b>down</b> button to move cursor down.
+<p align="center">
+<img src="Photos/20220228_160721.jpg" width="250"/>
+</p>
 
 # Hardware
 <p align="center"><img src="Photos/2022-03-02 Hardware-and-case.jpg" width="400"/></p>
@@ -401,7 +422,7 @@ You can fing STL files for DRM Watch case in `Case` folder.
 
 ### No any activity after connecting battery
 - Battery protection is blocking power. Connect to USB or charger to start BMS.
-- Connect charger and check for current by USC Charger Doctor. Correct value is about 200-600mA.
+- Connect charger and check for current by USB Charger Doctor. Correct value is about 200-600mA.
 - Check if battery protection ICs soldered in correct orientation.
 - Check voltage on Arduino.
 - Replace battery protection ICs and its related components.
@@ -581,12 +602,6 @@ When adding new mode:
 - Call your `modeFinish()` from `setMode()` when leaving your mode.
 - Call `setMode(YOUR_MODE);` when you want to enter your new screen.
 - Don't forget to call `goToWatchface()` or `setMode()` to exit your mode if needed.
-
-### ModeMenuSetTime
-Menu to set correct time manually. There is no auto-exit from this menu, 
-so if you leave watch untouched in this mode, it will discharge and power off.
-Button down is moving field selection, button up is incrementing value.\
-<img src="Photos/photo_2021-12-19_19-43-52 (5).jpg" width="300"/>
 
 ### ModeAbout
 Information about developers and version.\
