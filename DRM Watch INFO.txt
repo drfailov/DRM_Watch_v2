@@ -331,7 +331,6 @@ Changelog
 2022-03-04 Обновление документации: Alarm
 2022-03-04 Обновление документации: Troubleshooting
 2022-03-04 Обновление документации: Overview of settings with description
-
 2022-03-05 Обновление документации: About screen
 2022-03-05 Обновление документации: debug screen
 
@@ -356,7 +355,7 @@ Changelog
 	+ Photos of device
 	+ Video demo of usage on YouTube
 	+ Overview of watchfaces with photos
-	- Overview of screens with photos and description
+	+ Overview of screens with photos and description
 	+ Overview of settings with description
 - Hardware and case
 	+ Used parts

@@ -531,6 +531,17 @@ Library included in this repo. Just copy it to your libraries folder (`C:\Users\
 Source: https://www.arduino.cc/reference/en/libraries/ds3231m/
 
 
+## Software > How to build
+- Install Arduino IDE.
+I used Arduino 1.8.16.
+Link: https://www.arduino.cc/en/software ;
+- Because Arduino IDE don't have drivers for CH340, you need to install drivers manually.
+You can find drivers enywhere over Internet.
+I found here: https://drive.google.com/file/d/1BqUo6f5WEd1vqdxt1UWzDh4OgjdQ7Mx1/view ;
+- Copy libraries to your Arduino IDE libraries folder;
+- Open project and try to build it. If all steps done correctly, project will build successfully.
+
+
 ## Software > How to set language
 There is 2 options to select language: `Russian` and `English`.\
 If you want use `Russian` language, uncomment `#define LANG_RU` string in `Generic.cpp` file.\
