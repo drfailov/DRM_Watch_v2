@@ -272,6 +272,48 @@ Buttons are indicated on the side of the screen.
 <img src="Photos/20220228_160721.jpg" width="250"/>
 </p>
 
+### "About" screen
+Information about developers and firmware version.
+If inactive for 120 sec, will automatically go to watchface. 
+
+Buttons:
+- Press <b>up</b> or <b>down</b> button to go to watchface.
+- Hold <b>up</b> or <b>down</b> button for 3 seconds to go to debug screen.
+<p align="center">
+<img src="Photos/20220228_160403.jpg" width="250"/>
+</p>
+
+### Debug screen
+Technical status information about system.
+Also, technical information is indicated in Serial logs.
+There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off.
+
+Information shown:
+- `VLT`: Current battery voltage detected by Arduino.
+Allows to check if voltage reading is correct and calibrate values if needed.
+Value interpreting is 4092 = 4.092v.
+Also this value indicated in battery indicator, but in form of bars.
+- `RAM`: Remaining free RAM in runtime. 
+To prevent overfilling while implementing new functions.
+Value is in bytes. Also this value indicated in serial log when mode changes.
+- `CHG`: Status of connected charger. 
+Helps debug charger detection.
+1 means charger connected, 0 means no charger connected.
+Also this value indicated on battery indicator as lightning near icon.
+- `aLD`: Last day (of month) when alarm was run.
+Helps to debug alarm and process behavior on "empty" brand new Arduinos without any settings.
+Value is important because it is not indicated anywhere else.
+- `WTF`: Current value of selected watchface index.
+System has protection in case of incorreclty set watchface number, 
+so only way to get know about data in memory is this value.
+Helps to process behavior on "empty" brand new Arduinos without any settings.
+
+Buttons:
+- Press <b>up</b> or <b>down</b> button to go to watchface.
+<p align="center">
+<img src="Photos/20220228_160415.jpg" width="250"/>
+</p>
+
 # Hardware
 <p align="center"><img src="Photos/2022-03-02 Hardware-and-case.jpg" width="400"/></p>
 If you want to assemble your own DRM Watch, this block is for you:)
@@ -586,7 +628,6 @@ Next part of this page is not structured
 --------------------------------------------------------------------------------------------
 # Under development
 --------------------------------------------------------------------------------------------
-
 ### How to add my own screen?
 Program contains several screens (menus, watchfaces...).
 Every screen is a separate mode. Every mode contains of: modeSetup(), modeLoop(), modeFinish().
@@ -602,7 +643,3 @@ When adding new mode:
 - Call your `modeFinish()` from `setMode()` when leaving your mode.
 - Call `setMode(YOUR_MODE);` when you want to enter your new screen.
 - Don't forget to call `goToWatchface()` or `setMode()` to exit your mode if needed.
-
-### ModeAbout
-Information about developers and version.\
-<img src="Photos/photo_2021-12-19_19-43-52 (8).jpg" width="300"/>
