@@ -572,6 +572,28 @@ Use other watchfaces as reference.
 - Now update your watch firmware and you can select your new watchface and use it!
 
 
+## Software > How to add your own application
+You can modify source and add own application.
+Program contains several screens (menus, applications).
+Every screen is a separate `mode`. Every mode contains of: `modeSetup()`, `modeLoop()`, `modeFinish()`.
+Modes can work independently. Modes divided into different files to ease.
+Function of main program `loop()` is routing `modeLoop()` to correct mode according to `_mode` value.
+Also `setMode()` function is triggering `modeSetup()` and `modeFinish()` for every mode.
+To change mode call: `setMode(MODE_INIT);`.
+When adding new mode: 
+- Create new file with `modeLoop()`, `modeSetup()`, and `modeFinish()` for your mode.
+- Define constant for it in main file, like `#define MODE_MENU_SET_BEEP_SOUND (byte)9`.
+- Add to main `loop()` call for your `modeLoop()`.
+- Call your `modeSetup()` from `setMode()` when entering your mode.
+- Call your `modeFinish()` from `setMode()` when leaving your mode.
+- Call `setMode(YOUR_MODE);` when you want to enter your new screen.
+- Don't forget to call `goToWatchface()` or `setMode()` to exit your mode if needed.
+- When your mode is active, only your mode's `loop()` will be called. 
+So mode have all control over device. 
+If your mode will be empty, so device will do nothing after activation your mode, 
+and you can't even exit to menu or reboot if you don't implemented this.
+- If you stuck with your mode, the easiest way to reboot watch is connect it to USB and reflash.
+
 
 ## Software > How to add your own melodies
 Because of Arduino have <b>VERY</b> limited space, but I want to store long melodies, I made algorythm to 
@@ -616,41 +638,3 @@ Here's some prototypes:
 </p>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---------------------------------------------------------------------------------------------
-Next part of this page is not structured
---------------------------------------------------------------------------------------------
-# Under development
---------------------------------------------------------------------------------------------
-### How to add my own screen?
-Program contains several screens (menus, watchfaces...).
-Every screen is a separate mode. Every mode contains of: modeSetup(), modeLoop(), modeFinish().
-Modes can work independently. Modes divided into different files to ease.
-Function of main program `loop()` is routing `modeLoop()` to correct mode according to `_mode` value.
-Also `setMode()` function is triggering `modeSetup()` and `modeFinish()` for every mode.
-To change mode call: `setMode(MODE_INIT);`.
-When adding new mode: 
-- Create new file with `modeLoop()`, `modeSetup()`, and `modeFinish()` for your mode.
-- Define constant for it in main file, like `#define MODE_MENU_SET_BEEP_SOUND (byte)9`.
-- Add to main `loop()` call for your `modeLoop()`.
-- Call your `modeSetup()` from `setMode()` when entering your mode.
-- Call your `modeFinish()` from `setMode()` when leaving your mode.
-- Call `setMode(YOUR_MODE);` when you want to enter your new screen.
-- Don't forget to call `goToWatchface()` or `setMode()` to exit your mode if needed.

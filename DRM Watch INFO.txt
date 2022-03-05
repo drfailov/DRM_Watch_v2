@@ -333,6 +333,7 @@ Changelog
 2022-03-04 Обновление документации: Overview of settings with description
 2022-03-05 Обновление документации: About screen
 2022-03-05 Обновление документации: debug screen
+2022-03-05 Обновление документации: How to build
 
 
 
@@ -366,11 +367,11 @@ Changelog
 	+ Troubleshooting
 - Software
 	+ Used libraries
-	- How to build
+	+ How to build
 	+ How to set language
 	+ How to set watchfaces list
 	+ How to add your own watchface
-	- How to add your own application
+	+ How to add your own application
 	+ How to add your own melodies
 - Project history
 	+ First steps
