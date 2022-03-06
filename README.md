@@ -41,7 +41,7 @@ According to my tests, time error can't be noticed in 1 mounth perspective: RTC 
 
 Here`s some photos: 
 <p align="center">
-<img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26.jpg" width="150"/>     <img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="150"/>
+<img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26.jpg" width="150"/>     <img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="150"/>\
 <img src="Photos/photo_2022-02-18_12-43-26 (5).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="150"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" width="150"/>
 </p>
 
