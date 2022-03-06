@@ -615,7 +615,8 @@ To add your melody to melody list:
 A long time ago...
 ## Project history > 2016, First steps
 Back in 2016 me and my friend <b>MeltemiOS</b> was playing with arduino and Nokia 5110 LCD.
-Then idea of DRM Watch was born. We've assembled one DIY working prototype and stopped development. \
+Then idea of DRM Watch was born. Why "DRM"? It's first letters from "drfailov" and "meltemios" names:)
+We've assembled one DIY working prototype and stopped development. \
 Here's some prorotype photos of these days: 
 <p align="center">
 <img src="Photos/xwYFapverSc.jpg" width="200"/> <img src="Photos/Kcf5E-HmfqE.jpg" width="200"/> <img src="Photos/RHoSkpuC5Ek.jpg" width="200"/>
