@@ -96,10 +96,6 @@ class WatchfaceXelibri : public GenericWatchface  { //
     virtual const char* name() {
       return (const char*)F("Xelibri");
     }
-    
-    virtual const byte updateMode() {  
-      return WATCHFACE_UPDATE_MODE_8S_1FRAME;
-    }
 
     /*
        EN:

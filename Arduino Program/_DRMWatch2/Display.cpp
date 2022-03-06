@@ -131,6 +131,7 @@ class Display_{
   
   //Врубаем подсветку
   static void displayBacklightOn(){
+    if(Battery.batteryIsLowPower()) return; //если батарея разряжена, подсветку не включать
     pinMode(pinLcdBacklight, OUTPUT);
     digitalWrite(pinLcdBacklight, HIGH);
   }
@@ -692,7 +693,8 @@ class Display_{
     }
   }
   
-  /*draws battery*/
+  /*draws battery
+  Эта функция предполагается быть приватной*/
   static void displayDrawBattery(byte x, byte y, byte level, bool isCharging, bool isLowPower){
   
     //draw battery
@@ -710,8 +712,8 @@ class Display_{
       displayDrawLine(/*X1*/x+xshift+3, /*Y1*/y+2, /*X2*/x+xshift+3, /*Y2*/y+4, /*C*/1);
   
   
-    //draw charging symbol
-    if(isCharging){
+    
+    if(isCharging){ //draw charging symbol
       static const char img[6] PROGMEM = { 
         0b00000000,
         0b01001100,
@@ -722,34 +724,25 @@ class Display_{
       };
       displayDrawBitmap(x, y, img, 6, 8, 1);
     }
-    
-    //draw low power symbol
-    if(isLowPower)
+    else if(isLowPower) //draw low power symbol
     {
-      static const char img[6] PROGMEM = { 
-        0b00100010,
-        0b00010100,
-        0b00001000,
-        0b00010100,
-        0b00100010,
-        0b00000000
+      static const char img[4] PROGMEM = { 
+        0b00000000,
+        0b00000000,
+        0b01101111,
+        0b01101111
       };
-      displayDrawBitmap(x, y, img, 6, 8, 1);
+      displayDrawBitmap(x, y, img, 4, 8, 1);
     }
   }
 
-  
+  //Это основная функция которая вызывается с циферлатов
   void displayDrawBattery(byte x, byte y) {
-    //float voltage = Battery.batteryVoltage();
-    int voltage = Battery.batteryRawVoltage();
     bool isCharging = Battery.batteryIsCharging();
     bool isLowPower = Battery.batteryIsLowPower();
-    byte level = 0;
-    if (voltage > 3400) level = 1;
-    if (voltage > 3650) level = 2;
-    if (voltage > 3850) level = 3;
-    if (voltage > 4000) level = 4;
-  
+    byte level = Battery.batteryBars();  
+    //isLowPower = true; //for test
+    //isCharging = false; //for test
     displayDrawBattery(x, y, level, isCharging, isLowPower);
   }
   

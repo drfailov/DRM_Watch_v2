@@ -59,7 +59,6 @@ You can change set of watchfaces in firmware. More info about it in "Software" b
 ### Watchface "DRM Watch"
 The first watchface in project, back from 2016. Inspired by iPod nano. \
 Designed by <b>MeltemiOS</b>.
-Updates once in second. Not very power-efficient. 
 Takes about <b>486 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_161025.jpg" width="250"/>
 <img src="Photos/photo_2022-01-16_13-16-34.jpg" width="100"/></p>
@@ -67,14 +66,12 @@ Takes about <b>486 bytes</b> of FLASH memory.
 ### Watchface "DRM Lite"
 "DRM Watch" without seconds. \
 Designed by <b>Dr. Failov</b>.
-Updates once in 8 seconds. Power-efficient. 
 Takes about <b>430 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_160327.jpg" width="250"/></p>
 
 ### Watchface "Nomens"
 Inspired by Siemens screensaver and Nokia home screen.\
 Designed by <b>MeltemiOS</b>.
-Updates once in 8 seconds. Power-efficient. 
 Takes about <b>666 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_161238.jpg" width="250"/>
 <img src="Photos/photo_2021-12-17_08-58-21.jpg" width="100"/>
@@ -83,14 +80,12 @@ Takes about <b>666 bytes</b> of FLASH memory.
 ### Watchface "Zubat"
 Project logo on watchface.\
 Designed by <b>Dr. Failov</b>.
-Updates once in 8 seconds. Power-efficient. 
 Takes about <b>336 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_161255.jpg" width="250"/></p>
 
 ### Watchface "Xelibri"
 Inspired by Siemens Xelibri product line. Very memory-hungry watchface.\
 Designed by <b>MeltemiOS</b>.
-Updates once in 8 seconds. Power-efficient. 
 Takes about <b>1528 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_162136.jpg" width="250"/>
 <img src="Photos/photo_2022-01-01_05-27-44.jpg" width="100"/></p>
@@ -98,7 +93,6 @@ Takes about <b>1528 bytes</b> of FLASH memory.
 ### Watchface "Matrix"
 Inspired by Matrix film, like font on secret documents.\
 Designed by <b>MeltemiOS</b>.
-Updates once in 8 seconds. Power-efficient. 
 Takes about <b>886 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_162259.jpg" width="250"/>
 <img src="Photos/photo_2022-03-01_17-50-55.jpg" width="100"/></p>
@@ -106,7 +100,6 @@ Takes about <b>886 bytes</b> of FLASH memory.
 ### Watchface "Life"
 Conway's Game of Life as background.\
 Designed by <b>Dr. Failov</b>.
-Draws 10 frames every 8 seconds. Not Power-efficient, because of animation. 
 Takes about <b>684 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_160803.jpg" width="250"/>
 <img src="Photos/game of life.jpg" width="100"/></p>
@@ -129,8 +122,9 @@ No user input on this screen.
 ### Watchface screen
 Screen with watchface. 
 Watchfaces is only screen with deep sleep, so device can run for a long time if in watchface mode.
-Sleep depends on watchface sleep mode. When battery is low, 1 frame in 8s sleep is used for any watchface.
-Most watcfaces draws 1 frame and sleeps 8 seconds. 
+
+First 30 seconds after user input watchface is updating without sleep. After 30 seconds: draws 1 frame in 8 seconds.
+When battery is low, 1 frame in 8s sleep is used for any watchface.
 - To enter main menu, press <b>up</b> button once. 
 - To force reboot watch, hold <b>up</b> button for 3 seconds. 
 - To enable backlight for 7 seconds, press <b>down</b> button once. 

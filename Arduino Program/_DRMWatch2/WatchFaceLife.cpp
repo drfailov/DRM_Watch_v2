@@ -15,10 +15,6 @@ class WatchfaceLife : public GenericWatchface  { //
     virtual const char* name() {
       return (const char*)F("Life");
     }
-    
-    virtual const byte updateMode() {  
-      return WATCHFACE_UPDATE_MODE_8S_10FRAMES;
-    }
 
     /*
        EN:

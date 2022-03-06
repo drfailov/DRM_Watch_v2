@@ -57,10 +57,6 @@ class WatchfaceNomens : public GenericWatchface  { //
     virtual const char* name() {
       return (const char*)F("Nomens");
     }
-    
-    virtual const byte updateMode() {  
-      return WATCHFACE_UPDATE_MODE_8S_1FRAME;
-    }
 
     /*
        EN:

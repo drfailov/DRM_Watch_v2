@@ -7,7 +7,8 @@
 #include "Generic.cpp"
 
 /*Screen with main watchface*/
-const long modeWatchFaceBacklightTimeout = 7000;
+const long modeWatchFaceBacklightTimeout = 7000; //мс, Сколько времени после последнего действия будет светить подстветка
+const long modeWatchFaceAminationTimeout = 30000; //мс, сколько времени после последнего действия будет идти анимация и часы не будт спать
 long modeWatchFaceBacklightEnabledTime = millis();
 byte modeWatchFaceFramesCounter = 0; //used to count frames and draw animation without sleep
 
@@ -79,9 +80,7 @@ void modeWatchFaceLoop(bool animate) {
   byte wtf = MyEEPROM.eepromReadWatchface();
   if (wtf >= watchfacesCount) wtf = 0;
   GenericWatchface *watchface = watchfaces[wtf];
-  byte updateMode = WATCHFACE_UPDATE_MODE_8S_1FRAME;
   if (watchface != 0) {
-    updateMode = watchface->updateMode();
     watchface->drawWatchface(hour, minute, second, day, month, year, dayOfWeek, animate ? 5 : 0);
   }
   else {
@@ -90,16 +89,12 @@ void modeWatchFaceLoop(bool animate) {
   }
 
   //Обработка сна
-  modeWatchFaceFramesCounter ++;
-  if (modeWatchFaceFramesCounter > 10) modeWatchFaceFramesCounter = 0;
   byte sleepTime = 8;
-  if (updateMode == WATCHFACE_UPDATE_MODE_8S_1FRAME || updateMode == WATCHFACE_UPDATE_MODE_8S_10FRAMES) sleepTime = 8;
-  if (updateMode == WATCHFACE_UPDATE_MODE_1S_1FRAME || updateMode == WATCHFACE_UPDATE_MODE_1S_10FRAMES) sleepTime = 1;
-  if ((updateMode == WATCHFACE_UPDATE_MODE_8S_10FRAMES || updateMode == WATCHFACE_UPDATE_MODE_1S_10FRAMES) && modeWatchFaceFramesCounter != 10) sleepTime = 0; //в режимах на 10 кадров не спать на всех кадрах кроме одного
-  if (updateMode == WATCHFACE_UPDATE_MODE_NO_SLEEP) sleepTime = 0; //Если режим работы текущего циферблата не предусматривает сон, не спать
+  if (millis() - modeWatchFaceBacklightEnabledTime < modeWatchFaceAminationTimeout) sleepTime = 0; //первые ... секунд не спать чтобы шла анимация. А потом часы идут в сон.
   if (animate) sleepTime = 0; //После первой отрисовки не впадать в сон, чтобы сразу отрисовался второй раз. Чтобы кнопки инициализировались.
-  if (Battery.batteryIsLowPower()) sleepTime = 8; //если разряжен, то макс интервал
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonUp.readDebounce() : ButtonDown.readDebounce()) sleepTime = 0; //если нажата кнопка вниз, не спать
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonUp.readDebounce() : ButtonDown.readDebounce()) sleepTime = 0; //если нажата кнопка вниз, не спать 
+  
+  
 
   if (sleepTime != 0) {
 #ifdef LOG
@@ -107,14 +102,8 @@ void modeWatchFaceLoop(bool animate) {
     Serial.end();
 #endif
     delay(5);
-    if (sleepTime == 1) {
-      setMillis(millis() + 1000);
-      LowPower.powerDown(SLEEP_1S, ADC_OFF, BOD_OFF);
-    }
-    else {
-      setMillis(millis() + 8000);
-      LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
-    }
+    setMillis(millis() + 8000);
+    LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
 #ifdef LOG
     Serial.begin(115200);
 #endif
