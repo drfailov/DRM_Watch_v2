@@ -633,6 +633,10 @@ Here's some prototypes:
 <p align="center">
 <img src="Photos/photo_2021-12-19_16-08-34.jpg" height="200"/> <img src="Photos/photo_2021-12-05_17-01-19.jpg" height="200"/> <img src="Photos/photo_2021-12-04_13-20-55.jpg" height="200"/>
 <img src="Photos/photo_2021-12-08_22-34-49.jpg" height="200"/> <img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" height="200"/> 
+Not every step is successful, here's some videos with funny fails:
+<p align="center"> https://youtu.be/Ur8o4e1e8V8 </p>
+<p align="center"> https://youtu.be/18OF_WzMhGE </p>
+
 </p>
 
 
