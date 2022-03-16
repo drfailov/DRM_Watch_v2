@@ -107,6 +107,12 @@ Takes about <b>684 bytes</b> of FLASH memory.
 <p align="center"><img src="Photos/20220228_160803.jpg" width="250"/>
 <img src="Photos/game of life.jpg" width="100"/></p>
 
+### Watchface "Calibri"
+Simple but informative watchface with font "Calibri".\
+Designed by <b>Dr. Failov</b>.
+Takes about <b>1340 bytes</b> of FLASH memory. 
+<p align="center"><img src="Photos/photo_2022-03-16_02-10-08.jpg" width="250"/>
+
 
 ## About project > Overview of screens
 Here's detailed overview of every screen and mode with recomendations how to use it.

@@ -54,7 +54,7 @@ void setup() {
   //watchfaces[i++] = new WatchfaceXelibri();
   //watchfaces[i++] = new WatchfaceMatrix();
   //watchfaces[i++] = new WatchfaceLife();
-  watchfaces[i++] = new WatchfaceCalibri();
+  //watchfaces[i++] = new WatchfaceCalibri();
   
   
 #ifdef LOG
