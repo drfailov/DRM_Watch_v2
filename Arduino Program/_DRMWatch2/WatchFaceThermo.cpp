@@ -124,6 +124,8 @@ class WatchfaceThermo : public GenericWatchface  { //
         
         {//Temperature
           float temp = RTC.rtcGetTemp(); //-26.5
+//          temp = (millis() / 1000);
+//          temp -= 28;
           bool minus = temp < 0; //true
           if(minus)
             temp = -temp; //26.5
@@ -132,17 +134,24 @@ class WatchfaceThermo : public GenericWatchface  { //
           byte temp2 = tempInt - (temp1 * 100); //265-(2*100) = 65
           temp2 = temp2 / 10; // 6
           byte temp3 = tempInt - (temp1 * 100) - (temp2 * 10); //265-(2*100)-(6*10)=5
+          byte screenWidth = 96;
+          byte textWidth = 96;
+          if(!minus){
+            textWidth = 86;
+            if(temp < 10){
+              textWidth = 67;
+            }
+          }
+          int xPosition = (textWidth-screenWidth) / 2;
 
-          //+ \ -
-          Display.displayFillRect(/*x*/0, /*y*/34, /*w*/10, /*h*/4, /*c*/1);
-          if(!minus)
-            Display.displayFillRect(/*x*/3, /*y*/31, /*w*/4, /*h*/10, /*c*/1);
-            
-          drawNumber(/*x*/11, /*y*/24, /*num*/temp1, /*animate*/ animate);
-          drawNumber(/*x*/30, /*y*/24, /*num*/temp2, /*animate*/ animate);
-          Display.displayFillCircle(/*x*/50, /*y*/44, /*r*/ 2, /*color*/ 1);
-          drawNumber(/*x*/54, /*y*/24, /*num*/temp3, /*animate*/ animate);
-          Display.displayDrawBitmap(/*x*/73, /*y*/23, /*bmp*/markC, /*w*/24, /*h*/24, /*COLOR*/1);
+          if(minus)
+            Display.displayFillRect(/*x*/xPosition+0, /*y*/34, /*w*/10, /*h*/4, /*c*/1);
+          if(temp1 != 0)
+            drawNumber(/*x*/xPosition+10, /*y*/24, /*num*/temp1, /*animate*/ animate);
+          drawNumber(/*x*/xPosition+29, /*y*/24, /*num*/temp2, /*animate*/ animate);
+          Display.displayFillCircle(/*x*/xPosition+49, /*y*/44, /*r*/ 2, /*color*/ 1);
+          drawNumber(/*x*/xPosition+53, /*y*/24, /*num*/temp3, /*animate*/ animate);
+          Display.displayDrawBitmap(/*x*/xPosition+72, /*y*/23, /*bmp*/markC, /*w*/24, /*h*/24, /*COLOR*/1);
         }
         
         Display.displayUpdate();

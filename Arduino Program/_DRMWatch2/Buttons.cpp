@@ -54,7 +54,7 @@ class Button_{
     if(!readDebounce()) 
       return false;
     long started = millis();
-    while(readDebounce() && millis() - started < 3000);
+    while(readDebounce() && millis() - started < 1200);
     buttonLastValue = readDebounce();
     if(buttonLastValue)
       holded = true;
