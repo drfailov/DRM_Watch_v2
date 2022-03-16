@@ -113,6 +113,14 @@ Designed by <b>Dr. Failov</b>.
 Takes about <b>1340 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/photo_2022-03-16_02-10-08.jpg" width="250"/>
 
+### Watchface "Calibri"
+The only information shown is temperature with font "Calibri". Very memory-hungry watchface.\
+Designed by <b>Dr. Failov</b>.
+Takes about <b>1466 bytes</b> of FLASH memory. 
+<p align="center"><img src="Photos/photo_2022-03-16_15-22-59.jpg" width="250"/>
+
+
+
 
 ## About project > Overview of screens
 Here's detailed overview of every screen and mode with recomendations how to use it.

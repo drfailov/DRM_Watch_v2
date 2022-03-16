@@ -7,6 +7,7 @@
 #include "WatchfaceMatrix.cpp"
 #include "WatchfaceLife.cpp"
 #include "WatchfaceCalibri.cpp"
+#include "WatchfaceThermo.cpp"
 #include <util/atomic.h>
 #include <LowPower.h>
 void(* resetFunc) (void) = 0;//объявляем функцию reset с адресом 0
@@ -42,19 +43,20 @@ byte _mode = -1;
 
 
 //Набор циферблатов следует менять именно здесь. Обязательно обновить количество если оно изменилось.
-const byte watchfacesCount = 3;
+const byte watchfacesCount = 2;
 GenericWatchface *watchfaces[watchfacesCount];
 
 void setup() {
   byte i=0;
   //watchfaces[i++] = new WatchfaceDrmWatch();
   watchfaces[i++] = new WatchfaceDrmLite();
-  watchfaces[i++] = new WatchfaceNomens();
+  //watchfaces[i++] = new WatchfaceNomens();
   //watchfaces[i++] = new WatchfaceZubat();
   //watchfaces[i++] = new WatchfaceXelibri();
   //watchfaces[i++] = new WatchfaceMatrix();
   //watchfaces[i++] = new WatchfaceLife();
   //watchfaces[i++] = new WatchfaceCalibri();
+  watchfaces[i++] = new WatchfaceThermo();
   
   
 #ifdef LOG
