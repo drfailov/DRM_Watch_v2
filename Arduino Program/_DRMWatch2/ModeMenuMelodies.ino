@@ -8,7 +8,7 @@ const char modeMenuMelodiesItem3[] PROGMEM = "Nokia Tune";
 const char modeMenuMelodiesItem4[] PROGMEM = "Mozart";
 const char modeMenuMelodiesItem5[] PROGMEM = "Mario";
 const char modeMenuMelodiesItem6[] PROGMEM = "Groovy Blue";
-const char modeMenuMelodiesItem7[] PROGMEM = "Toreador";
+const char modeMenuMelodiesItem7[] PROGMEM = "Ukraine";
 
 const char* const modeMenuMelodiesItems[] PROGMEM = {
   menuItemBack,
@@ -64,5 +64,5 @@ const byte* const getMelodyByIndex(byte index){
   if (index == 5) 
     return getMelodyGroovyBlue();
   if (index == 6) 
-    return getMelodyToreador();
+    return getMelodyUkraine();
 }
