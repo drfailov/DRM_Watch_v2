@@ -60,8 +60,7 @@ YouTube video with device overview:
 You can change set of watchfaces in firmware. More info about it in "Software" block.
 
 ### Watchface "DRM Watch"
-The first watchface in project, back from 2016. Inspired by iPod nano. \
-<!-- Designed by <b>MeltemiOS</b>. -->
+The first watchface in project, back from 2016. Inspired by iPod nano. 
 Takes about <b>486 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_161025.jpg" width="250"/>
 <img src="Photos/photo_2022-01-16_13-16-34.jpg" width="100"/></p>
@@ -73,8 +72,7 @@ Takes about <b>430 bytes</b> of FLASH memory.
 <p align="center"><img src="Photos/20220228_160327.jpg" width="250"/></p>
 
 ### Watchface "Nomens"
-Inspired by Siemens screensaver and Nokia home screen.\
-<!-- Designed by <b>MeltemiOS</b>. -->
+Inspired by Siemens screensaver and Nokia home screen.
 Takes about <b>666 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_161238.jpg" width="250"/>
 <img src="Photos/photo_2021-12-17_08-58-21.jpg" width="100"/>
@@ -87,15 +85,13 @@ Takes about <b>336 bytes</b> of FLASH memory.
 <p align="center"><img src="Photos/20220228_161255.jpg" width="250"/></p>
 
 ### Watchface "Xelibri"
-Inspired by Siemens Xelibri product line. Very memory-hungry watchface.\
-<!-- Designed by <b>MeltemiOS</b>. -->
+Inspired by Siemens Xelibri product line. Very memory-hungry watchface.
 Takes about <b>1528 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_162136.jpg" width="250"/>
 <img src="Photos/photo_2022-01-01_05-27-44.jpg" width="100"/></p>
 
 ### Watchface "Matrix"
-Inspired by Matrix film, like font on secret documents.\
-<!-- Designed by <b>MeltemiOS</b>. -->
+Inspired by Matrix film, like font on secret documents.
 Takes about <b>886 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_162259.jpg" width="250"/>
 <img src="Photos/photo_2022-03-01_17-50-55.jpg" width="100"/></p>
