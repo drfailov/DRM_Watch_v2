@@ -7,8 +7,8 @@
 Arduino-based watch with Nokia 1280 LCD. \
 Main challenge of this project is packing as much
 as possible stuff inside Arduino Nano with its 32KB of memory and 2KB RAM.\
-Programming contributions made by <b>Dr. Failov</b>.\
-Hardware design is made by <b>MeltemiOS</b>.
+Programming contributions made by <b>Dr. Failov</b>.
+<!--Hardware design is made by <b>MeltemiOS</b>. -->
 
 
 ## About project > Features
@@ -61,7 +61,7 @@ You can change set of watchfaces in firmware. More info about it in "Software" b
 
 ### Watchface "DRM Watch"
 The first watchface in project, back from 2016. Inspired by iPod nano. \
-Designed by <b>MeltemiOS</b>.
+<!-- Designed by <b>MeltemiOS</b>. -->
 Takes about <b>486 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_161025.jpg" width="250"/>
 <img src="Photos/photo_2022-01-16_13-16-34.jpg" width="100"/></p>
@@ -74,7 +74,7 @@ Takes about <b>430 bytes</b> of FLASH memory.
 
 ### Watchface "Nomens"
 Inspired by Siemens screensaver and Nokia home screen.\
-Designed by <b>MeltemiOS</b>.
+<!-- Designed by <b>MeltemiOS</b>. -->
 Takes about <b>666 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_161238.jpg" width="250"/>
 <img src="Photos/photo_2021-12-17_08-58-21.jpg" width="100"/>
@@ -88,14 +88,14 @@ Takes about <b>336 bytes</b> of FLASH memory.
 
 ### Watchface "Xelibri"
 Inspired by Siemens Xelibri product line. Very memory-hungry watchface.\
-Designed by <b>MeltemiOS</b>.
+<!-- Designed by <b>MeltemiOS</b>. -->
 Takes about <b>1528 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_162136.jpg" width="250"/>
 <img src="Photos/photo_2022-01-01_05-27-44.jpg" width="100"/></p>
 
 ### Watchface "Matrix"
 Inspired by Matrix film, like font on secret documents.\
-Designed by <b>MeltemiOS</b>.
+<!-- Designed by <b>MeltemiOS</b>. -->
 Takes about <b>886 bytes</b> of FLASH memory. 
 <p align="center"><img src="Photos/20220228_162259.jpg" width="250"/>
 <img src="Photos/photo_2022-03-01_17-50-55.jpg" width="100"/></p>
@@ -628,8 +628,8 @@ To add your melody to melody list:
 # Project history
 A long time ago...
 ## Project history > 2016, First steps
-Back in 2016 me and my friend <b>MeltemiOS</b> was playing with arduino and Nokia 5110 LCD.
-Then idea of DRM Watch was born. Why "DRM"? It's first letters from "drfailov" and "meltemios" names:)
+Back in 2016 me and my friend was playing with arduino and Nokia 5110 LCD.
+Then idea of DRM Watch was born. Why "DRM"? It's first letters from my and my friend's nicknames:)
 We've assembled one DIY working prototype and stopped development. \
 Here's some prorotype photos of these days: 
 <p align="center">

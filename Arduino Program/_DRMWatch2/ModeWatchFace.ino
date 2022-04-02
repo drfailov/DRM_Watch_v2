@@ -8,7 +8,7 @@
 
 /*Screen with main watchface*/
 const long modeWatchFaceBacklightTimeout = 7000; //мс, Сколько времени после последнего действия будет светить подстветка
-const long modeWatchFaceAminationTimeout = 30000; //мс, сколько времени после последнего действия будет идти анимация и часы не будт спать
+const long modeWatchFaceAminationTimeout = 20000; //мс, сколько времени после последнего действия будет идти анимация и часы не будт спать
 long modeWatchFaceBacklightEnabledTime = millis();
 byte modeWatchFaceFramesCounter = 0; //used to count frames and draw animation without sleep
 

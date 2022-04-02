@@ -43,7 +43,7 @@ byte _mode = -1;
 
 
 //Набор циферблатов следует менять именно здесь. Обязательно обновить количество если оно изменилось.
-const byte watchfacesCount = 2;
+const byte watchfacesCount = 3;
 GenericWatchface *watchfaces[watchfacesCount];
 
 void setup() {
@@ -54,7 +54,7 @@ void setup() {
   //watchfaces[i++] = new WatchfaceZubat();
   //watchfaces[i++] = new WatchfaceXelibri();
   //watchfaces[i++] = new WatchfaceMatrix();
-  //watchfaces[i++] = new WatchfaceLife();
+  watchfaces[i++] = new WatchfaceLife();
   watchfaces[i++] = new WatchfaceCalibri();
   //watchfaces[i++] = new WatchfaceThermo();
   
