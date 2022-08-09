@@ -220,7 +220,7 @@ If inactive for 120 sec, will automatically go to watchface.
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
 - Hold <b>up</b> button for 3 seconds to go back to watchface.
-- Press <b>down</b> button to move cursor down.
+- Press <b>down</b> button to move cursor down.\
 When melody is playing:
 - Press <b>up</b> or <b>down</b> button to exit back to list.
 - Hold <b>up</b> or <b>down</b> button to loop melody.
