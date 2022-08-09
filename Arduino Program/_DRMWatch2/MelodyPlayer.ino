@@ -176,58 +176,90 @@ const byte* const getMelodyNokiaTune() {
   return nokiaTune;
 }
 
+bool melodyPlayerLoopMelody = false;
 
 //return true if was played completely or false if interrupted
 bool melodyPlayerPlayMelody(const byte* const melody) {
-  melodyPlayerDrawScreen();
-  pinMode(pinBuzzer, OUTPUT);
-  byte length = melodyPlayerGetLength(melody);
-  float tempo = pgm_read_byte(&melody[0]);
-  float whole_notes_per_second = tempo / 240.0;
-  for (byte i = 1; i < length - 1; i++) {
-    byte b = pgm_read_byte(&melody[i]);
-    byte duration = 0;
-    if (bitRead(b, 7) == 0 && bitRead(b, 6) == 0) duration = 4;
-    if (bitRead(b, 7) == 0 && bitRead(b, 6) == 1) duration = 8;
-    if (bitRead(b, 7) == 1 && bitRead(b, 6) == 0) duration = 16;
-    if (bitRead(b, 7) == 1 && bitRead(b, 6) == 1) duration = 32;
-    float timeMs = 1000.0 / (whole_notes_per_second * duration);
-    byte noteNumberByte = 0;
-    for (byte i = 0; i < 6; i++)
-      bitWrite(noteNumberByte, i, bitRead(b, i));
-    float noteNumber = noteNumberByte;
-    // Note frequency is calculated as (F*2^(n/12)),
-    // We can use C2=65.41, or C3=130.81. C2 is a bit shorter.
-    float frequency = 0;
-    if (noteNumber < 36)
-      frequency = 290.0 * pow(2.0, (noteNumber / 12.0));
-
-    if (frequency != 0)
-      tone(pinBuzzer, frequency);
-    else
+  melodyPlayerLoopMelody = false;
+  do{
+    melodyPlayerDrawScreen();
+    pinMode(pinBuzzer, OUTPUT);
+    byte length = melodyPlayerGetLength(melody);
+    float tempo = pgm_read_byte(&melody[0]);
+    float whole_notes_per_second = tempo / 240.0;
+    for (byte i = 1; i < length - 1; i++) {
+      byte b = pgm_read_byte(&melody[i]);
+      byte duration = 0;
+      if (bitRead(b, 7) == 0 && bitRead(b, 6) == 0) duration = 4;
+      if (bitRead(b, 7) == 0 && bitRead(b, 6) == 1) duration = 8;
+      if (bitRead(b, 7) == 1 && bitRead(b, 6) == 0) duration = 16;
+      if (bitRead(b, 7) == 1 && bitRead(b, 6) == 1) duration = 32;
+      float timeMs = 1000.0 / (whole_notes_per_second * duration);
+      byte noteNumberByte = 0;
+      for (byte i = 0; i < 6; i++)
+        bitWrite(noteNumberByte, i, bitRead(b, i));
+      float noteNumber = noteNumberByte;
+      // Note frequency is calculated as (F*2^(n/12)),
+      // We can use C2=65.41, or C3=130.81. C2 is a bit shorter.
+      float frequency = 0;
+      //290 is ok
+      if (noteNumber < 36)
+        frequency = 250.0 * pow(2.0, (noteNumber / 12.0));
+  
+      if (frequency != 0){
+        Display.displayBacklightOn();
+        tone(pinBuzzer, frequency);
+      }
+      else{
+        noTone(pinBuzzer);
+      }
+      long noteStarted = millis();
+      while(millis() - noteStarted < timeMs);
       noTone(pinBuzzer);
-    long noteStarted = millis();
-    while(millis() - noteStarted < timeMs);
+      Display.displayBacklightOff();
+      delay(13);
+      
+      if (ButtonDown.isButtonPressed() || ButtonUp.isButtonPressed()){
+        if(ButtonDown.waitHold() || ButtonUp.waitHold()){
+          melodyPlayerLoopMelody = !melodyPlayerLoopMelody;
+          melodyPlayerDrawScreen();
+        }
+        else{
+          Display.displayBacklightOn();
+          return false;
+        }
+      }
+    }
+    
     noTone(pinBuzzer);
-    delay(10);
-    if (ButtonDown.isButtonPressed() || ButtonUp.isButtonPressed())
-      return false;
-  }
-  noTone(pinBuzzer);
-  pinMode(pinBuzzer, INPUT);
-  delay(500);
+    pinMode(pinBuzzer, INPUT);
+    delay(1000);
+  }while(melodyPlayerLoopMelody);
+  Display.displayBacklightOn();
   return true;
 }
 
 void melodyPlayerDrawScreen() {
   Display.displayClear();
-  Display.displayDrawVector(/*path*/Display.getPathZubat(), /*x*/24, /*y*/5, /*animate*/false, /*color*/1);
+  Display.displayDrawVector(/*path*/Display.getPathZubat(), /*x*/24, /*y*/10, /*animate*/false, /*color*/1);
 #ifdef LANG_EN
-  Display.displayDrawText(20, 55, 1, F("Playing..."));
+  Display.displayDrawText(20, 60, 1, F("Playing..."));
 #endif
 #ifdef LANG_RU
-  Display.displayDrawText(17, 55, 1, F("Пoпиликaeм!"));
+  Display.displayDrawText(17, 60, 1, F("Пoпиликaeм!"));
 #endif
+
+  if(!melodyPlayerLoopMelody){
+    byte hour = RTC.rtcGetHours();
+    byte minute = RTC.rtcGetMinutes();
+    sprintf(Generic.buffer, "%02d:%02d", hour, minute);
+    Display.displayDrawText(0, 0, 1, Generic.buffer);
+  }
+  else{
+    Display.displayDrawIconFlip(0, 0, 1);
+  }
+  
+  Display.displayDrawBattery(79, 0);
   Display.displayUpdate();
 }
 

@@ -5,6 +5,7 @@
 
 #include <Arduino.h>
 #include "Generic.cpp"
+#include "Display.cpp"
 #include "myEEPROM.cpp"
 
 class Buzzer_{
@@ -20,11 +21,14 @@ class Buzzer_{
       delay(100);
     }
     for(byte i=0; i<6; i++){
+      Display.displayBacklightOff();
       tone(pinBuzzer, 5000);  // пищать на пине 12, 1 кГц
       delay(30);
+      Display.displayBacklightOn();
       noTone(pinBuzzer);      // не пищать
       delay(30);
     }
+    //Display.displayBacklightOn();
     pinMode(pinBuzzer, INPUT);
   }
   
@@ -32,27 +36,31 @@ class Buzzer_{
     if(MyEEPROM.eepromReadSilentMode())
       return;
     pinMode(pinBuzzer, OUTPUT);
-    if(MyEEPROM.eepromReadBeepSound() == eepromBeepSoundNone){
+    if(MyEEPROM.eepromReadBeepSound() == eepromBeepSoundNone){ // 4
       //play nothing
+      delay(10);
     }
-    else if(MyEEPROM.eepromReadBeepSound() == eepromBeepSoundClick){
-      tone(pinBuzzer, 1500);  
-      delay(1);
+    else if(MyEEPROM.eepromReadBeepSound() == eepromBeepSoundClick){ // 1
+      tone(pinBuzzer, 3000);  
+      delay(2);
     }
-    else if(MyEEPROM.eepromReadBeepSound() == eepromBeepSoundTone){
-      tone(pinBuzzer, 1000);  
-      delay(100);
+    else if(MyEEPROM.eepromReadBeepSound() == eepromBeepSoundTone){ // 2
+      tone(pinBuzzer, 2000);  
+      delay(40);
     }
     else if(MyEEPROM.eepromReadBeepSound() == eepromBeepSoundWhistle){
       tone(pinBuzzer, 2000);  
-      delay(40);
+      delay(10);
       tone(pinBuzzer, 3000);  
       delay(40);
     }
-    else{//standartBeep
-      tone(pinBuzzer, 1500);  
-      delay(80);
+    else{//standartBeep  //0
+      tone(pinBuzzer, 5000);  
+      delay(10);
+      tone(pinBuzzer, 3000);  
+      delay(30); 
     }
+    
     noTone(pinBuzzer);
     pinMode(pinBuzzer, INPUT);
   }

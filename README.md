@@ -174,7 +174,7 @@ Buttons are indicated on the side of the screen.
 ### Stopwatch application
 Stopwatch designed to measure the amount of time that elapses between its activation and deactivation.
 Stopwatch count time only while application is opened due to power consumption reasons.
-There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off. 
+There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off (time will reset). 
 
 Buttons are indicated on the side of the screen.
 - Press <b>up</b> button Start/Pause stopwatch.
@@ -187,7 +187,7 @@ Buttons are indicated on the side of the screen.
 
 ### Alarm
 You can select time and melody and alarm will play at that time. Alarm will start only if watchface is opened.
-There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off. 
+There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off (time will reset). 
 
 Menu items is:
 - Back to apps list.
@@ -221,10 +221,21 @@ Buttons are indicated on the side of the screen.
 - Press <b>up</b> button to confirm selected item.
 - Hold <b>up</b> button for 3 seconds to go back to watchface.
 - Press <b>down</b> button to move cursor down.
+When melody is playing:
+- Press <b>up</b> or <b>down</b> button to exit back to list.
+- Hold <b>up</b> or <b>down</b> button to loop melody.
+There is no auto-exit from melody playing if loop, so if you leave watch untouched in this mode, it will discharge and power off (time will reset).
 <p align="center">
 <img src="Photos/20220228_160601.jpg" width="250"/>
 <img src="Photos/20220228_160610.jpg" width="250"/>
 </p>
+
+### Life
+Game of life is a cellular automaton.
+There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off(time will reset).
+- Press <b>up</b> or <b>down</b> button to fill screen with random pattern.
+- Hold <b>up</b> or <b>down</b> button to exit to watchface.
+
 
 ### Settings screen
 Main place where you can change parameters of wor DRM Watch.
@@ -256,7 +267,7 @@ Buttons are indicated on the side of the screen.
 
 ### Time setting screen
 Menu to set correct time manually. 
-There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off.
+There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off (time will reset).
 Time is storing in RTC while RTC is powered. If battery is discharged and watch power off, time will reset.
 To prevent resetting time you can attach backup power to RTC's Vbat according to its datasheet.
 
@@ -290,7 +301,7 @@ Buttons:
 ### Debug screen
 Technical status information about system.
 Also, technical information is indicated in Serial logs.
-There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off.
+There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off (time will reset).
 
 Information shown:
 - `VLT`: Current battery voltage detected by Arduino.

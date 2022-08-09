@@ -37,24 +37,25 @@ void(* resetFunc) (void) = 0;//объявляем функцию reset с адр
 #define MODE_MENU_APPS (byte)11
 #define MODE_STOPWATCH (byte)12
 #define MODE_SET_ALARM (byte)13
+#define MODE_GAME_OF_LIFE (byte)14
 //Переменная в которой хранится текущий режим
 byte _mode = -1;
 
 
 
 //Набор циферблатов следует менять именно здесь. Обязательно обновить количество если оно изменилось.
-const byte watchfacesCount = 3;
+const byte watchfacesCount = 2;
 GenericWatchface *watchfaces[watchfacesCount];
 
 void setup() {
   byte i=0;
-  //watchfaces[i++] = new WatchfaceDrmWatch();
-  watchfaces[i++] = new WatchfaceDrmLite();
+  watchfaces[i++] = new WatchfaceDrmWatch();
+  //watchfaces[i++] = new WatchfaceDrmLite();
   //watchfaces[i++] = new WatchfaceNomens();
   //watchfaces[i++] = new WatchfaceZubat();
   //watchfaces[i++] = new WatchfaceXelibri();
   //watchfaces[i++] = new WatchfaceMatrix();
-  watchfaces[i++] = new WatchfaceLife();
+  //watchfaces[i++] = new WatchfaceLife();
   watchfaces[i++] = new WatchfaceCalibri();
   //watchfaces[i++] = new WatchfaceThermo();
   
@@ -84,6 +85,7 @@ void loop() {
   if (_mode == MODE_MENU_APPS ) modeMenuAppsLoop();
   if (_mode == MODE_STOPWATCH ) modeStopwatchLoop();
   if (_mode == MODE_SET_ALARM ) modeSetAlarmLoop();
+  if (_mode == MODE_GAME_OF_LIFE ) modeGameOfLifeLoop();
 }
 
 void setMode(int _modeNew) {
@@ -110,6 +112,7 @@ void setMode(int _modeNew) {
   if (_mode == MODE_MENU_APPS ) modeMenuAppsFinish();
   if (_mode == MODE_STOPWATCH ) modeStopwatchFinish();
   if (_mode == MODE_SET_ALARM ) modeSetAlarmFinish();
+  if (_mode == MODE_GAME_OF_LIFE ) modeGameOfLifeFinish();
   
   //init new
   if (_modeNew == MODE_INIT) modeInitSetup();
@@ -123,6 +126,8 @@ void setMode(int _modeNew) {
   if (_modeNew == MODE_MENU_APPS ) modeMenuAppsSetup();
   if (_modeNew == MODE_STOPWATCH ) modeStopwatchSetup();
   if (_modeNew == MODE_SET_ALARM ) modeSetAlarmSetup();  
+  if (_modeNew == MODE_GAME_OF_LIFE ) modeGameOfLifeSetup();  
+  
   
   _mode = _modeNew;
 }

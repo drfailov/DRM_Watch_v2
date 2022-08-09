@@ -25,16 +25,14 @@ void modeStopwatchLoop() {
       goToWatchface();
       return;
     }
+    Buzzer.beep();
     if(modeStopwatchIsRunning == false){
-      Buzzer.beep();
       modeStopwatchStartedTime = millis() - (modeStopwatchFinishedTime-modeStopwatchStartedTime);
-      modeStopwatchIsRunning = true;
     }
-    else if(modeStopwatchIsRunning == true){
-      Buzzer.beep();
+    else{
       modeStopwatchFinishedTime = millis();
-      modeStopwatchIsRunning = false;
     }
+    modeStopwatchIsRunning = !modeStopwatchIsRunning;
   }
   
   if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()){ //DOWN
