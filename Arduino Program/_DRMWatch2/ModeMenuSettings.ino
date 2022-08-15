@@ -16,8 +16,8 @@ void modeMenuSettingsSetup() {
 }
 
 void modeMenuSettingsLoop() {
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) { //upper button
-    if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.waitHold():ButtonUp.waitHold()){
+  if (isButtonUpPressed()){ //upper button
+    if(isButtonUpHold()){
       Buzzer.beep();
       goToWatchface();
       return;
@@ -28,7 +28,7 @@ void modeMenuSettingsLoop() {
     return;
   }
 
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()) { //down button
+  if (isButtonDownPressed()) { //down button
     Generic.genericMenuLastActionTime = millis();
     Buzzer.beep();
     Generic.selected ++;

@@ -180,7 +180,6 @@ Buttons are indicated on the side of the screen.
 - Press <b>up</b> button Start/Pause stopwatch.
 - Hold <b>up</b> button to Back to watchface. Stopwatch will reset.
 - Press <b>down</b> button to Reset stopwatch to zero value.
-- Hold <b>down</b> button to Back to watchface. Stopwatch will reset.
 <p align="center">
 <img src="Photos/photo_2022-03-16_18-51-27.jpg" width="250"/>
 </p>
@@ -222,8 +221,8 @@ Buttons are indicated on the side of the screen.
 - Hold <b>up</b> button for 3 seconds to go back to watchface.
 - Press <b>down</b> button to move cursor down.\
 When melody is playing:
-- Press <b>up</b> or <b>down</b> button to exit back to list.
-- Hold <b>up</b> or <b>down</b> button to loop melody.
+- Press <b>up</b> button to exit back to list.
+- Hold <b>up</b> button to loop melody.
 There is no auto-exit from melody playing if loop, so if you leave watch untouched in this mode, it will discharge and power off (time will reset).
 <p align="center">
 <img src="Photos/20220228_160601.jpg" width="250"/>
@@ -233,8 +232,8 @@ There is no auto-exit from melody playing if loop, so if you leave watch untouch
 ### Life
 Game of life is a cellular automaton.
 There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off(time will reset).
-- Press <b>up</b> or <b>down</b> button to fill screen with random pattern.
-- Hold <b>up</b> or <b>down</b> button to exit to watchface.
+- Press <b>up</b> button to fill screen with random pattern.
+- Hold <b>up</b> button to exit to watchface.
 
 
 ### Settings screen
@@ -292,8 +291,8 @@ Information about developers and firmware version.
 If inactive for 120 sec, will automatically go to watchface. 
 
 Buttons:
-- Press <b>up</b> or <b>down</b> button to go to watchface.
-- Hold <b>up</b> or <b>down</b> button for 3 seconds to go to debug screen.
+- Press <b>up</b> button to go to watchface.
+- Hold <b>up</b> button for 3 seconds to go to debug screen.
 <p align="center">
 <img src="Photos/20220228_160403.jpg" width="250"/>
 </p>

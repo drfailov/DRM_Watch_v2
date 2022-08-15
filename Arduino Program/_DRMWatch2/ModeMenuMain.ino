@@ -11,7 +11,7 @@ void modeMenuMainSetup() {
 }
 
 void modeMenuMainLoop() {
-  if (MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) {
+  if (isButtonUpPressed()){
     Generic.genericMenuLastActionTime = millis();
     Buzzer.beep();
     if(Generic.selected == MAIN_MENU_SELECTED_BACK){
@@ -29,7 +29,7 @@ void modeMenuMainLoop() {
     return;
   }
   
-  if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()){
+  if(isButtonDownPressed()){
     Generic.genericMenuLastActionTime = millis();
     Buzzer.beep();
     Generic.selected ++;
@@ -94,7 +94,7 @@ void modeMenuMainLoop() {
   else if(Generic.selected  == MAIN_MENU_SELECTED_SETTINGS) 
     Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Hacтpoйки"));
   else if(Generic.selected  == MAIN_MENU_SELECTED_ABOUT) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("O пpoгpaммe"));
+    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Cпpaвкa"));
 #endif
 #ifdef LANG_EN
   if(Generic.selected  == MAIN_MENU_SELECTED_BACK) 

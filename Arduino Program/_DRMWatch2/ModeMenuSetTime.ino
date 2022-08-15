@@ -17,9 +17,9 @@ byte modeMenuSetTimeHours = 00;
 byte modeMenuSetTimeMinutes = 00;
 byte modeMenuSetTimeSeconds = 00;
 
-byte modeMenuSetTimeDays = 01;
-byte modeMenuSetTimeMonths = 01;
-int modeMenuSetTimeYears = 2021;
+byte modeMenuSetTimeDays;
+byte modeMenuSetTimeMonths;
+int modeMenuSetTimeYears;
 
 
 void modeMenuSetTimeSetup(){
@@ -32,29 +32,19 @@ void modeMenuSetTimeSetup(){
 }
 
 void modeMenuSetTimeLoop(){
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()){
+  if (isButtonUpPressed()){ 
     Buzzer.beep();
     //change value
-    if(Generic.selected == MENU_SET_TIME_SELECTED_HOUR) {//hours
+    if(Generic.selected == MENU_SET_TIME_SELECTED_HOUR) //hours
       modeMenuSetTimeHours ++;
-      if(modeMenuSetTimeHours > 23) modeMenuSetTimeHours = 0;
-    }
-    if(Generic.selected == MENU_SET_TIME_SELECTED_MINUTE) {//Minutes
-      modeMenuSetTimeMinutes ++;
-      if(modeMenuSetTimeMinutes > 59) modeMenuSetTimeMinutes = 0;
-    }
-    if(Generic.selected == MENU_SET_TIME_SELECTED_DAY) {//Day
-      modeMenuSetTimeDays ++;
-      if(modeMenuSetTimeDays > 31) modeMenuSetTimeDays = 0;
-    }
-    if(Generic.selected == MENU_SET_TIME_SELECTED_MONTH) {//Month
-      modeMenuSetTimeMonths ++;
-      if(modeMenuSetTimeMonths > 12) modeMenuSetTimeMonths = 0;
-    }
-    if(Generic.selected == MENU_SET_TIME_SELECTED_YEAR) {//Month
+    if(Generic.selected == MENU_SET_TIME_SELECTED_MINUTE) //Minutes
+      modeMenuSetTimeMinutes ++;  
+    if(Generic.selected == MENU_SET_TIME_SELECTED_DAY) //Day
+      modeMenuSetTimeDays ++;  
+    if(Generic.selected == MENU_SET_TIME_SELECTED_MONTH) //Month
+      modeMenuSetTimeMonths ++;  
+    if(Generic.selected == MENU_SET_TIME_SELECTED_YEAR) //Month
       modeMenuSetTimeYears ++;
-      if(modeMenuSetTimeYears > 2050) modeMenuSetTimeYears = 2020;
-    }
     
     if(Generic.selected == MENU_SET_TIME_SELECTED_SAVE) {//SAVE
       RTC.rtcSetTime(modeMenuSetTimeYears, modeMenuSetTimeMonths, modeMenuSetTimeDays, modeMenuSetTimeHours, modeMenuSetTimeMinutes);
@@ -70,12 +60,17 @@ void modeMenuSetTimeLoop(){
     }
   }
 
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()){
+  if (isButtonDownPressed()){
     Buzzer.beep();
-    //move next
     Generic.selected ++;
-    if(Generic.selected > 6) Generic.selected = 0;
   }
+  
+  if(Generic.selected > 6) Generic.selected = 0;
+  if(modeMenuSetTimeHours > 23) modeMenuSetTimeHours = 0;
+  if(modeMenuSetTimeMinutes > 59) modeMenuSetTimeMinutes = 0;
+  if(modeMenuSetTimeDays > 31) modeMenuSetTimeDays = 0;
+  if(modeMenuSetTimeMonths > 12) modeMenuSetTimeMonths = 0;
+  if(modeMenuSetTimeYears < 2020 || modeMenuSetTimeYears > 2040) modeMenuSetTimeYears = 2020;
 
 
   //draw

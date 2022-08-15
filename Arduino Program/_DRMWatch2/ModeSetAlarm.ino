@@ -18,7 +18,7 @@ void modeSetAlarmSetup(){
 }
 
 void modeSetAlarmLoop(){
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()){//change value
+  if (isButtonUpPressed()){ //change value
     Buzzer.beep();
     if(Generic.selected == MODE_SET_ALARM_SELECTED_BACK) {//BACK
       setMode(MODE_MENU_APPS);
@@ -41,7 +41,7 @@ void modeSetAlarmLoop(){
     }
   }
 
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()){ ////move next
+  if (isButtonDownPressed()){ ////move next
     Buzzer.beep();
     Generic.selected ++;
     if(Generic.selected > 4) Generic.selected = 0;

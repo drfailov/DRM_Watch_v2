@@ -9,8 +9,7 @@
 /*Screen with main watchface*/
 const long modeWatchFaceBacklightTimeout = 7000; //мс, Сколько времени после последнего действия будет светить подстветка
 const long modeWatchFaceAminationTimeout = 20000; //мс, сколько времени после последнего действия будет идти анимация и часы не будт спать
-long modeWatchFaceBacklightEnabledTime = millis();
-byte modeWatchFaceFramesCounter = 0; //used to count frames and draw animation without sleep
+long modeWatchFaceBacklightEnabledTime;
 
 void modeWatchFaceSetup() {
   Display.displayInit();
@@ -23,22 +22,20 @@ void modeWatchFaceSetup() {
     attachInterrupt(0, wakeUp, HIGH); //down
     attachInterrupt(1, wakeUp, HIGH);  //up
   }
-  //  ButtonUp.isButtonPressed();
-  //  ButtonDown.isButtonPressed();
   modeWatchFaceLoop(true);
 }
 
 void modeWatchFaceLoop(bool animate) {
   //Обработка подстветки
-  { //Baclight
-    bool backlight = millis() - modeWatchFaceBacklightEnabledTime < modeWatchFaceBacklightTimeout;
-    if (/*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonUp.readDebounce() : ButtonDown.readDebounce()) backlight = true; //если нажата кнопка вниз, не тушить подсветку
+  if (/*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonUp.readDebounce() : ButtonDown.readDebounce())  //если нажата кнопка вниз, не тушить подсветку
+    modeWatchFaceBacklightEnabledTime = millis(); 
+  
+  bool backlight = millis() - modeWatchFaceBacklightEnabledTime < modeWatchFaceBacklightTimeout;
+  if(backlight)
+    Display.displayBacklightOn();
+  else
+    Display.displayBacklightOff();
     
-    if (backlight)
-      Display.displayBacklightOn();
-    else
-      Display.displayBacklightOff();
-  }
 
   //Загрузка данных
   byte hour = RTC.rtcGetHours();
@@ -67,7 +64,7 @@ void modeWatchFaceLoop(bool animate) {
         if ((hour == alertTimeHour && minute >= alertTimeMinute) || (hour > alertTimeHour)) {
           MyEEPROM.eepromSaveAlertLastDayRun(day);
           long timeStarted = millis();
-          long playTime = 120000;
+          long playTime = 180000;
           Display.displayBacklightOn();
           while (melodyPlayerPlayMelody(getMelodyByIndex(alertMelodyIndex)) && millis() - timeStarted < playTime);
         }
@@ -83,38 +80,33 @@ void modeWatchFaceLoop(bool animate) {
   if (watchface != 0) {
     watchface->drawWatchface(hour, minute, second, day, month, year, dayOfWeek, animate ? 5 : 0);
   }
-  else {
-    Display.displayDrawText(20, 30, 1, F("Select WTF"));
-    Display.displayUpdate();
-  }
 
   //Обработка сна
-  byte sleepTime = 8;
-  if (millis() - modeWatchFaceBacklightEnabledTime < modeWatchFaceAminationTimeout) sleepTime = 0; //первые ... секунд не спать чтобы шла анимация. А потом часы идут в сон.
-  if (animate) sleepTime = 0; //После первой отрисовки не впадать в сон, чтобы сразу отрисовался второй раз. Чтобы кнопки инициализировались.
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonUp.readDebounce() : ButtonDown.readDebounce()) sleepTime = 0; //если нажата кнопка вниз, не спать 
+  bool sleepInThisFrame = true;
+  if (millis() - modeWatchFaceBacklightEnabledTime < modeWatchFaceAminationTimeout) sleepInThisFrame = false; //первые ... секунд не спать чтобы шла анимация. А потом часы идут в сон.
+  if (animate) sleepInThisFrame = false; //После первой отрисовки не впадать в сон, чтобы сразу отрисовался второй раз. Чтобы кнопки инициализировались.
+  if (backlight) sleepInThisFrame = false; //если нажата кнопка вниз, не спать 
   
   
 
-  if (sleepTime != 0) {
-#ifdef LOG
-    Serial.flush();
-    Serial.end();
-#endif
+  if (sleepInThisFrame) {
+    #ifdef LOG
+      Serial.flush();
+      Serial.end();
+    #endif
     delay(5);
     setMillis(millis() + 8000);
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
-#ifdef LOG
-    Serial.begin(115200);
-#endif
+    #ifdef LOG
+      Serial.begin(115200);
+    #endif
   }
 
 
 
   //Обработка кнопок
-  //if(! animate){ //не обрабатывать кнопки если это анимированный вывод на экран (предотвращает блокировку кнопками первой отрисовки экрана)
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonDown.isButtonPressed() : ButtonUp.isButtonPressed()) {
-    if (/*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonDown.waitHold() : ButtonUp.waitHold()) {
+  if (isButtonUpPressed()) {
+    if (isButtonUpHold()) {
       reboot();
       return;
     }
@@ -122,7 +114,6 @@ void modeWatchFaceLoop(bool animate) {
     setMode(MODE_MENU_MAIN);
     return;
   }
-  //}
 }
 
 void modeWatchFaceFinish() {

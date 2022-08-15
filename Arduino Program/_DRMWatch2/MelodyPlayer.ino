@@ -219,8 +219,8 @@ bool melodyPlayerPlayMelody(const byte* const melody) {
       Display.displayBacklightOff();
       delay(13);
       
-      if (ButtonDown.isButtonPressed() || ButtonUp.isButtonPressed()){
-        if(ButtonDown.waitHold() || ButtonUp.waitHold()){
+      if (isButtonUpPressed()){
+        if(isButtonUpHold()){
           melodyPlayerLoopMelody = !melodyPlayerLoopMelody;
           melodyPlayerDrawScreen();
         }

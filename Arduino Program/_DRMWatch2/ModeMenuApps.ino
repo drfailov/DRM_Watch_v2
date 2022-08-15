@@ -3,14 +3,14 @@ const byte modeMenuAppsItemsCount = 6; //сколько пунктов меню 
 
 //Максимальная длина строки:              |          |
 #ifdef LANG_EN
-const char modeMenuAppsItem1[] PROGMEM = "Stopwatch";
+const char modeMenuAppsItemStopwatch[] PROGMEM = "Stopwatch";
 const char modeMenuAppsItem2[] PROGMEM = "Alarm";
 const char modeMenuAppsItem3[] PROGMEM = "Zrada";
 const char modeMenuAppsItem4[] PROGMEM = "Melodies";
 const char modeMenuAppsItem5[] PROGMEM = "Life";
 #endif
 #ifdef LANG_RU
-const char modeMenuAppsItem1[] PROGMEM = "Ceкyндoмep";
+const char modeMenuAppsItemStopwatch[] PROGMEM = "Ceкyндoмep";
 const char modeMenuAppsItem2[] PROGMEM = "Бyдильник";
 const char modeMenuAppsItem3[] PROGMEM = "Зpaдa";
 const char modeMenuAppsItem4[] PROGMEM = "Meлoдии";
@@ -19,7 +19,7 @@ const char modeMenuAppsItem5[] PROGMEM = "Жизнь";
 
 const char* modeMenuAppsItems[] = {
   Generic.getMenuItemBack(),
-  modeMenuAppsItem1,
+  modeMenuAppsItemStopwatch,
   modeMenuAppsItem2,
   modeMenuAppsItem3,
   modeMenuAppsItem4,

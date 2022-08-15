@@ -20,10 +20,10 @@ void modeAboutLoop() {
   }
   
 #ifdef LANG_EN
-  Display.displayDrawText(0, 0, 1, F("Softw: Dr.Failov"));
+  Display.displayDrawText(0, 0, 1, F("Soft: Dr.Failov"));
 #endif
 #ifdef LANG_RU
-  Display.displayDrawText(0, 0, 1, F("Coфт:  Dr.Failov"));
+  Display.displayDrawText(0, 0, 1, F("Coфт: Dr.Failov"));
 #endif
   Display.displayDrawText(73, 61, 1, F("2022"));
   Display.displayDrawText(00, 61, 1, version);
@@ -33,8 +33,8 @@ void modeAboutLoop() {
   Display.displayUpdate();
   color = !color;
   for(long st = millis(); millis() - st < 900 && !color; ){
-    if(ButtonUp.isButtonPressed() || ButtonDown.isButtonPressed()){
-      if(ButtonUp.waitHold() || ButtonDown.waitHold()){
+    if(isButtonUpPressed()){
+      if(isButtonUpHold()){
         setMode(MODE_STATUS);
         return;
       }

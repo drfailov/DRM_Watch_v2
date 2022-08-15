@@ -19,7 +19,7 @@ class myEEPROM_ {
   
   #define eepromAddressSilentMode (byte)11
   bool eepromReadSilentMode(){
-    byte result = 1;
+    byte result;
     EEPROM.get(eepromAddressSilentMode, result);
     return result == 1;
   }
@@ -39,7 +39,7 @@ class myEEPROM_ {
   #define eepromBeepSoundNone (byte)4
   #define eepromAddressBeepSound (byte)12 
   byte eepromReadBeepSound(){
-    byte result = 1;
+    byte result;
     EEPROM.get(eepromAddressBeepSound, result);
     return result;
   }
@@ -50,7 +50,7 @@ class myEEPROM_ {
   
   #define eepromAddressAlertEnabled (byte)13
   bool eepromReadAlertEnabled(){
-    byte result = 0;
+    byte result;
     EEPROM.get(eepromAddressAlertEnabled, result);
     return result == 1;
   }
@@ -61,7 +61,7 @@ class myEEPROM_ {
   
   #define eepromAddressAlertHour (byte)14
   byte eepromReadAlertHour(){
-    byte result = 0;
+    byte result;
     EEPROM.get(eepromAddressAlertHour, result);
     if(result > 23) result = 0;
     return result;
@@ -73,7 +73,7 @@ class myEEPROM_ {
   
   #define eepromAddressAlertMinute (byte)15
   byte eepromReadAlertMinute(){
-    byte result = 0;
+    byte result;
     EEPROM.get(eepromAddressAlertMinute, result);
     if(result > 59) result = 0;
     return result;
@@ -85,7 +85,7 @@ class myEEPROM_ {
   
   #define eepromAddressAlertLastDayRun (byte)16
   byte eepromReadAlertLastDayRun(){
-    byte result = 0;
+    byte result;
     EEPROM.get(eepromAddressAlertLastDayRun, result);
     return result;
   }
@@ -97,7 +97,7 @@ class myEEPROM_ {
   #define eepromAddressAlertMelodyIndex (byte)17
   #define eepromMelodyCount (byte)7
   byte eepromReadAlertMelodyIndex(){
-    byte result = 0;
+    byte result;
     EEPROM.get(eepromAddressAlertMelodyIndex, result);
     if(result >= eepromMelodyCount) result = 0;
     return result;
@@ -110,7 +110,7 @@ class myEEPROM_ {
   
   #define eepromAddressWatchface (byte)18
   byte eepromReadWatchface(){
-    byte result = 0;
+    byte result;
     EEPROM.get(eepromAddressWatchface, result);
     return result;
   }
@@ -122,7 +122,7 @@ class myEEPROM_ {
   
   #define eepromAddressFlipScreen (byte)19
   bool eepromReadFlipScreen(){
-    byte result = 0;
+    byte result;
     EEPROM.get(eepromAddressFlipScreen, result);
     return result == 1;
   }
@@ -138,16 +138,16 @@ class myEEPROM_ {
       EEPROM.get(i, Generic.buffer[i]);
     }
   }
-  void eepromFIllByZeros(){
-    for(int i=0; i<1000; i++){
-      EEPROM.put(i, 0b00000000);
-    }
-  }
-  void eepromFIllByOnes(){
-    for(int i=0; i<1000; i++){
-      EEPROM.put(i, 0b11111111);
-    }
-  }
+//  void eepromFIllByZeros(){
+//    for(int i=0; i<1000; i++){
+//      EEPROM.put(i, 0b00000000);
+//    }
+//  }
+//  void eepromFIllByOnes(){
+//    for(int i=0; i<1000; i++){
+//      EEPROM.put(i, 0b11111111);
+//    }
+//  }
 };
 
 static myEEPROM_ MyEEPROM;

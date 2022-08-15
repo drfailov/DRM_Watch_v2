@@ -13,14 +13,10 @@ byte genericMenuViewPosition = 0; //первый элемент который �
 
 
 void genericMenuSetup(){
-  //Display.displayInit();
   Display.displayBacklightOn();
   Generic.selected = 0;
   genericMenuViewPosition = 0;
   Generic.genericMenuLastActionTime = millis();
-  //Защита от срабатывания кнопки после перехода на этот экран
-//  ButtonUp.isButtonPressed();
-//  ButtonDown.isButtonPressed();
 }
 
 
@@ -30,8 +26,8 @@ void genericMenuSetup(){
  * progmemArray - Text has to be stored in progmem. But array can be stored in RAM or in PROGMEM. Pass true if your array stored in PROGMEM.
 */
 void genericMenuLoop(const int genericMenuItemsCount, const char* const genericMenuItems[], void (*onSelected)(byte index), bool progmemArray){
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed()) { //UP button
-    if(/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonDown.waitHold():ButtonUp.waitHold()){
+  if (isButtonUpPressed()){  
+    if(isButtonUpHold()){
       Buzzer.beep();
       goToWatchface();
       return;
@@ -42,7 +38,7 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
     return;
   }
 
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed()) { //DOWN button
+  if (isButtonDownPressed()) { 
     Generic.genericMenuLastActionTime = millis();
     Buzzer.beep();
     Generic.selected ++;

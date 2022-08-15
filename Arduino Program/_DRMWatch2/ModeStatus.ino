@@ -6,15 +6,12 @@
 /*Used to test new functionality*/
 
 void modeStatusSetup() {
-  Serial.println(F("modeStatusSetup"));
   modeStatusDraw(); 
   genericMenuSetup();
 }
 
 void modeStatusLoop() {
-  Serial.println(F("modeStatusLoop"));
-  if(ButtonDown.isButtonPressed() || ButtonUp.isButtonPressed() ){
-    Serial.println(F("ButtonPressed !"));
+  if(isButtonUpPressed()){
     Buzzer.beep();
     goToWatchface();
     return;

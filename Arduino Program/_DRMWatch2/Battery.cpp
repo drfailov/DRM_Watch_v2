@@ -10,16 +10,16 @@ class Battery_{
   public:  
   
   bool batteryIsLowPower() {
-    return batteryRawVoltage() < 3550;
+    return batteryRawVoltage() < 3600;
   }
   
   byte batteryBars(){
     int voltage = batteryRawVoltage();
     byte level = 0;
-    if (voltage >= 3300) level = 1;
-    if (voltage >= 3600) level = 2;
+    if (voltage >= 3350) level = 1;
+    if (voltage >= 3650) level = 2;
     if (voltage >= 3850) level = 3;
-    if (voltage >= 4000) level = 4;
+    if (voltage >= 3950) level = 4;
     return level;
   }
   

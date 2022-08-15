@@ -144,7 +144,7 @@ class Display_{
   //Отсоединяем все пины дисплея от ардуины, в том числе и питание
   static void displayPowerOff(){
   #ifdef LOG
-    Serial.println(F("LCD POWER OFF"));
+    Serial.println(F("LCD PWR OFF"));
   #endif
     pinMode(pinLcdBacklight, INPUT);
     digitalWrite(pinLcdBacklight, LOW);
@@ -246,7 +246,7 @@ class Display_{
         displayDrawLine(/*X1*/lx + X, /*Y1*/ly + Y, /*X2*/x + X, /*Y2*/y + Y, /*C*/color);
       if(animate!=0 && i%animate==0){
         displayUpdate();
-        if (ButtonUp.isButtonPressed() || ButtonDown.isButtonPressed()) 
+        if (isButtonUpPressed()) 
           animate = false;
       }
       currentIndex += 2;

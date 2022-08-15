@@ -12,8 +12,8 @@ void modeGameOfLifeSetup() {
 }
 
 void modeGameOfLifeLoop() {
-  if (ButtonDown.isButtonPressed() || ButtonUp.isButtonPressed()){ //PRESS
-    if (ButtonDown.waitHold() || ButtonUp.waitHold()){ //if hold - reset
+  if (isButtonUpPressed()){ //PRESS
+    if (isButtonUpHold()){ //if hold - reset
       Buzzer.beep();
       goToWatchface();
       return;

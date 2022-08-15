@@ -5,10 +5,7 @@
 
 #include <Arduino.h>
 #include "Generic.cpp"
-
-#define BUTTON_ACTION_NOTHING 0
-#define BUTTON_ACTION_PRESS 1
-#define BUTTON_ACTION_LONG 2
+#include "MyEEPROM.cpp"
 
 class Button_{
   private:
@@ -40,13 +37,13 @@ class Button_{
 
   
     if(isButtonPressDown){ //if down
-      return BUTTON_ACTION_PRESS;
+      return true;
     }
     
     //multipress
     if(!holded && value && lastValue && millis()-lastTimePushDownTimeForButton > 500)
-      return BUTTON_ACTION_PRESS;
-    return BUTTON_ACTION_NOTHING;
+      return true;
+    return false;
   }
 
   //Вызывать после того как получен true на pressed. Выдает true после нажатия кнопку не отпускать в течении 5 секунды
@@ -76,5 +73,16 @@ class Button_{
 
 static Button_ ButtonUp(pinButtonUp);
 static Button_ ButtonDown(pinButtonDown);
+
+
+static bool isButtonUpPressed(){
+  return MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed();
+}
+static bool isButtonDownPressed(){
+  return MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed();
+}
+static bool isButtonUpHold(){
+  return /*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonDown.waitHold() : ButtonUp.waitHold();
+}
 
 #endif
