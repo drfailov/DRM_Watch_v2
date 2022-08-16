@@ -235,6 +235,11 @@ There is no auto-exit from this menu, so if you leave watch untouched in this mo
 - Press <b>up</b> button to fill screen with random pattern.
 - Hold <b>up</b> button to exit to watchface.
 
+### Meow
+Watch will meow until you stop it.
+There is no auto-exit from this menu, so if you leave watch untouched in this mode, it will discharge and power off(time will reset).
+- Press <b>up</b> button to exit to watchface.
+
 
 ### Settings screen
 Main place where you can change parameters of wor DRM Watch.
