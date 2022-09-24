@@ -96,6 +96,12 @@ Takes about <b>886 bytes</b> of FLASH memory.
 <p align="center"><img src="Photos/20220228_162259.jpg" width="250"/>
 <img src="Photos/photo_2022-03-01_17-50-55.jpg" width="100"/></p>
 
+### Watchface "Minimal"
+Shows only time. Press DOWN button to show more info.
+Takes about <b>446 bytes</b> of FLASH memory. 
+<p align="center"><img src="Photos/photo_2022-09-24_13-10-24.jpg" width="250"/>
+<img src="Photos/photo_2022-09-24_13-10-24 (2).jpg" width="100"/></p>
+
 ### Watchface "Life"
 Conway's Game of Life as background.\
 Designed by <b>Dr. Failov</b>.

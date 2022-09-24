@@ -5,7 +5,6 @@
 #include "WatchfaceZubat.cpp"
 #include "WatchfaceXelibri.cpp"
 #include "WatchfaceMatrix.cpp"
-#include "WatchfaceMinimal.cpp"
 #include "WatchfaceLife.cpp"
 #include "WatchfaceCalibri.cpp"
 #include "WatchfaceThermo.cpp"
@@ -50,7 +49,7 @@ GenericWatchface *watchfaces[watchfacesCount];
 
 void setup() {
   byte i=0;
-  //watchfaces[i++] = new WatchfaceDrmWatch();
+  watchfaces[i++] = new WatchfaceDrmWatch();
   //watchfaces[i++] = new WatchfaceDrmLite();
   //watchfaces[i++] = new WatchfaceNomens();
   //watchfaces[i++] = new WatchfaceZubat();
@@ -58,7 +57,6 @@ void setup() {
   //watchfaces[i++] = new WatchfaceMatrix();
   //watchfaces[i++] = new WatchfaceLife();
   watchfaces[i++] = new WatchfaceCalibri();
-  //watchfaces[i++] = new WatchfaceMinimal();
   //watchfaces[i++] = new WatchfaceThermo();
   
   
