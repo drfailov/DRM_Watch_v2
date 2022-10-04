@@ -57,12 +57,7 @@ void modeSetAlarmLoop(){
   Display.displayDrawIconWithFrame(/*x*/xOffset, /*y*/0, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected == MODE_SET_ALARM_SELECTED_BACK);
 
   //TITLE
-#ifdef LANG_EN
   Display.displayDrawText(xOffset+25, 4, 1, F("Alarm"));
-#endif
-#ifdef LANG_RU
-  Display.displayDrawText(xOffset+25, 4, 1, F("Бyдильник"));
-#endif
   
 
   //ENABLE \ DISABLE
@@ -94,11 +89,8 @@ void modeSetAlarmLoop(){
   
 
   //LEGEND
-  if(Generic.selected <= MODE_SET_ALARM_SELECTED_TOGGLE)
-    Display.displayDrawCheck(/*X*/MyEEPROM.eepromReadFlipScreen()?89:1, /*Y*/2, 1);
-  else
-    Display.displayDrawText(/*X*/MyEEPROM.eepromReadFlipScreen()?89:1, /*Y*/2, /*C*/1, "+");
-  Display.displayDrawArrowRight(/*X*/MyEEPROM.eepromReadFlipScreen()?89:1, /*Y*/59, 1);
+  Display.drawLegend();
+  
   
   Display.displayUpdate();
 }

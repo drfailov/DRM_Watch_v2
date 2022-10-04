@@ -8,10 +8,7 @@
 
 
 //Базовые константы
-#define version F("v1.29")   //Версию менять здесь
-//#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
-#define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
-#define LOG   //Закомментировать чтобы отключило логи
+#define version F("m1.30")   //Версию менять здесь
 #define  AUTO_EXIT_TIMEOUT 120000 //MS  //Время до автоматического выхода с менюшек
 
 //Распиновка
@@ -34,14 +31,9 @@
 
   
 //Здесь определенл, которое используется во всех меню, для экономии памяти
-#ifdef LANG_RU
-const char menuItemBack[] PROGMEM = "< Haзaд";
-const char textSaved[] PROGMEM = "Coxpaнeнo";
-#endif
-#ifdef LANG_EN
 const char menuItemBack[] PROGMEM = "< Back";
 const char textSaved[] PROGMEM = "Saved";
-#endif
+
 
 class Generic_{
   
@@ -62,6 +54,7 @@ class Generic_{
   byte selected = 0;
   //Общий формат вывода данных много где используется
   char* getDateFormat(){return "%02d.%02d.%04d";}
+  char* getTimeFormat(){return "%02d:%02d";}
   
 
 };

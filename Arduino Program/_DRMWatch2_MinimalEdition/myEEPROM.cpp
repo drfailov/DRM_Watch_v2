@@ -27,26 +27,6 @@ class myEEPROM_ {
     EEPROM.put(eepromAddressSilentMode, (byte)data);
   }
   
-
-
-  
-  //beep sounds
-  //Значения констант звука кнопок, котоые пишутся в память
-  #define eepromBeepSoundBeep (byte)0
-  #define eepromBeepSoundClick (byte)1
-  #define eepromBeepSoundTone (byte)2
-  #define eepromBeepSoundWhistle (byte)3
-  #define eepromBeepSoundNone (byte)4
-  #define eepromAddressBeepSound (byte)12 
-  byte eepromReadBeepSound(){
-    byte result;
-    EEPROM.get(eepromAddressBeepSound, result);
-    return result;
-  }
-  void eepromSaveBeepSound(byte data){
-    EEPROM.put(eepromAddressBeepSound, data);
-  }
-  
   
   #define eepromAddressAlertEnabled (byte)13
   bool eepromReadAlertEnabled(){
@@ -95,7 +75,7 @@ class myEEPROM_ {
   
   
   #define eepromAddressAlertMelodyIndex (byte)17
-  #define eepromMelodyCount (byte)7
+  #define eepromMelodyCount (byte)3
   byte eepromReadAlertMelodyIndex(){
     byte result;
     EEPROM.get(eepromAddressAlertMelodyIndex, result);

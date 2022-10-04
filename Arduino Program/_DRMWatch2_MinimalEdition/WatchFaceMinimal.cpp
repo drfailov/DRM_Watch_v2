@@ -6,13 +6,13 @@
 #include "MyEEPROM.cpp"
 
 
-#ifndef WATCHFACEDRMLITECPP
-#define WATCHFACEDRMLITECPP
+#ifndef WATCHFACEMINIMAL
+#define WATCHFACEMINIMAL
 
-class WatchfaceDrmLite : public GenericWatchface  { //
+class WatchfaceMinimal : public GenericWatchface  { //
   public :
     virtual const char* name() {
-      return (const char*)F("DRM Lite");
+      return (const char*)F("Minimal");
     }
     
 
@@ -30,12 +30,12 @@ class WatchfaceDrmLite : public GenericWatchface  { //
     {
         Display.displayClear();
   
-        {//date
+        if(isButtonDownNowPressed()){//date
           sprintf(Generic.buffer, Generic.getDateFormat(), day, month, year);
           Display.displayDrawText(0, 0, 1, Generic.buffer);
         }
         
-        {//DayOfWeek
+        if(isButtonDownNowPressed()){//DayOfWeek
       #ifdef LANG_EN
           Display.drawDayOfWeek(79, 0, dayOfWeek, /*color*/1);
       #endif
@@ -44,7 +44,7 @@ class WatchfaceDrmLite : public GenericWatchface  { //
       #endif
         }
         
-        {//Temperature
+        if(isButtonDownNowPressed()){//Temperature
           float temp = RTC.rtcGetTemp();
           /* 4 is mininum width, 2 is precision; float value is copied onto str_temp*/
           dtostrf(temp, 4, 1, Generic.buffer);
@@ -53,37 +53,30 @@ class WatchfaceDrmLite : public GenericWatchface  { //
         }
       
         byte X = 96;
-        
-        {//battery
-          X -= 17;
-          Display.displayDrawBattery(X, 61);
-          if(!Battery.batteryIsCharging() && !Battery.batteryIsLowPower()) X += 5;
-        }
-        
-        //Silent mode sign
-        if(MyEEPROM.eepromReadSilentMode()){ 
-          X -= 10;
-          Display.displayDrawSilentModeIcon(X, 61, 1);
-        }
-        
-        //Alert sign
-        if(MyEEPROM.eepromReadAlertEnabled()){ 
-          X-= 11;
-          Display.displayDrawAlertSign(X, 61, 1);
+        if(isButtonDownNowPressed()){
+          {//battery
+            X -= 17;
+            Display.displayDrawBattery(X, 61);
+            if(!Battery.batteryIsCharging() && !Battery.batteryIsLowPower()) X += 5;
+          }
+          
+          //Silent mode sign
+          if(MyEEPROM.eepromReadSilentMode()){ 
+            X -= 10;
+            Display.displayDrawSilentModeIcon(X, 61, 1);
+          }
+          
+          //Alert sign
+          if(MyEEPROM.eepromReadAlertEnabled()){ 
+            X-= 11;
+            Display.displayDrawAlertSign(X, 61, 1);
+          }
         }
         
         
         { //time
-          byte hour1 = hour / 10;
-          byte hour2 = hour - (hour1 * 10);
-          byte minute1 = minute / 10;
-          byte minute2 = minute - (minute1 * 10);
-          
-          Display.displayDrawNumber(hour1   ,  6, 18, 4, 5, animate);
-          Display.displayDrawNumber(hour2   , 25, 18, 4, 5, animate);
-          Display.displayDrawNumber(10      , 46, 18, 4, 5, animate); // :
-          Display.displayDrawNumber(minute1 , 55, 18, 4, 5, animate);
-          Display.displayDrawNumber(minute2 , 74, 18, 4, 5, animate);
+          sprintf(Generic.buffer, Generic.getTimeFormat(), hour, minute);
+          Display.displayDrawText(33, 28, 1, Generic.buffer);
         }
         
         Display.displayUpdate();

@@ -16,50 +16,9 @@
 #include "Buttons.cpp"
 #include "Battery.cpp"
 
-const int32_t  PROGMEM watchFaceFont [] { 
-  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
-  0b00000000000011111001100110011111, //0
-  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
-  0b00000000000011100100010001000110, //1
-  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
-  0b00000000000011110001111110001111, //2
-  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
-  0b00000000000011111000111110001111, //3
-  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
-  0b00000000000010001000111110011001, //4
-  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
-  0b00000000000011111000111100011111, //5
-  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
-  0b00000000000011111001111100011111, //6
-  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
-  0b00000000000001000100010010001111, //7
-  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
-  0b00000000000011111001111110011111, //8
-  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
-  0b00000000000011111000111110011111, //9
-  //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
-  0b00000000000000000001000000010000 // [10] = :
-};
-const PROGMEM byte pathDrmWatch[] = { 57,
-   0,  0,     7,  0,    10,  3,    10, 13,     7, 16,  //D
-   0, 16,     0,  0,   255,255,    13, 16,    13,  0,  //R
-  20,  0,    22,  2,    22,  6,    20,  8,    14,  8,
-  22, 16,   255,255,    25, 16,    25,  0,    33,  8,  //M
-  41,  0,    41, 16,   255,255,     1, 23,     4, 34,  //W
-   6, 28,     8, 34,    11, 22,   255,255,    11, 34,  //A
-  15, 22,    17, 29,    14, 29,    17, 29,    19, 34,
- 255,255,    20, 22,    26, 22,    23, 22,    23, 34,  //T
- 255,255,    36, 24,    34, 22,    31, 22,    29, 24,  //C
-  29, 32,    31, 34,    34, 34,    36, 32,   255,255,
-  39, 22,    39, 34,    39, 30,    41, 28,    43, 28,  //H
-  45, 30,    45, 34
-}; 
 
-const PROGMEM byte pathBubble[] = { 12,
-  39, 28,    53, 18,    89, 18,    95, 15,    95,  3,  
-  89,  0,    5,   0,     0,  3,     0, 15,     5, 18,
-  40, 18,   37,  29
-}; 
+
+
 
 const PROGMEM byte pathZubat[] = { 42,
    0, 36,     4, 35,    20,  3,    23,  0,    36,  0, //контур
@@ -101,32 +60,16 @@ class Display_{
   static const byte* const getPathZubat(){
     return pathZubat;
   }
-
-   
-  static const byte* const getPathDrmWatch(){ 
-    return pathDrmWatch;
-  }
-
-  static const byte* const getPathBubble(){
-    return pathBubble;
-  } 
   
   
   //Инициализация дисплея. Подаём питание, ждём немного и инициализируем программно
   static void displayInit(){
-    #ifdef LOG
-      Serial.print(F("LCD Init..."));
-    #endif
-    //lcd = LCD1202(0,0,0,0);  // RST, CS, MOSI, SCK
     lcd = LCD1202(pinLcdRst, pinLcdCs, pinLcdMosi, pinLcdSck);  // RST, CS, MOSI, SCK
     pinMode(pinLcdPower, OUTPUT);
     digitalWrite(pinLcdPower, HIGH);
     delay(100);
     lcd.Inicialize();  //Инициализация дисплея
     delay(10);
-    #ifdef LOG
-      Serial.println("OK");
-    #endif
   }
   
   //Врубаем подсветку
@@ -143,9 +86,6 @@ class Display_{
   
   //Отсоединяем все пины дисплея от ардуины, в том числе и питание
   static void displayPowerOff(){
-  #ifdef LOG
-    Serial.println(F("LCD PWR OFF"));
-  #endif
     pinMode(pinLcdBacklight, INPUT);
     digitalWrite(pinLcdBacklight, LOW);
     
@@ -221,13 +161,6 @@ class Display_{
   
   //-------- Display independent functions
   
-  //Реконструкция изначального растра из тестовой программы. Эта функция нигде не вызывается, поэтому памяти не занимает. Пусть валяется.
-  static void displayDrawVectorLogo(){
-    displayDrawVector(/*path*/getPathZubat(), /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
-    displayDrawVector(/*path*/getPathBubble(), /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
-    displayDrawVector(/*path*/getPathDrmWatch(), /*x*/48, /*y*/25, /*animate*/true, /*color*/1);
-  }
-  
   //Рисование векторной картинки. Формат вектора описан в комментарии ниже.
   //max number of points for one path is 255.
   //Array type: const PROGMEM byte path[] = {...);
@@ -274,7 +207,6 @@ class Display_{
   static void displayMessage(const __FlashStringHelper* str){
     displayClear();
     displayDrawVector(/*path*/getPathZubat(), /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
-    displayDrawVector(/*path*/getPathBubble(), /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
     strcpy_P(Generic.buffer, (PGM_P)str);
     byte pos = 0;
     bool animate = true;
@@ -752,38 +684,9 @@ class Display_{
     displayDrawBattery(x, y, level, isCharging, isLowPower);
   }
   
-  #define BLOCK_WIDTH  4  // how many blocks contains one symbol
-  #define BLOCK_HEIGHT 5  // how many blocks contains one symbol      
-  void displayDrawNumber(byte symbol, byte offsetX, byte offsetY, byte blockSizeX, byte blockSizeY, byte animate){
-    for(byte bx=0;bx<BLOCK_WIDTH; bx++){
-      for(byte by=0;by<BLOCK_HEIGHT;by++){
-        byte bitIndex = bx + by * BLOCK_WIDTH;
-        int32_t data = pgm_read_dword(&watchFaceFont[symbol]);
-        bool fill = bitRead(data, bitIndex);
-        if(fill){
-          byte x = blockSizeX*bx + offsetX;
-          byte y = blockSizeY*by + offsetY;
-          displayFillRect(/*x*/x, /*y*/y, /*w*/blockSizeX-1, /*h*/blockSizeY-1, /*c*/1);
-          if(animate && bitIndex%animate == 0){
-            displayUpdate();
-          }
-        }
-      }
-    }
-  }
 
   void drawDayOfWeek(byte x, byte y, byte dayOfWeek, bool color) { //
     __FlashStringHelper* txt;
-  #ifdef LANG_RU
-    if (dayOfWeek == 1) txt = F("Пн");
-    if (dayOfWeek == 2) txt = F("Вт");
-    if (dayOfWeek == 3) txt = F("Ср");
-    if (dayOfWeek == 4) txt = F("Чт");
-    if (dayOfWeek == 5) txt = F("Пт");
-    if (dayOfWeek == 6) txt = F("Сб");
-    if (dayOfWeek == 0) txt = F("Вс");
-  #endif
-  #ifdef LANG_EN
     if (dayOfWeek == 1) txt = F("Mon");
     if (dayOfWeek == 2) txt = F("Tue");
     if (dayOfWeek == 3) txt = F("Wed");
@@ -791,8 +694,21 @@ class Display_{
     if (dayOfWeek == 5) txt = F("Fri");
     if (dayOfWeek == 6) txt = F("Sat");
     if (dayOfWeek == 0) txt = F("Sun");
-  #endif
     displayDrawText(x, y, color, txt);
+  }
+
+  //classic legend with upper is select and bottom is next
+  void drawLegend(){
+      if(MyEEPROM.eepromReadFlipScreen()){ //flip
+        displayDrawLine(/*X1*/96-11, /*Y1*/0, /*X2*/96-11, /*Y2*/68, /*C*/1);
+        displayDrawCheck(/*X*/96-8, /*Y*/2, 1);
+        displayDrawArrowDown(/*X*/96-8, /*Y*/59, 1);
+      }
+      else{  //no flip
+        displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
+        displayDrawCheck(/*X*/2, /*Y*/2, 1);
+        displayDrawArrowDown(/*X*/1, /*Y*/59, 1);
+      }
   }
 };
 

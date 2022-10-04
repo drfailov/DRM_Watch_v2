@@ -109,12 +109,7 @@ class WatchfaceCalibri : public GenericWatchface  { //
         }
         
         {//DayOfWeek
-      #ifdef LANG_EN
           Display.drawDayOfWeek(79, 0, dayOfWeek, /*color*/1);
-      #endif
-      #ifdef LANG_RU
-          Display.drawDayOfWeek(85, 0, dayOfWeek, /*color*/1);
-      #endif
         }
         
         {//Temperature
@@ -154,7 +149,7 @@ class WatchfaceCalibri : public GenericWatchface  { //
 
           drawNumber(/*x*/8, /*y*/20, /*num*/hour1, /*animate*/ animate);
           drawNumber(/*x*/27, /*y*/20, /*num*/hour2, /*animate*/ animate);
-          Display.displayDrawNumber(/*num*/10, /*x*/46, /*y*/20, /*w*/5, /*h*/5, animate); // :
+          //Display.displayDrawNumber(/*num*/10, /*x*/46, /*y*/20, /*w*/5, /*h*/5, animate); // :
           drawNumber(/*x*/53, /*y*/20, /*num*/minute1, /*animate*/ animate);
           drawNumber(/*x*/72, /*y*/20, /*num*/minute2, /*animate*/ animate);
         }

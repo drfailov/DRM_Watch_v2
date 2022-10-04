@@ -54,16 +54,8 @@ class WatchfaceZubat : public GenericWatchface  { //
       }
       
       {//time
-        byte hour1 = hour / 10;
-        byte hour2 = hour - (hour1 * 10);
-        byte minute1 = minute / 10;
-        byte minute2 = minute - (minute1 * 10);
-        
-        Display.displayDrawNumber(hour1   , 38, 19, 3, 4, animate);
-        Display.displayDrawNumber(hour2   , 52, 19, 3, 4, animate);
-        Display.displayDrawNumber(10      , 66, 19, 3, 4, animate); // :
-        Display.displayDrawNumber(minute1 , 71, 19, 3, 4, animate);
-        Display.displayDrawNumber(minute2 , 85, 19, 3, 4, animate);
+        sprintf(Generic.buffer, Generic.getTimeFormat(), hour, minute);
+        Display.displayDrawText(47, 26, 1, Generic.buffer);
       }
     
       Display.displayUpdate();

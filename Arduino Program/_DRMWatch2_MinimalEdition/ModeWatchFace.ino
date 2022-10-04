@@ -90,16 +90,9 @@ void modeWatchFaceLoop(bool animate) {
   
 
   if (sleepInThisFrame) {
-    #ifdef LOG
-      Serial.flush();
-      Serial.end();
-    #endif
     delay(5);
     setMillis(millis() + 8000);
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
-    #ifdef LOG
-      Serial.begin(115200);
-    #endif
   }
 
 

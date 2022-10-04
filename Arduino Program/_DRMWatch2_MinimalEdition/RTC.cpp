@@ -11,29 +11,13 @@ class RTC_{
   
   public:
   void rtcInit() {
-  #ifdef LOG
-    Serial.print(F("DS3231M..."));
-  #endif
     Wire.setWireTimeout(3000, true); //timeout value in uSec - SBWire uses 100 uSec, so 1000 should be OK
     while (!DS3231M.begin())  // Initialize RTC communications
     {
-  #ifdef LOG
-      Serial.println(F("FAIL"));
-  #endif
-  #ifdef LANG_EN
-      Display.displayMessage(F("RTC FAIL"));
-  #endif
-  #ifdef LANG_RU
-      Display.displayMessage(F("Ошибка RTC"));
-  #endif
       delay(300);
     }                         // of loop until device is located
     DS3231M.pinSquareWave();  // Make INT/SQW pin toggle at 1Hz
     rtcReady = true;
-  #ifdef LOG
-    Serial.print(F("OK,Temp="));
-    Serial.println(DS3231M.temperature());
-  #endif
   }
   
   void rtcSetTime(int year, byte month, byte day, byte hour, byte minute) {

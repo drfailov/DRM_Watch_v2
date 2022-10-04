@@ -85,4 +85,8 @@ static bool isButtonUpHold(){
   return /*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonDown.waitHold() : ButtonUp.waitHold();
 }
 
+static bool isButtonDownNowPressed(){
+  return /*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonUp.readDebounce() : ButtonDown.readDebounce();
+}
+
 #endif

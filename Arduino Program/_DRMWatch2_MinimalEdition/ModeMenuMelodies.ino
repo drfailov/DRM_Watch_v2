@@ -1,24 +1,16 @@
 /*Show menu with melodies by triggerimg GenericMenu*/
-//const byte modeMenuMelodiesItemsCount = 8; //сколько пунктов меню в массиве
+//const byte modeMenuMelodiesItemsCount = 4; //сколько пунктов меню в массиве
 
 //Максимальная длина строки:                  |          |
-const char modeMenuMelodiesItem1[] PROGMEM = "Entertainer";
-const char modeMenuMelodiesItem2[] PROGMEM = "Badinerie";
-const char modeMenuMelodiesItem3[] PROGMEM = "Nokia Tune";
-const char modeMenuMelodiesItem4[] PROGMEM = "Mozart";
-const char modeMenuMelodiesItem5[] PROGMEM = "Mario";
-const char modeMenuMelodiesItem6[] PROGMEM = "Groovy Blue";
-const char modeMenuMelodiesItem7[] PROGMEM = "Ukraine";
+const char modeMenuMelodiesItemEntertainer[] PROGMEM = "Entertainer";
+const char modeMenuMelodiesItemBadinerie[] PROGMEM = "Badinerie";
+const char modeMenuMelodiesItemMozart[] PROGMEM = "Mozart";
 
 const char* const modeMenuMelodiesItems[] PROGMEM = {
   menuItemBack,
-  modeMenuMelodiesItem1,
-  modeMenuMelodiesItem2,
-  modeMenuMelodiesItem3,
-  modeMenuMelodiesItem4,
-  modeMenuMelodiesItem5,
-  modeMenuMelodiesItem6,
-  modeMenuMelodiesItem7
+  modeMenuMelodiesItemEntertainer,
+  modeMenuMelodiesItemBadinerie,
+  modeMenuMelodiesItemMozart
 };
 
 
@@ -55,14 +47,6 @@ const byte* const getMelodyByIndex(byte index){
     return getMelodyEntertainer();
   if (index == 1)  
     return getMelodyBadinerie();
-  if (index == 2)  
-    return getMelodyNokiaTune();
-  if (index == 3) 
+  if (index == 2) 
     return getMelodyMozart();
-  if (index == 4) 
-    return getMelodyMario();
-  if (index == 5) 
-    return getMelodyGroovyBlue();
-  if (index == 6) 
-    return getMelodyUkraine();
 }

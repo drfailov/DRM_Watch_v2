@@ -1,5 +1,5 @@
 /*Show main menu */
-const byte modeMenuMainItemsCount = 4; //сколько пунктов меню в массиве
+const byte modeMenuMainItemsCount = 3; //сколько пунктов меню в массиве
 
 #define MAIN_MENU_SELECTED_BACK 0
 #define MAIN_MENU_SELECTED_APPS 1
@@ -23,9 +23,6 @@ void modeMenuMainLoop() {
     else if (Generic.selected == MAIN_MENU_SELECTED_SETTINGS){
       setMode(MODE_MENU_SETTINGS);
     }
-    else if (Generic.selected == MAIN_MENU_SELECTED_ABOUT){
-      setMode(MODE_ABOUT);
-    }
     return;
   }
   
@@ -33,7 +30,7 @@ void modeMenuMainLoop() {
     Generic.genericMenuLastActionTime = millis();
     Buzzer.beep();
     Generic.selected ++;
-    if(Generic.selected > 3) 
+    if(Generic.selected >= modeMenuMainItemsCount) 
       Generic.selected = 0;
   }
   //auto exit
@@ -75,49 +72,16 @@ void modeMenuMainLoop() {
 
 
   //back
-  Display.displayDrawIconWithFrame(/*x*/xOffset+9, /*y*/15, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_BACK);
-  
+  Display.displayDrawIconWithFrame(/*x*/xOffset+2, /*y*/30, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_BACK);
   //APPS
-  Display.displayDrawIconWithFrame(/*x*/xOffset+9, /*y*/34, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawAppsIcon, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_APPS);
+  Display.displayDrawIconWithFrame(/*x*/xOffset+32, /*y*/30, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawAppsIcon, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_APPS);
   //SETTINGS
-  Display.displayDrawIconWithFrame(/*x*/xOffset+33, /*y*/34, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconSettings, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_SETTINGS);
-  //ABOUT
-  Display.displayDrawIconWithFrame(/*x*/xOffset+57, /*y*/34, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconAbout, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_ABOUT);
+  Display.displayDrawIconWithFrame(/*x*/xOffset+62, /*y*/30, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconSettings, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_SETTINGS);
 
-
-  //LABEL
-#ifdef LANG_RU
-  if(Generic.selected  == MAIN_MENU_SELECTED_BACK) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/(__FlashStringHelper*)menuItemBack);
-  else if(Generic.selected  == MAIN_MENU_SELECTED_APPS) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Пpилoжeния"));
-  else if(Generic.selected  == MAIN_MENU_SELECTED_SETTINGS) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Hacтpoйки"));
-  else if(Generic.selected  == MAIN_MENU_SELECTED_ABOUT) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Cпpaвкa"));
-#endif
-#ifdef LANG_EN
-  if(Generic.selected  == MAIN_MENU_SELECTED_BACK) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/(__FlashStringHelper*)menuItemBack);
-  else if(Generic.selected  == MAIN_MENU_SELECTED_APPS) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Apps"));
-  else if(Generic.selected  == MAIN_MENU_SELECTED_SETTINGS) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Settings"));
-  else if(Generic.selected  == MAIN_MENU_SELECTED_ABOUT) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("About"));
-#endif
 
   //LEGEND
-  if(MyEEPROM.eepromReadFlipScreen()){ //flip
-    Display.displayDrawLine(/*X1*/96-11, /*Y1*/0, /*X2*/96-11, /*Y2*/68, /*C*/1);
-    Display.displayDrawCheck(/*X*/96-8, /*Y*/2, 1);
-    Display.displayDrawArrowDown(/*X*/96-8, /*Y*/59, 1);
-  }
-  else{  //no flip
-    Display.displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
-    Display.displayDrawCheck(/*X*/2, /*Y*/2, 1);
-    Display.displayDrawArrowDown(/*X*/1, /*Y*/59, 1);
-  }
+  Display.drawLegend();
+  
   Display.displayUpdate();
 }
 
@@ -132,10 +96,7 @@ void modeMenuMainSelected(byte index) {
   else if (index == 1) { //Settings
     setMode(MODE_MENU_SETTINGS);
   }
-  else if (index == 2) { //About
-    setMode(MODE_ABOUT);
-  }
-  else if (index == 3) { //Exit
+  else if (index == 2) { //Exit
     goToWatchface();
   }
 }

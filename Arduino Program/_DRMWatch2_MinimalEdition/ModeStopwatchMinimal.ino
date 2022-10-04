@@ -63,23 +63,10 @@ void modeStopwatchLoop() {
     
     minute = (difference) / 1000 / 60;                         //3710100/1000/60 = 3710/60 = 61.83 = 61
     second = (difference - (minute * 1000 * 60)) / 1000;       //(3710100 - (61*1000*60)) /1000 = (3710100-3660000) /1000 = 50100 /1000 = 5.01 = 5
-    millisecond = (difference - (minute * 1000 * 60) - (second * 1000)) / 10;
-      
-    byte minute1 = minute / 10;
-    byte minute2 = minute - (minute1 * 10);
-    byte second1 = second / 10;
-    byte second2 = second - (second1 * 10);
-    byte millisecond1 = millisecond / 10;
-    byte millisecond2 = millisecond - (millisecond1 * 10);
-    byte y = 22;
-    Display.displayDrawNumber(minute1 , /*x*/5, /*y*/y, /*w*/3, /*h*/4, /*animate*/false);
-    Display.displayDrawNumber(minute2 , /*x*/19, /*y*/y, /*w*/3, /*h*/4, /*animate*/false);
-    Display.displayDrawNumber(10      , /*x*/33, /*y*/y, /*w*/3, /*h*/4, /*animate*/false); // :
-    Display.displayDrawNumber(second1 , /*x*/38, /*y*/y, /*w*/3, /*h*/4, /*animate*/false);
-    Display.displayDrawNumber(second2 , /*x*/52, /*y*/y, /*w*/3, /*h*/4, /*animate*/false);
-    Display.displayDrawNumber(10      , /*x*/66, /*y*/y+5, /*w*/2, /*h*/3, /*animate*/false); // :
-    Display.displayDrawNumber(millisecond1 , /*x*/70, /*y*/y+5, /*w*/2, /*h*/3, /*animate*/false);
-    Display.displayDrawNumber(millisecond2 , /*x*/80, /*y*/y+5, /*w*/2, /*h*/3, /*animate*/false);
+    millisecond = (difference - (minute * 1000 * 60) - (second * 1000)) / 1;
+
+    sprintf(Generic.buffer, "%02d:%02d:%03d", (int)minute, (int)second, millisecond);
+    Display.displayDrawText(20, 25, 1, Generic.buffer);
   }
 
   if(modeStopwatchIsRunning)
