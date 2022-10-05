@@ -56,17 +56,18 @@ YouTube video with device overview:
 
 
 ## About project > Typical problems
-Regarding watches: they have two typical problems.\
-1) Water. There is essentially no protection against water, so you need to avoid getting water on them, and especially inside.\
+Regarding watches: they have two typical problems.
+1) Water. There is essentially no protection against water, so you need to avoid getting water on them, and especially inside.
 2) Statics. Static can occur when plugged into a charger, or when putting on/taking off a sweater or other synthetic clothing.
-Therefore, the watch must either be removed for a while, or move slowly so that static in large quantities does not have time to form.\
-....
-If static has already affected the clock, then:\
+Therefore, the watch must either be removed for a while, or move slowly so that static in large quantities does not have time to form.
+
+
+If static has already affected the clock, then:
 - usually the display suffers first, there are artifacts. For six months, I had this happen 5 times. 
-In this case, the watch can be reset (hold down the top button until you see the loading animation).\
+In this case, the watch can be reset (hold down the top button until you see the loading animation).
 - A complete freeze of the controller may occur up to the impossibility of rebooting. 
 Then you need to disassemble the watch and reconnect the battery, or wait for the battery to be FULLY discharged and then charge the fully discharged watch.
-In the meantime, time will slip. (In my six months of use, this was 1 time).\
+In the meantime, time will slip. (In my six months of use, this was 1 time).
 - The controller may also be affected. (in theory, in practice I haven’t had this for half a year of use)
 In this case, it needs to be replaced with a new one (solder the microcircuit)
 
