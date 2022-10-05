@@ -540,6 +540,28 @@ You can fing STL files for DRM Watch case in `Case` folder.
 # Software
 Description of software components and how to build.
 
+## Software > Firmware version
+There are different versions of firmware with different purposes.
+### _DRMWatch2
+Main version, full functionality, full memory usage.
+<p align="center">
+<img src="Photos/photo_2022-10-05_23-08-49.jpg" height="300"/>
+</p>
+
+### _DRMWatch2_MinimalEdition
+Functional version available for daily use, but totally reduced memory usage. 
+You can use it for write your own applications for watch.
+<p align="center">
+<img src="Photos/photo_2022-10-05_23-08-49 (2).jpg" height="300"/>
+</p>
+
+### _DRMWatch2_FactoryTest
+Just testing hardware, you can use it to build your own formware from scratch.
+<p align="center">
+<img src="Photos/photo_2022-10-05_23-04-28.jpg" height="300"/>
+</p>
+
+
 ## Software > Used libraries
 ### LCD1202
 Used to run nokia display. Also may be compatible with this LCD controllers: `pcf8814`, `ste2007`, `ST7565`, `HX1230`.
