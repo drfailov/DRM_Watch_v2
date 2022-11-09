@@ -680,6 +680,12 @@ To add your melody to melody list:
 - Update firmware on your watch;
 - Now your melody will appear in list and can be set as alarm.
 
+Melody player: https://zserge.com/nokia-composer/ (link actual 2022-11)
+Melody repository: https://nokia.nigelcoldwell.co.uk/tunes.html (link actual 2022-11)
+
+Video describing this process you can see here:
+https://www.youtube.com/watch?v=Ek3eQStupCs
+
 
 # Project history
 A long time ago...

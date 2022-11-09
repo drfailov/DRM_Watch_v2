@@ -95,7 +95,7 @@ class myEEPROM_ {
   
   
   #define eepromAddressAlertMelodyIndex (byte)17
-  #define eepromMelodyCount (byte)7
+  #define eepromMelodyCount (byte)8
   byte eepromReadAlertMelodyIndex(){
     byte result;
     EEPROM.get(eepromAddressAlertMelodyIndex, result);

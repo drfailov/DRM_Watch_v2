@@ -19,12 +19,7 @@ void modeAboutLoop() {
     return;
   }
   
-#ifdef LANG_EN
-  Display.displayDrawText(0, 0, 1, F("Soft: Dr.Failov"));
-#endif
-#ifdef LANG_RU
-  Display.displayDrawText(0, 0, 1, F("Coфт: Dr.Failov"));
-#endif
+  Display.displayDrawText(0, 0, 1, F("Made by DrFailov"));
   Display.displayDrawText(73, 61, 1, F("2022"));
   Display.displayDrawText(00, 61, 1, version);
 

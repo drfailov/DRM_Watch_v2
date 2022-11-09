@@ -42,10 +42,60 @@ TC4056: 0.000 мА
 Дырка 0.4
 
 
+add melody video:
+How to add melody to DRM Watch v2 firmware 
+DRM Watch repository: https://github.com/drfailov/DRM_Watch_v2
+Melody player: https://zserge.com/nokia-composer/ (link actual 2022-11)
+Melody repository: https://nokia.nigelcoldwell.co.uk/tunes.html (link actual 2022-11)
+
+Timecodes:
+0:00 Intro
+0:25 Check if sketch compiling
+1:25 Find melody on Internet
+2:00 Check if melody correct with player
+2:37 Convert melody to binary format
+3:35 Add melody code to MediaPlayer.ino
+4:05 Add getMelody function for new melody
+4:42 Add melody to getMelodiByIndex() function
+5:15 Add name of melody to modeMenuMelodiesItems array
+6:01 Edit eepromMelodyCount in myEEPROM.cpp
+6:40 Compile and upload to DRM Watch
+7:49 Check if melody added successfully
+ 
+
+ 
+
+
 Плеер мелодий:
 https://zserge.com/nokia-composer/
 Ukraine athem:
 4e2 8- 8e2 8e2 8d2 8e2 8f2 4g2 8- 8f2 4e2 4d2 4c2 4e2 4b1 4e2 8a1 8#g1 8a1 8b1 4c2 4d2 4e2 8- 8e2 8e2 8d2 8e2 8f2 4g2 8- 8f2 4e2 4d2 4c2 4a1 4e2 4#g1 4a1 4e1 4a1
+
+
+Eiffel 65: Blue v1 (Tempo=140)	
+  4a1 4#a1 8g1 8#a1 8c2 8f1 8a1 4#a1 8g1 8#a1 8d2 4#d2 8d2 8c2 4#a1 8g1 8#a1 8c2 8f1 8a1 4#a1 8g1 8#a1 8d2 4#d2 8d2 8c2 4#a1 8g1 8#a1 8c2 8f1 8a1 4#a1 8g1 8#a1 8d2 4#d2 8d2 8c2 4#a1 8g1 8#a1 8a1 8f1 8f1 2g1
+  
+Entertainer(Tempo=140)	
+  8d2 8#d2 8e2 4c3 8e2 4c3 8e2 2c3 8c3 8d3 8#d3 8e3 8c3 8d3 4e3 8b2 4d3 2c3 4- 8d2 8#d2 8e2 4c3 8e2 4c3 8e2 2c3 8- 8a2 8g2 8#f2 8a2 8c3 4e3 8d3 8c3 8a2 2d3
+
+  
+Harry Potter - Movie Theme(Tempo=125)	
+  8b1 8.e2 16g2 8#f2 4e2 8b2 4.a2 4.#f2 8.e2 16g2 8#f2 4d2 8f2 2b1 8- 8b1 8.e2 16g2 8#f2 4e2 8b2 4d3 8#c3 4c3 8#g2 8.c3 16b2 8#a2 4#f2 8g2 2e2 8- 8g2 4b2 8g2 4b2 8g2 4c3 8b2 4#a2 8#f2 8.g2 16b2 8#a2 4#a1
+
+Imperial(Tempo=112)	
+  4a1 4a1 4a1 4f1 16c2 4a1 4f1 16c2 2a1 4e2 4e2 4e2 4f2 16c2 4#g1 4f1 16c2 2a1 4a2 4a1 16a1 4a2 4#g2 16g2 16#f2 16f2 4#f2 8#a1 4#d2 4d2 16#c2 16c2 16b1 4c2 8f1 4#g1 4f1 16#g1 4c2 4a1 16c2 2e2 4a2 4a1 16a1 4a2 4#g2 16g2 16#f2 16f2
+  
+James Bond v1 (Tempo=80)	
+  16#d1 32f1 32f1 16f1 8f1 16#d1 16#d1 16#d1 16#d1 32#f1 32#f1 16#f1 8#f1 16f1 16f1 16f1 16#d1 32f1 32f1 16f1 8f1 16#d1 16#d1 16#d1 16#d1 32#f1 32#f1 16#f1 8#f1 16f1 16e1 16#d1 16#d2 2d2 16#a1 16#g1 2#a1
+  
+Mission Impossible(Tempo=100)	
+  16g2 8- 16g2 8- 16f2 16- 16#f2 16- 16g2 8- 16g2 8- 16#a2 16- 16c3 16- 16g2 8- 16g2 8- 16f2 16- 16#f2 16- 16g2 8- 16g2 8- 16#a2 16- 16c3 16- 16#a2 16g2 2d2 32- 16#a2 16g2 2#c2 32- 16#a2 16g2 2c2 16- 16#a1 16c2
+  
+Popcorn(Tempo=70)	
+  16g2 16f2 16g2 16d2 16#a1 16d2 8g1 16g2 16f2 16g2 16d2 16#a1 16d2 8g1 16g2 16a2 16#a2 32g2 16#a2 32g2 16#a2 16a2 32f2 16a2 32f2 16a2 16g2 16f2 16d2 16f2 8g2
+  
+  
+  
 
 
 
@@ -385,6 +435,8 @@ Changelog
 2022-09-24 1.30 Обновлена документация
 2022-09-24 1.30 Начата разработка минималистичной прошивки
 2022-10-04 m1.30 Минималистичная прошивка, высвобождено около 7кб памяти для дальнейшей разработки
+2022-11-09 1.31 Добавлена в прошивку мелодия blue
+2022-11-09 1.31 Обновления на экране "Справка"
 
 
 
@@ -402,30 +454,3 @@ Changelog
 - таймер
 
 
-
-Общая информация которая должна быть на странице проекта:
-- About this project
-	+ List of features
-	+ Photos of device
-	+ Video demo of usage on YouTube
-	+ Overview of watchfaces with photos
-	+ Overview of screens with photos and description
-	+ Overview of settings with description
-- Hardware and case
-	+ Used parts
-	+ Schematics
-	+ 3d model
-	+ assembly instructions
-	+ Assembly photos
-	+ Troubleshooting
-- Software
-	+ Used libraries
-	+ How to build
-	+ How to set language
-	+ How to set watchfaces list
-	+ How to add your own watchface
-	+ How to add your own application
-	+ How to add your own melodies
-- Project history
-	+ First steps
-	+ Prototype photos
