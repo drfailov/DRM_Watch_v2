@@ -427,13 +427,13 @@ Here's what I got:
 ### Board gerber files
 You can fing GERBER files for DRM Watch board in `Circuit Board` folder.
 <p align="center">
-<img src="Photos\v4 20mm.JPG" width="300"/>
+<img src="Circuit Board\Плата DRMW2 v6\board_v6_view1.png" width="300"/>
 </p>
 
-### Board soldering plan, elements list and LCD pinout
+### Board soldering plan, elements list
 Description of elements on board:
 <p align="center">
-<img src="Photos\2022-01-16 DRMW2_DOC.png" width="300"/>
+<img src="Circuit Board\Плата DRMW2 v6\board_v6_info1.png" width="300"/>
 </p>
 
 ### Atmel 328P chip pinout
