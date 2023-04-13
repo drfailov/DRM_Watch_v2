@@ -425,7 +425,7 @@ Here's what I got:
 
 ## Hardware > Schematics
 ### Board gerber files
-You can fing GERBER files for DRM Watch board in `Circuit Board` folder. Case is dezigned to fit <b>1mm thick</b> board.
+You can fing GERBER files for DRM Watch board in `Circuit Board` folder. Case is designed to fit <b>1mm thick</b> board.
 <p align="center">
 <img src="Circuit Board\Плата DRMW2 v7\board_v7_view1.png" width="300"/>
 </p>
