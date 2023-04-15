@@ -261,7 +261,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Отображение красивого уведомления с Зубатом и анимацией.
   //Анимацию можно перемотать кнопкой вверх
   static void displayMessage(const __FlashStringHelper* str){
-    displayClear();
+    displayTransition();
     displayDrawVector(/*path*/getPathZubat(), /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
     displayDrawVector(/*path*/getPathBubble(), /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
     strcpy_P(buffer, (PGM_P)str);
@@ -290,26 +290,12 @@ const PROGMEM byte pathZubat[] = { 42,
   
   //Вывод простого сообщения из оперативки.
   static void displaySimpleMessage(const char* text){
-    displayClear();
+    displayTransition();
     displayDrawText(10, 30, 1, text);
     displayUpdate();
   }
   
-  //Рисование галочки. Используется по всей программе, в частности в менюшках.
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawCheck(byte x, byte y, bool color){
-    static const unsigned char img[6] PROGMEM = { 
-        0b00011000,
-        0b01110000,
-        0b01110000,
-        0b00111000,
-        0b00001110,
-        0b00000011,
-      };
-    displayDrawBitmap(x, y, img, 6, 8, color);
-  }
+
   
   //Рисование иконки сброса. Используется сейчас нигде
   //Рисунок находится в битовом массиве.
@@ -325,23 +311,6 @@ const PROGMEM byte pathZubat[] = { 42,
         0b00000000,
       };
     displayDrawBitmap(x, y, img, 6, 8, color);
-  }
-  
-  //Рисование иконки стрелки вниз. Используется менющках.
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawArrowDown(byte x, byte y, bool color){
-    static const unsigned char img[7] PROGMEM = { 
-        0b00000001,
-        0b00000111,
-        0b00011110,
-        0b01111000,
-        0b00011110,
-        0b00000111,
-        0b00000001,
-      };
-    displayDrawBitmap(x, y, img, 7, 8, color);
   }
   
   //Рисование иконки стрелки вправо. Используется на экране установки времени и будильника.
@@ -546,24 +515,6 @@ const PROGMEM byte pathZubat[] = { 42,
   }
   
   
-  //Рисование иконки времени. Используется в меню настроек
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawIconTime(byte x, byte y, bool color){
-    static const unsigned char img[7] PROGMEM = { 
-        0b00011100,
-        0b00100010,
-        0b01001001,
-        0b01001101,
-        0b01000001,
-        0b00100010,
-        0b00011100
-      };
-    displayDrawBitmap(x, y, img, 7, 8, color);
-  }
-  
-  
   //Рисование иконки сброса. Используется в меню настроек
   //Рисунок находится в битовом массиве.
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
@@ -702,4 +653,71 @@ const PROGMEM byte pathZubat[] = { 42,
     if (dayOfWeek == 0) txt = F("Sun");
   #endif
     displayDrawText(x, y, color, txt);
+  }
+
+  void displayTransition(){
+    for(byte x = LCD_X-1; x < LCD_X; x--){ //byte is cycling to 255
+      for(byte y = 0; y < LCD_Y; y++){
+          displaySetPixel(x,y,0);
+      }
+      if(x%30==0)
+        displayUpdate();
+    }
+  }
+
+  void displayTransitionFade(){
+    for(byte i = 0; i < 2; i++){ 
+      for(byte y = LCD_Y-1; y < LCD_Y; y--){ //byte is cycling to 255
+        for(byte x = 0; x < LCD_X; x++){
+          if(((i+y)%2)+((i+x)%2)==0)
+            displaySetPixel(x,y,0);
+        }
+      }
+      displayUpdate();
+    }
+  }
+  void displayTransitionSwipeDownAndFade(){
+    byte amountOfShift = 5;
+    byte mesh=5;
+    for(byte i = 0; i < 4; i++){ 
+      for(byte y = LCD_Y-1; y < LCD_Y; y--){ //byte is cycling to 255
+        for(byte x = 0; x < LCD_X; x++){
+          if(y - amountOfShift >= 0 && (x+y)%mesh!=0){
+            displaySetPixel(x,y, displayGetPixel(x,y-amountOfShift));
+          }
+          else{
+            displaySetPixel(x,y,0);
+          }
+        }
+      }
+      mesh--;
+      amountOfShift += 10;
+      displayUpdate();
+    }
+  }
+  void displayTransitionWipeDown(){
+    byte amountOfShift = 15;
+    for(byte y = 0; y < LCD_Y; y++){
+      for(byte x = 0; x < LCD_X; x++)
+         displaySetPixel(x,y,0);
+      if(y%amountOfShift ==0)
+        displayUpdate();
+    }
+  }
+  void displayTransitionSwipeLeft(){
+    byte amountOfShift = 23;
+    for(byte i = 0; i < 5; i++){  
+      for(byte y = 0; y < LCD_Y; y++){
+        for(byte x = 0; x < LCD_X; x++){
+          if(x + amountOfShift < LCD_X){
+            displaySetPixel(x,y, displayGetPixel(x+amountOfShift,y));
+          }
+          else{
+            displaySetPixel(x,y,0);
+          }
+        }
+      }
+      amountOfShift += 10;
+      displayUpdate();
+    }
   }

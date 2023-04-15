@@ -92,8 +92,8 @@ void drawMenuItem(byte index, void (*drawIcon)(byte x,byte y,bool color), const 
   const byte yOffset = 16;
   const byte width=20;
   const byte height=15;
-  const byte margin = 5;
-  byte x = xOffset + 5 + (width+margin) * (index%3);
+  const byte margin = 4;
+  byte x = xOffset + 7 + (width+margin) * (index%3);
   byte y = yOffset + (height+margin) * (index/3);
   void(* drawR) (byte x, byte y, byte w, byte h, boolean color) = selected == index?displayFillRect:displayDrawRect;
   

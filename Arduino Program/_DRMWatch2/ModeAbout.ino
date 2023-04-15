@@ -1,13 +1,7 @@
-
-#include "Buttons.cpp"
-
-/*Used to test new functionality*/
-
 bool color = 1;
 
 void modeAboutSetup() {
   genericMenuSetup();
-  displayClear();
   color = 1;
 }
 
@@ -18,7 +12,6 @@ void modeAboutLoop() {
   displayDrawText(0, 8, 1, F("Made in Ukraine"));
   displayDrawText(73, 61, 1, F("2022"));
   displayDrawText(00, 61, 1, version);
-
   displayDrawVector(/*path*/getPathDrmWatch(), /*x*/26, /*y*/21, /*animate*/4, /*color*/color);
   displayUpdate();
   color = !color;

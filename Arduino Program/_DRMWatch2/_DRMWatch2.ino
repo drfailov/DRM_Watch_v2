@@ -46,6 +46,7 @@ long genericMenuLastActionTime = 0;
 char buffer[BUFFER_SIZE]; 
 //Общий на всю программу счётчик для выбора элементов из списка
 byte selected = 0;
+bool animate;
 
 
 
@@ -142,6 +143,8 @@ void setMode(int _modeNew) {
   Serial.print(F("RAM: "));
   Serial.println(freeRam());
 #endif
+  //animate transition
+  displayTransition();
   //finish old
   if (_mode == MODE_INIT) modeInitFinish();
   if (_mode == MODE_WATCHFACE) modeWatchFaceFinish();

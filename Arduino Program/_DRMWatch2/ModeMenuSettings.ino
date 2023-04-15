@@ -8,7 +8,6 @@
 #define MENU_SETTINS_SELECTED_WATCHFACE 3
 #define MENU_SETTINS_SELECTED_TIME 4
 bool selectingWatchface = false;
-bool animate;
 
 
 void modeMenuSettingsSetup() {
@@ -23,9 +22,9 @@ void modeMenuSettingsLoop() {
       goToWatchface();
       return;
     }
+    beep();
     genericMenuLastActionTime = millis();
     modeMenuSettingsSelected (selected);
-    beep();
     return;
   }
 

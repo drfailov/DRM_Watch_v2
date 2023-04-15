@@ -14,24 +14,16 @@ const char textSaved[] PROGMEM = "Coxpaнeнo";
 const char menuItemBack[] PROGMEM = "< Back";
 const char textSaved[] PROGMEM = "Saved";
 #endif
-
-
-const char* getMenuItemBack(){ 
-  return menuItemBack;
-}
-static const char* getTextSaved(){ 
-  return menuItemBack;
-}
+const char* getMenuItemBack(){  return menuItemBack; }
+static const char* getTextSaved(){  return menuItemBack;}
 
 
   
 
 
 #include "Buttons.cpp"
-
 Button_ ButtonUp(pinButtonUp);
 Button_ ButtonDown(pinButtonDown);
-
 static bool isButtonUpPressed(){
   return eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed();
 }
