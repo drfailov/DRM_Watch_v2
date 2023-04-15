@@ -1,9 +1,8 @@
 #include <Arduino.h>
 #include "GenericWatchface.cpp"
-#include "Display.cpp"
-#include "RTC.cpp"
-#include "Battery.cpp"
-#include "MyEEPROM.cpp"
+//#include "RTC.cpp"
+//#include "Battery.cpp"
+//#include "MyEEPROM.cpp"
 
 
 #ifndef WATCHFACEMATRIXCPP
@@ -118,21 +117,21 @@ class WatchfaceMatrix : public GenericWatchface  { //
     */
     virtual void drawWatchface(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)
     {
-      Display.displayClear();
+      displayClear();
 
 
        
       {//date
         sprintf(Generic.buffer, Generic.getDateFormat(), day, month, year);
-        Display.displayDrawText(28, 60, 1, Generic.buffer);
+        displayDrawText(28, 60, 1, Generic.buffer);
       }
       
       {//DayOfWeek
     #ifdef LANG_EN
-        Display.drawDayOfWeek(6, 60, dayOfWeek, 1);
+        drawDayOfWeek(6, 60, dayOfWeek, 1);
     #endif
     #ifdef LANG_RU
-        Display.drawDayOfWeek(10, 60, dayOfWeek, 1);
+        drawDayOfWeek(10, 60, dayOfWeek, 1);
     #endif
       }
     
@@ -143,37 +142,37 @@ class WatchfaceMatrix : public GenericWatchface  { //
         byte hour2 = hour - (hour1 * 10);
         byte minute1 = minute / 10;
         byte minute2 = minute - (minute1 * 10);
-        Display.displayDrawNumber(10, 47, 18, 4, 5, animate); // :
+        displayDrawNumber(10, 47, 18, 4, 5, animate); // :
         drawNumber(/*x*/8, /*y*/12, /*num*/hour1, /*animate*/ animate);
         drawNumber(/*x*/26, /*y*/12, /*num*/hour2, /*animate*/ animate);
         drawNumber(/*x*/54, /*y*/12, /*num*/minute1, /*animate*/ animate);
         drawNumber(/*x*/72, /*y*/12, /*num*/minute2, /*animate*/ animate);
       }
       
-      Display.displayUpdate();
+      displayUpdate();
     }
 
     void drawNumber(byte x, byte y, byte num, byte animate){
       if(num == 0)
-        Display.displayDrawVector(/*path*/pathMatrix0, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathMatrix0, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       if(num == 1)
-        Display.displayDrawVector(/*path*/pathMatrix1, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathMatrix1, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       if(num == 2)
-        Display.displayDrawVector(/*path*/pathMatrix2, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathMatrix2, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       if(num == 3)
-        Display.displayDrawVector(/*path*/pathMatrix3, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathMatrix3, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       if(num == 4)
-        Display.displayDrawVector(/*path*/pathMatrix4, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathMatrix4, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       if(num == 5)
-        Display.displayDrawVector(/*path*/pathMatrix5, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathMatrix5, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       if(num == 6)
-        Display.displayDrawVector(/*path*/pathMatrix6, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathMatrix6, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       if(num == 7)
-        Display.displayDrawVector(/*path*/pathMatrix7, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathMatrix7, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       if(num == 8)
-        Display.displayDrawVector(/*path*/pathMatrix8, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathMatrix8, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       if(num == 9)
-        Display.displayDrawVector(/*path*/pathMatrix9, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);        
+        displayDrawVector(/*path*/pathMatrix9, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);        
     }
     
 

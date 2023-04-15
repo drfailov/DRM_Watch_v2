@@ -1,10 +1,5 @@
-#include "Display.cpp"
+
 #include "Buttons.cpp"
-#include "Battery.cpp"
-#include "Buzzer.cpp"
-#include "RTC.cpp"
-#include "MyEEPROM.cpp"
-#include "Generic.cpp"
 
 /*Screen with main watchface*/
 const long modeWatchFaceBacklightTimeout = 7000; //мс, Сколько времени после последнего действия будет светить подстветка
@@ -12,9 +7,9 @@ const long modeWatchFaceAminationTimeout = 20000; //мс, сколько вре�
 long modeWatchFaceBacklightEnabledTime;
 
 void modeWatchFaceSetup() {
-  Display.displayInit();
+  displayInit();
   modeWatchFaceBacklightEnabledTime = millis();
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen()) {
+  if (/*flip*/eepromReadFlipScreen()) {
     attachInterrupt(1, wakeUp, HIGH); //down
     attachInterrupt(0, wakeUp, HIGH);  //up
   }
@@ -27,24 +22,24 @@ void modeWatchFaceSetup() {
 
 void modeWatchFaceLoop(bool animate) {
   //Обработка подстветки
-  if (/*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonUp.readDebounce() : ButtonDown.readDebounce())  //если нажата кнопка вниз, не тушить подсветку
+  if (/*flip*/eepromReadFlipScreen() ? ButtonUp.readDebounce() : ButtonDown.readDebounce())  //если нажата кнопка вниз, не тушить подсветку
     modeWatchFaceBacklightEnabledTime = millis(); 
   
   bool backlight = millis() - modeWatchFaceBacklightEnabledTime < modeWatchFaceBacklightTimeout;
   if(backlight)
-    Display.displayBacklightOn();
+    displayBacklightOn();
   else
-    Display.displayBacklightOff();
+    displayBacklightOff();
     
 
   //Загрузка данных
-  byte hour = RTC.rtcGetHours();
-  byte minute = RTC.rtcGetMinutes();
-  byte second = RTC.rtcGetSeconds();
-  byte dayOfWeek = RTC.rtcGetDayOfWeek();
-  byte day = RTC.rtcGetDay();
-  byte month = RTC.rtcGetMonth();
-  int year = RTC.rtcGetYear();
+  byte hour = rtcGetHours();
+  byte minute = rtcGetMinutes();
+  byte second = rtcGetSeconds();
+  byte dayOfWeek = rtcGetDayOfWeek();
+  byte day = rtcGetDay();
+  byte month = rtcGetMonth();
+  int year = rtcGetYear();
 
   //Обработка будильника
   { //alert
@@ -53,19 +48,19 @@ void modeWatchFaceLoop(bool animate) {
     //-in this day was not playen
     //-this is right time to play
 
-    bool alertIsEnabled = MyEEPROM.eepromReadAlertEnabled();
-    byte alertLastRunDay = MyEEPROM.eepromReadAlertLastDayRun();
-    byte alertTimeHour = MyEEPROM.eepromReadAlertHour();
-    byte alertTimeMinute = MyEEPROM.eepromReadAlertMinute();
-    byte alertMelodyIndex = MyEEPROM.eepromReadAlertMelodyIndex();
+    bool alertIsEnabled = eepromReadAlertEnabled();
+    byte alertLastRunDay = eepromReadAlertLastDayRun();
+    byte alertTimeHour = eepromReadAlertHour();
+    byte alertTimeMinute = eepromReadAlertMinute();
+    byte alertMelodyIndex = eepromReadAlertMelodyIndex();
 
     if (alertIsEnabled) {
       if (alertLastRunDay != day) {
         if ((hour == alertTimeHour && minute >= alertTimeMinute) || (hour > alertTimeHour)) {
-          MyEEPROM.eepromSaveAlertLastDayRun(day);
+          eepromSaveAlertLastDayRun(day);
           long timeStarted = millis();
           long playTime = 180000;
-          Display.displayBacklightOn();
+          displayBacklightOn();
           while (melodyPlayerPlayMelody(getMelodyByIndex(alertMelodyIndex)) && millis() - timeStarted < playTime);
         }
       }
@@ -73,13 +68,10 @@ void modeWatchFaceLoop(bool animate) {
   }
 
   //Отрисовка циферблата
-  //Номер выбранного циферблата из памяти
-  byte wtf = MyEEPROM.eepromReadWatchface();
+  byte wtf = eepromReadWatchface(); //Номер выбранного циферблата из памяти
   if (wtf >= watchfacesCount) wtf = 0;
-  GenericWatchface *watchface = watchfaces[wtf];
-  if (watchface != 0) {
-    watchface->drawWatchface(hour, minute, second, day, month, year, dayOfWeek, animate ? 5 : 0);
-  }
+  if(wfs[wtf] != 0)
+    wfs[wtf](hour, minute, second, day, month, year, dayOfWeek, animate ? 5 : 0);
 
   //Обработка сна
   bool sleepInThisFrame = true;
@@ -110,7 +102,7 @@ void modeWatchFaceLoop(bool animate) {
       reboot();
       return;
     }
-    Buzzer.beep();
+    beep();
     setMode(MODE_MENU_MAIN);
     return;
   }

@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include "GenericWatchface.cpp"
-#include "Display.cpp"
 #include "RTC.cpp"
 #include "Battery.cpp"
 #include "MyEEPROM.cpp"
@@ -34,11 +33,11 @@ class WatchfaceLife : public GenericWatchface  { //
       
       //if first step, fill screen with random pattern
       if(steps == 0){
-        Display.displayClear();
+        displayClear();
         for(byte x = 0; x < LCD_X; x++){
           for(byte y = 0; y < LCD_Y; y++){
             bool c = micros()%3 == 0;
-            Display.displaySetPixel(x,y, c);
+            displaySetPixel(x,y, c);
           }
         }
       }
@@ -46,15 +45,15 @@ class WatchfaceLife : public GenericWatchface  { //
       //draw
       lifeStep();
       drawTime (hour, minute);
-      Display.displayUpdate();
+      displayUpdate();
     }
 
     void drawTime(byte hour, byte minute){
-      Display.displayFillRect(/*x*/ 29, /*y*/ 20, /*w*/ 42, /*h*/ 29, /*color*/ 0);
-      Display.displayDrawRect(/*x*/ 30, /*y*/ 21, /*w*/ 40, /*h*/ 27, /*color*/ 1);
+      displayFillRect(/*x*/ 29, /*y*/ 20, /*w*/ 42, /*h*/ 29, /*color*/ 0);
+      displayDrawRect(/*x*/ 30, /*y*/ 21, /*w*/ 40, /*h*/ 27, /*color*/ 1);
       sprintf(Generic.buffer, "%02d:%02d", hour, minute);
-      Display.displayDrawText(35, 25, 1, Generic.buffer);
-      Display.displayDrawBattery(39, 38);
+      displayDrawText(35, 25, 1, Generic.buffer);
+      displayDrawBattery(39, 38);
     }
 
     void lifeStep(){
@@ -66,20 +65,20 @@ class WatchfaceLife : public GenericWatchface  { //
         for(byte y = 0; y < LCD_Y; y++)
           lastCol[y] = currCol[y];
         for(byte y = 0; y < LCD_Y; y++)
-          currCol[y] = Display.displayGetPixel(x,y);
+          currCol[y] = displayGetPixel(x,y);
           
         for(byte y = 0; y < LCD_Y; y++){
           bool topleft = lastCol[y-1];
           bool top = currCol[y-1];
-          bool topright = Display.displayGetPixel(x + 1, y-1);
+          bool topright = displayGetPixel(x + 1, y-1);
           
           bool left = lastCol[y];
           bool current = currCol[y];
-          bool right = Display.displayGetPixel(x + 1, y);
+          bool right = displayGetPixel(x + 1, y);
           
           bool bottomleft = lastCol[y+1];
           bool bottom = currCol[y+1];
-          bool bottomright = Display.displayGetPixel(x + 1, y+1);
+          bool bottomright = displayGetPixel(x + 1, y+1);
 
           byte neighbours = topleft+top+topright+left+right+bottomleft+bottom+bottomright;
           
@@ -88,7 +87,7 @@ class WatchfaceLife : public GenericWatchface  { //
             c = (neighbours == 2 || neighbours == 3);
           else
             c = neighbours == 3;
-          Display.displaySetPixel(x, y, c);
+          displaySetPixel(x, y, c);
         }
       }
     }

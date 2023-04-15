@@ -12,44 +12,44 @@ void modeMenuMainSetup() {
 
 void modeMenuMainLoop() {
   if (isButtonUpPressed()){
-    Generic.genericMenuLastActionTime = millis();
-    Buzzer.beep();
-    if(Generic.selected == MAIN_MENU_SELECTED_BACK){
+    genericMenuLastActionTime = millis();
+    beep();
+    if(selected == MAIN_MENU_SELECTED_BACK){
       goToWatchface();
     }
-    else if (Generic.selected == MAIN_MENU_SELECTED_APPS){
+    else if (selected == MAIN_MENU_SELECTED_APPS){
       setMode(MODE_MENU_APPS);
     }
-    else if (Generic.selected == MAIN_MENU_SELECTED_SETTINGS){
+    else if (selected == MAIN_MENU_SELECTED_SETTINGS){
       setMode(MODE_MENU_SETTINGS);
     }
-    else if (Generic.selected == MAIN_MENU_SELECTED_ABOUT){
+    else if (selected == MAIN_MENU_SELECTED_ABOUT){
       setMode(MODE_ABOUT);
     }
     return;
   }
   
   if(isButtonDownPressed()){
-    Generic.genericMenuLastActionTime = millis();
-    Buzzer.beep();
-    Generic.selected ++;
-    if(Generic.selected > 3) 
-      Generic.selected = 0;
+    genericMenuLastActionTime = millis();
+    beep();
+    selected ++;
+    if(selected > 3) 
+      selected = 0;
   }
   //auto exit
-  if (millis() - Generic.genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
+  if (millis() - genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
     goToWatchface();
     return;
   }
   
-  Display.displayClear();
-  byte xOffset = MyEEPROM.eepromReadFlipScreen()? 0 : 13;
+  displayClear();
+  byte xOffset = eepromReadFlipScreen()? 0 : 13;
 
   {//Temperature
-    float temp = RTC.rtcGetTemp();
-    dtostrf(/*value*/temp, /*mininum width*/4, /*precision*/1, /*buffer*/Generic.buffer);
-    sprintf(Generic.buffer, "%sC", Generic.buffer);
-    Display.displayDrawText(xOffset+0, 0, 1, Generic.buffer);
+    float temp = rtcGetTemp();
+    dtostrf(/*value*/temp, /*mininum width*/4, /*precision*/1, /*buffer*/buffer);
+    sprintf(buffer, "%sC", buffer);
+    displayDrawText(xOffset+0, 0, 1, buffer);
   }
   
   byte X = xOffset+83; //96 total
@@ -57,68 +57,68 @@ void modeMenuMainLoop() {
   
   {//battery
     X -= 17;
-    Display.displayDrawBattery(/*x*/X, /*y*/0);
-    if(!Battery.batteryIsCharging() && !Battery.batteryIsLowPower()) X += 5;
+    displayDrawBattery(/*x*/X, /*y*/0);
+    if(!batteryIsCharging() && !batteryIsLowPower()) X += 5;
   }
   
   //Silent mode sign
-  if(MyEEPROM.eepromReadSilentMode()){ 
+  if(eepromReadSilentMode()){ 
     X -= 10;
-    Display.displayDrawSilentModeIcon(/*x*/X, /*y*/0, /*color*/1);
+    displayDrawSilentModeIcon(/*x*/X, /*y*/0, /*color*/1);
   }
   
   //Alert sign
-  if(MyEEPROM.eepromReadAlertEnabled()){ 
+  if(eepromReadAlertEnabled()){ 
     X-= 11;
-    Display.displayDrawAlertSign(/*x*/X, /*y*/0, /*color*/1);
+    displayDrawAlertSign(/*x*/X, /*y*/0, /*color*/1);
   }
 
 
   //back
-  Display.displayDrawIconWithFrame(/*x*/xOffset+9, /*y*/15, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_BACK);
+  displayDrawIconWithFrame(/*x*/xOffset+9, /*y*/15, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawArrowLeft, /*selected*/selected  == MAIN_MENU_SELECTED_BACK);
   
   //APPS
-  Display.displayDrawIconWithFrame(/*x*/xOffset+9, /*y*/34, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawAppsIcon, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_APPS);
+  displayDrawIconWithFrame(/*x*/xOffset+9, /*y*/34, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawAppsIcon, /*selected*/selected  == MAIN_MENU_SELECTED_APPS);
   //SETTINGS
-  Display.displayDrawIconWithFrame(/*x*/xOffset+33, /*y*/34, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconSettings, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_SETTINGS);
+  displayDrawIconWithFrame(/*x*/xOffset+33, /*y*/34, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawIconSettings, /*selected*/selected  == MAIN_MENU_SELECTED_SETTINGS);
   //ABOUT
-  Display.displayDrawIconWithFrame(/*x*/xOffset+57, /*y*/34, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconAbout, /*selected*/Generic.selected  == MAIN_MENU_SELECTED_ABOUT);
+  displayDrawIconWithFrame(/*x*/xOffset+57, /*y*/34, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawIconAbout, /*selected*/selected  == MAIN_MENU_SELECTED_ABOUT);
 
 
   //LABEL
 #ifdef LANG_RU
-  if(Generic.selected  == MAIN_MENU_SELECTED_BACK) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/(__FlashStringHelper*)menuItemBack);
-  else if(Generic.selected  == MAIN_MENU_SELECTED_APPS) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Пpилoжeния"));
-  else if(Generic.selected  == MAIN_MENU_SELECTED_SETTINGS) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Hacтpoйки"));
-  else if(Generic.selected  == MAIN_MENU_SELECTED_ABOUT) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Cпpaвкa"));
+  if(selected  == MAIN_MENU_SELECTED_BACK) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/(__FlashStringHelper*)menuItemBack);
+  else if(selected  == MAIN_MENU_SELECTED_APPS) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Пpилoжeния"));
+  else if(selected  == MAIN_MENU_SELECTED_SETTINGS) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Hacтpoйки"));
+  else if(selected  == MAIN_MENU_SELECTED_ABOUT) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Cпpaвкa"));
 #endif
 #ifdef LANG_EN
-  if(Generic.selected  == MAIN_MENU_SELECTED_BACK) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/(__FlashStringHelper*)menuItemBack);
-  else if(Generic.selected  == MAIN_MENU_SELECTED_APPS) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Apps"));
-  else if(Generic.selected  == MAIN_MENU_SELECTED_SETTINGS) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Settings"));
-  else if(Generic.selected  == MAIN_MENU_SELECTED_ABOUT) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("About"));
+  if(selected  == MAIN_MENU_SELECTED_BACK) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/(__FlashStringHelper*)menuItemBack);
+  else if(selected  == MAIN_MENU_SELECTED_APPS) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Apps"));
+  else if(selected  == MAIN_MENU_SELECTED_SETTINGS) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Settings"));
+  else if(selected  == MAIN_MENU_SELECTED_ABOUT) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("About"));
 #endif
 
   //LEGEND
-  if(MyEEPROM.eepromReadFlipScreen()){ //flip
-    Display.displayDrawLine(/*X1*/96-11, /*Y1*/0, /*X2*/96-11, /*Y2*/68, /*C*/1);
-    Display.displayDrawCheck(/*X*/96-8, /*Y*/2, 1);
-    Display.displayDrawArrowDown(/*X*/96-8, /*Y*/59, 1);
+  if(eepromReadFlipScreen()){ //flip
+    displayDrawLine(/*X1*/96-11, /*Y1*/0, /*X2*/96-11, /*Y2*/68, /*C*/1);
+    displayDrawCheck(/*X*/96-8, /*Y*/2, 1);
+    displayDrawArrowDown(/*X*/96-8, /*Y*/59, 1);
   }
   else{  //no flip
-    Display.displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
-    Display.displayDrawCheck(/*X*/2, /*Y*/2, 1);
-    Display.displayDrawArrowDown(/*X*/1, /*Y*/59, 1);
+    displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
+    displayDrawCheck(/*X*/2, /*Y*/2, 1);
+    displayDrawArrowDown(/*X*/1, /*Y*/59, 1);
   }
-  Display.displayUpdate();
+  displayUpdate();
 }
 
 void modeMenuMainFinish() {

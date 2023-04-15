@@ -1,5 +1,4 @@
 /*Show settings menu by triggerimg GenericMenu*/
-#include "Generic.cpp"
 
 #define modeMenuSettingsItemsCount 6 //сколько пунктов меню в массиве
 
@@ -18,114 +17,113 @@ void modeMenuSettingsSetup() {
 void modeMenuSettingsLoop() {
   if (isButtonUpPressed()){ //upper button
     if(isButtonUpHold()){
-      Buzzer.beep();
+      beep();
       goToWatchface();
       return;
     }
-    Generic.genericMenuLastActionTime = millis();
-    modeMenuSettingsSelected (Generic.selected);
-    Buzzer.beep();
+    genericMenuLastActionTime = millis();
+    modeMenuSettingsSelected (selected);
+    beep();
     return;
   }
 
   if (isButtonDownPressed()) { //down button
-    Generic.genericMenuLastActionTime = millis();
-    Buzzer.beep();
-    Generic.selected ++;
-    if (Generic.selected >= modeMenuSettingsItemsCount) Generic.selected = 0;
+    genericMenuLastActionTime = millis();
+    beep();
+    selected ++;
+    if (selected >= modeMenuSettingsItemsCount) selected = 0;
   }
   
   //auto exit
-  if (millis() - Generic.genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
+  if (millis() - genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
     goToWatchface();
     return;
   }
 
   byte xOffset = 12;
-  if(/*flip*/MyEEPROM.eepromReadFlipScreen())
+  if(/*flip*/eepromReadFlipScreen())
     xOffset = 0;
-  Display.displayClear();
+  displayClear();
 
   //BACK
-  Display.displayDrawIconWithFrame(/*x*/xOffset+7, /*y*/3, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawArrowLeft, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_BACK);
+  displayDrawIconWithFrame(/*x*/xOffset+7, /*y*/3, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawArrowLeft, /*selected*/selected  == MENU_SETTINS_SELECTED_BACK);
 
   //SILENT MODE
-  Display.displayDrawIconWithFrame(/*x*/xOffset+31, /*y*/3, /*additionalWidth*/1, /*drawIcon(x,y,color)*/(MyEEPROM.eepromReadSilentMode()?Display.displayDrawSilentModeIcon:Display.displayDrawSilentModeOffIcon), /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_SILENT);
+  displayDrawIconWithFrame(/*x*/xOffset+31, /*y*/3, /*additionalWidth*/1, /*drawIcon(x,y,color)*/(eepromReadSilentMode()?displayDrawSilentModeIcon:displayDrawSilentModeOffIcon), /*selected*/selected  == MENU_SETTINS_SELECTED_SILENT);
 
   //FLIP
-  Display.displayDrawIconWithFrame(/*x*/xOffset+56, /*y*/3, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconFlip, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_FLIP);
+  displayDrawIconWithFrame(/*x*/xOffset+56, /*y*/3, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawIconFlip, /*selected*/selected  == MENU_SETTINS_SELECTED_FLIP);
 
 
   
   //WATCHFACE
-  byte wtfIndex = MyEEPROM.eepromReadWatchface();
+  byte wtfIndex = eepromReadWatchface();
   if(wtfIndex > watchfacesCount) wtfIndex = 0;
-  if(watchfaces[wtfIndex] == 0)
-    strcpy_P(Generic.buffer, (char*)F("-"));      //for RAM arrays
-  else
-    strcpy_P(Generic.buffer, watchfaces[wtfIndex]->name());
-  Display.displayDrawIconWithFrame(/*x*/xOffset+7, /*y*/21, /*additionalWidth*/49, /*drawIcon(x,y,color)*/Display.displayDrawIconWatchface, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_WATCHFACE);
-  Display.displayDrawText(/*X*/xOffset+25, /*Y*/25, /*C*/Generic.selected  != MENU_SETTINS_SELECTED_WATCHFACE, /*text*/Generic.buffer);
+  if(wfs[wtfIndex] != 0){
+    wfs[wtfIndex](/*hour*/0, /*minute*/0, /*second*/0, /*day*/0, /*month*/0, /*year*/0, /*dayOfWeek*/0, /*animate*/0);
+  }
+  displayDrawIconWithFrame(/*x*/xOffset+7, /*y*/21, /*additionalWidth*/49, /*drawIcon(x,y,color)*/displayDrawIconWatchface, /*selected*/selected  == MENU_SETTINS_SELECTED_WATCHFACE);
+  displayDrawText(/*X*/xOffset+25, /*Y*/25, /*C*/selected  != MENU_SETTINS_SELECTED_WATCHFACE, /*text*/buffer);
 
 
 
   //BEEP
-  byte beepCurrent = MyEEPROM.eepromReadBeepSound();
-  ltoa(beepCurrent, Generic.buffer, DEC);
-  Generic.buffer[1] = '\0';
-  Display.displayDrawIconWithFrame(/*x*/xOffset+7, /*y*/39, /*additionalWidth*/7, /*drawIcon(x,y,color)*/Display.displayDrawIconBeep, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_BEEP);
-  Display.displayDrawText(/*X*/xOffset+24, /*Y*/43, /*C*/Generic.selected  != MENU_SETTINS_SELECTED_BEEP, /*text*/Generic.buffer);
+  byte beepCurrent = eepromReadBeepSound();
+  ltoa(beepCurrent, buffer, DEC);
+  buffer[1] = '\0';
+  displayDrawIconWithFrame(/*x*/xOffset+7, /*y*/39, /*additionalWidth*/7, /*drawIcon(x,y,color)*/displayDrawIconBeep, /*selected*/selected  == MENU_SETTINS_SELECTED_BEEP);
+  displayDrawText(/*X*/xOffset+24, /*Y*/43, /*C*/selected  != MENU_SETTINS_SELECTED_BEEP, /*text*/buffer);
 
   //SET TIME
-  Display.displayDrawIconWithFrame(/*x*/xOffset+38, /*y*/39, /*additionalWidth*/0, /*drawIcon(x,y,color)*/Display.displayDrawIconTime, /*selected*/Generic.selected  == MENU_SETTINS_SELECTED_TIME);
+  displayDrawIconWithFrame(/*x*/xOffset+38, /*y*/39, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawIconTime, /*selected*/selected  == MENU_SETTINS_SELECTED_TIME);
 
 
 
   //ITEM NAME
 #ifdef LANG_RU
-  if(Generic.selected  == MENU_SETTINS_SELECTED_BACK) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/(__FlashStringHelper*)menuItemBack);
-  else if(Generic.selected  == MENU_SETTINS_SELECTED_SILENT) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Бeззвyчный"));
-  else if(Generic.selected  == MENU_SETTINS_SELECTED_FLIP) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Пepeвopoт"));
-  else if(Generic.selected  == MENU_SETTINS_SELECTED_TIME) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Bpeмя"));
-  else if(Generic.selected  == MENU_SETTINS_SELECTED_WATCHFACE) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Цифepблaт"));
-  else if(Generic.selected  == MENU_SETTINS_SELECTED_BEEP) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("3вyк кнoпoк"));
+  if(selected  == MENU_SETTINS_SELECTED_BACK) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/(__FlashStringHelper*)menuItemBack);
+  else if(selected  == MENU_SETTINS_SELECTED_SILENT) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Бeззвyчный"));
+  else if(selected  == MENU_SETTINS_SELECTED_FLIP) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Пepeвopoт"));
+  else if(selected  == MENU_SETTINS_SELECTED_TIME) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Bpeмя"));
+  else if(selected  == MENU_SETTINS_SELECTED_WATCHFACE) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Цифepблaт"));
+  else if(selected  == MENU_SETTINS_SELECTED_BEEP) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("3вyк кнoпoк"));
   
 #endif
 #ifdef LANG_EN
-  if(Generic.selected  == MENU_SETTINS_SELECTED_BACK) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/(__FlashStringHelper*)menuItemBack);
-  else if(Generic.selected  == MENU_SETTINS_SELECTED_SILENT) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Silent"));
-  else if(Generic.selected  == MENU_SETTINS_SELECTED_FLIP) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Flip"));
-  else if(Generic.selected  == MENU_SETTINS_SELECTED_TIME) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Time"));
-  else if(Generic.selected  == MENU_SETTINS_SELECTED_WATCHFACE) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("WTF"));
-  else if(Generic.selected  == MENU_SETTINS_SELECTED_BEEP) 
-    Display.displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Beep"));
+  if(selected  == MENU_SETTINS_SELECTED_BACK) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/(__FlashStringHelper*)menuItemBack);
+  else if(selected  == MENU_SETTINS_SELECTED_SILENT) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Silent"));
+  else if(selected  == MENU_SETTINS_SELECTED_FLIP) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Flip"));
+  else if(selected  == MENU_SETTINS_SELECTED_TIME) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Time"));
+  else if(selected  == MENU_SETTINS_SELECTED_WATCHFACE) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("WTF"));
+  else if(selected  == MENU_SETTINS_SELECTED_BEEP) 
+    displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("Beep"));
 #endif
 
 
   //LEGEND
-  if(/*flip*/MyEEPROM.eepromReadFlipScreen()){
-    Display.displayDrawLine(/*X1*/96-11, /*Y1*/0, /*X2*/96-11, /*Y2*/68, /*C*/1);
-    Display.displayDrawCheck(/*X*/96-8, /*Y*/2, 1);
-    Display.displayDrawArrowDown(/*X*/96-8, /*Y*/59, 1);    
+  if(/*flip*/eepromReadFlipScreen()){
+    displayDrawLine(/*X1*/96-11, /*Y1*/0, /*X2*/96-11, /*Y2*/68, /*C*/1);
+    displayDrawCheck(/*X*/96-8, /*Y*/2, 1);
+    displayDrawArrowDown(/*X*/96-8, /*Y*/59, 1);    
   }
   else{/*no flip*/
-    Display.displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
-    Display.displayDrawCheck(/*X*/2, /*Y*/2, 1);
-    Display.displayDrawArrowDown(/*X*/1, /*Y*/59, 1);
+    displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
+    displayDrawCheck(/*X*/2, /*Y*/2, 1);
+    displayDrawArrowDown(/*X*/1, /*Y*/59, 1);
   }
   
-  Display.displayUpdate();
+  displayUpdate();
 }
 
 void modeMenuSettingsFinish() {
@@ -139,28 +137,28 @@ void modeMenuSettingsSelected(byte index) {
   }
   
   if (index == MENU_SETTINS_SELECTED_WATCHFACE) { //Select WTF
-    byte wtfIndex = MyEEPROM.eepromReadWatchface();
+    byte wtfIndex = eepromReadWatchface();
     Serial.print(wtfIndex);
     if(wtfIndex < watchfacesCount -1){
-      MyEEPROM.eepromSaveWatchface(++wtfIndex);
+      eepromSaveWatchface(++wtfIndex);
     }
     else{
-      MyEEPROM.eepromSaveWatchface(0);
+      eepromSaveWatchface(0);
     }
     return;
   }
 
   if (index == MENU_SETTINS_SELECTED_SILENT) { //Set silent mode
-    MyEEPROM.eepromSaveSilentMode(!MyEEPROM.eepromReadSilentMode());
+    eepromSaveSilentMode(!eepromReadSilentMode());
     return;
   }
   
   if (index == MENU_SETTINS_SELECTED_BEEP) { //Set sound
     //setMode(MODE_MENU_SET_BEEP_SOUND); 
-    byte beepCurrent = MyEEPROM.eepromReadBeepSound();
+    byte beepCurrent = eepromReadBeepSound();
     beepCurrent++;
     if(beepCurrent > 4) beepCurrent = 0;
-    MyEEPROM.eepromSaveBeepSound(beepCurrent);
+    eepromSaveBeepSound(beepCurrent);
     return;
   }
 
@@ -170,7 +168,7 @@ void modeMenuSettingsSelected(byte index) {
   }
   
   if (index == MENU_SETTINS_SELECTED_FLIP) { //Flip screen
-    MyEEPROM.eepromSaveFlipScreen(!MyEEPROM.eepromReadFlipScreen());
+    eepromSaveFlipScreen(!eepromReadFlipScreen());
     return;
   }
 }

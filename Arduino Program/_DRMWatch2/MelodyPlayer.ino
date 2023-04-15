@@ -1,4 +1,4 @@
-#include "Display.cpp"
+
 
 const byte groovyBlue[] PROGMEM = {
   125,
@@ -226,7 +226,7 @@ bool melodyPlayerPlayMelody(const byte* const melody) {
         frequency = 250.0 * pow(2.0, (noteNumber / 12.0));
   
       if (frequency != 0){
-        Display.displayBacklightOn();
+        displayBacklightOn();
         tone(pinBuzzer, frequency);
       }
       else{
@@ -235,7 +235,7 @@ bool melodyPlayerPlayMelody(const byte* const melody) {
       long noteStarted = millis();
       while(millis() - noteStarted < timeMs);
       noTone(pinBuzzer);
-      Display.displayBacklightOff();
+      displayBacklightOff();
       delay(13);
       
       if (isButtonUpPressed()){
@@ -244,7 +244,7 @@ bool melodyPlayerPlayMelody(const byte* const melody) {
           melodyPlayerDrawScreen();
         }
         else{
-          Display.displayBacklightOn();
+          displayBacklightOn();
           return false;
         }
       }
@@ -254,32 +254,32 @@ bool melodyPlayerPlayMelody(const byte* const melody) {
     pinMode(pinBuzzer, INPUT);
     delay(1000);
   }while(melodyPlayerLoopMelody);
-  Display.displayBacklightOn();
+  displayBacklightOn();
   return true;
 }
 
 void melodyPlayerDrawScreen() {
-  Display.displayClear();
-  Display.displayDrawVector(/*path*/Display.getPathZubat(), /*x*/24, /*y*/10, /*animate*/false, /*color*/1);
+  displayClear();
+  displayDrawVector(/*path*/getPathZubat(), /*x*/24, /*y*/10, /*animate*/false, /*color*/1);
 #ifdef LANG_EN
-  Display.displayDrawText(20, 60, 1, F("Playing..."));
+  displayDrawText(20, 60, 1, F("Playing..."));
 #endif
 #ifdef LANG_RU
-  Display.displayDrawText(17, 60, 1, F("Пoпиликaeм!"));
+  displayDrawText(17, 60, 1, F("Пoпиликaeм!"));
 #endif
 
   if(!melodyPlayerLoopMelody){
-    byte hour = RTC.rtcGetHours();
-    byte minute = RTC.rtcGetMinutes();
-    sprintf(Generic.buffer, "%02d:%02d", hour, minute);
-    Display.displayDrawText(0, 0, 1, Generic.buffer);
+    byte hour = rtcGetHours();
+    byte minute = rtcGetMinutes();
+    sprintf(buffer, "%02d:%02d", hour, minute);
+    displayDrawText(0, 0, 1, buffer);
   }
   else{
-    Display.displayDrawIconFlip(0, 0, 1);
+    displayDrawIconFlip(0, 0, 1);
   }
   
-  Display.displayDrawBattery(79, 0);
-  Display.displayUpdate();
+  displayDrawBattery(79, 0);
+  displayUpdate();
 }
 
 void printBits(byte myByte) {

@@ -1,15 +1,11 @@
 /*Global RTC-related functions*/
-#ifndef RTCCPP
-#define RTCCPP
 
 #include <DS3231M.h>  // Include the DS3231M RTC library
-class RTC_{
 
-  DS3231M_Class DS3231M;  ///< Create an instance of the DS3231M class
+DS3231M_Class DS3231M;  ///< Create an instance of the DS3231M class
   bool rtcReady = false;
   
   
-  public:
   void rtcInit() {
   #ifdef LOG
     Serial.print(F("DS3231M..."));
@@ -21,10 +17,10 @@ class RTC_{
       Serial.println(F("FAIL"));
   #endif
   #ifdef LANG_EN
-      Display.displayMessage(F("RTC FAIL"));
+      displayMessage(F("RTC FAIL"));
   #endif
   #ifdef LANG_RU
-      Display.displayMessage(F("Ошибка RTC"));
+      displayMessage(F("Ошибка RTC"));
   #endif
       delay(300);
     }                         // of loop until device is located
@@ -79,7 +75,3 @@ class RTC_{
     float temp =  DS3231M.temperature() / 100.0;
     return temp;
   }
-};
-
-static RTC_ RTC;
-#endif

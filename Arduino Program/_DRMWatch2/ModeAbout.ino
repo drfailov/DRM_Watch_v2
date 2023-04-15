@@ -1,6 +1,5 @@
-#include "Display.cpp"
+
 #include "Buttons.cpp"
-#include "Buzzer.cpp"
 
 /*Used to test new functionality*/
 
@@ -8,24 +7,24 @@ bool color = 1;
 
 void modeAboutSetup() {
   genericMenuSetup();
-  Display.displayClear();
+  displayClear();
   color = 1;
 }
 
 void modeAboutLoop() {  
   //auto exit
-  if (millis() - Generic.genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
+  if (millis() - genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
     goToWatchface();
     return;
   }
   
-  Display.displayDrawText(0, 0, 1, F("Made by DrFailov"));
-  Display.displayDrawText(73, 61, 1, F("2022"));
-  Display.displayDrawText(00, 61, 1, version);
+  displayDrawText(0, 0, 1, F("Made by DrFailov"));
+  displayDrawText(0, 8, 1, F("Made in Ukraine"));
+  displayDrawText(73, 61, 1, F("2022"));
+  displayDrawText(00, 61, 1, version);
 
-  
-  Display.displayDrawVector(/*path*/Display.getPathDrmWatch(), /*x*/26, /*y*/17, /*animate*/4, /*color*/color);
-  Display.displayUpdate();
+  displayDrawVector(/*path*/getPathDrmWatch(), /*x*/26, /*y*/21, /*animate*/4, /*color*/color);
+  displayUpdate();
   color = !color;
   for(long st = millis(); millis() - st < 900 && !color; ){
     if(isButtonUpPressed()){
@@ -33,7 +32,7 @@ void modeAboutLoop() {
         setMode(MODE_STATUS);
         return;
       }
-      Buzzer.beep();
+      beep();
       goToWatchface();
       return;
     } 

@@ -3,18 +3,11 @@
    * Every call to display has to be done by some call from this file.
    * It needed to make migration to other display easier.
   */
-
-#ifndef DISPLAYCPP
-#define DISPLAYCPP
+#include "lcd1202.h"
 
 #define LCD_X        96
 #define LCD_Y        68
 
-#include "lcd1202.h"
-#include "MyEEPROM.cpp"
-#include "Generic.cpp"
-#include "Buttons.cpp"
-#include "Battery.cpp"
 
 const int32_t  PROGMEM watchFaceFont [] { 
   //  Lines:    |5 ||4 ||3 ||2 ||1 |  <<<<
@@ -73,9 +66,8 @@ const PROGMEM byte pathZubat[] = { 42,
   32,  3,    30,  3
 };
 
-class Display_{
-  private:
-  static LCD1202 lcd;
+  //LCD1202 lcd;
+  LCD1202 lcd(pinLcdRst, pinLcdCs, pinLcdMosi, pinLcdSck);
   /*
    * Display workflow:
    * 
@@ -95,7 +87,6 @@ class Display_{
    *
   */
   
-  public:
   
 
   static const byte* const getPathZubat(){
@@ -118,7 +109,7 @@ class Display_{
       Serial.print(F("LCD Init..."));
     #endif
     //lcd = LCD1202(0,0,0,0);  // RST, CS, MOSI, SCK
-    lcd = LCD1202(pinLcdRst, pinLcdCs, pinLcdMosi, pinLcdSck);  // RST, CS, MOSI, SCK
+    //lcd = LCD1202(pinLcdRst, pinLcdCs, pinLcdMosi, pinLcdSck);  // RST, CS, MOSI, SCK
     pinMode(pinLcdPower, OUTPUT);
     digitalWrite(pinLcdPower, HIGH);
     delay(100);
@@ -131,7 +122,7 @@ class Display_{
   
   //Врубаем подсветку
   static void displayBacklightOn(){
-    if(Battery.batteryIsLowPower()) return; //если батарея разряжена, подсветку не включать
+    if(batteryIsLowPower()) return; //если батарея разряжена, подсветку не включать
     pinMode(pinLcdBacklight, OUTPUT);
     digitalWrite(pinLcdBacklight, HIGH);
   }
@@ -167,7 +158,7 @@ class Display_{
   //Если в параметрах указано перевернктый дисплей, эта функция сама это сделает. Она обращается к MyEEPROM
   static void displayUpdate(){
     //true is flip 180, false is no flip
-    lcd.Update(/*flip*/MyEEPROM.eepromReadFlipScreen()); 
+    lcd.Update(/*flip*/eepromReadFlipScreen()); 
   }
   
   //Функция рисования линии. Она здесь указана для простоты перехода на другой дисплей - всё взаимодействие с дисплее происходит через эти "обёртки".
@@ -257,13 +248,13 @@ class Display_{
   
   //Рисование на экране текста из макроса F().
   static void displayDrawText(int X, int Y, int color, const __FlashStringHelper* str){
-    strcpy_P(Generic.buffer, (PGM_P)str);
+    strcpy_P(buffer, (PGM_P)str);
     byte pos = 0;
     for(int i=0; i<BUFFER_SIZE; i++){
-      if(Generic.buffer[i] == '\0') 
+      if(buffer[i] == '\0') 
         break;
-      if((byte)Generic.buffer[i] != 208 && (byte)Generic.buffer[i] != 209){
-        displayDrawText(X + pos*6, Y, color, Generic.buffer[i]);
+      if((byte)buffer[i] != 208 && (byte)buffer[i] != 209){
+        displayDrawText(X + pos*6, Y, color, buffer[i]);
         pos++;
       }
     }
@@ -275,14 +266,14 @@ class Display_{
     displayClear();
     displayDrawVector(/*path*/getPathZubat(), /*x*/0, /*y*/20, /*animate*/false, /*color*/1);
     displayDrawVector(/*path*/getPathBubble(), /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
-    strcpy_P(Generic.buffer, (PGM_P)str);
+    strcpy_P(buffer, (PGM_P)str);
     byte pos = 0;
     bool animate = true;
     for(byte i=0; i<BUFFER_SIZE; i++){
-      if(Generic.buffer[i] == '\0') 
+      if(buffer[i] == '\0') 
         break;
-      if((byte)Generic.buffer[i] != 208 && (byte)Generic.buffer[i] != 209){
-        displayDrawText(10 + pos*6, 6, 1, Generic.buffer[i]);
+      if((byte)buffer[i] != 208 && (byte)buffer[i] != 209){
+        displayDrawText(10 + pos*6, 6, 1, buffer[i]);
         pos ++;
         if(animate){
           displayUpdate();
@@ -448,7 +439,7 @@ class Display_{
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawSilentModeIcon(byte x, byte y, bool color){
-        static const char img[8] PROGMEM = { 
+        static const unsigned char img[8] PROGMEM = { 
         0b00100000,
         0b01011110,
         0b00100001,
@@ -675,14 +666,14 @@ class Display_{
   
   //Рисование прямоугольника с цифрами. Используется на экранах настройки будильника и времени
   static void displayDraw2DigitNumberWithFrame(byte x, byte y, byte number, bool selected){
-    sprintf(Generic.buffer, "%02d", number);
+    sprintf(buffer, "%02d", number);
     if(selected){
       displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, Generic.buffer);
+      displayDrawText(x + 4, y+4, 0, buffer);
     }
     else{
       displayDrawRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, Generic.buffer);
+      displayDrawText(x+4, y+4, 1, buffer);
     }
   }
   //Рисование рамки с картинкой
@@ -744,9 +735,9 @@ class Display_{
 
   //Это основная функция которая вызывается с циферлатов
   void displayDrawBattery(byte x, byte y) {
-    bool isCharging = Battery.batteryIsCharging();
-    bool isLowPower = Battery.batteryIsLowPower();
-    byte level = Battery.batteryBars();  
+    bool isCharging = batteryIsCharging();
+    bool isLowPower = batteryIsLowPower();
+    byte level = batteryBars();  
     //isLowPower = true; //for test
     //isCharging = false; //for test
     displayDrawBattery(x, y, level, isCharging, isLowPower);
@@ -794,8 +785,3 @@ class Display_{
   #endif
     displayDrawText(x, y, color, txt);
   }
-};
-
-static Display_ Display;
-
-#endif

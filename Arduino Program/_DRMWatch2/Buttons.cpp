@@ -4,8 +4,6 @@
 #define BUTTONCPP
 
 #include <Arduino.h>
-#include "Generic.cpp"
-#include "MyEEPROM.cpp"
 
 class Button_{
   private:
@@ -71,21 +69,8 @@ class Button_{
   }
 };
 
-static Button_ ButtonUp(pinButtonUp);
-static Button_ ButtonDown(pinButtonDown);
 
 
-static bool isButtonUpPressed(){
-  return MyEEPROM.eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed();
-}
-static bool isButtonDownPressed(){
-  return MyEEPROM.eepromReadFlipScreen()?ButtonUp.isButtonPressed():ButtonDown.isButtonPressed();
-}
-static bool isButtonUpHold(){
-  return /*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonDown.waitHold() : ButtonUp.waitHold();
-}
-static bool isButtonDownNowPressed(){
-  return /*flip*/MyEEPROM.eepromReadFlipScreen() ? ButtonUp.readDebounce() : ButtonDown.readDebounce();
-}
+
 
 #endif

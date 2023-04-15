@@ -1,17 +1,64 @@
-#include "GenericWatchface.cpp"
-#include "WatchfaceDrmWatch.cpp"
-#include "WatchfaceDrmLite.cpp"
-#include "WatchfaceNomens.cpp"
-#include "WatchfaceZubat.cpp"
-#include "WatchfaceXelibri.cpp"
-#include "WatchfaceMatrix.cpp"
-#include "WatchfaceMinimal.cpp"
-#include "WatchfaceLife.cpp"
-#include "WatchfaceCalibri.cpp"
-#include "WatchfaceThermo.cpp"
+//#include "GenericWatchface.cpp"
+//#include "WatchfaceDrmWatch.cpp"
+//#include "WatchfaceDrmLite.cpp"
+//#include "WatchfaceNomens.cpp"
+//#include "WatchfaceMatrix.cpp"
+//#include "WatchfaceMinimal.cpp"
+//#include "WatchfaceLife.cpp"
+//#include "WatchfaceThermo.cpp"
+
 #include <util/atomic.h>
 #include <LowPower.h>
 void(* resetFunc) (void) = 0;//объявляем функцию reset с адресом 0
+
+
+
+/*Данные, которые требуется по всей программе*/
+
+
+//Базовые константы
+#define version F("v1.32")   //Версию менять здесь
+#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
+//#define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
+//#define LOG   //Закомментировать чтобы отключило логи
+#define  AUTO_EXIT_TIMEOUT 120000 //MS  //Время до автоматического выхода с менюшек
+
+//Распиновка
+#define pinButtonDown (byte)2 //active high
+#define pinButtonUp (byte)3 //active high
+#define pinLcdRst (byte)5
+#define pinLcdCs (byte)6
+#define pinLcdMosi (byte)7
+#define pinLcdSck (byte)8   
+#define pinLcdPower (byte)10
+#define pinUsbVoltage (byte)11  
+#define pinBuzzer (byte)12 //passive
+#define pinLed (byte)13  //active high
+#define pinLcdBacklight (byte)15  //A1, active high
+// A4 - RTC SDA
+// A5 - RTC SCL
+
+
+//Значения констант звука кнопок, котоые пишутся в память
+#define eepromBeepSoundBeep (byte)0
+#define eepromBeepSoundClick (byte)1
+#define eepromBeepSoundTone (byte)2
+#define eepromBeepSoundWhistle (byte)3
+#define eepromBeepSoundNone (byte)4
+#define eepromAddressBeepSound (byte)12 
+
+//размер текстового буфера. Чем меньше тем экономнее.
+#define BUFFER_SIZE 25
+//последнее действие кнопками, нужно для автоматического выхода
+long genericMenuLastActionTime = 0;   
+//общий на всю программу текстовый буфер чтобы не объявлять каждый раз локальную.
+char buffer[BUFFER_SIZE]; 
+//Общий на всю программу счётчик для выбора элементов из списка
+byte selected = 0;
+//Общий формат вывода данных много где используется
+const char* getDateFormat(){return "%02d.%02d.%04d";}
+char* getTimeFormat(){return "%02d:%02d";}
+
 
 /* Program contains several screens (menus, watchfaces...).
  * Every screen is a separate mode. Every mode contains of: modeSetup(), modeLoop(), modeFinish().
@@ -44,22 +91,33 @@ byte _mode = -1;
 
 
 
-//Набор циферблатов следует менять именно здесь. Обязательно обновить количество если оно изменилось.
-const byte watchfacesCount = 2;
-GenericWatchface *watchfaces[watchfacesCount];
+//Набор циферблатов 
+typedef void (*WF) (const byte hour, const byte minute, const byte second, const byte day, const byte month, const int year, const byte dayOfWeek, const byte animate);
+const byte watchfacesCount = 4;
+WF wfs[watchfacesCount];
+
 
 void setup() {
   byte i=0;
+  //Набор циферблатов следует менять именно здесь. 
+  //number of WFs here need to less or equal than watchfacesCount, otherwise will crash
+  wfs[i++] = watchfaceZubat;
+  wfs[i++] = watchfaceCalibri;
+  wfs[i++] = watchfaceXelibri;
+  
   //watchfaces[i++] = new WatchfaceDrmWatch();
-  watchfaces[i++] = new WatchfaceDrmLite();
+  //watchfaces[i++] = new WatchfaceDrmLite();
   //watchfaces[i++] = new WatchfaceNomens();
   //watchfaces[i++] = new WatchfaceZubat();
   //watchfaces[i++] = new WatchfaceXelibri();
   //watchfaces[i++] = new WatchfaceMatrix();
   //watchfaces[i++] = new WatchfaceLife();
-  watchfaces[i++] = new WatchfaceCalibri();
+  //watchfaces[i++] = new WatchfaceCalibri();
   //watchfaces[i++] = new WatchfaceMinimal();
   //watchfaces[i++] = new WatchfaceThermo();
+  //GenericWatchface *watchface = watchfaces[0];
+  
+  
   
   
 #ifdef LOG
@@ -135,7 +193,7 @@ void setMode(int _modeNew) {
 
 //Выплнить всю последовательность действий требуемых для выполнения перезагрузки.
 void reboot(){
-  Display.displayPowerOff();
+  displayPowerOff();
   delay(1000);
   resetFunc(); //вызываем reset
 }

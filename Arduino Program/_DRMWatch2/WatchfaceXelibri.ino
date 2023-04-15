@@ -1,13 +1,59 @@
-#include <Arduino.h>
-#include "GenericWatchface.cpp"
-#include "Display.cpp"
-#include "RTC.cpp"
-#include "Battery.cpp"
-#include "MyEEPROM.cpp"
+void watchfaceXelibri(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)
+{
+  displayClear();
+
+  {//battery
+    displayDrawBattery(79, 61);
+  }      
+   
+  {//date
+    sprintf(buffer, "%2d ", day);
+    if(month == 1)
+      strcpy (buffer+3, "Jan");   
+    if(month == 2)
+      strcpy (buffer+3, "Feb");   
+    if(month == 3)
+      strcpy (buffer+3, "Mar");   
+    if(month == 4)
+      strcpy (buffer+3, "Apr");   
+    if(month == 5)
+      strcpy (buffer+3, "May");   
+    if(month == 6)
+      strcpy (buffer+3, "Jun");   
+    if(month == 7)
+      strcpy (buffer+3, "Jul");   
+    if(month == 8)
+      strcpy (buffer+3, "Aug");   
+    if(month == 9)
+      strcpy (buffer+3, "Sep");   
+    if(month == 10)
+      strcpy (buffer+3, "Oct");   
+    if(month == 11)
+      strcpy (buffer+3, "Now");   
+    if(month == 12)
+      strcpy (buffer+3, "Dec");   
+    displayDrawText(29, 49, 1, buffer);
+  }
+  
+
+  {//time
+    byte hour1 = hour / 10;
+    byte hour2 = hour - (hour1 * 10);
+    byte minute1 = minute / 10;
+    byte minute2 = minute - (minute1 * 10);
+    drawNumberXelibri(/*x*/5, /*y*/12, /*num*/hour1, /*animate*/ animate);
+    drawNumberXelibri(/*x*/26, /*y*/12, /*num*/hour2, /*animate*/ animate);
+    displayDrawNumber(10, 47, 15, 4, 5, animate); // :
+    drawNumberXelibri(/*x*/53, /*y*/12, /*num*/minute1, /*animate*/ animate);
+    drawNumberXelibri(/*x*/74, /*y*/12, /*num*/minute2, /*animate*/ animate);
+  }
+  
+  displayUpdate();
+}
 
 
-#ifndef WATCHFACEZELIBRICPP
-#define WATCHFACEZELIBRICPP
+
+
 
 //(Total bytes used to store images in PROGMEM = 1056)
 // 'Xelibri0', 18x29px
@@ -91,101 +137,27 @@ const unsigned char bitmap_Xelibri9 [] PROGMEM = {
 
 
 
-class WatchfaceXelibri : public GenericWatchface  { //
-  public :
-    virtual const char* name() {
-      return (const char*)F("Xelibri");
-    }
-
-    /*
-       EN:
-       Drawing watchfacw 1 (DRM Watch). Arguments:
-       hour, minute, second, day, month, year, dayOfWeek - current values to draw
-       animate - 0=draw without animation, 1 - animate slowly, 2 - animate more quickly, ...
-       RU:
-       Рисование циферблата 1 (DRM Watch). Принимает аргументы:
-       hour, minute, second, day, month, year, dayOfWeek - текущие значения которые нужно вывести на циферблат
-       animate - Анимировать ли вывод. 0 = не анимировать. 1 = анимировать медленно, 2 = анимировать быстрее ...
-    */
-    virtual void drawWatchface(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)
-    {
-      Display.displayClear();
-
-      {//battery
-        Display.displayDrawBattery(79, 61);
-      }      
-       
-      {//date
-        sprintf(Generic.buffer, "%2d ", day);
-        if(month == 1)
-          strcpy (Generic.buffer+3, "Jan");   
-        if(month == 2)
-          strcpy (Generic.buffer+3, "Feb");   
-        if(month == 3)
-          strcpy (Generic.buffer+3, "Mar");   
-        if(month == 4)
-          strcpy (Generic.buffer+3, "Apr");   
-        if(month == 5)
-          strcpy (Generic.buffer+3, "May");   
-        if(month == 6)
-          strcpy (Generic.buffer+3, "Jun");   
-        if(month == 7)
-          strcpy (Generic.buffer+3, "Jul");   
-        if(month == 8)
-          strcpy (Generic.buffer+3, "Aug");   
-        if(month == 9)
-          strcpy (Generic.buffer+3, "Sep");   
-        if(month == 10)
-          strcpy (Generic.buffer+3, "Oct");   
-        if(month == 11)
-          strcpy (Generic.buffer+3, "Now");   
-        if(month == 12)
-          strcpy (Generic.buffer+3, "Dec");   
-        Display.displayDrawText(29, 49, 1, Generic.buffer);
-      }
-      
-
-      {//time
-        byte hour1 = hour / 10;
-        byte hour2 = hour - (hour1 * 10);
-        byte minute1 = minute / 10;
-        byte minute2 = minute - (minute1 * 10);
-        drawNumber(/*x*/5, /*y*/12, /*num*/hour1, /*animate*/ animate);
-        drawNumber(/*x*/26, /*y*/12, /*num*/hour2, /*animate*/ animate);
-        Display.displayDrawNumber(10, 47, 15, 4, 5, animate); // :
-        drawNumber(/*x*/53, /*y*/12, /*num*/minute1, /*animate*/ animate);
-        drawNumber(/*x*/74, /*y*/12, /*num*/minute2, /*animate*/ animate);
-      }
-      
-      Display.displayUpdate();
-    }
-
-    void drawNumber(byte x, byte y, byte num, byte animate){
-      if(num == 0)
-        Display.displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri0, /*w*/18, /*h*/29, /*COLOR*/1);
-      if(num == 1)
-        Display.displayDrawBitmap(/*x*/x+5, /*y*/y, /*bmp*/bitmap_Xelibri1, /*w*/8, /*h*/29, /*COLOR*/1);
-      if(num == 2)
-        Display.displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri2, /*w*/18, /*h*/29, /*COLOR*/1);
-      if(num == 3)
-        Display.displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri3, /*w*/18, /*h*/29, /*COLOR*/1);
-      if(num == 4)
-        Display.displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri4, /*w*/18, /*h*/29, /*COLOR*/1);
-      if(num == 5)
-        Display.displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri5, /*w*/18, /*h*/29, /*COLOR*/1);
-      if(num == 6)
-        Display.displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri6, /*w*/18, /*h*/29, /*COLOR*/1);
-      if(num == 7)
-        Display.displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri7, /*w*/18, /*h*/29, /*COLOR*/1);
-      if(num == 8)
-        Display.displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri8, /*w*/18, /*h*/29, /*COLOR*/1);
-      if(num == 9)
-        Display.displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri9, /*w*/18, /*h*/29, /*COLOR*/1);
-      if(animate)
-        Display.displayUpdate();
-    }
-    
-
-};
-
-#endif
+void drawNumberXelibri(byte x, byte y, byte num, byte animate){
+  if(num == 0)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri0, /*w*/18, /*h*/29, /*COLOR*/1);
+  if(num == 1)
+    displayDrawBitmap(/*x*/x+5, /*y*/y, /*bmp*/bitmap_Xelibri1, /*w*/8, /*h*/29, /*COLOR*/1);
+  if(num == 2)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri2, /*w*/18, /*h*/29, /*COLOR*/1);
+  if(num == 3)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri3, /*w*/18, /*h*/29, /*COLOR*/1);
+  if(num == 4)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri4, /*w*/18, /*h*/29, /*COLOR*/1);
+  if(num == 5)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri5, /*w*/18, /*h*/29, /*COLOR*/1);
+  if(num == 6)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri6, /*w*/18, /*h*/29, /*COLOR*/1);
+  if(num == 7)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri7, /*w*/18, /*h*/29, /*COLOR*/1);
+  if(num == 8)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri8, /*w*/18, /*h*/29, /*COLOR*/1);
+  if(num == 9)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/bitmap_Xelibri9, /*w*/18, /*h*/29, /*COLOR*/1);
+  if(animate)
+    displayUpdate();
+}

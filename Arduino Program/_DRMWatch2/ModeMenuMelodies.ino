@@ -11,6 +11,7 @@ const char modeMenuMelodiesItem6[] PROGMEM = "Groovy Blue";
 const char modeMenuMelodiesItem7[] PROGMEM = "Ukraine";
 const char modeMenuMelodiesItem8[] PROGMEM = "Blue";
 
+byte getMelodyCount(){ return 8;}
 const char* const modeMenuMelodiesItems[] PROGMEM = {
   menuItemBack,
   modeMenuMelodiesItem1,
@@ -29,7 +30,7 @@ void modeMenuMelodiesSetup() {
 }
 
 void modeMenuMelodiesLoop() {
-  genericMenuLoop(eepromMelodyCount + 1, modeMenuMelodiesItems, modeMenuMelodiesSelected, true);
+  genericMenuLoop(getMelodyCount() + 1, modeMenuMelodiesItems, modeMenuMelodiesSelected, true);
 }
 
 void modeMenuMelodiesFinish() {

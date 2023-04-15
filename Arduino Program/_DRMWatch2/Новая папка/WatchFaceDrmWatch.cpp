@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include "GenericWatchface.cpp"
-#include "Display.cpp"
 #include "RTC.cpp"
 #include "Battery.cpp"
 #include "MyEEPROM.cpp"
@@ -26,19 +25,19 @@ class WatchfaceDrmWatch : public GenericWatchface  { //
     */
     virtual void drawWatchface(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)
     {
-      Display.displayClear();
+      displayClear();
 
       { //date
         sprintf(Generic.buffer, Generic.getDateFormat(), day, month, year);
-        Display.displayDrawText(0, 0, 1, Generic.buffer);
+        displayDrawText(0, 0, 1, Generic.buffer);
       }
 
       { //DayOfWeek
 #ifdef LANG_EN
-        Display.drawDayOfWeek(79, 0, dayOfWeek, /*color*/1);
+        drawDayOfWeek(79, 0, dayOfWeek, /*color*/1);
 #endif
 #ifdef LANG_RU
-        Display.drawDayOfWeek(85, 0, dayOfWeek, /*color*/1);
+        drawDayOfWeek(85, 0, dayOfWeek, /*color*/1);
 #endif
       }
 
@@ -47,7 +46,7 @@ class WatchfaceDrmWatch : public GenericWatchface  { //
         /* 4 is mininum width, 2 is precision; float value is copied onto str_temp*/
         dtostrf(temp, 4, 1, Generic.buffer);
         sprintf(Generic.buffer, "%sC", Generic.buffer);
-        Display.displayDrawText(0, 61, 1, Generic.buffer);
+        displayDrawText(0, 61, 1, Generic.buffer);
       }
 
 
@@ -55,20 +54,20 @@ class WatchfaceDrmWatch : public GenericWatchface  { //
 
       { //battery
         X -= 17;
-        Display.displayDrawBattery(X, 61);
+        displayDrawBattery(X, 61);
         if (!Battery.batteryIsCharging() && !Battery.batteryIsLowPower()) X += 5;
       }
 
       //Silent mode sign
       if (MyEEPROM.eepromReadSilentMode()) {
         X -= 10;
-        Display.displayDrawSilentModeIcon(X, 61, 1);
+        displayDrawSilentModeIcon(X, 61, 1);
       }
 
       //Alert sign
       if (MyEEPROM.eepromReadAlertEnabled()) {
         X -= 11;
-        Display.displayDrawAlertSign(X, 61, 1);
+        displayDrawAlertSign(X, 61, 1);
       }
 
 
@@ -80,17 +79,17 @@ class WatchfaceDrmWatch : public GenericWatchface  { //
         byte second1 = second / 10;
         byte second2 = second - (second1 * 10);
 
-        Display.displayDrawNumber(hour1   ,  5, 20, 3, 4, animate);
-        Display.displayDrawNumber(hour2   , 19, 20, 3, 4, animate);
-        Display.displayDrawNumber(10      , 34, 20, 3, 4, animate); // :
-        Display.displayDrawNumber(minute1 , 40, 20, 3, 4, animate);
-        Display.displayDrawNumber(minute2 , 54, 20, 3, 4, animate);
-        Display.displayDrawNumber(10      , 70, 25, 2, 3, animate); // :
-        Display.displayDrawNumber(second1 , 75, 25, 2, 3, animate);
-        Display.displayDrawNumber(second2 , 85, 25, 2, 3, animate);
+        displayDrawNumber(hour1   ,  5, 20, 3, 4, animate);
+        displayDrawNumber(hour2   , 19, 20, 3, 4, animate);
+        displayDrawNumber(10      , 34, 20, 3, 4, animate); // :
+        displayDrawNumber(minute1 , 40, 20, 3, 4, animate);
+        displayDrawNumber(minute2 , 54, 20, 3, 4, animate);
+        displayDrawNumber(10      , 70, 25, 2, 3, animate); // :
+        displayDrawNumber(second1 , 75, 25, 2, 3, animate);
+        displayDrawNumber(second2 , 85, 25, 2, 3, animate);
       }
 
-      Display.displayUpdate();
+      displayUpdate();
     }
 
 };

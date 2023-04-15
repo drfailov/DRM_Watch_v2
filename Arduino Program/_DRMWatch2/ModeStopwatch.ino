@@ -1,6 +1,5 @@
-#include "Display.cpp"
+
 #include "Buttons.cpp"
-#include "Buzzer.cpp"
 
 /*Stopwatch functionality*/
 #define MODE_STOPWATCH_SELECTED_BACK 2
@@ -21,11 +20,11 @@ void modeStopwatchSetup() {
 void modeStopwatchLoop() {
   if (isButtonUpPressed()){ //UP
     if (isButtonUpHold()){ //if hold - reset
-      Buzzer.beep();
+      beep();
       goToWatchface();
       return;
     }
-    Buzzer.beep();
+    beep();
     if(modeStopwatchIsRunning == false){
       modeStopwatchStartedTime = millis() - (modeStopwatchFinishedTime-modeStopwatchStartedTime);
     }
@@ -36,15 +35,15 @@ void modeStopwatchLoop() {
   }
   
   if (isButtonDownPressed()){ //DOWN
-    Buzzer.beep();
+    beep();
     modeStopwatchStartedTime = modeStopwatchFinishedTime = millis();
     return;
   } 
   
   
-  Display.displayClear();
+  displayClear();
   byte xOffset = 11;
-  if(MyEEPROM.eepromReadFlipScreen())
+  if(eepromReadFlipScreen())
     xOffset = 0;
 
     
@@ -72,23 +71,23 @@ void modeStopwatchLoop() {
     byte millisecond1 = millisecond / 10;
     byte millisecond2 = millisecond - (millisecond1 * 10);
     byte y = 22;
-    Display.displayDrawNumber(minute1 , /*x*/5, /*y*/y, /*w*/3, /*h*/4, /*animate*/false);
-    Display.displayDrawNumber(minute2 , /*x*/19, /*y*/y, /*w*/3, /*h*/4, /*animate*/false);
-    Display.displayDrawNumber(10      , /*x*/33, /*y*/y, /*w*/3, /*h*/4, /*animate*/false); // :
-    Display.displayDrawNumber(second1 , /*x*/38, /*y*/y, /*w*/3, /*h*/4, /*animate*/false);
-    Display.displayDrawNumber(second2 , /*x*/52, /*y*/y, /*w*/3, /*h*/4, /*animate*/false);
-    Display.displayDrawNumber(10      , /*x*/66, /*y*/y+5, /*w*/2, /*h*/3, /*animate*/false); // :
-    Display.displayDrawNumber(millisecond1 , /*x*/70, /*y*/y+5, /*w*/2, /*h*/3, /*animate*/false);
-    Display.displayDrawNumber(millisecond2 , /*x*/80, /*y*/y+5, /*w*/2, /*h*/3, /*animate*/false);
+    displayDrawNumber(minute1 , /*x*/5, /*y*/y, /*w*/3, /*h*/4, /*animate*/false);
+    displayDrawNumber(minute2 , /*x*/19, /*y*/y, /*w*/3, /*h*/4, /*animate*/false);
+    displayDrawNumber(10      , /*x*/33, /*y*/y, /*w*/3, /*h*/4, /*animate*/false); // :
+    displayDrawNumber(second1 , /*x*/38, /*y*/y, /*w*/3, /*h*/4, /*animate*/false);
+    displayDrawNumber(second2 , /*x*/52, /*y*/y, /*w*/3, /*h*/4, /*animate*/false);
+    displayDrawNumber(10      , /*x*/66, /*y*/y+5, /*w*/2, /*h*/3, /*animate*/false); // :
+    displayDrawNumber(millisecond1 , /*x*/70, /*y*/y+5, /*w*/2, /*h*/3, /*animate*/false);
+    displayDrawNumber(millisecond2 , /*x*/80, /*y*/y+5, /*w*/2, /*h*/3, /*animate*/false);
   }
 
   if(modeStopwatchIsRunning)
-    Display.displayDrawPauseSign(/*X*/MyEEPROM.eepromReadFlipScreen()?89:2, /*Y*/2, /*c*/1);
+    displayDrawPauseSign(/*X*/eepromReadFlipScreen()?89:2, /*Y*/2, /*c*/1);
   else
-    Display.displayDrawPlaySign(/*X*/MyEEPROM.eepromReadFlipScreen()?89:2, /*Y*/2, /*c*/1);
-  Display.displayDrawIconReboot(/*x*/MyEEPROM.eepromReadFlipScreen()?88:0, /*Y*/61, /*c*/1);
+    displayDrawPlaySign(/*X*/eepromReadFlipScreen()?89:2, /*Y*/2, /*c*/1);
+  displayDrawIconReboot(/*x*/eepromReadFlipScreen()?88:0, /*Y*/61, /*c*/1);
     
-  Display.displayUpdate();
+  displayUpdate();
 }
 
 void modeStopwatchFinish() {

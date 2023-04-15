@@ -20,7 +20,7 @@ const char modeMenuAppsItemMeow[] PROGMEM = "Mяy";
 #endif
 
 const char* modeMenuAppsItems[] = {
-  Generic.getMenuItemBack(),
+  getMenuItemBack(),
   modeMenuAppsItemStopwatch,
   modeMenuAppsItem2,
   modeMenuAppsItem3,
@@ -54,10 +54,10 @@ void modeMenuAppsSelected(byte index) {
   }
   else if (index == 3) { //Zrada
     if(millis()%2==0){
-      Display.displayMessage(F("3paдa"));
+      displayMessage(F("3paдa"));
     }
     else{
-      Display.displayMessage(F("Пepeмoгa"));
+      displayMessage(F("Пepeмoгa"));
     }
   }
   else if (index == 4) { //Melodies
@@ -72,10 +72,10 @@ void modeMenuAppsSelected(byte index) {
 }
 
 void meow(){
-  Display.displayClear();
-  Display.displayDrawVector(/*path*/Display.getPathZubat(), /*x*/25, /*y*/5, /*animate*/0, /*color*/1);
-  Display.displayDrawText(35, 58, 1, "MEOW");
-  Display.displayUpdate();
+  displayClear();
+  displayDrawVector(/*path*/getPathZubat(), /*x*/25, /*y*/5, /*animate*/0, /*color*/1);
+  displayDrawText(35, 58, 1, "MEOW");
+  displayUpdate();
   while(1){
     byte meowLength = 8;
     int meowData[] = {2012, 2544, 2742, 2556, 2416, 2128, 1920, 1874, -1000};

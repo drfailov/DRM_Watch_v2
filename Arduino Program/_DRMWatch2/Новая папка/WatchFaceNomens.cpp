@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include "GenericWatchface.cpp"
-#include "Display.cpp"
 #include "RTC.cpp"
 #include "Battery.cpp"
 #include "MyEEPROM.cpp"
@@ -70,29 +69,29 @@ class WatchfaceNomens : public GenericWatchface  { //
     */
     virtual void drawWatchface(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)
     {
-      Display.displayClear();
+      displayClear();
 
 
       {//треугольничек с полосочкой рисуем
         byte X = 63;
         byte Y = 54;
         for(byte i=1; i<14; i++){
-           Display.displayDrawLine(/*X1*/X+i, /*Y1*/Y+i, /*X2*/96, /*Y2*/Y+i, /*C*/1);
+           displayDrawLine(/*X1*/X+i, /*Y1*/Y+i, /*X2*/96, /*Y2*/Y+i, /*C*/1);
         }
-        Display.displayDrawLine(/*X1*/0, /*Y1*/Y, /*X2*/96, /*Y2*/Y, /*C*/1);
+        displayDrawLine(/*X1*/0, /*Y1*/Y, /*X2*/96, /*Y2*/Y, /*C*/1);
       }
        
       {//date
         sprintf(Generic.buffer, Generic.getDateFormat(), day, month, year);
-        Display.displayDrawText(3, 58, 1, Generic.buffer);
+        displayDrawText(3, 58, 1, Generic.buffer);
       }
       
       {//DayOfWeek
     #ifdef LANG_EN
-        Display.drawDayOfWeek(76, 58, dayOfWeek, 0);
+        drawDayOfWeek(76, 58, dayOfWeek, 0);
     #endif
     #ifdef LANG_RU
-        Display.drawDayOfWeek(80, 58, dayOfWeek, 0);
+        drawDayOfWeek(80, 58, dayOfWeek, 0);
     #endif
       }
     
@@ -100,7 +99,7 @@ class WatchfaceNomens : public GenericWatchface  { //
       
       {//battery
         X -= 17;
-        Display.displayDrawBattery(X, 0);
+        displayDrawBattery(X, 0);
         if(!Battery.batteryIsCharging() && !Battery.batteryIsLowPower()) X += 5;
       }
     
@@ -108,14 +107,14 @@ class WatchfaceNomens : public GenericWatchface  { //
       //Alert sign
       if(MyEEPROM.eepromReadAlertEnabled()){ 
         X-= 13;
-        Display.displayDrawAlertSign(X, 0, 1);
+        displayDrawAlertSign(X, 0, 1);
       }
     
       
       //Silent mode sign
       if(MyEEPROM.eepromReadSilentMode()){ 
         X -= 12;
-        Display.displayDrawSilentModeIcon(X, 0, 1);
+        displayDrawSilentModeIcon(X, 0, 1);
       }
       
     
@@ -125,40 +124,40 @@ class WatchfaceNomens : public GenericWatchface  { //
         byte hour2 = hour - (hour1 * 10);
         byte minute1 = minute / 10;
         byte minute2 = minute - (minute1 * 10);
-        Display.displayDrawNumber(10, 46, 18, 4, 5, animate); // :
-//        Display.displayFillRect(/*x*/46, /*y*/24, /*w*/3, /*h*/3, /*c*/1);
-//        Display.displayFillRect(/*x*/46, /*y*/35, /*w*/3, /*h*/3, /*c*/1);
+        displayDrawNumber(10, 46, 18, 4, 5, animate); // :
+//        displayFillRect(/*x*/46, /*y*/24, /*w*/3, /*h*/3, /*c*/1);
+//        displayFillRect(/*x*/46, /*y*/35, /*w*/3, /*h*/3, /*c*/1);
         drawNumber(/*x*/8, /*y*/14, /*num*/hour1, /*animate*/ animate);
         drawNumber(/*x*/26, /*y*/14, /*num*/hour2, /*animate*/ animate);
         drawNumber(/*x*/54, /*y*/14, /*num*/minute1, /*animate*/ animate);
         drawNumber(/*x*/72, /*y*/14, /*num*/minute2, /*animate*/ animate);
       }
       
-      Display.displayUpdate();
+      displayUpdate();
     }
 
     void drawNumber(byte x, byte y, byte num, byte animate){
       byte b = pgm_read_byte(&fontWtf3[num]);
       if(bitRead(b, 7)){ 
-        Display.displayDrawVector(/*path*/pathUp, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathUp, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       }
       if(bitRead(b, 6)){ 
-        Display.displayDrawVector(/*path*/pathUpLeft, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathUpLeft, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       }
       if(bitRead(b, 5)){ 
-        Display.displayDrawVector(/*path*/pathUpRight, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathUpRight, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       }
       if(bitRead(b, 4)){ 
-        Display.displayDrawVector(/*path*/pathCenter, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathCenter, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       }
       if(bitRead(b, 3)){ 
-        Display.displayDrawVector(/*path*/pathBottomLeft, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathBottomLeft, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       }
       if(bitRead(b, 2)){ 
-        Display.displayDrawVector(/*path*/pathBottomRight, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathBottomRight, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       }
       if(bitRead(b, 1)){ 
-        Display.displayDrawVector(/*path*/pathBottom, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
+        displayDrawVector(/*path*/pathBottom, /*x*/x, /*y*/y, /*animate*/animate, /*color*/1);
       }
     }
     
