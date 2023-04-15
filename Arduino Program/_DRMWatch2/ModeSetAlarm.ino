@@ -60,6 +60,9 @@ void modeSetAlarmLoop(){
 #ifdef LANG_RU
   displayDrawText(xOffset+25, 4, 1, F("Бyдильник"));
 #endif
+#ifdef LANG_UA
+  displayDrawText(xOffset+25, 4, 1, F("Бyдильник"));
+#endif
   
 
   //ENABLE \ DISABLE

@@ -88,6 +88,9 @@ void modeMenuSetTimeLoop(){
 #ifdef LANG_RU
   displayDrawText(xOffset+25, 4, 1, F("Bpeмя"));
 #endif
+#ifdef LANG_RU
+  displayDrawText(xOffset+25, 4, 1, F("Час"));
+#endif
 
 
   

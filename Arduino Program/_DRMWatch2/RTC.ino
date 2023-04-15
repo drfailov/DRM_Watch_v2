@@ -22,6 +22,9 @@ DS3231M_Class DS3231M;  ///< Create an instance of the DS3231M class
   #ifdef LANG_RU
       displayMessage(F("Ошибка RTC"));
   #endif
+  #ifdef LANG_RU
+      displayMessage(F("Пoмилкa RTC"));
+  #endif
       delay(300);
     }                         // of loop until device is located
     DS3231M.pinSquareWave();  // Make INT/SQW pin toggle at 1Hz
