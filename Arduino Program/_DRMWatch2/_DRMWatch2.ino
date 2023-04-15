@@ -19,7 +19,8 @@ void(* resetFunc) (void) = 0;//объявляем функцию reset с адр
 //Базовые константы
 #define version F("v1.32")   //Версию менять здесь
 //#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
-#define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
+//#define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
+#define LANG_UA   //Розкоментувати щоб використовувати українську мову в меню
 //#define LOG   //Закомментировать чтобы отключило логи
 #define  AUTO_EXIT_TIMEOUT 120000 //MS  //Время до автоматического выхода с менюшек
 
@@ -91,9 +92,10 @@ void setup() {
   wfs[i++] = watchfaceZubat;
   wfs[i++] = watchfaceCalibri;
   wfs[i++] = watchfaceXelibri;
+  wfs[i++] = WatchfaceDrmLite;
+  
   
   //watchfaces[i++] = new WatchfaceDrmWatch();
-  //watchfaces[i++] = new WatchfaceDrmLite();
   //watchfaces[i++] = new WatchfaceNomens();
   //watchfaces[i++] = new WatchfaceMatrix();
   //watchfaces[i++] = new WatchfaceLife();

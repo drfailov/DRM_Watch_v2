@@ -18,6 +18,14 @@ const char modeMenuAppsItem4[] PROGMEM = "Meлoдии";
 const char modeMenuAppsItem5[] PROGMEM = "Жизнь";
 const char modeMenuAppsItemMeow[] PROGMEM = "Mяy";
 #endif
+#ifdef LANG_UA
+const char modeMenuAppsItemStopwatch[] PROGMEM = "Ceкyндoмip";
+const char modeMenuAppsItem2[] PROGMEM = "Бyдильник";
+const char modeMenuAppsItem3[] PROGMEM = "3paдa";
+const char modeMenuAppsItem4[] PROGMEM = "3вyки";
+const char modeMenuAppsItem5[] PROGMEM = "Життя";
+const char modeMenuAppsItemMeow[] PROGMEM = "Mяy";
+#endif
 
 const char* modeMenuAppsItems[] = {
   getMenuItemBack(),

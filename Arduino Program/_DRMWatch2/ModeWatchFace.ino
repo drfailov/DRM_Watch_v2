@@ -115,5 +115,6 @@ void modeWatchFaceFinish() {
 }
 
 void wakeUp() { //to react for button
+  displayBacklightOn();
   modeWatchFaceBacklightEnabledTime = millis();
 }

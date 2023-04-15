@@ -14,6 +14,9 @@ void watchfaceCalibri(byte hour, byte minute, byte second, byte day, byte month,
   #ifdef LANG_RU
       drawDayOfWeek(85, 0, dayOfWeek, /*color*/1);
   #endif
+  #ifdef LANG_UA
+      drawDayOfWeek(85, 0, dayOfWeek, /*color*/1);
+  #endif
     }
     
     {//Temperature

@@ -46,8 +46,14 @@ void modeMenuSettingsLoop() {
 #endif
 #ifdef LANG_RU
   const __FlashStringHelper* settingsSilent = F("Бeззвyчный");
-  const __FlashStringHelper* settingsFlip = F("Пepeвopoт");
+  const __FlashStringHelper* settingsFlip = F("Пoвopoт");
   const __FlashStringHelper* settingsTime = F("Bpeмя");
+  const __FlashStringHelper* settingsWTF = F("Цифepблaт");
+#endif
+#ifdef LANG_UA
+  const __FlashStringHelper* settingsSilent = F("Тиша");
+  const __FlashStringHelper* settingsFlip = F("Поворот");
+  const __FlashStringHelper* settingsTime = F("Час");
   const __FlashStringHelper* settingsWTF = F("Цифepблaт");
 #endif
 

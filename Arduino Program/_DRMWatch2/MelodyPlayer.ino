@@ -267,6 +267,9 @@ void melodyPlayerDrawScreen() {
 #ifdef LANG_RU
   displayDrawText(17, 60, 1, F("Пoпиликaeм!"));
 #endif
+#ifdef LANG_UA
+  displayDrawText(17, 60, 1, F("3iгpaємo!"));
+#endif
 
   if(!melodyPlayerLoopMelody){
     byte hour = rtcGetHours();

@@ -10,7 +10,7 @@ void modeAboutLoop() {
   
   displayDrawText(0, 0, 1, F("Made by DrFailov"));
   displayDrawText(0, 8, 1, F("Made in Ukraine"));
-  displayDrawText(73, 61, 1, F("2022"));
+  displayDrawText(73, 61, 1, F("2023"));
   displayDrawText(00, 61, 1, version);
   displayDrawVector(/*path*/getPathDrmWatch(), /*x*/26, /*y*/21, /*animate*/4, /*color*/color);
   displayUpdate();

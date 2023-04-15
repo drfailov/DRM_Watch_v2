@@ -6,6 +6,10 @@ const char* getTimeFormat(){return "%02d:%02d";}
 
   
 //Здесь определенл, которое используется во всех меню, для экономии памяти
+#ifdef LANG_UA
+const char menuItemBack[] PROGMEM = "< Haзaд";
+const char textSaved[] PROGMEM = "3бepeжeнo";
+#endif
 #ifdef LANG_RU
 const char menuItemBack[] PROGMEM = "< Haзaд";
 const char textSaved[] PROGMEM = "Coxpaнeнo";

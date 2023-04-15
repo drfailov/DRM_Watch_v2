@@ -643,6 +643,15 @@ const PROGMEM byte pathZubat[] = { 42,
     if (dayOfWeek == 6) txt = F("Сб");
     if (dayOfWeek == 0) txt = F("Вс");
   #endif
+  #ifdef LANG_UA
+    if (dayOfWeek == 1) txt = F("Пн");
+    if (dayOfWeek == 2) txt = F("Bт");
+    if (dayOfWeek == 3) txt = F("Cp");
+    if (dayOfWeek == 4) txt = F("Чт");
+    if (dayOfWeek == 5) txt = F("Пт");
+    if (dayOfWeek == 6) txt = F("Cб");
+    if (dayOfWeek == 0) txt = F("Hд");
+  #endif
   #ifdef LANG_EN
     if (dayOfWeek == 1) txt = F("Mon");
     if (dayOfWeek == 2) txt = F("Tue");

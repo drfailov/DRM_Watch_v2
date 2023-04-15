@@ -49,6 +49,11 @@ void modeMenuMainLoop() {
   const __FlashStringHelper* menuSettings = F("Hacтpoйки");
   const __FlashStringHelper* menuAbout = F("Cпpaвкa");
 #endif
+#ifdef LANG_UA
+  const __FlashStringHelper* menuApps = F("Програми");
+  const __FlashStringHelper* menuSettings = F("Налаштування");
+  const __FlashStringHelper* menuAbout = F("Дoвiдкa");
+#endif
 
   displayClear();
   drawLegend();
