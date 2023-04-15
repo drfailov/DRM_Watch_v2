@@ -108,8 +108,6 @@ const PROGMEM byte pathZubat[] = { 42,
     #ifdef LOG
       Serial.print(F("LCD Init..."));
     #endif
-    //lcd = LCD1202(0,0,0,0);  // RST, CS, MOSI, SCK
-    //lcd = LCD1202(pinLcdRst, pinLcdCs, pinLcdMosi, pinLcdSck);  // RST, CS, MOSI, SCK
     pinMode(pinLcdPower, OUTPUT);
     digitalWrite(pinLcdPower, HIGH);
     delay(100);
@@ -280,7 +278,7 @@ const PROGMEM byte pathZubat[] = { 42,
           delay(6);
         }
       }
-      if (ButtonUp.isButtonPressed()) 
+      if (isButtonUpPressed()) 
         animate = false;
     }
     displayUpdate();
@@ -302,7 +300,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawCheck(byte x, byte y, bool color){
-    static const char img[6] PROGMEM = { 
+    static const unsigned char img[6] PROGMEM = { 
         0b00011000,
         0b01110000,
         0b01110000,
@@ -318,7 +316,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawResetIcon(byte x, byte y, bool color){
-    static const char img[6] PROGMEM = { 
+    static const unsigned char img[6] PROGMEM = { 
         0b01001111,
         0b10000011,
         0b10000101,
@@ -334,7 +332,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawArrowDown(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
+    static const unsigned char img[7] PROGMEM = { 
         0b00000001,
         0b00000111,
         0b00011110,
@@ -351,7 +349,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawArrowRight(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
+    static const unsigned char img[7] PROGMEM = { 
         0b01100011,
         0b00110110,
         0b00110110,
@@ -368,7 +366,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawPlaySign(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
+    static const unsigned char img[7] PROGMEM = { 
         0b01111111,
         0b00111110,
         0b00111110,
@@ -385,7 +383,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawPauseSign(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
+    static const unsigned char img[7] PROGMEM = { 
         0b01111111,
         0b01111111,
         0b00000000,
@@ -402,7 +400,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawStopSign(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
+    static const unsigned char img[7] PROGMEM = { 
         0b01111111,
         0b01111111,
         0b01111111,
@@ -419,7 +417,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawAlertSign(byte x, byte y, bool color){
-    static const char img[9] PROGMEM = { 
+    static const unsigned char img[9] PROGMEM = { 
         0b00000010,
         0b00011101,
         0b00100010,
@@ -434,47 +432,14 @@ const PROGMEM byte pathZubat[] = { 42,
   }
 
   
-  //Рисование иконки беззвучного режима. Используется на циферблатах и в настройках.
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawSilentModeIcon(byte x, byte y, bool color){
-        static const unsigned char img[8] PROGMEM = { 
-        0b00100000,
-        0b01011110,
-        0b00100001,
-        0b01010001,
-        0b01101001,
-        0b00100101,
-        0b00111010,
-        0b00100001
-      };
-      displayDrawBitmap(x, y, img, 8, 8, color);
-  }
-  //Рисование иконки небеззвучного режима. Используется на циферблатах и в настройках.
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawSilentModeOffIcon(byte x, byte y, bool color){
-        static const char img[8] PROGMEM = { 
-        0b00100000,
-        0b00111110,
-        0b00100001,
-        0b01100001,
-        0b01100001,
-        0b00100001,
-        0b00111110,
-        0b00100000
-      };
-      displayDrawBitmap(x, y, img, 8, 8, color);
-  }
+  
 
   //Рисование иконки приложений. Используется в главном меню.
   //Рисунок находится в битовом массиве.
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawAppsIcon(byte x, byte y, bool color){
-        static const char img[7] PROGMEM = { 
+        static const unsigned char img[7] PROGMEM = { 
         0b01110111,
         0b01110111,
         0b01110111,
@@ -486,29 +451,14 @@ const PROGMEM byte pathZubat[] = { 42,
       displayDrawBitmap(x, y, img, 7, 8, color);
   }
   
-  //Рисование иконки стрелки влево. Используется на многи экранах как кнопка НАЗАД.
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawArrowLeft(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
-        0b00001000,
-        0b00001000,
-        0b00011100,
-        0b00011100,
-        0b00110110,
-        0b00110110,
-        0b01100011
-      };
-    displayDrawBitmap(x, y, img, 7, 8, color);
-  }
+
   
   //Рисование иконки настроек. Используется в главном меню
   //Рисунок находится в битовом массиве.
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawIconSettings(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
+    static const unsigned char img[7] PROGMEM = { 
         0b00001100,
         0b00011000,
         0b00011001,
@@ -526,7 +476,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawIconAbout(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
+    static const unsigned char img[7] PROGMEM = { 
         0b00111110,
         0b01111111,
         0b01111111,
@@ -544,7 +494,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawIconReboot(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
+    static const unsigned char img[7] PROGMEM = { 
         0b01110110,
         0b00110001,
         0b01010001,
@@ -557,22 +507,7 @@ const PROGMEM byte pathZubat[] = { 42,
   }
   
   
-  //Рисование иконки вочфейс. Используется в меню настроек
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawIconWatchface(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
-        0b00000000,
-        0b01111111,
-        0b00111010,
-        0b00101110,
-        0b00111010,
-        0b01111111,
-        0b00000000
-      };
-    displayDrawBitmap(x, y, img, 7, 8, color);
-  }
+
   
   
   //Рисование иконки сна. Используется в меню настроек
@@ -580,7 +515,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawIconSleep(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
+    static const unsigned char img[7] PROGMEM = { 
         0b00011100,
         0b00111110,
         0b01111111,
@@ -598,7 +533,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawIconBeep(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
+    static const unsigned char img[7] PROGMEM = { 
         0b00011100,
         0b00000000,
         0b00111110,
@@ -616,7 +551,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawIconTime(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
+    static const unsigned char img[7] PROGMEM = { 
         0b00011100,
         0b00100010,
         0b01001001,
@@ -634,7 +569,7 @@ const PROGMEM byte pathZubat[] = { 42,
   //Начало массива - левая часть рисунка. Один бит - один пиксель.
   //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawIconReset(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
+    static const unsigned char img[7] PROGMEM = { 
         0b01011110,
         0b01100001,
         0b00000000,
@@ -645,24 +580,7 @@ const PROGMEM byte pathZubat[] = { 42,
       };
     displayDrawBitmap(x, y, img, 7, 8, color);
   }
-  
-  
-  //Рисование иконки переворота диссплей. Используется в меню настроек
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawIconFlip(byte x, byte y, bool color){
-    static const char img[7] PROGMEM = { 
-        0b00000100,
-        0b01110110,
-        0b01000100,
-        0b01000001,
-        0b00010001,
-        0b00110111,
-        0b00010000
-      };
-    displayDrawBitmap(x, y, img, 7, 8, color);
-  }
+
   
   //Рисование прямоугольника с цифрами. Используется на экранах настройки будильника и времени
   static void displayDraw2DigitNumberWithFrame(byte x, byte y, byte number, bool selected){
@@ -711,7 +629,7 @@ const PROGMEM byte pathZubat[] = { 42,
   
     
     if(isCharging){ //draw charging symbol
-      static const char img[6] PROGMEM = { 
+      static const unsigned char img[6] PROGMEM = { 
         0b00000000,
         0b01001100,
         0b00111110,
@@ -723,7 +641,7 @@ const PROGMEM byte pathZubat[] = { 42,
     }
     else if(isLowPower) //draw low power symbol
     {
-      static const char img[4] PROGMEM = { 
+      static const unsigned char img[4] PROGMEM = { 
         0b00000000,
         0b00000000,
         0b01101111,
@@ -764,7 +682,7 @@ const PROGMEM byte pathZubat[] = { 42,
   }
 
   void drawDayOfWeek(byte x, byte y, byte dayOfWeek, bool color) { //
-    __FlashStringHelper* txt;
+    const __FlashStringHelper* txt;
   #ifdef LANG_RU
     if (dayOfWeek == 1) txt = F("Пн");
     if (dayOfWeek == 2) txt = F("Вт");

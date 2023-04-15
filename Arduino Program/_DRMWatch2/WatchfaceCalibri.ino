@@ -58,7 +58,6 @@ void watchfaceCalibri(byte hour, byte minute, byte second, byte day, byte month,
       drawNumber(/*x*/72, /*y*/20, /*num*/minute2, /*animate*/ animate);
     }
     
-    displayUpdate();
 }
 
 

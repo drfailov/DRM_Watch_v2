@@ -44,11 +44,7 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
     while (selected >= genericMenuViewPosition + genericMenuViewCount) genericMenuViewPosition ++;
     while (selected < genericMenuViewPosition) genericMenuViewPosition --;
   }
-  //auto exit
-  if (millis() - genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
-    goToWatchface();
-    return;
-  }
+  doAutoExit();
 
   //draw
   displayClear();
@@ -71,15 +67,49 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
       }
     }
   }
-  { //scrollbar
-    float h = 66;
-    displayDrawLine(/*X1*/xOffset+83, /*Y1*/0, /*X2*/xOffset+83, /*Y2*/h, /*C*/1);
-    float barHeight = h / genericMenuItemsCount;
-    float barPosition = barHeight * selected;
-    displayFillRect(/*x*/xOffset+82, /*y*/barPosition, /*w*/3, /*h*/barHeight, /*c*/1);
+  
+  drawLegend();
+  displayUpdate();
+}
+
+void genericMenuFinish(){
+}
+
+
+
+
+
+void doAutoExit(){
+  //auto exit
+  if (millis() - genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
+    goToWatchface();
+    return;
   }
+}
+
+void drawMenuItem(byte index, void (*drawIcon)(byte x,byte y,bool color), const __FlashStringHelper* name, bool animate){
+  const byte xOffset = eepromReadFlipScreen()? 0 : 13;
+  const byte yOffset = 16;
+  const byte width=20;
+  const byte height=15;
+  const byte margin = 5;
+  byte x = xOffset + 5 + (width+margin) * (index%3);
+  byte y = yOffset + (height+margin) * (index/3);
+  void(* drawR) (byte x, byte y, byte w, byte h, boolean color) = selected == index?displayFillRect:displayDrawRect;
+  
+  drawR(/*x*/x, /*y*/y, /*w*/width, /*h*/height, /*c*/1);
+  drawIcon(x + 6, y+4, selected != index);
+  if(selected == index){
+    displayDrawText(/*X*/xOffset, /*Y*/60, /*C*/1, /*text*/name);
+  }
+  if(animate)
+    displayUpdate();
+}
+
+void drawLegend(){
+  //LEGEND
   if(eepromReadFlipScreen()){ //flip
-    //displayDrawLine(/*X1*/96-11, /*Y1*/0, /*X2*/96-11, /*Y2*/68, /*C*/1);
+    displayDrawLine(/*X1*/96-11, /*Y1*/0, /*X2*/96-11, /*Y2*/68, /*C*/1);
     displayDrawCheck(/*X*/96-8, /*Y*/2, 1);
     displayDrawArrowDown(/*X*/96-8, /*Y*/59, 1);
   }
@@ -88,8 +118,35 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
     displayDrawCheck(/*X*/2, /*Y*/2, 1);
     displayDrawArrowDown(/*X*/1, /*Y*/59, 1);
   }
-  displayUpdate();
 }
+void drawStatusBar(){
+  byte xOffset = eepromReadFlipScreen()? 0 : 13;
 
-void genericMenuFinish(){
+  {//Temperature
+    float temp = rtcGetTemp();
+    dtostrf(/*value*/temp, /*mininum width*/4, /*precision*/1, /*buffer*/buffer);
+    sprintf(buffer, "%sC", buffer);
+    displayDrawText(xOffset+0, 0, 1, buffer);
+  }
+  
+  byte X = xOffset+83; //96 total
+  const byte Y = 0;
+  
+  {//battery
+    X -= 17;
+    displayDrawBattery(/*x*/X, /*y*/0);
+    if(!batteryIsCharging() && !batteryIsLowPower()) X += 5;
+  }
+  
+  //Silent mode sign
+  if(eepromReadSilentMode()){ 
+    X -= 10;
+    displayDrawSilentModeIcon(/*x*/X, /*y*/0, /*color*/1);
+  }
+  
+  //Alert sign
+  if(eepromReadAlertEnabled()){ 
+    X-= 11;
+    displayDrawAlertSign(/*x*/X, /*y*/0, /*color*/1);
+  }
 }

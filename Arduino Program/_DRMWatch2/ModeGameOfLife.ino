@@ -1,7 +1,3 @@
-
-#include "Buttons.cpp"
-
-
 long modeGameOfLifeStartedTime = 0;
 long modeGameOfLifeFinishedTime = 0;
 bool modeGameOfLifeIsRunning = false;
@@ -33,6 +29,8 @@ void modeGameOfLifeFinish() {
 void lifeStep(){
   bool lastCol [LCD_Y];
   bool currCol [LCD_Y];
+  for(byte y = 0; y < LCD_Y; y++)
+      currCol[y] = false;
   
   for(byte x = 0; x < LCD_X; x++){
     for(byte y = 0; y < LCD_Y; y++)
@@ -41,17 +39,17 @@ void lifeStep(){
       currCol[y] = displayGetPixel(x,y);
       
     for(byte y = 0; y < LCD_Y; y++){
-      bool topleft = lastCol[y-1];
-      bool top = currCol[y-1];
-      bool topright = displayGetPixel(x + 1, y-1);
+      bool topleft = y==0?false:lastCol[y-1];
+      bool top = y==0?false:currCol[y-1];
+      bool topright = y==0?false:displayGetPixel(x + 1, y-1);
       
       bool left = lastCol[y];
       bool current = currCol[y];
-      bool right = displayGetPixel(x + 1, y);
+      bool right = x>=LCD_X-1?false:displayGetPixel(x + 1, y);
       
-      bool bottomleft = lastCol[y+1];
-      bool bottom = currCol[y+1];
-      bool bottomright = displayGetPixel(x + 1, y+1);
+      bool bottomleft = y>=LCD_Y-1?false:lastCol[y+1];
+      bool bottom = y>=LCD_Y-1?false:currCol[y+1];
+      bool bottomright = y>=LCD_Y-1?false:displayGetPixel(x + 1, y+1);
 
       byte neighbours = topleft+top+topright+left+right+bottomleft+bottom+bottomright;
       

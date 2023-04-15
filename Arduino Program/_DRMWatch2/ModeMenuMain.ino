@@ -36,42 +36,10 @@ void modeMenuMainLoop() {
     if(selected > 3) 
       selected = 0;
   }
-  //auto exit
-  if (millis() - genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
-    goToWatchface();
-    return;
-  }
-  
-  displayClear();
+  doAutoExit();
   byte xOffset = eepromReadFlipScreen()? 0 : 13;
-
-  {//Temperature
-    float temp = rtcGetTemp();
-    dtostrf(/*value*/temp, /*mininum width*/4, /*precision*/1, /*buffer*/buffer);
-    sprintf(buffer, "%sC", buffer);
-    displayDrawText(xOffset+0, 0, 1, buffer);
-  }
-  
-  byte X = xOffset+83; //96 total
-  const byte Y = 0;
-  
-  {//battery
-    X -= 17;
-    displayDrawBattery(/*x*/X, /*y*/0);
-    if(!batteryIsCharging() && !batteryIsLowPower()) X += 5;
-  }
-  
-  //Silent mode sign
-  if(eepromReadSilentMode()){ 
-    X -= 10;
-    displayDrawSilentModeIcon(/*x*/X, /*y*/0, /*color*/1);
-  }
-  
-  //Alert sign
-  if(eepromReadAlertEnabled()){ 
-    X-= 11;
-    displayDrawAlertSign(/*x*/X, /*y*/0, /*color*/1);
-  }
+  displayClear();
+  drawStatusBar();
 
 
   //back
@@ -107,17 +75,7 @@ void modeMenuMainLoop() {
     displayDrawText(/*X*/xOffset+0, /*Y*/60, /*C*/1, /*text*/F("About"));
 #endif
 
-  //LEGEND
-  if(eepromReadFlipScreen()){ //flip
-    displayDrawLine(/*X1*/96-11, /*Y1*/0, /*X2*/96-11, /*Y2*/68, /*C*/1);
-    displayDrawCheck(/*X*/96-8, /*Y*/2, 1);
-    displayDrawArrowDown(/*X*/96-8, /*Y*/59, 1);
-  }
-  else{  //no flip
-    displayDrawLine(/*X1*/10, /*Y1*/0, /*X2*/10, /*Y2*/68, /*C*/1);
-    displayDrawCheck(/*X*/2, /*Y*/2, 1);
-    displayDrawArrowDown(/*X*/1, /*Y*/59, 1);
-  }
+  drawLegend();
   displayUpdate();
 }
 

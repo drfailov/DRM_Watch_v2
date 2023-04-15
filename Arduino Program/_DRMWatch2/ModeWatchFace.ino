@@ -72,6 +72,7 @@ void modeWatchFaceLoop(bool animate) {
   if (wtf >= watchfacesCount) wtf = 0;
   if(wfs[wtf] != 0)
     wfs[wtf](hour, minute, second, day, month, year, dayOfWeek, animate ? 5 : 0);
+  displayUpdate();
 
   //Обработка сна
   bool sleepInThisFrame = true;

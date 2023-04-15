@@ -71,6 +71,8 @@ void modeMenuAppsSelected(byte index) {
   }
 }
 
+
+
 void meow(){
   displayClear();
   displayDrawVector(/*path*/getPathZubat(), /*x*/25, /*y*/5, /*animate*/0, /*color*/1);
@@ -86,7 +88,7 @@ void meow(){
     float meowSpeed = 0;
     meowValue *= meowCoef;
     meowValue += meowOffset;
-    pinMode(pinBuzzer, OUTPUT);
+    //pinMode(pinBuzzer, OUTPUT);
     for(byte i=1; i<meowLength; i++){
       float meowValueNext = meowData[i];
       meowValueNext *= meowCoef;

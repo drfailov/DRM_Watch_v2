@@ -20,19 +20,6 @@ void eepromSaveSilentMode(bool data){
 }
 
 
-
-
-//beep sounds
-byte eepromReadBeepSound(){
-  byte result;
-  EEPROM.get(eepromAddressBeepSound, result);
-  return result;
-}
-void eepromSaveBeepSound(byte data){
-  EEPROM.put(eepromAddressBeepSound, data);
-}
-
-
 #define eepromAddressAlertEnabled (byte)13
 bool eepromReadAlertEnabled(){
   byte result;

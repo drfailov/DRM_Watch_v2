@@ -39,6 +39,4 @@ void watchfaceZubat(byte hour, byte minute, byte second, byte day, byte month, i
     displayDrawNumber(minute1 , 71, 19, 3, 4, animate);
     displayDrawNumber(minute2 , 85, 19, 3, 4, animate);
   }
-
-  displayUpdate();
 }

@@ -75,7 +75,10 @@ byte flipByte(byte c){
   return r;
 }
 
-void LCD1202::Update(bool flip = false){
+void LCD1202::Update(){
+	LCD1202::Update(false);
+}
+void LCD1202::Update(bool flip){
   for(byte p = 0; p < 9; p++){
     SendByte(LCD_C, SetYAddr| p); 
     SendByte(LCD_C, SetXAddr4);

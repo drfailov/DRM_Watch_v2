@@ -48,7 +48,6 @@ void watchfaceXelibri(byte hour, byte minute, byte second, byte day, byte month,
     drawNumberXelibri(/*x*/74, /*y*/12, /*num*/minute2, /*animate*/ animate);
   }
   
-  displayUpdate();
 }
 
 

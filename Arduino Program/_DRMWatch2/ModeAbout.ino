@@ -12,11 +12,7 @@ void modeAboutSetup() {
 }
 
 void modeAboutLoop() {  
-  //auto exit
-  if (millis() - genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
-    goToWatchface();
-    return;
-  }
+  doAutoExit();
   
   displayDrawText(0, 0, 1, F("Made by DrFailov"));
   displayDrawText(0, 8, 1, F("Made in Ukraine"));

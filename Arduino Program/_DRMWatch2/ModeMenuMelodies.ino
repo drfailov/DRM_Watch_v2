@@ -49,8 +49,7 @@ void modeMenuMelodiesSelected(byte index) {
 }
 
 const char* getMelodyName(byte index){
-  uint16_t ptr = pgm_read_word(&modeMenuMelodiesItems[index+1]);
-  return ptr;
+  return pgm_read_word(&modeMenuMelodiesItems[index+1]);
 }
 
 const byte* const getMelodyByIndex(byte index){

@@ -18,8 +18,8 @@ void(* resetFunc) (void) = 0;//объявляем функцию reset с адр
 
 //Базовые константы
 #define version F("v1.32")   //Версию менять здесь
-#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
-//#define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
+//#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
+#define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
 //#define LOG   //Закомментировать чтобы отключило логи
 #define  AUTO_EXIT_TIMEOUT 120000 //MS  //Время до автоматического выхода с менюшек
 
@@ -38,15 +38,6 @@ void(* resetFunc) (void) = 0;//объявляем функцию reset с адр
 // A4 - RTC SDA
 // A5 - RTC SCL
 
-
-//Значения констант звука кнопок, котоые пишутся в память
-#define eepromBeepSoundBeep (byte)0
-#define eepromBeepSoundClick (byte)1
-#define eepromBeepSoundTone (byte)2
-#define eepromBeepSoundWhistle (byte)3
-#define eepromBeepSoundNone (byte)4
-#define eepromAddressBeepSound (byte)12 
-
 //размер текстового буфера. Чем меньше тем экономнее.
 #define BUFFER_SIZE 25
 //последнее действие кнопками, нужно для автоматического выхода
@@ -55,9 +46,7 @@ long genericMenuLastActionTime = 0;
 char buffer[BUFFER_SIZE]; 
 //Общий на всю программу счётчик для выбора элементов из списка
 byte selected = 0;
-//Общий формат вывода данных много где используется
-const char* getDateFormat(){return "%02d.%02d.%04d";}
-char* getTimeFormat(){return "%02d:%02d";}
+
 
 
 /* Program contains several screens (menus, watchfaces...).
@@ -89,13 +78,10 @@ char* getTimeFormat(){return "%02d:%02d";}
 //Переменная в которой хранится текущий режим
 byte _mode = -1;
 
-
-
 //Набор циферблатов 
 typedef void (*WF) (const byte hour, const byte minute, const byte second, const byte day, const byte month, const int year, const byte dayOfWeek, const byte animate);
 const byte watchfacesCount = 4;
 WF wfs[watchfacesCount];
-
 
 void setup() {
   byte i=0;
@@ -108,14 +94,11 @@ void setup() {
   //watchfaces[i++] = new WatchfaceDrmWatch();
   //watchfaces[i++] = new WatchfaceDrmLite();
   //watchfaces[i++] = new WatchfaceNomens();
-  //watchfaces[i++] = new WatchfaceZubat();
-  //watchfaces[i++] = new WatchfaceXelibri();
   //watchfaces[i++] = new WatchfaceMatrix();
   //watchfaces[i++] = new WatchfaceLife();
-  //watchfaces[i++] = new WatchfaceCalibri();
   //watchfaces[i++] = new WatchfaceMinimal();
   //watchfaces[i++] = new WatchfaceThermo();
-  //GenericWatchface *watchface = watchfaces[0];
+  
   
   
   

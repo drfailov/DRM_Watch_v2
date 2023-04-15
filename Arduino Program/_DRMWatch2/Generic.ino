@@ -1,5 +1,9 @@
 
 
+//Общий формат вывода данных много где используется
+const char* getDateFormat(){return "%02d.%02d.%04d";}
+const char* getTimeFormat(){return "%02d:%02d";}
+
   
 //Здесь определенл, которое используется во всех меню, для экономии памяти
 #ifdef LANG_RU
@@ -23,6 +27,10 @@ static const char* getTextSaved(){
   
 
 
+#include "Buttons.cpp"
+
+Button_ ButtonUp(pinButtonUp);
+Button_ ButtonDown(pinButtonDown);
 
 static bool isButtonUpPressed(){
   return eepromReadFlipScreen()?ButtonDown.isButtonPressed():ButtonUp.isButtonPressed();

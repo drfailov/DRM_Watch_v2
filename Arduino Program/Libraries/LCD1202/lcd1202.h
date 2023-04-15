@@ -9,9 +9,10 @@ class LCD1202 {
        LCD1202(uint8_t _RES, uint8_t _CS, uint8_t _Data, uint8_t _Clock);
        void Inicialize();
        void Clear_LCD();
-       void Update(bool flip = false);
+       void Update();
+	   void Update(bool flip);
        void drawPixel(byte x, byte y, boolean color);
-	   bool LCD1202::getPixel (byte x, byte y);
+	   bool getPixel (byte x, byte y);
        void fillScreen(boolean color);
        void drawChar(byte x, byte y, boolean color, unsigned char c);
        void print(byte x, byte y, boolean color, const char *str);
