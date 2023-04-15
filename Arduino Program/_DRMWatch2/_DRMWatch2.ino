@@ -89,16 +89,19 @@ void setup() {
   byte i=0;
   //Набор циферблатов следует менять именно здесь. 
   //number of WFs here need to less or equal than watchfacesCount, otherwise will crash
-  wfs[i++] = watchfaceZubat;
+  //wfs[i++] = watchfaceZubat;
   wfs[i++] = watchfaceCalibri;
-  wfs[i++] = watchfaceXelibri;
+  //wfs[i++] = watchfaceXelibri;
   wfs[i++] = WatchfaceDrmLite;
+  wfs[i++] = WatchfaceDrmWatch;
+  wfs[i++] = WatchfaceLife;
+  //wfs[i++] = WatchfaceMinimal;
   
   
-  //watchfaces[i++] = new WatchfaceDrmWatch();
+  
+  
   //watchfaces[i++] = new WatchfaceNomens();
   //watchfaces[i++] = new WatchfaceMatrix();
-  //watchfaces[i++] = new WatchfaceLife();
   //watchfaces[i++] = new WatchfaceMinimal();
   //watchfaces[i++] = new WatchfaceThermo();
   

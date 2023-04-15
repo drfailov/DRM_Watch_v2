@@ -68,7 +68,7 @@ void modeMenuSettingsLoop() {
   }
   drawLegend();
   drawStatusBar();
-  drawMenuItem(/*index*/MENU_SETTINS_SELECTED_BACK, /*icon*/displayDrawArrowLeft, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
+  drawMenuItem(/*index*/MENU_SETTINS_SELECTED_BACK, /*icon*/displayDrawIconSettings, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
   drawMenuItem(/*index*/MENU_SETTINS_SELECTED_SILENT, /*icon*/(eepromReadSilentMode()?displayDrawSilentModeIcon:displayDrawSilentModeOffIcon), /*text*/settingsSilent, /*animate*/animate);
   drawMenuItem(/*index*/MENU_SETTINS_SELECTED_FLIP, /*icon*/displayDrawIconFlip, /*text*/settingsFlip, /*animate*/animate);
   drawMenuItem(/*index*/MENU_SETTINS_SELECTED_WATCHFACE, /*icon*/displayDrawIconWatchface, /*text*/settingsWTF, /*animate*/animate);
