@@ -13,7 +13,7 @@ void modeWatchFaceSetup() {
 
 void modeWatchFaceLoop(bool animate) {
   //Обработка подстветки
-  if (/*flip*/eepromReadFlipScreen() ? ButtonUp.readDebounce() : ButtonDown.readDebounce())  //если нажата кнопка вниз, не тушить подсветку
+  if (isButtonDownPressed())
     modeWatchFaceBacklightEnabledTime = millis(); 
   
   bool backlight = millis() - modeWatchFaceBacklightEnabledTime < modeWatchFaceBacklightTimeout;

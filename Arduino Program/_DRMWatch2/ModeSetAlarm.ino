@@ -93,12 +93,7 @@ void modeSetAlarmLoop(){
   
   
 
-  //LEGEND
-  if(selected <= MODE_SET_ALARM_SELECTED_TOGGLE)
-    displayDrawCheck(/*X*/eepromReadFlipScreen()?89:1, /*Y*/2, 1);
-  else
-    displayDrawText(/*X*/eepromReadFlipScreen()?89:1, /*Y*/2, /*C*/1, "+");
-  displayDrawArrowRight(/*X*/eepromReadFlipScreen()?89:1, /*Y*/59, 1);
+  drawLegend();
   
   displayUpdate();
 }

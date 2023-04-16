@@ -1,13 +1,3 @@
-#include <Arduino.h>
-#include "GenericWatchface.cpp"
-#include "RTC.cpp"
-#include "Battery.cpp"
-#include "MyEEPROM.cpp"
-
-
-#ifndef WATCHFACETHERMOCPP
-#define WATCHFACETHERMOCPP
-
 // 'calibri0', 17x23px
 const unsigned char  thermo0 [] PROGMEM = {
   0x80, 0xf0, 0xfc, 0xfe, 0xfe, 0x3f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x1f, 0xff, 0xfe, 0xfc, 0xf8, 
@@ -87,102 +77,85 @@ const unsigned char  markC [] PROGMEM = {
   0xf0, 0xf0, 0xf0, 0xf0, 0xf0, 0xf0, 0x78, 0x78
 };
 
+void WatchfaceThermo(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)
+{
+    displayClear();
 
-
-class WatchfaceThermo : public GenericWatchface  { //
-  public :
-    virtual const char* name() {
-      return (const char*)F("Thermo");
+    byte X = 96;        
+    {//battery
+      X -= 17;
+      displayDrawBattery(X, 61);
+      if(!batteryIsCharging() && !batteryIsLowPower()) X += 5;
     }
+
+#ifdef LANG_EN
+    displayDrawText(15, 7, 1, F("Temperature"));
+#endif
+#ifdef LANG_RU
+    displayDrawText(15, 7, 1, F("Teмпepaтypa"));
+#endif
+#ifdef LANG_UA
+    displayDrawText(15, 7, 1, F("Teмпepaтypa"));
+#endif
     
-
-    /*
-       EN:
-       Drawing watchfacw 1 (DRM Watch). Arguments:
-       hour, minute, second, day, month, year, dayOfWeek - current values to draw
-       animate - 0=draw without animation, 1 - animate slowly, 2 - animate more quickly, ...
-       RU:
-       Рисование циферблата 1 (DRM Watch). Принимает аргументы:
-       hour, minute, second, day, month, year, dayOfWeek - текущие значения которые нужно вывести на циферблат
-       animate - Анимировать ли вывод. 0 = не анимировать. 1 = анимировать медленно, 2 = анимировать быстрее ...
-    */
-    virtual void drawWatchface(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)
-    {
-        displayClear();
-
-        byte X = 96;        
-        {//battery
-          X -= 17;
-          displayDrawBattery(X, 61);
-          if(!Battery.batteryIsCharging() && !Battery.batteryIsLowPower()) X += 5;
-        }
-        
-        displayDrawText(15, 7, 1, F("Temperature"));
-        
-      
-        
-        {//Temperature
-          float temp = RTC.rtcGetTemp(); //-26.5
+    {//Temperature
+      float temp = rtcGetTemp(); //-26.5
 //          temp = (millis() / 1000);
 //          temp -= 28;
-          bool minus = temp < 0; //true
-          if(minus)
-            temp = -temp; //26.5
-          int tempInt = temp * 10; //265
-          byte temp1 = tempInt / 100; //2
-          byte temp2 = tempInt - (temp1 * 100); //265-(2*100) = 65
-          temp2 = temp2 / 10; // 6
-          byte temp3 = tempInt - (temp1 * 100) - (temp2 * 10); //265-(2*100)-(6*10)=5
-          byte screenWidth = 96;
-          byte textWidth = 96;
-          if(!minus){
-            textWidth = 86;
-            if(temp < 10){
-              textWidth = 67;
-            }
-          }
-          int xPosition = (textWidth-screenWidth) / 2;
-
-          if(minus)
-            displayFillRect(/*x*/xPosition+0, /*y*/34, /*w*/10, /*h*/4, /*c*/1);
-          if(temp1 != 0)
-            drawNumber(/*x*/xPosition+10, /*y*/24, /*num*/temp1, /*animate*/ animate);
-          drawNumber(/*x*/xPosition+29, /*y*/24, /*num*/temp2, /*animate*/ animate);
-          displayFillCircle(/*x*/xPosition+49, /*y*/44, /*r*/ 2, /*color*/ 1);
-          drawNumber(/*x*/xPosition+53, /*y*/24, /*num*/temp3, /*animate*/ animate);
-          displayDrawBitmap(/*x*/xPosition+72, /*y*/23, /*bmp*/markC, /*w*/24, /*h*/24, /*COLOR*/1);
+      bool minus = temp < 0; //true
+      if(minus)
+        temp = -temp; //26.5
+      int tempInt = temp * 10; //265
+      byte temp1 = tempInt / 100; //2
+      byte temp2 = tempInt - (temp1 * 100); //265-(2*100) = 65
+      temp2 = temp2 / 10; // 6
+      byte temp3 = tempInt - (temp1 * 100) - (temp2 * 10); //265-(2*100)-(6*10)=5
+      byte screenWidth = 96;
+      byte textWidth = 96;
+      if(!minus){
+        textWidth = 86;
+        if(temp < 10){
+          textWidth = 67;
         }
-        
-        displayUpdate();
-    }
+      }
+      int xPosition = (textWidth-screenWidth) / 2;
 
+      if(minus)
+        displayFillRect(/*x*/xPosition+0, /*y*/34, /*w*/10, /*h*/4, /*c*/1);
+      if(temp1 != 0)
+        drawNumber(/*x*/xPosition+10, /*y*/24, /*num*/temp1, /*animate*/ animate);
+      drawNumberThermo(/*x*/xPosition+29, /*y*/24, /*num*/temp2, /*animate*/ animate);
+      displayFillCircle(/*x*/xPosition+49, /*y*/44, /*r*/ 2, /*color*/ 1);
+      drawNumberThermo(/*x*/xPosition+53, /*y*/24, /*num*/temp3, /*animate*/ animate);
+      displayDrawBitmap(/*x*/xPosition+72, /*y*/23, /*bmp*/markC, /*w*/24, /*h*/24, /*COLOR*/1);
+    }
     
+    displayUpdate();
+}
 
-    void drawNumber(byte x, byte y, byte num, byte animate){
-      if(num == 0)
-        displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo0, /*w*/17, /*h*/23, /*COLOR*/1);
-      if(num == 1)
-        displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo1, /*w*/17, /*h*/23, /*COLOR*/1);
-      if(num == 2)
-        displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo2, /*w*/17, /*h*/23, /*COLOR*/1);
-      if(num == 3)
-        displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo3, /*w*/17, /*h*/23, /*COLOR*/1);
-      if(num == 4)
-        displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo4, /*w*/17, /*h*/23, /*COLOR*/1);
-      if(num == 5)
-        displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo5, /*w*/17, /*h*/23, /*COLOR*/1);
-      if(num == 6)
-        displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo6, /*w*/17, /*h*/23, /*COLOR*/1);
-      if(num == 7)
-        displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo7, /*w*/17, /*h*/23, /*COLOR*/1);
-      if(num == 8)
-        displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo8, /*w*/17, /*h*/23, /*COLOR*/1);
-      if(num == 9)
-        displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo9, /*w*/17, /*h*/23, /*COLOR*/1);
-      if(animate)
-        displayUpdate();
-    }
 
-};
 
-#endif
+void drawNumberThermo(byte x, byte y, byte num, byte animate){
+  if(num == 0)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo0, /*w*/17, /*h*/23, /*COLOR*/1);
+  if(num == 1)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo1, /*w*/17, /*h*/23, /*COLOR*/1);
+  if(num == 2)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo2, /*w*/17, /*h*/23, /*COLOR*/1);
+  if(num == 3)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo3, /*w*/17, /*h*/23, /*COLOR*/1);
+  if(num == 4)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo4, /*w*/17, /*h*/23, /*COLOR*/1);
+  if(num == 5)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo5, /*w*/17, /*h*/23, /*COLOR*/1);
+  if(num == 6)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo6, /*w*/17, /*h*/23, /*COLOR*/1);
+  if(num == 7)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo7, /*w*/17, /*h*/23, /*COLOR*/1);
+  if(num == 8)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo8, /*w*/17, /*h*/23, /*COLOR*/1);
+  if(num == 9)
+    displayDrawBitmap(/*x*/x, /*y*/y, /*bmp*/thermo9, /*w*/17, /*h*/23, /*COLOR*/1);
+  if(animate)
+    displayUpdate();
+}

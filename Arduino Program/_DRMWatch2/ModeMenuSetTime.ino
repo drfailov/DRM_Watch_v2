@@ -116,12 +116,8 @@ void modeMenuSetTimeLoop(){
   displayDrawIconWithFrame(/*x*/xOffset+30, /*y*/53, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawCheck, /*selected*/selected  == MENU_SET_TIME_SELECTED_SAVE);
     
 
-  //button icons
-  if(selected == MENU_SET_TIME_SELECTED_SAVE || selected == MENU_SET_TIME_SELECTED_BACK)
-    displayDrawCheck(/*X*/eepromReadFlipScreen()?89:1, /*Y*/2, 1);
-  else
-    displayDrawText(/*X*/eepromReadFlipScreen()?89:1, /*Y*/2, /*C*/1, "+");
-  displayDrawArrowRight(/*X*/eepromReadFlipScreen()?89:1, /*Y*/59, 1);
+  
+  drawLegend();
   
   displayUpdate();
 }

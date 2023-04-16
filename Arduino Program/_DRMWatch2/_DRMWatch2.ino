@@ -42,6 +42,7 @@ long genericMenuLastActionTime = 0;
 char buffer[BUFFER_SIZE]; 
 //Общий на всю программу счётчик для выбора элементов из списка
 byte selected = 0;
+//используется на экранах с анимацией
 bool animate;
 
 //Общий формат вывода данных много где используется
@@ -94,21 +95,13 @@ void setup() {
   //wfs[i++] = watchfaceXelibri;
   wfs[i++] = WatchfaceDrmLite;
   wfs[i++] = WatchfaceDrmWatch;
-  wfs[i++] = WatchfaceLife;
+  //wfs[i++] = WatchfaceLife;
   //wfs[i++] = WatchfaceMinimal;
+  //wfs[i++] = WatchfaceMatrix;
+  //wfs[i++] = WatchfaceThermo;
+  wfs[i++] = WatchfaceNomens;
   
-  
-  
-  
-  //watchfaces[i++] = new WatchfaceNomens();
-  //watchfaces[i++] = new WatchfaceMatrix();
-  //watchfaces[i++] = new WatchfaceMinimal();
-  //watchfaces[i++] = new WatchfaceThermo();
-  
-  
-  
-  
-  
+   
 #ifdef LOG
   Serial.begin(115200);
   Serial.println(F("DRM Watch V2"));
