@@ -453,16 +453,21 @@ Changelog
 2023-04-16 Firmware v1.32: Анімація переходу між екранами
 2023-04-16 Firmware v1.32: Додано мову: Українська
 2023-04-16 Firmware v1.32: Тепер годинник можна відправити в сон
+2023-04-16 Firmware v1.32: Переробив всі циферблати
 
 
 
 
-back watchfaces
 переделать екран мелодий и приложений под новое
 
-date format
-Скетч использует 29272 байт (95%)
-Скетч использует 29272 байт (95%)
+До переделки єкрана приложений
+Скетч использует 29414 байт (95%)
+wfs[i++] = watchfaceCalibri;
+wfs[i++] = WatchfaceDrmLite;
+wfs[i++] = WatchfaceDrmWatch;
+wfs[i++] = WatchfaceNomens;
+#define LANG_UA   
+
 
 
 

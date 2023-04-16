@@ -46,14 +46,22 @@ class Button_{
 
   //Вызывать после того как получен true на pressed. Выдает true после нажатия кнопку не отпускать в течении 5 секунды
   bool waitHold(){
-    if(!readDebounce()) 
-      return false;
-    long started = millis();
-    while(readDebounce() && millis() - started < 1200);
-    buttonLastValue = readDebounce();
-    if(buttonLastValue)
-      holded = true;
-    return buttonLastValue;
+    for (unsigned long started = millis(); readDebounce(); ){
+      if(millis() - started > 1200){
+        holded = true;
+        return true;
+      }
+    }
+    return false;
+    
+//    if(!readDebounce()) 
+//      return false;
+//    long started = millis();
+//    while(readDebounce() && millis() - started < 1200);
+//    buttonLastValue = readDebounce();
+//    if(buttonLastValue)
+//      holded = true;
+//    return buttonLastValue;
   }
 
   
