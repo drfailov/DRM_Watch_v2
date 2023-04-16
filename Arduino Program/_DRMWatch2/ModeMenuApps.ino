@@ -13,7 +13,7 @@ const char modeMenuAppsItemMeow[] PROGMEM = "Meow";
 #ifdef LANG_RU
 const char modeMenuAppsItemStopwatch[] PROGMEM = "Ceкyндoмep";
 const char modeMenuAppsItem2[] PROGMEM = "Бyдильник";
-const char modeMenuAppsItem3[] PROGMEM = "Зpaдa";
+const char modeMenuAppsItem3[] PROGMEM = "3paдa";
 const char modeMenuAppsItem4[] PROGMEM = "Meлoдии";
 const char modeMenuAppsItem5[] PROGMEM = "Жизнь";
 const char modeMenuAppsItemMeow[] PROGMEM = "Mяy";
@@ -22,7 +22,7 @@ const char modeMenuAppsItemMeow[] PROGMEM = "Mяy";
 const char modeMenuAppsItemStopwatch[] PROGMEM = "Ceкyндoмip";
 const char modeMenuAppsItem2[] PROGMEM = "Бyдильник";
 const char modeMenuAppsItem3[] PROGMEM = "3paдa";
-const char modeMenuAppsItem4[] PROGMEM = "3вyки";
+const char modeMenuAppsItem4[] PROGMEM = "Myзикa";
 const char modeMenuAppsItem5[] PROGMEM = "Життя";
 const char modeMenuAppsItemMeow[] PROGMEM = "Mяy";
 #endif

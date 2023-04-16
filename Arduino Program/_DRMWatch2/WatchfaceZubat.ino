@@ -3,7 +3,7 @@ void watchfaceZubat(byte hour, byte minute, byte second, byte day, byte month, i
   displayClear();
 
   {//date
-    sprintf(buffer, getDateFormat(), day, month, year);
+    sprintf(buffer, dateFormat, day, month, year);
     displayDrawText(37, 61, 1, buffer);
   }
   

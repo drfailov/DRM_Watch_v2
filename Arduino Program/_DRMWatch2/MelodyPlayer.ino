@@ -268,13 +268,13 @@ void melodyPlayerDrawScreen() {
   displayDrawText(17, 60, 1, F("Пoпиликaeм!"));
 #endif
 #ifdef LANG_UA
-  displayDrawText(17, 60, 1, F("3iгpaємo!"));
+  displayDrawText(20, 60, 1, F("Виконую..."));
 #endif
 
   if(!melodyPlayerLoopMelody){
     byte hour = rtcGetHours();
     byte minute = rtcGetMinutes();
-    sprintf(buffer, "%02d:%02d", hour, minute);
+    sprintf(buffer, timeFormat, hour, minute);
     displayDrawText(0, 0, 1, buffer);
   }
   else{

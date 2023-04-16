@@ -9,13 +9,8 @@
 
 #include <util/atomic.h>
 #include <LowPower.h>
-void(* resetFunc) (void) = 0;//объявляем функцию reset с адресом 0
-
-
 
 /*Данные, которые требуется по всей программе*/
-
-
 //Базовые константы
 #define version F("v1.32")   //Версию менять здесь
 //#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
@@ -49,6 +44,10 @@ char buffer[BUFFER_SIZE];
 byte selected = 0;
 bool animate;
 
+//Общий формат вывода данных много где используется
+const char* dateFormat = "%02d.%02d.%04d";
+const char* timeFormat = "%02d:%02d";
+
 
 
 /* Program contains several screens (menus, watchfaces...).
@@ -77,6 +76,7 @@ bool animate;
 #define MODE_STOPWATCH (byte)12
 #define MODE_SET_ALARM (byte)13
 #define MODE_GAME_OF_LIFE (byte)14
+#define MODE_OFF (byte)15
 //Переменная в которой хранится текущий режим
 byte _mode = -1;
 
@@ -134,6 +134,7 @@ void loop() {
   if (_mode == MODE_STOPWATCH ) modeStopwatchLoop();
   if (_mode == MODE_SET_ALARM ) modeSetAlarmLoop();
   if (_mode == MODE_GAME_OF_LIFE ) modeGameOfLifeLoop();
+  if (_mode == MODE_OFF ) modeOffLoop();
 }
 
 void setMode(int _modeNew) {
@@ -176,17 +177,16 @@ void setMode(int _modeNew) {
   if (_modeNew == MODE_MENU_APPS ) modeMenuAppsSetup();
   if (_modeNew == MODE_STOPWATCH ) modeStopwatchSetup();
   if (_modeNew == MODE_SET_ALARM ) modeSetAlarmSetup();  
-  if (_modeNew == MODE_GAME_OF_LIFE ) modeGameOfLifeSetup();  
+  if (_modeNew == MODE_GAME_OF_LIFE ) modeGameOfLifeSetup(); 
+  if (_modeNew == MODE_OFF ) modeOffInit();  
   
   
   _mode = _modeNew;
 }
 
 //Выплнить всю последовательность действий требуемых для выполнения перезагрузки.
-void reboot(){
-  displayPowerOff();
-  delay(1000);
-  resetFunc(); //вызываем reset
+void powerOff(){
+  setMode(MODE_OFF);
 }
 
 //переключить на режим выбранного в меню вотчфейса из любого места программы

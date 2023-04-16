@@ -3,7 +3,7 @@ void watchfaceCalibri(byte hour, byte minute, byte second, byte day, byte month,
     displayClear();
 
     {//date
-      sprintf(buffer, getDateFormat(), day, month, year);
+      sprintf(buffer, dateFormat, day, month, year);
       displayDrawText(0, 0, 1, buffer);
     }
     

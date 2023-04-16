@@ -3,7 +3,7 @@ void WatchfaceMinimal(byte hour, byte minute, byte second, byte day, byte month,
     displayClear();
 
     if(isButtonDownNowPressed()){//date
-      sprintf(buffer, getDateFormat(), day, month, year);
+      sprintf(buffer, dateFormat, day, month, year);
       displayDrawText(0, 0, 1, buffer);
     }
     
@@ -50,7 +50,7 @@ void WatchfaceMinimal(byte hour, byte minute, byte second, byte day, byte month,
     
     
     { //time
-      sprintf(buffer, getTimeFormat(), hour, minute);
+      sprintf(buffer, timeFormat, hour, minute);
       displayDrawText(33, 28, 1, buffer);
     }
     

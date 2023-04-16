@@ -1,6 +1,3 @@
-
-#include "Buttons.cpp"
-
 /*Screen with main watchface*/
 const long modeWatchFaceBacklightTimeout = 7000; //мс, Сколько времени после последнего действия будет светить подстветка
 const long modeWatchFaceAminationTimeout = 20000; //мс, сколько времени после последнего действия будет идти анимация и часы не будт спать
@@ -9,14 +6,8 @@ long modeWatchFaceBacklightEnabledTime;
 void modeWatchFaceSetup() {
   displayInit();
   modeWatchFaceBacklightEnabledTime = millis();
-  if (/*flip*/eepromReadFlipScreen()) {
-    attachInterrupt(1, wakeUp, HIGH); //down
-    attachInterrupt(0, wakeUp, HIGH);  //up
-  }
-  else {
-    attachInterrupt(0, wakeUp, HIGH); //down
-    attachInterrupt(1, wakeUp, HIGH);  //up
-  }
+  attachInterrupt(1, wakeUp, HIGH); //down
+  attachInterrupt(0, wakeUp, HIGH);  //up
   modeWatchFaceLoop(true);
 }
 
@@ -100,7 +91,7 @@ void modeWatchFaceLoop(bool animate) {
   //Обработка кнопок
   if (isButtonUpPressed()) {
     if (isButtonUpHold()) {
-      reboot();
+      powerOff();
       return;
     }
     beep();
