@@ -79,7 +79,7 @@ void modeMenuSetTimeLoop(){
 
 
   //BACK
-  displayDrawIconWithFrame(/*x*/xOffset, /*y*/0, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawArrowLeft, /*selected*/selected == MENU_SET_TIME_SELECTED_BACK);
+  displayDrawIconWithFrame(/*x*/xOffset, /*y*/0, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawBackIcon, /*selected*/selected == MENU_SET_TIME_SELECTED_BACK);
 
   //TITLE
 #ifdef LANG_EN

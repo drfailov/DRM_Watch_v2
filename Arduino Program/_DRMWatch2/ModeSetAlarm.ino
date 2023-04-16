@@ -51,7 +51,7 @@ void modeSetAlarmLoop(){
     xOffset = 0;
 
   //BACK
-  displayDrawIconWithFrame(/*x*/xOffset, /*y*/0, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawArrowLeft, /*selected*/selected == MODE_SET_ALARM_SELECTED_BACK);
+  displayDrawIconWithFrame(/*x*/xOffset, /*y*/0, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawBackIcon, /*selected*/selected == MODE_SET_ALARM_SELECTED_BACK);
 
   //TITLE
 #ifdef LANG_EN

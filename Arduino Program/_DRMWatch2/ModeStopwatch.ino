@@ -85,7 +85,7 @@ void modeStopwatchLoop() {
     displayDrawPauseSign(/*X*/eepromReadFlipScreen()?89:2, /*Y*/2, /*c*/1);
   else
     displayDrawPlaySign(/*X*/eepromReadFlipScreen()?89:2, /*Y*/2, /*c*/1);
-  displayDrawIconReboot(/*x*/eepromReadFlipScreen()?88:0, /*Y*/61, /*c*/1);
+  displayDrawIconReset(/*x*/eepromReadFlipScreen()?88:0, /*Y*/61, /*c*/1);
     
   displayUpdate();
 }

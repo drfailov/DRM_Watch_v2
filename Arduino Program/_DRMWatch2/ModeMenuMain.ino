@@ -58,7 +58,7 @@ void modeMenuMainLoop() {
   displayClear();
   drawLegend();
   drawStatusBar();
-  drawMenuItem(/*index*/MAIN_MENU_SELECTED_BACK, /*icon*/displayDrawArrowLeft, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
+  drawMenuItem(/*index*/MAIN_MENU_SELECTED_BACK, /*icon*/displayDrawBackIcon, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
   drawMenuItem(/*index*/MAIN_MENU_SELECTED_APPS, /*icon*/displayDrawAppsIcon, /*text*/menuApps, /*animate*/animate);
   drawMenuItem(/*index*/MAIN_MENU_SELECTED_SETTINGS, /*icon*/displayDrawIconSettings, /*text*/menuSettings, /*animate*/animate);
   drawMenuItem(/*index*/MAIN_MENU_SELECTED_ABOUT, /*icon*/displayDrawIconAbout, /*text*/menuAbout, /*animate*/animate);

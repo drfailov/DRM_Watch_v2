@@ -381,102 +381,6 @@ const PROGMEM byte pathZubat[] = { 42,
     displayDrawBitmap(x, y, img, 7, 8, color);
   }
   
-  //Рисование иконки будильника. Используется на циферблатах.
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawAlertSign(byte x, byte y, bool color){
-    static const unsigned char img[9] PROGMEM = { 
-        0b00000010,
-        0b00011101,
-        0b00100010,
-        0b01000001,
-        0b01001101,
-        0b01001001,
-        0b00100010,
-        0b00011101,
-        0b00000010
-      };
-    displayDrawBitmap(x, y, img, 9, 8, color);
-  }
-
-  
-  
-
-  //Рисование иконки приложений. Используется в главном меню.
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawAppsIcon(byte x, byte y, bool color){
-        static const unsigned char img[7] PROGMEM = { 
-        0b01110111,
-        0b01110111,
-        0b01110111,
-        0b00000000,
-        0b01110111,
-        0b01110111,
-        0b01110111
-      };
-      displayDrawBitmap(x, y, img, 7, 8, color);
-  }
-  
-
-  
-  //Рисование иконки настроек. Используется в главном меню
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawIconSettings(byte x, byte y, bool color){
-    static const unsigned char img[7] PROGMEM = { 
-        0b00001100,
-        0b00011000,
-        0b00011001,
-        0b00011111,
-        0b00111110,
-        0b01110000,
-        0b01100000
-      };
-    displayDrawBitmap(x, y, img, 7, 8, color);
-  }
-  
-  
-  //Рисование иконки инфор о программе. Используется в главном меню
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawIconAbout(byte x, byte y, bool color){
-    static const unsigned char img[7] PROGMEM = { 
-        0b00111110,
-        0b01111111,
-        0b01111111,
-        0b01000101,
-        0b01111111,
-        0b01111111,
-        0b00111110
-      };
-    displayDrawBitmap(x, y, img, 7, 8, color);
-  }
-  
-  
-  //Рисование иконки перезагрузки. Используется в меню настроек и в секундомере
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawIconReboot(byte x, byte y, bool color){
-    static const unsigned char img[7] PROGMEM = { 
-        0b01110110,
-        0b00110001,
-        0b01010001,
-        0b01000001,
-        0b01000101,
-        0b01000110,
-        0b00110111
-      };
-    displayDrawBitmap(x, y, img, 7, 8, color);
-  }
-  
-  
-
   
   
   //Рисование иконки сна. Используется в меню настроек
@@ -513,72 +417,45 @@ const PROGMEM byte pathZubat[] = { 42,
       };
     displayDrawBitmap(x, y, img, 7, 8, color);
   }
-  
-  
-  //Рисование иконки сброса. Используется в меню настроек
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawIconReset(byte x, byte y, bool color){
-    static const unsigned char img[7] PROGMEM = { 
-        0b01011110,
-        0b01100001,
-        0b00000000,
-        0b00101110,
-        0b00000000,
-        0b01000011,
-        0b00111101
-      };
-    displayDrawBitmap(x, y, img, 7, 8, color);
-  }
 
   
   //Рисование прямоугольника с цифрами. Используется на экранах настройки будильника и времени
   static void displayDraw2DigitNumberWithFrame(byte x, byte y, byte number, bool selected){
     sprintf(buffer, "%02d", number);
-    if(selected){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x + 4, y+4, 0, buffer);
-    }
-    else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-      displayDrawText(x+4, y+4, 1, buffer);
-    }
+    (selected?displayFillRect:displayDrawRect)(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
+    displayDrawText(x + 4, y+4, !selected, buffer);
   }
   //Рисование рамки с картинкой
   
   //Рисование прямоугольника с иконкой 7x7. Используется на экранах главного меню, секундомера
   static void displayDrawIconWithFrame(byte x, byte y, byte additionalWidth, void (*drawIcon)(byte x,byte y,bool color), bool selected){
-    if(selected){
-      displayFillRect(/*x*/x, /*y*/y, /*w*/20 + additionalWidth, /*h*/15, /*c*/1);
-      drawIcon(x + 6, y+4, 0);
-    }
-    else{
-      displayDrawRect(/*x*/x, /*y*/y, /*w*/20 + additionalWidth, /*h*/15, /*c*/1);
-      drawIcon(x + 6, y+4, 1);
-    }
+    (selected?displayFillRect:displayDrawRect)(/*x*/x, /*y*/y, /*w*/20 + additionalWidth, /*h*/15, /*c*/1);
+    drawIcon(x+6, y+4, !selected);
   }
   
-  /*draws battery
-  Эта функция предполагается быть приватной*/
+  /*draws battery*/
   static void displayDrawBattery(byte x, byte y, byte level, bool isCharging, bool isLowPower){
-  
-    //draw battery
     byte xshift = 5;
-    displayDrawRect(/*x*/x+xshift+1, /*y*/y, /*w*/11, /*h*/7, /*color*/1);
-    displayDrawLine(/*X1*/x+xshift+0, /*Y1*/y+2, /*X2*/x+xshift+0, /*Y2*/y+4, /*C*/1);
-    displayDrawLine(/*X1*/x+xshift+1, /*Y1*/y+2, /*X2*/x+xshift+1, /*Y2*/y+4, /*C*/0);
-    if(level >= 1)
-      displayDrawLine(/*X1*/x+xshift+9, /*Y1*/y+2, /*X2*/x+xshift+9, /*Y2*/y+4, /*C*/1);
-    if(level >= 2)
-      displayDrawLine(/*X1*/x+xshift+7, /*Y1*/y+2, /*X2*/x+xshift+7, /*Y2*/y+4, /*C*/1);
-    if(level >= 3)
-      displayDrawLine(/*X1*/x+xshift+5, /*Y1*/y+2, /*X2*/x+xshift+5, /*Y2*/y+4, /*C*/1);
-    if(level >= 4)
-      displayDrawLine(/*X1*/x+xshift+3, /*Y1*/y+2, /*X2*/x+xshift+3, /*Y2*/y+4, /*C*/1);
-  
-  
+
+    static const unsigned char img[12] PROGMEM = { 
+      0b00011100,
+      0b01100011,
+      0b01000001,
+      0b01000001,
+      0b01000001,
+      0b01000001,
+      0b01000001,
+      0b01000001,
+      0b01000001,
+      0b01000001,
+      0b01000001,
+      0b01111111,
+    };
+    displayDrawBitmap(x+xshift, y, img, 12, 8, 1);
     
+    for(byte i=0; i < level; i++)
+      displayDrawLine(/*X1*/x+xshift+9-i*2, /*Y1*/y+2, /*X2*/x+xshift+9-i*2, /*Y2*/y+4, /*C*/1);
+
     if(isCharging){ //draw charging symbol
       static const unsigned char img[6] PROGMEM = { 
         0b00000000,
@@ -632,7 +509,8 @@ const PROGMEM byte pathZubat[] = { 42,
     }
   }
 
-  void drawDayOfWeek(byte x, byte y, byte dayOfWeek, bool color) { //
+  void drawDayOfWeek(byte x, byte y, byte dayOfWeek, bool color) { 
+    //Да, это говно. Но оно занимает меньше места в памяти, да, реально! Я проверил и сам офигел.
     const __FlashStringHelper* txt;
   #ifdef LANG_RU
     if (dayOfWeek == 1) txt = F("Пн");

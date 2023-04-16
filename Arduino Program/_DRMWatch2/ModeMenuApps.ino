@@ -40,10 +40,37 @@ const char* modeMenuAppsItems[] = {
 
 void modeMenuAppsSetup() {
   genericMenuSetup();
+  animate = true;
 }
 
 void modeMenuAppsLoop() {
-  genericMenuLoop(modeMenuAppsItemsCount, modeMenuAppsItems, modeMenuAppsSelected, false);
+    if (isButtonUpPressed()){
+    genericMenuLastActionTime = millis();
+    beep();
+    if(selected == 0){
+      goToWatchface();
+    }
+    return;
+  }
+  
+  if(isButtonDownPressed()){
+    genericMenuLastActionTime = millis();
+    beep();
+    selected ++;
+    if(selected > 3) 
+      selected = 0;
+  }
+  doAutoExit();
+  displayClear();
+  //genericMenuLoop(modeMenuAppsItemsCount, modeMenuAppsItems, modeMenuAppsSelected, false);
+  drawLegend();
+  drawStatusBar();
+  drawMenuItem(/*index*/0, /*icon*/displayDrawAppsIcon, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
+  drawMenuItem(/*index*/1, /*icon*/displayDrawIconStopwatch, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
+  drawMenuItem(/*index*/2, /*icon*/displayDrawAlertSign, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
+  
+  displayUpdate();
+  animate = false;
 }
 
 void modeMenuAppsFinish() {
