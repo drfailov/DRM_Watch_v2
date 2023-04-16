@@ -12,7 +12,6 @@ bool selectingWatchface = false;
 
 void modeMenuSettingsSetup() {
   genericMenuSetup();
-  animate = true;
 }
 
 void modeMenuSettingsLoop() {
@@ -75,10 +74,6 @@ void modeMenuSettingsLoop() {
   drawMenuItem(/*index*/MENU_SETTINS_SELECTED_TIME, /*icon*/displayDrawIconTime, /*text*/settingsTime, /*animate*/animate);
   displayUpdate();
   animate = false;
-}
-
-void modeMenuSettingsFinish() {
-  genericMenuFinish();
 }
 
 void modeMenuSettingsSelected(byte index) {

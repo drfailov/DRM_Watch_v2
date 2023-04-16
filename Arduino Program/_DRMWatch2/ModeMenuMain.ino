@@ -1,6 +1,3 @@
-/*Show main menu */
-const byte modeMenuMainItemsCount = 4; //сколько пунктов меню в массиве
-
 #define MAIN_MENU_SELECTED_BACK 0
 #define MAIN_MENU_SELECTED_APPS 1
 #define MAIN_MENU_SELECTED_SETTINGS 2
@@ -8,7 +5,6 @@ const byte modeMenuMainItemsCount = 4; //сколько пунктов меню 
 
 void modeMenuMainSetup() {
   genericMenuSetup();
-  animate = true;
 }
 
 void modeMenuMainLoop() {

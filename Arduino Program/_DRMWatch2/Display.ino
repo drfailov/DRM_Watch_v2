@@ -266,26 +266,27 @@ const PROGMEM byte pathZubat[] = { 42,
     displayDrawVector(/*path*/getPathBubble(), /*x*/0, /*y*/0, /*animate*/false, /*color*/1);
     strcpy_P(buffer, (PGM_P)str);
     byte pos = 0;
-    bool animate = true;
+    bool animateMessage = true;
     for(byte i=0; i<BUFFER_SIZE; i++){
       if(buffer[i] == '\0') 
         break;
       if((byte)buffer[i] != 208 && (byte)buffer[i] != 209){
         displayDrawText(10 + pos*6, 6, 1, buffer[i]);
         pos ++;
-        if(animate){
+        if(animateMessage){
           displayUpdate();
           delay(6);
         }
       }
       if (isButtonUpPressed()) 
-        animate = false;
+        animateMessage = false;
     }
     displayUpdate();
-    if(animate)
+    if(animateMessage)
       delay(500);
     else
       delay(200);
+    displayTransition();
   }
   
   //Вывод простого сообщения из оперативки.
@@ -295,45 +296,7 @@ const PROGMEM byte pathZubat[] = { 42,
     displayUpdate();
   }
   
-
-  
-  //Рисование иконки сброса. Используется сейчас нигде
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawResetIcon(byte x, byte y, bool color){
-    static const unsigned char img[6] PROGMEM = { 
-        0b01001111,
-        0b10000011,
-        0b10000101,
-        0b01001001,
-        0b00110000,
-        0b00000000,
-      };
-    displayDrawBitmap(x, y, img, 6, 8, color);
-  }
-  
-  //Рисование иконки стрелки вправо. Используется на экране установки времени и будильника.
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawArrowRight(byte x, byte y, bool color){
-    static const unsigned char img[7] PROGMEM = { 
-        0b01100011,
-        0b00110110,
-        0b00110110,
-        0b00011100,
-        0b00011100,
-        0b00001000,
-        0b00001000
-      };
-    displayDrawBitmap(x, y, img, 7, 8, color);
-  }
-  
   //Рисование иконки плэй. 7х7. Используется на экране секундомера.
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawPlaySign(byte x, byte y, bool color){
     static const unsigned char img[7] PROGMEM = { 
         0b01111111,
@@ -348,9 +311,6 @@ const PROGMEM byte pathZubat[] = { 42,
   }
   
   //Рисование иконки паузы. 7х7. Используется на экране секундомера.
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
   static void displayDrawPauseSign(byte x, byte y, bool color){
     static const unsigned char img[7] PROGMEM = { 
         0b01111111,
@@ -381,42 +341,6 @@ const PROGMEM byte pathZubat[] = { 42,
     displayDrawBitmap(x, y, img, 7, 8, color);
   }
   
-  
-  
-  //Рисование иконки сна. Используется в меню настроек
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawIconSleep(byte x, byte y, bool color){
-    static const unsigned char img[7] PROGMEM = { 
-        0b00011100,
-        0b00111110,
-        0b01111111,
-        0b01111000,
-        0b01110000,
-        0b00110000,
-        0b00010000
-      };
-    displayDrawBitmap(x, y, img, 7, 8, color);
-  }
-  
-  
-  //Рисование иконки звука. Используется в меню настроек
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawIconBeep(byte x, byte y, bool color){
-    static const unsigned char img[7] PROGMEM = { 
-        0b00011100,
-        0b00000000,
-        0b00111110,
-        0b00000000,
-        0b00111110,
-        0b00000000,
-        0b00011100
-      };
-    displayDrawBitmap(x, y, img, 7, 8, color);
-  }
 
   
   //Рисование прямоугольника с цифрами. Используется на экранах настройки будильника и времени
@@ -550,6 +474,7 @@ const PROGMEM byte pathZubat[] = { 42,
       if(x%30==0)
         displayUpdate();
     }
+    animate = true;
   }
 
   void displayTransitionFade(){

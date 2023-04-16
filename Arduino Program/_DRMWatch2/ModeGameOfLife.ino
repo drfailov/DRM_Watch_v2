@@ -7,6 +7,8 @@ void modeGameOfLifeSetup() {
 }
 
 void modeGameOfLifeLoop() {
+  if(animate) //first frame
+    randomScreen();
   if (isButtonUpPressed()){ //PRESS
     if (isButtonUpHold()){ //if hold - reset
       beep();
@@ -19,6 +21,7 @@ void modeGameOfLifeLoop() {
 
   lifeStep();
   displayUpdate();
+  animate = false;
 }
 
 void modeGameOfLifeFinish() {
@@ -63,6 +66,13 @@ void lifeStep(){
   }
 }
 
+void linesScreen(){
+  for(byte x = 0; x < LCD_X; x++){
+    for(byte y = 0; y < LCD_Y; y++){
+      displaySetPixel(x,y, y%2==0);
+    }
+  }
+}
 void randomScreen(){
   for(byte x = 0; x < LCD_X; x++){
     for(byte y = 0; y < LCD_Y; y++){

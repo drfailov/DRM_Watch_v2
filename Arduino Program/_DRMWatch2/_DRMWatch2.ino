@@ -149,11 +149,8 @@ void setMode(int _modeNew) {
   if (_mode == MODE_WATCHFACE) modeWatchFaceFinish();
   if (_mode == MODE_MENU_MAIN ) modeMenuMainFinish();
   if (_mode == MODE_STATUS ) modeStatusFinish();
-  if (_mode == MODE_MENU_MELODIES ) modeMenuMelodiesFinish();
-  if (_mode == MODE_MENU_SETTINGS ) modeMenuSettingsFinish();
   if (_mode == MODE_MENU_SET_TIME ) modeMenuSetTimeFinish();
   if (_mode == MODE_ABOUT ) modeAboutFinish();
-  if (_mode == MODE_MENU_APPS ) modeMenuAppsFinish();
   if (_mode == MODE_STOPWATCH ) modeStopwatchFinish();
   if (_mode == MODE_SET_ALARM ) modeSetAlarmFinish();
   if (_mode == MODE_GAME_OF_LIFE ) modeGameOfLifeFinish();

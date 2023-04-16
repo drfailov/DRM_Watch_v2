@@ -54,52 +54,49 @@ static void displayDrawArrowDown(byte x, byte y, bool color){
 //APPS
 //Рисование иконки приложений. Используется в главном меню.
 static void displayDrawAppsIcon(byte x, byte y, bool color){
-      static const unsigned char img[9] PROGMEM = { 
-      0b01110111,
+      static const unsigned char img[8] PROGMEM = { 
+      0b00000000,
       0b01110111,
       0b01110111,
       0b01110111,
       0b00000000,
       0b01110111,
       0b01110111,
-      0b01110111,
       0b01110111
     };
-    displayDrawBitmap(x, y, img, 9, 8, color);
+    displayDrawBitmap(x, y, img, 8, 8, color);
 }
 
 //SETTINGS
 //Рисование иконки настроек. Используется в главном меню
 static void displayDrawIconSettings(byte x, byte y, bool color){
-  static const unsigned char img[9] PROGMEM = { 
+  static const unsigned char img[8] PROGMEM = { 
+      0b00000000,
       0b00001100,
-      0b00011100,
       0b00011000,
       0b00011001,
       0b00011111,
-      0b00111111,
       0b00111110,
       0b01110000,
       0b01100000
     };
-  displayDrawBitmap(x, y, img, 9, 8, color);
+  displayDrawBitmap(x, y, img, 8, 8, color);
 }
 
 //INFO
 //Рисование иконки инфор о программе. Используется в главном меню
 static void displayDrawIconAbout(byte x, byte y, bool color){
-  static const unsigned char img[9] PROGMEM = { 
+  static const unsigned char img[8] PROGMEM = { 
+      0b00000000,
       0b00111110,
-      0b01111111,
       0b01111111,
       0b01111111,
       0b01000101,
       0b01111111,
       0b01111111,
-      0b01111111,
       0b00111110
     };
-  displayDrawBitmap(x, y, img, 9, 8, color);
+  displayDrawBitmap(x, y, img, 8, 8, color);
 }
 
 
@@ -235,21 +232,138 @@ static void displayDrawAlertSign(byte x, byte y, bool color){
   displayDrawBitmap(x, y, img, 9, 8, color);
 }
 
+//ZRADA
+static void displayDrawZradaSign(byte x, byte y, bool color){
+  static const unsigned char img[9] PROGMEM = { 
+      0b00011001,
+      0b00011111,
+      0b01011001,
+      0b01000001,
+      0b01111101,
+      0b01000001,
+      0b01011001,
+      0b00011111,
+      0b00011001
+    };
+  displayDrawBitmap(x, y, img, 9, 8, color);
+}
+
+//MELODIES
+static void displayDrawMelodiesSign(byte x, byte y, bool color){
+  static const unsigned char img[8] PROGMEM = { 
+      0b00000000,
+      0b01110000,
+      0b01110000,
+      0b01111111,
+      0b00000001,
+      0b00111001,
+      0b00111001,
+      0b00111111
+    };
+  displayDrawBitmap(x, y, img, 8, 8, color);
+}
+
+//LIFE
+static void displayDrawLifeSign(byte x, byte y, bool color){
+  static const unsigned char img[8] PROGMEM = { 
+      0b00000000,
+      0b01100000,
+      0b01100000,
+      0b01100000,
+      0b01100011,
+      0b01100011,
+      0b01111100,
+      0b01111100
+    };
+  displayDrawBitmap(x, y, img, 8, 8, color);
+}
+
+//CAT
+static void displayDrawCatSign(byte x, byte y, bool color){
+  static const unsigned char img[9] PROGMEM = { 
+      0b00011000,
+      0b00111100,
+      0b01111111,
+      0b01111010,
+      0b01111110,
+      0b01111010,
+      0b01111111,
+      0b00111100,
+      0b00011000
+    };
+  displayDrawBitmap(x, y, img, 9, 8, color);
+}
+
 //==========================================================================================---------------------------------------------- NOT USED
 
 //Рисование иконки сброса. Используется в меню настроек
-  //Рисунок находится в битовом массиве.
-  //Начало массива - левая часть рисунка. Один бит - один пиксель.
-  //Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
-  static void displayDrawIconReset2(byte x, byte y, bool color){
-    static const unsigned char img[7] PROGMEM = { 
-        0b01011110,
-        0b01100001,
-        0b00000000,
-        0b00101110,
-        0b00000000,
-        0b01000011,
-        0b00111101
-      };
-    displayDrawBitmap(x, y, img, 7, 8, color);
-  }
+//Рисунок находится в битовом массиве.
+//Начало массива - левая часть рисунка. Один бит - один пиксель.
+//Т.е. смотреть на массив следует повернув его на 90 градусов против часовой стрелки.
+static void displayDrawIconReset2(byte x, byte y, bool color){
+  static const unsigned char img[7] PROGMEM = { 
+      0b01011110,
+      0b01100001,
+      0b00000000,
+      0b00101110,
+      0b00000000,
+      0b01000011,
+      0b00111101
+    };
+  displayDrawBitmap(x, y, img, 7, 8, color);
+}
+
+//Рисование иконки сна. 
+static void displayDrawIconSleep(byte x, byte y, bool color){
+  static const unsigned char img[7] PROGMEM = { 
+      0b00011100,
+      0b00111110,
+      0b01111111,
+      0b01111000,
+      0b01110000,
+      0b00110000,
+      0b00010000
+    };
+  displayDrawBitmap(x, y, img, 7, 8, color);
+}
+
+//Рисование иконки звука. 
+static void displayDrawIconBeep(byte x, byte y, bool color){
+  static const unsigned char img[7] PROGMEM = { 
+      0b00011100,
+      0b00000000,
+      0b00111110,
+      0b00000000,
+      0b00111110,
+      0b00000000,
+      0b00011100
+    };
+  displayDrawBitmap(x, y, img, 7, 8, color);
+}
+
+//Рисование иконки сброса. 
+static void displayDrawResetIcon(byte x, byte y, bool color){
+  static const unsigned char img[6] PROGMEM = { 
+      0b01001111,
+      0b10000011,
+      0b10000101,
+      0b01001001,
+      0b00110000,
+      0b00000000,
+    };
+  displayDrawBitmap(x, y, img, 6, 8, color);
+}
+
+//Рисование иконки стрелки вправо. Используется на экране установки времени и будильника.
+static void displayDrawArrowRight(byte x, byte y, bool color){
+  static const unsigned char img[7] PROGMEM = { 
+      0b01100011,
+      0b00110110,
+      0b00110110,
+      0b00011100,
+      0b00011100,
+      0b00001000,
+      0b00001000
+    };
+  displayDrawBitmap(x, y, img, 7, 8, color);
+}

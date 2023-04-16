@@ -1,54 +1,45 @@
-/*Show menu with melodies by triggerimg GenericMenu*/
-const byte modeMenuAppsItemsCount = 7; //сколько пунктов меню в массиве
-
-//Максимальная длина строки:              |          |
-#ifdef LANG_EN
-const char modeMenuAppsItemStopwatch[] PROGMEM = "Stopwatch";
-const char modeMenuAppsItem2[] PROGMEM = "Alarm";
-const char modeMenuAppsItem3[] PROGMEM = "Zrada";
-const char modeMenuAppsItem4[] PROGMEM = "Melodies";
-const char modeMenuAppsItem5[] PROGMEM = "Life";
-const char modeMenuAppsItemMeow[] PROGMEM = "Meow";
-#endif
-#ifdef LANG_RU
-const char modeMenuAppsItemStopwatch[] PROGMEM = "Ceкyндoмep";
-const char modeMenuAppsItem2[] PROGMEM = "Бyдильник";
-const char modeMenuAppsItem3[] PROGMEM = "3paдa";
-const char modeMenuAppsItem4[] PROGMEM = "Meлoдии";
-const char modeMenuAppsItem5[] PROGMEM = "Жизнь";
-const char modeMenuAppsItemMeow[] PROGMEM = "Mяy";
-#endif
-#ifdef LANG_UA
-const char modeMenuAppsItemStopwatch[] PROGMEM = "Ceкyндoмip";
-const char modeMenuAppsItem2[] PROGMEM = "Бyдильник";
-const char modeMenuAppsItem3[] PROGMEM = "3paдa";
-const char modeMenuAppsItem4[] PROGMEM = "Myзикa";
-const char modeMenuAppsItem5[] PROGMEM = "Життя";
-const char modeMenuAppsItemMeow[] PROGMEM = "Mяy";
-#endif
-
-const char* modeMenuAppsItems[] = {
-  getMenuItemBack(),
-  modeMenuAppsItemStopwatch,
-  modeMenuAppsItem2,
-  modeMenuAppsItem3,
-  modeMenuAppsItem4,
-  modeMenuAppsItem5,
-  modeMenuAppsItemMeow
-};
-
+#define APPS_MENU_SELECTED_BACK 0
+#define APPS_MENU_SELECTED_STOPWATCH 1
+#define APPS_MENU_SELECTED_ALARM 2
+#define APPS_MENU_SELECTED_ZRADA 3
+#define APPS_MENU_SELECTED_MELODIES 4
+#define APPS_MENU_SELECTED_LIFE 5
+#define APPS_MENU_SELECTED_MEOW 6
 
 void modeMenuAppsSetup() {
   genericMenuSetup();
-  animate = true;
 }
 
 void modeMenuAppsLoop() {
     if (isButtonUpPressed()){
     genericMenuLastActionTime = millis();
     beep();
-    if(selected == 0){
-      goToWatchface();
+    if(selected == APPS_MENU_SELECTED_BACK){
+      setMode(MODE_MENU_MAIN);
+    }
+    else if(selected == APPS_MENU_SELECTED_STOPWATCH){
+      setMode(MODE_STOPWATCH);
+    }
+    else if(selected == APPS_MENU_SELECTED_ALARM){
+      setMode(MODE_SET_ALARM);
+    }
+    else if(selected == APPS_MENU_SELECTED_ZRADA){
+      if(millis()%2==0){
+        displayMessage(F("3paдa"));
+      }
+      else{
+        displayMessage(F("Пepeмoгa"));
+      }
+    }
+    else if(selected == APPS_MENU_SELECTED_MELODIES){
+      setMode(MODE_MENU_MELODIES);
+    }
+    else if(selected == APPS_MENU_SELECTED_LIFE){
+      setMode(MODE_GAME_OF_LIFE);
+      
+    }
+    else if(selected == APPS_MENU_SELECTED_MEOW){
+      meow(); 
     }
     return;
   }
@@ -57,53 +48,50 @@ void modeMenuAppsLoop() {
     genericMenuLastActionTime = millis();
     beep();
     selected ++;
-    if(selected > 3) 
+    if(selected > 6) 
       selected = 0;
   }
   doAutoExit();
   displayClear();
-  //genericMenuLoop(modeMenuAppsItemsCount, modeMenuAppsItems, modeMenuAppsSelected, false);
   drawLegend();
   drawStatusBar();
-  drawMenuItem(/*index*/0, /*icon*/displayDrawAppsIcon, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
-  drawMenuItem(/*index*/1, /*icon*/displayDrawIconStopwatch, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
-  drawMenuItem(/*index*/2, /*icon*/displayDrawAlertSign, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
+
+#ifdef LANG_EN
+  const __FlashStringHelper* textStopwatch = F("Stopwatch");
+  const __FlashStringHelper* textAlarm = F("Alarm");
+  const __FlashStringHelper* textZrada = F("Zrada");
+  const __FlashStringHelper* textMelodies = F("Melodies");
+  const __FlashStringHelper* textLife = F("Life");
+  const __FlashStringHelper* textMeow = F("Meow");
+#endif
+#ifdef LANG_RU
+  const __FlashStringHelper* textStopwatch = F("Ceкyндoмep");
+  const __FlashStringHelper* textAlarm = F("Бyдильник");
+  const __FlashStringHelper* textZrada = F("3paдa");
+  const __FlashStringHelper* textMelodies = F("Meлoдии");
+  const __FlashStringHelper* textLife = F("Жизнь");
+  const __FlashStringHelper* textMeow = F("Mяy");
+#endif
+#ifdef LANG_UA
+  const __FlashStringHelper* textStopwatch = F("Ceкyндoмip");
+  const __FlashStringHelper* textAlarm = F("Бyдильник");
+  const __FlashStringHelper* textZrada = F("3paдa");
+  const __FlashStringHelper* textMelodies = F("Myзикa");
+  const __FlashStringHelper* textLife = F("Життя");
+  const __FlashStringHelper* textMeow = F("Mяy");
+#endif
+  
+  drawMenuItem(/*index*/APPS_MENU_SELECTED_BACK, /*icon*/displayDrawBackIcon, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
+  drawMenuItem(/*index*/APPS_MENU_SELECTED_STOPWATCH, /*icon*/displayDrawIconStopwatch, /*text*/textStopwatch, /*animate*/animate);
+  drawMenuItem(/*index*/APPS_MENU_SELECTED_ALARM, /*icon*/displayDrawAlertSign, /*text*/textAlarm, /*animate*/animate);
+  drawMenuItem(/*index*/APPS_MENU_SELECTED_ZRADA, /*icon*/displayDrawZradaSign, /*text*/textZrada, /*animate*/animate);
+  drawMenuItem(/*index*/APPS_MENU_SELECTED_MELODIES, /*icon*/displayDrawMelodiesSign, /*text*/textMelodies, /*animate*/animate);
+  drawMenuItem(/*index*/APPS_MENU_SELECTED_LIFE, /*icon*/displayDrawLifeSign, /*text*/textLife, /*animate*/animate);
+  drawMenuItem(/*index*/APPS_MENU_SELECTED_MEOW, /*icon*/displayDrawCatSign, /*text*/textLife, /*animate*/animate);
+  
   
   displayUpdate();
   animate = false;
-}
-
-void modeMenuAppsFinish() {
-  genericMenuFinish();
-}
-
-void modeMenuAppsSelected(byte index) {
-  if (index == 0) { //Back
-    setMode(MODE_MENU_MAIN);
-  }
-  else if (index == 1) { //Stopwatch
-    setMode(MODE_STOPWATCH);
-  }
-  else if (index == 2) { //alarm
-    setMode(MODE_SET_ALARM);
-  }
-  else if (index == 3) { //Zrada
-    if(millis()%2==0){
-      displayMessage(F("3paдa"));
-    }
-    else{
-      displayMessage(F("Пepeмoгa"));
-    }
-  }
-  else if (index == 4) { //Melodies
-    setMode(MODE_MENU_MELODIES);
-  }
-  else if (index == 5) { //life
-    setMode(MODE_GAME_OF_LIFE);
-  }
-  else if (index == 6) { //Meow
-    meow();
-  }
 }
 
 

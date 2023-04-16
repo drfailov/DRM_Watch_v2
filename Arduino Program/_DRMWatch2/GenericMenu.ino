@@ -13,8 +13,8 @@ byte genericMenuViewPosition = 0; //первый элемент который �
 void genericMenuSetup(){
   displayBacklightOn();
   selected = 0;
-  genericMenuViewPosition = 0;
-  genericMenuLastActionTime = millis();
+  //genericMenuViewPosition = 0;
+  //genericMenuLastActionTime = millis();
 }
 
 
@@ -70,9 +70,6 @@ void genericMenuLoop(const int genericMenuItemsCount, const char* const genericM
   
   drawLegend();
   displayUpdate();
-}
-
-void genericMenuFinish(){
 }
 
 
