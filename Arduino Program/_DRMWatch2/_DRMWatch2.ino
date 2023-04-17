@@ -1,12 +1,3 @@
-//#include "GenericWatchface.cpp"
-//#include "WatchfaceDrmWatch.cpp"
-//#include "WatchfaceDrmLite.cpp"
-//#include "WatchfaceNomens.cpp"
-//#include "WatchfaceMatrix.cpp"
-//#include "WatchfaceMinimal.cpp"
-//#include "WatchfaceLife.cpp"
-//#include "WatchfaceThermo.cpp"
-
 #include <util/atomic.h>
 #include <LowPower.h>
 
@@ -17,7 +8,7 @@
 //#define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
 #define LANG_UA   //Розкоментувати щоб використовувати українську мову в меню
 //#define LOG   //Закомментировать чтобы отключило логи
-#define  AUTO_EXIT_TIMEOUT 120000 //MS  //Время до автоматического выхода с менюшек
+#define  AUTO_EXIT_TIMEOUT 180000 //MS  //Время до автоматического выхода с менюшек
 
 //Распиновка
 #define pinButtonDown (byte)2 //active high
@@ -151,7 +142,6 @@ void setMode(int _modeNew) {
   if (_mode == MODE_MENU_SET_TIME ) modeMenuSetTimeFinish();
   if (_mode == MODE_ABOUT ) modeAboutFinish();
   if (_mode == MODE_STOPWATCH ) modeStopwatchFinish();
-  if (_mode == MODE_SET_ALARM ) modeSetAlarmFinish();
   if (_mode == MODE_GAME_OF_LIFE ) modeGameOfLifeFinish();
   
   //init new

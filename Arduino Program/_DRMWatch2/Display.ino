@@ -351,10 +351,10 @@ const PROGMEM byte pathZubat[] = { 42,
   }
   //Рисование рамки с картинкой
   
-  //Рисование прямоугольника с иконкой 7x7. Используется на экранах главного меню, секундомера
-  static void displayDrawIconWithFrame(byte x, byte y, byte additionalWidth, void (*drawIcon)(byte x,byte y,bool color), bool selected){
-    (selected?displayFillRect:displayDrawRect)(/*x*/x, /*y*/y, /*w*/20 + additionalWidth, /*h*/15, /*c*/1);
-    drawIcon(x+6, y+4, !selected);
+  //Рисование прямоугольника с иконкой 9x7. Используется на экранах главного меню, секундомера
+  static void displayDrawIconWithFrame(byte index, byte x, byte y, void (*drawIcon)(byte x,byte y,bool color)){
+    (selected==index?displayFillRect:displayDrawRect)(/*x*/x, /*y*/y, /*w*/21, /*h*/15, /*c*/1);
+    drawIcon(x+6, y+4, selected!=index);
   }
   
   /*draws battery*/
@@ -412,7 +412,8 @@ const PROGMEM byte pathZubat[] = { 42,
     //isCharging = false; //for test
     displayDrawBattery(x, y, level, isCharging, isLowPower);
   }
-  
+
+  //нарисовать красивую цифру шривтом DRM
   #define BLOCK_WIDTH  4  // how many blocks contains one symbol
   #define BLOCK_HEIGHT 5  // how many blocks contains one symbol      
   void displayDrawNumber(byte symbol, byte offsetX, byte offsetY, byte blockSizeX, byte blockSizeY, byte animate){

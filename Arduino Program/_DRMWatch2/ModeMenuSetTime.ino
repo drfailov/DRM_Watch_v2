@@ -79,7 +79,7 @@ void modeMenuSetTimeLoop(){
 
 
   //BACK
-  displayDrawIconWithFrame(/*x*/xOffset, /*y*/0, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawBackIcon, /*selected*/selected == MENU_SET_TIME_SELECTED_BACK);
+  displayDrawIconWithFrame(MENU_SET_TIME_SELECTED_BACK, /*x*/xOffset, /*y*/0, /*Icon*/displayDrawBackIcon);
 
   //TITLE
 #ifdef LANG_EN
@@ -113,7 +113,7 @@ void modeMenuSetTimeLoop(){
 
   
   //Save
-  displayDrawIconWithFrame(/*x*/xOffset+30, /*y*/53, /*additionalWidth*/0, /*drawIcon(x,y,color)*/displayDrawCheck, /*selected*/selected  == MENU_SET_TIME_SELECTED_SAVE);
+  displayDrawIconWithFrame(MENU_SET_TIME_SELECTED_SAVE, /*x*/xOffset+30, /*y*/53, /*drawIcon*/displayDrawCheck);
     
 
   
