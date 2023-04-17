@@ -14,7 +14,6 @@ void modeMenuMelodiesLoop() {
 
 
 void modeMenuMelodiesSelected() {
-  delay(200);
   if (selected == 0) { //Back
     setMode(MODE_MENU_APPS);
     return;

@@ -120,4 +120,10 @@ void drawStatusBar(){
     X-= 11;
     displayDrawAlertSign(/*x*/X, /*y*/0, /*color*/1);
   }
+
+  //Auto-exit soon
+  if (millis()-genericMenuLastActionTime>AUTO_EXIT_TIMEOUT-15000 && millis()%2000>1000) {
+    X-= 11;
+    displayDrawBackIcon(/*x*/X, /*y*/0, /*color*/1);
+  }
 }

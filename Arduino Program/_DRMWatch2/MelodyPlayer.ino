@@ -305,7 +305,7 @@ bool melodyPlayerPlayMelody(const byte* const melody) {
     }
     
     noTone(pinBuzzer);
-    pinMode(pinBuzzer, INPUT);
+    //pinMode(pinBuzzer, INPUT);
     delay(1000);
   }while(melodyPlayerLoopMelody);
   displayBacklightOn();

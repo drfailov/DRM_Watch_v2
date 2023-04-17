@@ -112,7 +112,6 @@ const PROGMEM byte pathZubat[] = { 42,
     digitalWrite(pinLcdPower, HIGH);
     delay(100);
     lcd.Inicialize();  //Инициализация дисплея
-    delay(10);
     #ifdef LOG
       Serial.println("OK");
     #endif
@@ -136,15 +135,13 @@ const PROGMEM byte pathZubat[] = { 42,
     Serial.println(F("LCD PWR OFF"));
   #endif
     pinMode(pinLcdBacklight, INPUT);
-    digitalWrite(pinLcdBacklight, LOW);
+    //digitalWrite(pinLcdBacklight, LOW);
     
     pinMode(pinLcdRst, INPUT);
     pinMode(pinLcdCs, INPUT);
     pinMode(pinLcdMosi, INPUT);
     pinMode(pinLcdSck, INPUT);
     pinMode(pinLcdPower, INPUT);
-    
-    delay(50);
   }
   
   //Функция очистки дисплея. Она здесь указана для простоты перехода на другой дисплей - всё взаимодействие с дисплее происходит через эти "обёртки".
@@ -282,10 +279,7 @@ const PROGMEM byte pathZubat[] = { 42,
         animateMessage = false;
     }
     displayUpdate();
-    if(animateMessage)
-      delay(500);
-    else
-      delay(200);
+    delay(animateMessage?500:200);
     displayTransition();
   }
   
@@ -344,10 +338,10 @@ const PROGMEM byte pathZubat[] = { 42,
 
   
   //Рисование прямоугольника с цифрами. Используется на экранах настройки будильника и времени
-  static void displayDraw2DigitNumberWithFrame(byte x, byte y, byte number, bool selected){
+  static void displayDraw2DigitNumberWithFrame(byte index, byte x, byte y, byte number){
     sprintf(buffer, "%02d", number);
-    (selected?displayFillRect:displayDrawRect)(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
-    displayDrawText(x + 4, y+4, !selected, buffer);
+    (selected==index?displayFillRect:displayDrawRect)(/*x*/x, /*y*/y, /*w*/19, /*h*/15, /*c*/1);
+    displayDrawText(x + 4, y+4, index!=selected, buffer);
   }
   //Рисование рамки с картинкой
   

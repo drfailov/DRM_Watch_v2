@@ -74,20 +74,20 @@ byte _mode = -1;
 
 //Набор циферблатов 
 typedef void (*WF) (const byte hour, const byte minute, const byte second, const byte day, const byte month, const int year, const byte dayOfWeek, const byte animate);
-const byte watchfacesCount = 4;
+const byte watchfacesCount = 7;
 WF wfs[watchfacesCount];
 
 void setup() {
   byte i=0;
   //Набор циферблатов следует менять именно здесь. 
   //number of WFs here need to less or equal than watchfacesCount, otherwise will crash
-  //wfs[i++] = watchfaceZubat;
+  wfs[i++] = watchfaceZubat;
   wfs[i++] = watchfaceCalibri;
   //wfs[i++] = watchfaceXelibri;
   wfs[i++] = WatchfaceDrmLite;
   wfs[i++] = WatchfaceDrmWatch;
-  //wfs[i++] = WatchfaceLife;
-  //wfs[i++] = WatchfaceMinimal;
+  wfs[i++] = WatchfaceLife;
+  wfs[i++] = WatchfaceMinimal;
   //wfs[i++] = WatchfaceMatrix;
   //wfs[i++] = WatchfaceThermo;
   wfs[i++] = WatchfaceNomens;
@@ -139,7 +139,6 @@ void setMode(int _modeNew) {
   if (_mode == MODE_INIT) modeInitFinish();
   if (_mode == MODE_WATCHFACE) modeWatchFaceFinish();
   if (_mode == MODE_STATUS ) modeStatusFinish();
-  if (_mode == MODE_MENU_SET_TIME ) modeMenuSetTimeFinish();
   if (_mode == MODE_ABOUT ) modeAboutFinish();
   if (_mode == MODE_STOPWATCH ) modeStopwatchFinish();
   if (_mode == MODE_GAME_OF_LIFE ) modeGameOfLifeFinish();
