@@ -1,7 +1,3 @@
-/*Show settings menu by triggerimg GenericMenu*/
-
-#define modeMenuSettingsItemsCount 5 //сколько пунктов меню в массиве
-
 #define MENU_SETTINS_SELECTED_BACK 0
 #define MENU_SETTINS_SELECTED_SILENT 1
 #define MENU_SETTINS_SELECTED_FLIP 2
@@ -15,27 +11,10 @@ void modeMenuSettingsSetup() {
 }
 
 void modeMenuSettingsLoop() {
-  if (isButtonUpPressed()){ //upper button
-    if(isButtonUpHold()){
-      beep();
-      goToWatchface();
-      return;
-    }
-    beep();
-    genericMenuLastActionTime = millis();
-    modeMenuSettingsSelected (selected);
-    return;
-  }
-
-  if (isButtonDownPressed()) { //down button
-    genericMenuLastActionTime = millis();
-    beep();
+  if(genericMenuRoutine(modeMenuSettingsSelected, 5))return;
+  if(selected != MENU_SETTINS_SELECTED_WATCHFACE)
     selectingWatchface = false;
-    selected ++;
-    if (selected >= modeMenuSettingsItemsCount) selected = 0;
-  }
   
-  doAutoExit();
   
 #ifdef LANG_EN
   const __FlashStringHelper* settingsSilent = F("Silent");
@@ -56,8 +35,8 @@ void modeMenuSettingsLoop() {
   const __FlashStringHelper* settingsWTF = F("Цифepблaт");
 #endif
 
-  displayClear();
   if(selected  == MENU_SETTINS_SELECTED_WATCHFACE && selectingWatchface){
+    displayClear();
     byte wtfIndex = eepromReadWatchface();
     if(wtfIndex > watchfacesCount) wtfIndex = 0;
     if(wfs[wtfIndex] != 0)
@@ -65,9 +44,7 @@ void modeMenuSettingsLoop() {
     displayUpdate();
     return;
   }
-  drawLegend();
-  drawStatusBar();
-  drawMenuItem(/*index*/MENU_SETTINS_SELECTED_BACK, /*icon*/displayDrawIconSettings, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
+  drawMenuItem(/*index*/MENU_SETTINS_SELECTED_BACK, /*icon*/displayDrawBackIcon, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
   drawMenuItem(/*index*/MENU_SETTINS_SELECTED_SILENT, /*icon*/(eepromReadSilentMode()?displayDrawSilentModeIcon:displayDrawSilentModeOffIcon), /*text*/settingsSilent, /*animate*/animate);
   drawMenuItem(/*index*/MENU_SETTINS_SELECTED_FLIP, /*icon*/displayDrawIconFlip, /*text*/settingsFlip, /*animate*/animate);
   drawMenuItem(/*index*/MENU_SETTINS_SELECTED_WATCHFACE, /*icon*/displayDrawIconWatchface, /*text*/settingsWTF, /*animate*/animate);
@@ -76,40 +53,27 @@ void modeMenuSettingsLoop() {
   animate = false;
 }
 
-void modeMenuSettingsSelected(byte index) {
-  if (index == MENU_SETTINS_SELECTED_BACK) { //Back
+void modeMenuSettingsSelected() {
+  //variable is: selected
+  if (selected == MENU_SETTINS_SELECTED_BACK) { //Back
     setMode(MODE_MENU_MAIN);
-    return;
   }
-  
-  if (index == MENU_SETTINS_SELECTED_WATCHFACE) { //Select WTF
+  else if (selected == MENU_SETTINS_SELECTED_WATCHFACE) { //Select WTF
     if(selectingWatchface == false){
       selectingWatchface = true;
       return;
     }
-    byte wtfIndex = eepromReadWatchface();
-    Serial.print(wtfIndex);
-    if(wtfIndex < watchfacesCount -1){
-      eepromSaveWatchface(++wtfIndex);
-    }
-    else{
-      eepromSaveWatchface(0);
-    }
-    return;
+    byte wtfIndex = eepromReadWatchface()+1;
+    if(wtfIndex >= watchfacesCount) wtfIndex = 0;
+    eepromSaveWatchface(wtfIndex);
   }
-
-  if (index == MENU_SETTINS_SELECTED_SILENT) { //Set silent mode
+  else if (selected == MENU_SETTINS_SELECTED_SILENT) { //Set silent mode
     eepromSaveSilentMode(!eepromReadSilentMode());
-    return;
   }
-
-  if (index == MENU_SETTINS_SELECTED_TIME) { //Set time
+  else if (selected == MENU_SETTINS_SELECTED_TIME) { //Set time
     setMode(MODE_MENU_SET_TIME); 
-    return;
   }
-  
-  if (index == MENU_SETTINS_SELECTED_FLIP) { //Flip screen
+  else if (selected == MENU_SETTINS_SELECTED_FLIP) { //Flip screen
     eepromSaveFlipScreen(!eepromReadFlipScreen());
-    return;
   }
 }

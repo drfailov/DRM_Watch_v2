@@ -8,32 +8,7 @@ void modeMenuMainSetup() {
 }
 
 void modeMenuMainLoop() {
-  if (isButtonUpPressed()){
-    genericMenuLastActionTime = millis();
-    beep();
-    if(selected == MAIN_MENU_SELECTED_BACK){
-      goToWatchface();
-    }
-    else if (selected == MAIN_MENU_SELECTED_APPS){
-      setMode(MODE_MENU_APPS);
-    }
-    else if (selected == MAIN_MENU_SELECTED_SETTINGS){
-      setMode(MODE_MENU_SETTINGS);
-    }
-    else if (selected == MAIN_MENU_SELECTED_ABOUT){
-      setMode(MODE_ABOUT);
-    }
-    return;
-  }
-  
-  if(isButtonDownPressed()){
-    genericMenuLastActionTime = millis();
-    beep();
-    selected ++;
-    if(selected > 3) 
-      selected = 0;
-  }
-  doAutoExit();
+  if(genericMenuRoutine(modeMenuMainSelected, 4))return;
   
 #ifdef LANG_EN
   const __FlashStringHelper* menuApps = F("Apps");
@@ -51,9 +26,6 @@ void modeMenuMainLoop() {
   const __FlashStringHelper* menuAbout = F("Дoвiдкa");
 #endif
 
-  displayClear();
-  drawLegend();
-  drawStatusBar();
   drawMenuItem(/*index*/MAIN_MENU_SELECTED_BACK, /*icon*/displayDrawBackIcon, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
   drawMenuItem(/*index*/MAIN_MENU_SELECTED_APPS, /*icon*/displayDrawAppsIcon, /*text*/menuApps, /*animate*/animate);
   drawMenuItem(/*index*/MAIN_MENU_SELECTED_SETTINGS, /*icon*/displayDrawIconSettings, /*text*/menuSettings, /*animate*/animate);
@@ -62,6 +34,18 @@ void modeMenuMainLoop() {
   animate = false;
 }
 
-void modeMenuMainFinish() {
-  
+void modeMenuMainSelected(){
+  //variable is: selected
+  if(selected == MAIN_MENU_SELECTED_BACK){
+    goToWatchface();
+  }
+  else if (selected == MAIN_MENU_SELECTED_APPS){
+    setMode(MODE_MENU_APPS);
+  }
+  else if (selected == MAIN_MENU_SELECTED_SETTINGS){
+    setMode(MODE_MENU_SETTINGS);
+  }
+  else if (selected == MAIN_MENU_SELECTED_ABOUT){
+    setMode(MODE_ABOUT);
+  }
 }

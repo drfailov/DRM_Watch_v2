@@ -147,7 +147,6 @@ void setMode(int _modeNew) {
   //finish old
   if (_mode == MODE_INIT) modeInitFinish();
   if (_mode == MODE_WATCHFACE) modeWatchFaceFinish();
-  if (_mode == MODE_MENU_MAIN ) modeMenuMainFinish();
   if (_mode == MODE_STATUS ) modeStatusFinish();
   if (_mode == MODE_MENU_SET_TIME ) modeMenuSetTimeFinish();
   if (_mode == MODE_ABOUT ) modeAboutFinish();

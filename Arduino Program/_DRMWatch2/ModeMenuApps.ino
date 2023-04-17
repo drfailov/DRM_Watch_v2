@@ -11,50 +11,7 @@ void modeMenuAppsSetup() {
 }
 
 void modeMenuAppsLoop() {
-    if (isButtonUpPressed()){
-    genericMenuLastActionTime = millis();
-    beep();
-    if(selected == APPS_MENU_SELECTED_BACK){
-      setMode(MODE_MENU_MAIN);
-    }
-    else if(selected == APPS_MENU_SELECTED_STOPWATCH){
-      setMode(MODE_STOPWATCH);
-    }
-    else if(selected == APPS_MENU_SELECTED_ALARM){
-      setMode(MODE_SET_ALARM);
-    }
-    else if(selected == APPS_MENU_SELECTED_ZRADA){
-      if(millis()%2==0){
-        displayMessage(F("3paдa"));
-      }
-      else{
-        displayMessage(F("Пepeмoгa"));
-      }
-    }
-    else if(selected == APPS_MENU_SELECTED_MELODIES){
-      setMode(MODE_MENU_MELODIES);
-    }
-    else if(selected == APPS_MENU_SELECTED_LIFE){
-      setMode(MODE_GAME_OF_LIFE);
-      
-    }
-    else if(selected == APPS_MENU_SELECTED_MEOW){
-      meow(); 
-    }
-    return;
-  }
-  
-  if(isButtonDownPressed()){
-    genericMenuLastActionTime = millis();
-    beep();
-    selected ++;
-    if(selected > 6) 
-      selected = 0;
-  }
-  doAutoExit();
-  displayClear();
-  drawLegend();
-  drawStatusBar();
+  if(genericMenuRoutine(modeMenuAppsSelected, 7))return;
 
 #ifdef LANG_EN
   const __FlashStringHelper* textStopwatch = F("Stopwatch");
@@ -87,13 +44,42 @@ void modeMenuAppsLoop() {
   drawMenuItem(/*index*/APPS_MENU_SELECTED_ZRADA, /*icon*/displayDrawZradaSign, /*text*/textZrada, /*animate*/animate);
   drawMenuItem(/*index*/APPS_MENU_SELECTED_MELODIES, /*icon*/displayDrawMelodiesSign, /*text*/textMelodies, /*animate*/animate);
   drawMenuItem(/*index*/APPS_MENU_SELECTED_LIFE, /*icon*/displayDrawLifeSign, /*text*/textLife, /*animate*/animate);
-  drawMenuItem(/*index*/APPS_MENU_SELECTED_MEOW, /*icon*/displayDrawCatSign, /*text*/textLife, /*animate*/animate);
-  
+  drawMenuItem(/*index*/APPS_MENU_SELECTED_MEOW, /*icon*/displayDrawCatSign, /*text*/textMeow, /*animate*/animate);
   
   displayUpdate();
   animate = false;
 }
 
+void modeMenuAppsSelected(){
+  //variable is: selected
+  if(selected == APPS_MENU_SELECTED_BACK){
+      setMode(MODE_MENU_MAIN);
+    }
+    else if(selected == APPS_MENU_SELECTED_STOPWATCH){
+      setMode(MODE_STOPWATCH);
+    }
+    else if(selected == APPS_MENU_SELECTED_ALARM){
+      setMode(MODE_SET_ALARM);
+    }
+    else if(selected == APPS_MENU_SELECTED_ZRADA){
+      if(millis()%2==0){
+        displayMessage(F("3paдa"));
+      }
+      else{
+        displayMessage(F("Пepeмoгa"));
+      }
+    }
+    else if(selected == APPS_MENU_SELECTED_MELODIES){
+      setMode(MODE_MENU_MELODIES);
+    }
+    else if(selected == APPS_MENU_SELECTED_LIFE){
+      setMode(MODE_GAME_OF_LIFE);
+      
+    }
+    else if(selected == APPS_MENU_SELECTED_MEOW){
+      meow(); 
+    }
+}
 
 
 void meow(){

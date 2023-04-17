@@ -13,86 +13,59 @@ byte genericMenuViewPosition = 0; //первый элемент который �
 void genericMenuSetup(){
   displayBacklightOn();
   selected = 0;
-  //genericMenuViewPosition = 0;
-  //genericMenuLastActionTime = millis();
+  genericMenuLastActionTime = millis();
 }
 
-
-/* genericMenuItemsCount - number of items in array.
- * genericMenuItems[] - Array of addresses to strings stored in PROGMEM
- * (*onSelected)(byte index) - Pointer to function which will be called when user selects item.
- * progmemArray - Text has to be stored in progmem. But array can be stored in RAM or in PROGMEM. Pass true if your array stored in PROGMEM.
-*/
-void genericMenuLoop(const int genericMenuItemsCount, const char* const genericMenuItems[], void (*onSelected)(byte index), bool progmemArray){
-  if (isButtonUpPressed()){  
+//return true if function triggered exit from current menu
+bool genericMenuRoutine(void (*select)(void), byte count){
+  if (isButtonUpPressed()){
+    genericMenuLastActionTime = millis();
     if(isButtonUpHold()){
       beep();
       goToWatchface();
-      return;
+      return true;
     }
-    genericMenuLastActionTime = millis();
     beep();
-    onSelected (selected);
-    return;
+    select();
+    return true;
   }
-
-  if (isButtonDownPressed()) { 
+  
+  if(isButtonDownPressed()){
     genericMenuLastActionTime = millis();
     beep();
     selected ++;
-    if (selected >= genericMenuItemsCount) selected = 0;
-    while (selected >= genericMenuViewPosition + genericMenuViewCount) genericMenuViewPosition ++;
-    while (selected < genericMenuViewPosition) genericMenuViewPosition --;
+    if(selected >= count) 
+      selected = 0;
   }
-  doAutoExit();
-
-  //draw
+  if(doAutoExit())return true;
   displayClear();
-  byte xOffset = 11;
-  if (/*flip*/eepromReadFlipScreen())
-    xOffset = 0;
-  for (int i = 0; i < genericMenuViewCount; i++) {
-    int index = genericMenuViewPosition + i;
-    if (index < genericMenuItemsCount) {
-      if(progmemArray)
-        strcpy_P(buffer, pgm_read_word(&(genericMenuItems[index])));  //for PROGMEM arrays
-      else
-        strcpy_P(buffer, (genericMenuItems[index]));      //for RAM arrays
-      if (index == selected) {
-        displayFillRect(/*x*/xOffset+0, /*y*/1 + 13 * i, /*w*/81, /*h*/13, /*c*/1);
-        displayDrawText(/*X*/xOffset+4, /*Y*/4 + 13 * i, /*C*/0, buffer);
-      }
-      else {
-        displayDrawText(/*X*/xOffset+4, /*Y*/4 + 13 * i, /*C*/1, buffer);
-      }
-    }
-  }
-  
   drawLegend();
-  displayUpdate();
+  drawStatusBar();
+  return false;
 }
 
 
 
-
-
-void doAutoExit(){
+//return true if function triggered exit from current menu
+bool doAutoExit(){
   //auto exit
   if (millis() - genericMenuLastActionTime > AUTO_EXIT_TIMEOUT) {
     goToWatchface();
-    return;
+    return true;
   }
+  return false;
 }
 
 //icon size: 9x7px
 void drawMenuItem(byte index, void (*drawIcon)(byte x,byte y,bool color), const __FlashStringHelper* name, bool animate){
+  if(selected/6 != index/6) return;
   const byte xOffset = eepromReadFlipScreen()? 0 : 13;
   const byte yOffset = 16;
   const byte width=21;
   const byte height=15;
   const byte margin = 4;
   byte x = xOffset + 6 + (width+margin) * (index%3);
-  byte y = yOffset + (height+margin) * (index/3);
+  byte y = yOffset + (height+margin) * ((index%6)/3);
   void(* drawR) (byte x, byte y, byte w, byte h, boolean color) = selected == index?displayFillRect:displayDrawRect;
   
   drawR(/*x*/x, /*y*/y, /*w*/width, /*h*/height, /*c*/1);
@@ -138,7 +111,7 @@ void drawStatusBar(){
   
   //Silent mode sign
   if(eepromReadSilentMode()){ 
-    X -= 10;
+    X -= 11;
     displayDrawSilentModeIcon(/*x*/X, /*y*/0, /*color*/1);
   }
   

@@ -3,32 +3,8 @@ void modeMenuMelodiesSetup() {
 }
 
 void modeMenuMelodiesLoop() {
-  if (isButtonUpPressed()){
-    genericMenuLastActionTime = millis();
-    beep();
-    if(selected == 0){
-      setMode(MODE_MENU_APPS);
-    }
-    else{
-      melodyPlayerPlayMelody(getMelodyByIndex(selected-1));
-    }
-    return;
-  }
+  if(genericMenuRoutine(modeMenuMelodiesSelected, getMelodyCount()+1))return;
   
-  if(isButtonDownPressed()){
-    genericMenuLastActionTime = millis();
-    beep();
-    selected ++;
-    if(selected > getMelodyCount()) 
-      selected = 0;
-  }
-  doAutoExit();
-  
-
-
-  displayClear();
-  drawLegend();
-  drawStatusBar();
   drawMenuItem(/*index*/0, /*icon*/displayDrawBackIcon, /*text*/(__FlashStringHelper*)menuItemBack, /*animate*/animate);
   for(byte i=0; i<getMelodyCount();i++)
     drawMenuItem(/*index*/i+1, /*icon*/displayDrawMelodiesSign, /*text*/(__FlashStringHelper*)getMelodyName(i), /*animate*/animate);
@@ -37,13 +13,13 @@ void modeMenuMelodiesLoop() {
 }
 
 
-void modeMenuMelodiesSelected(byte index) {
+void modeMenuMelodiesSelected() {
   delay(200);
-  if (index == 0) { //Back
+  if (selected == 0) { //Back
     setMode(MODE_MENU_APPS);
     return;
   }
   else{
-    melodyPlayerPlayMelody(getMelodyByIndex(index-1));
+    melodyPlayerPlayMelody(getMelodyByIndex(selected-1));
   }
 }

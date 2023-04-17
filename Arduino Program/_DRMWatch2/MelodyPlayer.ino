@@ -252,6 +252,7 @@ bool melodyPlayerLoopMelody = false;
 
 //return true if was played completely or false if interrupted
 bool melodyPlayerPlayMelody(const byte* const melody) {
+  displayTransition();
   melodyPlayerLoopMelody = false;
   do{
     melodyPlayerDrawScreen();

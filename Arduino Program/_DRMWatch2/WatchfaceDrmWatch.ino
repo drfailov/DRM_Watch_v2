@@ -38,7 +38,7 @@ void WatchfaceDrmWatch(byte hour, byte minute, byte second, byte day, byte month
 
   //Silent mode sign
   if (eepromReadSilentMode()) {
-    X -= 10;
+    X -= 11;
     displayDrawSilentModeIcon(X, 61, 1);
   }
 
