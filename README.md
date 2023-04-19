@@ -35,17 +35,30 @@ Programming contributions made by <b>Dr. Failov</b>.
 
 
 ## About project > Photos of device
-I have assembled few watches and using it as my everyday watch. 
+I have assembled few watches and using it as my everyday watch for over a year. 
 My device has battery about 80mAh capacity and works about 5 days for one charge.
+Other device with 250mAh battery lasts about 2 weeks for one charge.
 According to my tests, time error can't be noticed in 1 mounth perspective: RTC is very precise.
 
-Here`s some photos: 
+Here's some photos of watches with SLS case: 
 <p align="center">
 <img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26.jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="150"/>
 </p>
 <p align="center">
 <img src="Photos/photo_2022-02-18_12-43-26 (5).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="150"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" width="150"/>
 </p>
+
+<p align="center">
+<img src="Photos/photo_2023-04-19_13-19-54.jpg" height="100"/> <img src="Photos/photo_2023-04-19_13-19-54 (2).jpg" height="100"/> 
+<img src="Photos/photo_2023-04-19_13-19-54 (3).jpg" height="100"/> <img src="Photos/photo_2023-04-19_13-19-54 (4).jpg" height="100"/> 
+<img src="Photos/photo_2023-04-19_13-19-54 (5).jpg" height="100"/> <img src="Photos/photo_2023-04-19_13-19-54 (6).jpg" height="100"/> 
+</p>
+
+And some photos of watches with FDM case:
+<p align="center">
+<img src="Photos/photo_2023-04-19_00-23-33 (4).jpg" height="100"/> <img src="Photos/photo_2023-04-19_00-23-33 (3).jpg" height="100"/> 
+</p>
+
 
 
 ## About project > Video overview
@@ -463,10 +476,27 @@ Used pins:
 
 ## Hardware > Case 3D Model
 You can fing STL files for DRM Watch case in `Case` folder. 
+There's 2 types of case available. 
+I'm new to 3d modeling, so you can edit both of my cases for you, use my Fusion 360 project: `DRM Watch v85.f3d`.
 <p align="center">
-<img src="Photos/Screenshot 2022-03-01 224852.jpg" width="230"/>
-<img src="Photos/Screenshot 2022-03-01 224938.jpg" width="200"/>
+<img src="Photos/Screenshot 2023-04-08 161535.jpg" height="100"/>
+<img src="Photos/Screenshot 2023-04-08 144433.jpg" height="100"/>
+<img src="Photos/Screenshot 2023-04-08 161426.jpg" height="100"/>
 </p>
+
+One is more fancy, but can`t be printed on FDM printer, better is to order SLS printing. 
+You can fing use files `2022-10-12 Back v38.stl` and `2022-10-06 Front v35.stl`.
+<p align="center">
+<img src="Photos/Screenshot 2022-03-01 224852.jpg" height="100"/>
+<img src="Photos/Screenshot 2022-03-01 224938.jpg" height="100"/>
+</p>
+
+Second is adapted to FDM printing 
+<p align="center">
+<img src="Photos/Screenshot 2023-04-11 234327.jpg" height="100"/>
+<img src="Photos/Screenshot 2023-04-11 234349.jpg" height="100"/>
+</p>
+
 
 ## Hardware > Assembly instruction
 ### General way to assemble watch:
