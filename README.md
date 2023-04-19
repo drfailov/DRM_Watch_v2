@@ -470,24 +470,24 @@ Used pins:
 ## Hardware > Case 3D Model
 You can fing STL files for DRM Watch case in `Case` folder. 
 There's 2 types of case available. 
-I'm new to 3d modeling, so you can edit both of my cases for you, use my Fusion 360 project: `DRM Watch v85.f3d`.
+You can edit both of my cases for you, use my Fusion 360 project: `DRM Watch v85.f3d`.
 <p align="center">
-<img src="Photos/Screenshot 2023-04-08 161535.jpg" height="120"/>
-<img src="Photos/Screenshot 2023-04-08 144433.jpg" height="120"/>
-<img src="Photos/Screenshot 2023-04-08 161426.jpg" height="120"/>
+<img src="Photos/Screenshot 2023-04-08 161535.jpg" height="130"/>
+<img src="Photos/Screenshot 2023-04-08 144433.jpg" height="130"/>
+<img src="Photos/Screenshot 2023-04-08 161426.jpg" height="130"/>
 </p>
 
 One is more fancy, but can't be printed on FDM printer, better is to order SLS printing. 
 You can fing use files `2022-10-12 Back v38.stl` and `2022-10-06 Front v35.stl`.
 <p align="center">
-<img src="Photos/Screenshot 2022-03-01 224852.jpg" height="200"/>
-<img src="Photos/Screenshot 2022-03-01 224938.jpg" height="200"/>
+<img src="Photos/Screenshot 2022-03-01 224852.jpg" height="250"/>
+<img src="Photos/Screenshot 2022-03-01 224938.jpg" height="250"/>
 </p>
 
-Second is adapted to FDM printing 
+Second is adapted to FDM printing. Now it's files `Front Case FDM v85.stl` and `Back Case FDM v85.stl`.
 <p align="center">
-<img src="Photos/Screenshot 2023-04-11 234327.jpg" height="150"/>
-<img src="Photos/Screenshot 2023-04-11 234349.jpg" height="150"/>
+<img src="Photos/Screenshot 2023-04-11 234327.jpg" height="170"/>
+<img src="Photos/Screenshot 2023-04-11 234349.jpg" height="170"/>
 </p>
 
 
@@ -736,10 +736,18 @@ Here's some prototypes:
 <img src="Photos/photo_2021-12-19_19-43-52 (2).jpg" height="200"/> 
 </p>
 
+## Project history > 2022, Closer to complete device
+In 2022 I had device with 3d printed case and used it as my daily watch.
+<p align="center">
+<img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26.jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="150"/>
+<img src="Photos/photo_2022-02-18_12-43-26 (5).jpg" width="150"/> <img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="150"/> <img src="Photos/photo_2022-02-18_00-19-38.jpg" width="150"/>
+</p>
+
+
+## Project history > Funny fails
 Not every step is successful, here's some videos with funny fails:
 <p align="center"> https://youtu.be/Ur8o4e1e8V8 </p>
 <p align="center"> https://youtu.be/18OF_WzMhGE </p>
 
-</p>
 
 
