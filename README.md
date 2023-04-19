@@ -477,9 +477,9 @@ You can fing STL files for DRM Watch case in `Case` folder.
 There's 2 types of case available. 
 You can edit both of my cases for you, use my Fusion 360 project: `DRM Watch v85.f3d`.
 <p align="center">
-<img src="Photos/Screenshot 2023-04-08 161535.jpg" height="190"/>
-<img src="Photos/Screenshot 2023-04-08 144433.jpg" height="190"/>
-<img src="Photos/Screenshot 2023-04-08 161426.jpg" height="190"/>
+<img src="Photos/Screenshot 2023-04-08 161535.jpg" height="170"/>
+<img src="Photos/Screenshot 2023-04-08 144433.jpg" height="170"/>
+<img src="Photos/Screenshot 2023-04-08 161426.jpg" height="170"/>
 </p>
 
 One is more fancy, but can't be printed on FDM printer, better is to order SLS printing. 
@@ -743,12 +743,12 @@ Here's some prototypes:
 ## Project history > 2022, Closer to complete device
 In 2022 I had device with 3d printed case and used it as my daily watch.
 <p align="center">
-<img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="190"/> 
-<img src="Photos/photo_2022-02-18_12-43-26.jpg" width="190"/> 
-<img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="190"/>
-<img src="Photos/photo_2022-02-18_12-43-26 (5).jpg" width="190"/> 
-<img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="190"/> 
-<img src="Photos/photo_2022-02-18_00-19-38.jpg" width="190"/>
+<img src="Photos/photo_2022-02-18_12-43-26 (2).jpg" width="200"/> 
+<img src="Photos/photo_2022-02-18_12-43-26.jpg" width="200"/> 
+<img src="Photos/photo_2022-02-18_12-43-26 (4).jpg" width="200"/>
+<img src="Photos/photo_2022-02-18_12-43-26 (5).jpg" width="200"/> 
+<img src="Photos/photo_2022-02-18_12-43-26 (3).jpg" width="200"/> 
+<img src="Photos/photo_2022-02-18_00-19-38.jpg" width="200"/>
 </p>
 
 
