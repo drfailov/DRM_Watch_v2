@@ -494,6 +494,8 @@ Second is adapted to FDM printing. Now it's files `Front Case FDM v85.stl` and `
 <img src="Photos/Screenshot 2023-04-11 234327.jpg" height="260"/>
 <img src="Photos/Screenshot 2023-04-11 234349.jpg" height="260"/>
 </p>
+Video overview of this case you can see here:
+https://www.youtube.com/watch?v=uoMRFqTGYNg
 
 
 ## Hardware > Assembly instruction
