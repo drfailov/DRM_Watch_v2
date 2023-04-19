@@ -631,7 +631,7 @@ Link: https://www.arduino.cc/en/software ;
 - Because Arduino IDE don't have drivers for CH340, you need to install drivers manually.
 You can find drivers enywhere over Internet.
 I found here: https://drive.google.com/file/d/1BqUo6f5WEd1vqdxt1UWzDh4OgjdQ7Mx1/view ;
-- Copy libraries to your Arduino IDE libraries folder;
+- Copy libraries to your Arduino IDE libraries folder (`C:\Users\USER\Documents\Arduino\libraries`);
 - Open project and try to build it. If all steps done correctly, project will build successfully.
 
 
@@ -646,21 +646,22 @@ Only one string can be active at the time. If you select any language, you have 
 You can include multiple watcfaces in firmware. As much as enough FLASH memory.\
 You can configure included wathfaces in file `_DRMWatch2.ino`.\
 Update number of included watchfaces, comment or uncomment needed watchfaces, check memory usage.\
-If no watchface is included in firmware, "Select WTF" text will appear on watchfaces screen.\
+If no watchface is included in firmware, firmware will dehave unexpectedly.\
 Example:
-<p align="center"><img src="Photos/config_watchfaces.jpg" width="300"/></p>
+<p align="center"><img src="Photos/wtf2023.png" width="300"/></p>
 
 
 ## Software > How to add your own watchface
 Project has several watchfaces included, but you always can create your own watchface and use it.
 Here's instruction how to do it:
-- Create file like `WatchFaceMy.cpp` and inherit class `GenericWatchface`. Use other watchfaces as reference.
-- Implement virtual methods of `GenericWatchface`. Detailed description of each method you can find in `GenericWatchface.cpp`. Use other watchfaces as reference.
-- Function `drawWatchface` draws watchface. You can draw everything you want calling functions from `Display.cpp`.
-`drawWatchface` have to be a non-blocking function, othervise watch will not work properly.
+- Create file like `WatchFaceMy`. Use other watchfaces as reference.
+- Create function like this: `void WatchfaceThermo(byte hour, byte minute, byte second, byte day, byte month, int year, byte dayOfWeek, byte animate)`. Use other watchfaces as reference.
+- This Function draws watchface. You can draw everything you want calling functions from `Display`.
+It have to be a non-blocking function, othervise watch will not work properly.
+Last argument `animate` is true when system draws watchface last time. You can add `displayUpdate();` 
+to make drawing more fancy. 
 Use other watchfaces as reference.
-- In file `_DRMWatch2.ino` include your `WatchFaceMy.cpp`. Use other watchfaces as reference.
-- In file `_DRMWatch2.ino` in `setup()` function add your watchface to array. Use other watchfaces as reference.
+- In file `_DRMWatch2` in `setup()` function add your watchface to array. Use other watchfaces as reference.
 - Update `watchfacesCount` if needed.
 - Now update your watch firmware and you can select your new watchface and use it!
 
