@@ -719,6 +719,28 @@ Video describing this process you can see here:
 https://www.youtube.com/watch?v=Ek3eQStupCs
 
 
+## Software > Default melodies codes
+
+### Badinerie
+Tempo = 125
+8b2 16d3 16b2 8#f2 16b2 16#f2 8d2 16#f2 16d2 4b1 16#f1 16b1 16d2 16b1 16#c2 16b1 16#c2 16b1 16#a1 16#c2 16e2 16#c2 8d2 8b1 8b2 16d3 16b2 8#f2 16b2 16#f2 8d2 16#f2 16d2 4b1 8d2 8d2 8d2 8d2 8b2 8d2 32d2 32#c2 32d2 32#c2 8#c2 8#f2 8#f2 8#f2 8#f2 8d3 8#f2 32#f2 32f2 32#f2 32f2 8f2 16#c2 16#f2 16a2 16#f2 16#g2 16#f2 16#g2 16#f2 16f2 16#g2 16b2 16#g2 16a2 16#g2 16a2 16#g2 16#f2 16a2 16#f2 16f2 16#f2 16b2 16#f2 16f2 16#f2 16#c3 16#f2 16f2 16#f2 16d3 16#f2 16f2 16#f2 16d3 16#c3 16b2 16#c3 16a2 16#g2 16#f2 8a2 8#g2 4#f2
+
+### Nokia Tune
+Tempo = 112
+16g3 16f3 8a2 8b2 16e3 16d3 8f2 8g2 16d3 16c3 8e2 8g2 4.c3
+
+### Mozart 40
+Tempo = 240
+8a2 16#g2 16- 8#g2 8- 8a2 16#g2 16- 8#g2 8- 8a2 16#g2 16- 4#g2 8.e3 4- 16- 8e3 16#d3 16- 8#c3 8- 8#c3 16b2 16- 8a2 8- 16.a2 32- 16#g2 16- 8#f2 8- 8#f2 4- 8- 16.#g2 32- 16.#f2 32- 8#f2 8- 8#g2 16#f2 16- 8#f2 8- 8#g2 16#f2 16- 4#f2 8#d3 4- 8- 8#d3 8#c3 8c3 8- 8c3 8a2 16.#g2 8- 32- 8#g2 8#f2 8e2 8- 8e2 4- 8- 8e3 16#d3 16- 4#d3 4#f3 4c3 4#d3 4#c3 4#g2 4- 16.e3 32- 16#d3 16- 4#d3 4#f3 4c3 4#d3 4#c3 4e3 8#d3 8#c3 8b2 8a2 1#g2 1g2 2#g2 4- 16#g1 16- 16#g1 16- 2#g1 4- 16#g1 16- 16#g1 16- 2#g1 4- 16#g1 16- 16#g1 16- 8#g1 8- 16#g1 16- 16#g1 16- 8#g1 8- 16#g1 16- 16#g1 16- 2#g1
+
+### Mario
+Tempo = 100
+16e2, 16e2, 32-, 8e2, 16c2, 8e2, 8g2, 8-, 8g1, 8-, 8c2, 16-, 8g1, 16-, 8e1, 16-, 8a1, 8b1, 16#a1, 8a1, 16.g1, 16e2, 16g2, 8a2, 16f2, 8g2, 8e2, 16c2, 16d2, 8b1, 16-, 8c2, 16-, 8g1, 16-, 8e1, 16-, 8a1, 8b1, 16#a1, 8a1, 16.g1, 16e2, 16g2, 8a2, 16f2, 8g2, 8e2, 16c2, 16d2, 8b1, 8-, 16g2, 16#f2, 16f2
+
+
+
+
+
 # Project history
 A long time ago...
 ## Project history > 2016, First steps
