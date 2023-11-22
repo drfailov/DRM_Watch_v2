@@ -7,7 +7,7 @@
 //#define LANG_EN  //Раскомментировать чтобы использовать английский язык меню
 //#define LANG_RU   //Раскомментировать чтобы использовать русский язык меню
 #define LANG_UA   //Розкоментувати щоб використовувати українську мову в меню
-//#define LOG   //Закомментировать чтобы отключило логи
+#define LOG   //Закомментировать чтобы отключило логи
 #define  AUTO_EXIT_TIMEOUT 180000 //MS  //Время до автоматического выхода с менюшек
 
 //Распиновка
@@ -90,7 +90,7 @@ void setup() {
   wfs[i++] = WatchfaceMinimal;
   //wfs[i++] = WatchfaceMatrix;
   //wfs[i++] = WatchfaceThermo;
-  wfs[i++] = WatchfaceNomens;
+  //wfs[i++] = WatchfaceNomens;
   
    
 #ifdef LOG
