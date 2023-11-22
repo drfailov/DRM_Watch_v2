@@ -701,14 +701,16 @@ Melodies stored in form of one byte-one note. Array is contains tempo and notes.
 First 2 bits of note is representing note duration (values 4, 8, 16, 32).\
 Last 6 bits represents note number counted from low note of first octave.\
 Software can be found in `Windows RTTTL to binary converter\RTTTL Converter\bin\Release\net5.0-windows` folder.
+To  run app you need to install framework:
+`https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-5.0.408-windows-x64-installer`
 <p align="center"><img src="Photos/photo_2021-12-16_22-37-15.jpg" width="400"/></p>
 
 To add your melody to melody list:
 - Convert your RTTTL melody to binary array;
 - In file `MelodyPlayer.ino` add array and `get...()` function with your melody;
-- In file `ModeMenuMelodies.ino` in function `getMelodyByIndex()` add index for your melody;
-- In file `ModeMenuMelodies.ino` in array `modeMenuMelodiesItems` add name of your melody;
-- In file `myEEPROM.cpp` in constant `#define eepromMelodyCount` update melody count;
+- In file `MelodyPlayer.ino` in function `getMelodyByIndex()` add index for your melody;
+- In file `MelodyPlayer.ino` in array `modeMenuMelodiesItems` add name of your melody;
+- In file `MelodyPlayer.cpp` in function `getMelodyCount()` update melody count;
 - Update firmware on your watch;
 - Now your melody will appear in list and can be set as alarm.
 
@@ -763,6 +765,21 @@ Tempo = 140
 8d2 8#d2 8e2 4c3 8e2 4c3 8e2 2c3 8c3 8d3 8#d3 8e3 8c3 8d3 4e3 8b2 4d3 2c3 4- 8d2 8#d2 8e2 4c3 8e2 4c3 8e2 2c3 8- 8a2 8g2 8#f2 8a2 8c3 4e3 8d3 8c3 8a2 2d3
 ```
 
+
+### Was wollen wir trinken  RTTTL
+Tempo = 140
+Thanks to @gromozdow98 for writing song into code.
+```
+8a2 8a2 16g2 16#f2 4g2 4e2 8e2 8a2 8a2 8g2 8#f2 8a2 8a2 16g2 16f2 4g2 4e2 8#f2 8d2 4e2
+
+8a1 8a1 16g1 16#f1 4g1 4e1 8e1 8a1 8a1 8g1 8#f1 8a1 8a1 16g1 16f1 4g1 4e1 8#f1 8d1 4e1
+
+8a2 8a2 16g2 16#f2 4g2 4e2 8e2 8a2 8a2 8g2 8#f2 8a2 8a2 16g2 16f2 4g2 4e2 8#f2 8d2 4e2
+
+8e2 8g2 8a2 4b2 4b2 8c3 8a2 2b2
+
+8a2 8a2 16g2 16#f2 4g2 4e2 8e2 8a2 8a2 8g2 8#f2 8a2 8a2 16g2 16f2 4g2 4e2 8#f2 8d2 2e2
+```
 
 # Project history
 A long time ago...

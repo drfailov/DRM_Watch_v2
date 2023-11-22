@@ -185,6 +185,32 @@ const byte* const getMelodyUkraine() {
 }
 
 
+const byte wasWollenWirTrinken[] PROGMEM = {
+  110,
+      0b01010101, 0b01010101, 0b10010011, 0b10010010, 0b00010011, 
+    0b00010000, 0b01010000, 0b01010101, 0b01010101, 0b01010011, 
+    0b01010010, 0b01010101, 0b01010101, 0b10010011, 0b10010001, 
+    0b00010011, 0b00010000, 0b01010010, 0b01001110, 0b00010000, 
+    0b01001001, 0b01001001, 0b10000111, 0b10000110, 0b00000111, 
+    0b00000100, 0b01000100, 0b01001001, 0b01001001, 0b01000111, 
+    0b01000110, 0b01001001, 0b01001001, 0b10000111, 0b10000101, 
+    0b00000111, 0b00000100, 0b01000110, 0b01000010, 0b00000100, 
+    0b01010101, 0b01010101, 0b10010011, 0b10010010, 0b00010011, 
+    0b00010000, 0b01010000, 0b01010101, 0b01010101, 0b01010011, 
+    0b01010010, 0b01010101, 0b01010101, 0b10010011, 0b10010001, 
+    0b00010011, 0b00010000, 0b01010010, 0b01001110, 0b00010000, 
+    0b01010000, 0b01010011, 0b01010101, 0b00010111, 0b00010111, 
+    0b01011000, 0b01010101, 0b00010111, 0b01010101, 0b01010101, 
+    0b10010011, 0b10010010, 0b00010011, 0b00010000, 0b01010000, 
+    0b01010101, 0b01010101, 0b01010011, 0b01010010, 0b01010101, 
+    0b01010101, 0b10010011, 0b10010001, 0b00010011, 0b00010000, 
+    0b01010010, 0b01001110, 0b00010000, 0b11111111,
+};
+const byte* const getMelodyWasWollenWirTrinken() {
+  return wasWollenWirTrinken;
+}
+
+
 const byte nokiaTune[] PROGMEM = {
   112,
   0b10011111, 0b10011101, 0b01010101, 0b01010111, 0b10011100,
@@ -205,6 +231,7 @@ const char modeMenuMelodiesItem5[] PROGMEM = "Mario";
 const char modeMenuMelodiesItem6[] PROGMEM = "Groovy Blue";
 const char modeMenuMelodiesItem7[] PROGMEM = "Ukraine";
 const char modeMenuMelodiesItem8[] PROGMEM = "Blue";
+const char modeMenuMelodiesItem9[] PROGMEM = "Was Wollen";
 
 
 const char* const modeMenuMelodiesItems[] PROGMEM = {
@@ -216,10 +243,11 @@ const char* const modeMenuMelodiesItems[] PROGMEM = {
   modeMenuMelodiesItem5,
   modeMenuMelodiesItem6,
   modeMenuMelodiesItem7,
-  modeMenuMelodiesItem8
+  modeMenuMelodiesItem8,
+  modeMenuMelodiesItem9
 };
 
-byte getMelodyCount(){ return 8;}
+byte getMelodyCount(){ return 9;}
 const char* getMelodyName(byte index){
   return pgm_read_word(&modeMenuMelodiesItems[index+1]);
 }
@@ -239,7 +267,9 @@ const byte* const getMelodyByIndex(byte index){
   if (index == 6) 
     return getMelodyUkraine();
   if (index == 7) 
-    return getMelodyBlue();    
+    return getMelodyBlue();  
+  if (index == 8) 
+    return getMelodyWasWollenWirTrinken();    
 }
 
 
