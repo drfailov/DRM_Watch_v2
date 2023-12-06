@@ -714,8 +714,9 @@ To add your melody to melody list:
 - Update firmware on your watch;
 - Now your melody will appear in list and can be set as alarm.
 
-Melody player: https://zserge.com/nokia-composer/ (link actual 2022-11)
+Melody player: https://zserge.com/nokia-composer/ (link actual 2023-12)
 Melody repository: https://nokia.nigelcoldwell.co.uk/tunes.html (link actual 2022-11)
+Melody player (non RTTTL, just for fun): http://outputchannel.com/monophonic-ringtone-synthesizer/ (link actual 2023-12)
 
 Video describing this process you can see here:
 https://www.youtube.com/watch?v=Ek3eQStupCs
@@ -767,16 +768,14 @@ Tempo = 140
 
 
 ### Was wollen wir trinken  RTTTL
-Tempo = 140
+Tempo = 115
 Thanks to @gromozdow98 for writing song into code.
 ```
-8a2 8a2 16g2 16#f2 4g2 4e2 8e2 8a2 8a2 8g2 8#f2 8a2 8a2 16g2 16f2 4g2 4e2 8#f2 8d2 4e2
+8a1 8a1 16g1 16#f1 4g1 4e1 8e1 8a1 8a1 8g1 8#f1 8a1 8a1 16g1 16f1 4g1 4e1 8#f1 8d1 4e1 8-
 
-8a1 8a1 16g1 16#f1 4g1 4e1 8e1 8a1 8a1 8g1 8#f1 8a1 8a1 16g1 16f1 4g1 4e1 8#f1 8d1 4e1
+8a2 8a2 16g2 16#f2 4g2 4e2 8e2 8a2 8a2 8g2 8#f2 8a2 8a2 16g2 16f2 4g2 4e2 8#f2 8d2 4e2 8-
 
-8a2 8a2 16g2 16#f2 4g2 4e2 8e2 8a2 8a2 8g2 8#f2 8a2 8a2 16g2 16f2 4g2 4e2 8#f2 8d2 4e2
-
-8e2 8g2 8a2 4b2 4b2 8c3 8a2 2b2
+8e2 8g2 8a2 4b2 4b2 8c3 8a2 2b2 8-
 
 8a2 8a2 16g2 16#f2 4g2 4e2 8e2 8a2 8a2 8g2 8#f2 8a2 8a2 16g2 16f2 4g2 4e2 8#f2 8d2 2e2
 ```
